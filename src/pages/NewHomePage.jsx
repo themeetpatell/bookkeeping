@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { FiCheckCircle, FiStar, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield } from 'react-icons/fi';
+import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield } from 'react-icons/fi';
+import Testimonials from '../components/Testimonials';
 import './NewHomePage.css';
 
 const NewHomePage = () => {
@@ -128,77 +129,6 @@ const NewHomePage = () => {
         'API Integrations',
         'CFO Advisory Services'
       ]
-    }
-  ];
-
-  const testimonials = [
-    {
-      quote:
-        'Fast, friendly, and very professional. I love how communicative they were handling our Corporate tax registration.',
-      name: 'Abdulla Al-Ogail',
-      role: 'Co-founder & CEO, Olymon',
-      avatar: '/Founders/abdulla.jpeg'
-    },
-    {
-      quote:
-        'Always very responsive, supportive, having a business mindset, providing visuals and on top of all that, open for feedback so they can keep improving. Very happy that I took the decision to work with them.',
-      name: 'Szilvia Vitos',
-      role: 'Founder, Livvity',
-      avatar: '/Founders/szilvia.jpeg'
-    },
-    {
-      quote:
-        'They designed an accounting system tailor made to our needs & completely automated our finance operations just like they promised. They\'ve been super helpful for us to scale.',
-      name: 'Jeremy Khatar',
-      role: 'CEO, Ronin Global LLC, USA',
-      avatar: '/Founders/jeremy.png'
-    },
-    {
-      quote:
-        'If you ever do any financial modeling/forecasting, I seriously can\'t recommend Finanshels enough. they are a dependable team of professionals who work hard to deliver results.',
-      name: 'Bader Al Kazimi',
-      role: 'Founder, Optimize App',
-      avatar: '/Founders/bader.jpeg'
-    },
-    {
-      quote:
-        'I am extremely grateful for the exceptional service we received from Finanshels.com. We insurancehub.ae highly recommend their services to anyone seeking reliable and trustworthy Accounting Partner.',
-      name: 'Jomon Ulahannan',
-      role: 'Founder & CEO, INSURANCE HUB',
-      avatar: '/Founders/jomon.jpg'
-    },
-    {
-      quote: 'Super fast team and I can always depend on these guys...way to go',
-      name: 'Pravin Rai',
-      role: 'Founder & CEO, QuicKart',
-      avatar: '/Founders/pravin.jpeg'
-    },
-    {
-      quote:
-        'Bookkeeping, a piece of cake with Finanshels! Sahal has been extremely helpful in managing the books! He makes sure its up-to-date and super clean! Sometimes, for advice, I refer to him as well and again, he has been super supportive and helpful to my needs!',
-      name: 'Sapna Mulani',
-      role: 'Sr Accountant, Growdash',
-      avatar: '/Founders/sapna.jpg'
-    },
-    {
-      quote:
-        'They thoroughly understood our business processes and streamlined our accounting processes perfectly where our both in-house and outsourced accountants failed multiple times to streamline and structure our complex financial ops.',
-      name: 'Meet Patel',
-      role: 'Former COO, StudentHub & BAWES',
-      avatar: '/Founders/themeetpatel.png'
-    },
-    {
-      quote:
-        'Excellent service. Finanshels has made the tax registration process fast and easy. Their communication is super prompt and clear. 5 stars!!',
-      name: 'Tina Chugani',
-      role: 'Managing Director, Proxis LLC',
-      avatar: '/Founders/tina.jpeg'
-    },
-    {
-      quote: 'The team was super responsive and the entire service was efficiently processed.',
-      name: 'Usama Naeem',
-      role: 'Co-founder, Qureos',
-      avatar: '/Founders/usama.jpeg'
     }
   ];
 
@@ -522,64 +452,8 @@ const NewHomePage = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="testimonials-section">
-        <div className="content-container">
-          <div className="section-header">
-            <p className="section-eyebrow">CLIENT SUCCESS STORIES</p>
-            <h2 className="section-title">
-              Trusted by <span className="highlight-green">5,000+ UAE Businesses</span>
-            </h2>
-            <p className="section-subtitle">
-              Don't just take our word for it. Here's what our clients say about working with Finanshels.
-            </p>
-          </div>
-          
-          <div className="testimonials-window">
-            <div className="testimonials-grid">
-              {[...testimonials, ...testimonials].map((testimonial, index) => (
-                <div key={index} className="testimonial-card">
-                  <div className="testimonial-stars">
-                    {[...Array(5)].map((_, i) => (
-                      <FiStar key={i} className="star-icon" fill="#f16610" stroke="#f16610" />
-                    ))}
-                  </div>
-              
-                  <div className="testimonial-quote-icon">❝</div>
-              
-                  <p className="testimonial-quote">{testimonial.quote}</p>
-              
-                  <div className="testimonial-author">
-                    <div className="author-avatar">
-                      {testimonial.avatar ? (
-                        <img src={testimonial.avatar} alt={testimonial.name} />
-                      ) : (
-                        <span>{testimonial.name.split(' ').map((n) => n[0]).slice(0, 2).join('')}</span>
-                      )}
-                    </div>
-                    <div className="author-info">
-                      <div className="author-name">{testimonial.name}</div>
-                      <div className="author-role">{testimonial.role}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          <div className="google-reviews">
-            <div className="google-rating">
-              <div className="rating-stars">
-                {[...Array(5)].map((_, i) => (
-                  <FiStar key={i} className="star-icon" fill="#f16610" stroke="#f16610" />
-                ))}
-              </div>
-              <span className="rating-text">4.9/5 on Trustpilot Reviews</span>
-              <span className="rating-count">(239 reviews)</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <Testimonials />
+                                                                                                                                                                                                                                             
 
       {/* FAQ Section */}
       <section className="faq-section">
