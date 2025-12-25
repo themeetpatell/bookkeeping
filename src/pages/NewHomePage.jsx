@@ -9,6 +9,18 @@ const NewHomePage = () => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
+  const clientLogos = [
+    { src: '/clients/Binary.png', alt: 'Binary' },
+    { src: '/clients/actualize.png', alt: 'Actualize' },
+    { src: '/clients/carbonsirf.png', alt: 'Carbonsirf' },
+    { src: '/clients/cotu.avif', alt: 'Cotu' },
+    { src: '/clients/fuze.png', alt: 'Fuze' },
+    { src: '/clients/growdash.png', alt: 'Growdash' },
+    { src: '/clients/humlog.png', alt: 'Humlog' },
+    { src: '/clients/veehive.png', alt: 'Veehive' },
+    { src: '/clients/zywa.png', alt: 'Zywa' }
+  ];
+
   const problems = [
     {
       icon: <FiFileText />,
@@ -77,7 +89,6 @@ const NewHomePage = () => {
       price: '560',
       period: '/mo',
       transactions: 'Up to 200 transactions/year',
-      popular: true,
       features: [
         'Everything in Starter, plus:',
         'Monthly Account Reconciliation',
@@ -93,6 +104,7 @@ const NewHomePage = () => {
       price: '800',
       period: '/mo',
       transactions: 'Up to 2,000 transactions/year',
+      popular: true,
       features: [
         'Everything in Essential, plus:',
         'Quarterly Bookkeeping',
@@ -121,48 +133,76 @@ const NewHomePage = () => {
 
   const testimonials = [
     {
-      quote: 'Finanshels transformed how we handle our finances. Before them, I was spending 20+ hours a month on bookkeeping. Now I focus entirely on growing my business while they handle everything seamlessly.',
-      name: 'Sarah Al-Rashid',
-      role: 'Founder, Desert Bloom Interiors',
-      avatar: 'SA'
+      quote:
+        'Fast, friendly, and very professional. I love how communicative they were handling our Corporate tax registration.',
+      name: 'Abdulla Al-Ogail',
+      role: 'Co-founder & CEO, Olymon',
+      avatar: '/Founders/abdulla.jpeg'
     },
     {
-      quote: 'The real-time financial insights have been game-changing. I can make informed decisions daily instead of waiting for month-end reports. Their tax compliance expertise saved us from potential penalties.',
-      name: 'Mohammed Hassan',
-      role: 'CEO, TechStart MENA',
-      avatar: 'MH'
+      quote:
+        'Always very responsive, supportive, having a business mindset, providing visuals and on top of all that, open for feedback so they can keep improving. Very happy that I took the decision to work with them.',
+      name: 'Szilvia Vitos',
+      role: 'Founder, Livvity',
+      avatar: '/Founders/szilvia.jpeg'
     },
     {
-      quote: 'As a restaurant owner, managing finances was my biggest headache. Finanshels not only handles our bookkeeping flawlessly but also provides insights that helped us improve our profit margins by 15%.',
-      name: 'Priya Sharma',
-      role: 'Owner, Spice Route Restaurant',
-      avatar: 'PS'
+      quote:
+        'They designed an accounting system tailor made to our needs & completely automated our finance operations just like they promised. They\'ve been super helpful for us to scale.',
+      name: 'Jeremy Khatar',
+      role: 'CEO, Ronin Global LLC, USA',
+      avatar: '/Founders/jeremy.png'
     },
     {
-      quote: 'The onboarding was fast and organized. Within a week, our accounts were reconciled and we had a clean dashboard to share with investors.',
-      name: 'Khalid Mansoor',
-      role: 'Founder, GulfTech Labs',
-      avatar: 'KM'
+      quote:
+        'If you ever do any financial modeling/forecasting, I seriously can\'t recommend Finanshels enough. they are a dependable team of professionals who work hard to deliver results.',
+      name: 'Bader Al Kazimi',
+      role: 'Founder, Optimize App',
+      avatar: '/Founders/bader.jpeg'
     },
     {
-      quote: 'Their team caught compliance gaps we missed. We avoided late filing penalties and now have predictable reporting every month.',
-      name: 'Amal Rahman',
-      role: 'COO, Oasis Logistics',
-      avatar: 'AR'
+      quote:
+        'I am extremely grateful for the exceptional service we received from Finanshels.com. We insurancehub.ae highly recommend their services to anyone seeking reliable and trustworthy Accounting Partner.',
+      name: 'Jomon Ulahannan',
+      role: 'Founder & CEO, INSURANCE HUB',
+      avatar: '/Founders/jomon.jpg'
     },
     {
-      quote: 'I finally get real-time numbers without chasing spreadsheets. The monthly close now takes hours instead of days.',
-      name: 'Lina Farouk',
-      role: 'Managing Partner, BrightWave Agency',
-      avatar: 'LF'
+      quote: 'Super fast team and I can always depend on these guys...way to go',
+      name: 'Pravin Rai',
+      role: 'Founder & CEO, QuicKart',
+      avatar: '/Founders/pravin.jpeg'
+    },
+    {
+      quote:
+        'Bookkeeping, a piece of cake with Finanshels! Sahal has been extremely helpful in managing the books! He makes sure its up-to-date and super clean! Sometimes, for advice, I refer to him as well and again, he has been super supportive and helpful to my needs!',
+      name: 'Sapna Mulani',
+      role: 'Sr Accountant, Growdash',
+      avatar: '/Founders/sapna.jpg'
+    },
+    {
+      quote:
+        'They thoroughly understood our business processes and streamlined our accounting processes perfectly where our both in-house and outsourced accountants failed multiple times to streamline and structure our complex financial ops.',
+      name: 'Meet Patel',
+      role: 'Former COO, StudentHub & BAWES',
+      avatar: '/Founders/themeetpatel.png'
+    },
+    {
+      quote:
+        'Excellent service. Finanshels has made the tax registration process fast and easy. Their communication is super prompt and clear. 5 stars!!',
+      name: 'Tina Chugani',
+      role: 'Managing Director, Proxis LLC',
+      avatar: '/Founders/tina.jpeg'
+    },
+    {
+      quote: 'The team was super responsive and the entire service was efficiently processed.',
+      name: 'Usama Naeem',
+      role: 'Co-founder, Qureos',
+      avatar: '/Founders/usama.jpeg'
     }
   ];
 
   const faqs = [
-    {
-      question: 'What does the free first month include?',
-      answer: 'During your free first month, you get full access to all features of your chosen plan with no commitment. We\'ll handle your bookkeeping, set up your accounts, and deliver all reports. Only pay if you\'re satisfied.'
-    },
     {
       question: 'How does Finanshels handle UAE Corporate Tax compliance?',
       answer: 'We manage your complete Corporate Tax lifecycle - from registration with the FTA to quarterly filings and annual returns. Our team stays updated with the latest UAE tax regulations to ensure 100% compliance and help you avoid penalties.'
@@ -197,10 +237,10 @@ const NewHomePage = () => {
             </div>
             
             <h1 className="hero-title">
-              Stop Stressing<br />
-              About <span className="highlight-green">Bookkeeping</span><br />
-              Focus on Growing<br />
-              Your Business
+              Buried in<br />
+              <span className="highlight-green">Bookkeeping?</span><br />
+              Let Experts Manage it<br />
+              For You
             </h1>
             
             <p className="hero-description">
@@ -213,19 +253,19 @@ const NewHomePage = () => {
               <div className="hero-feature">
                 <FiCheckCircle className="feature-icon" />
                 <div>
-                  <strong>First month free - no commitment</strong>
+                  <strong>Pay Only if Satisfied</strong>
                 </div>
               </div>
               <div className="hero-feature">
                 <FiCheckCircle className="feature-icon" />
                 <div>
-                  <strong>Dedicated finance expert</strong>
+                  <strong>Dedicated Account Manager</strong>
                 </div>
               </div>
               <div className="hero-feature">
                 <FiCheckCircle className="feature-icon" />
                 <div>
-                  <strong>UAE tax compliant</strong>
+                  <strong>Comprehensive Financial Dashboard</strong>
                 </div>
               </div>
             </div>
@@ -233,16 +273,6 @@ const NewHomePage = () => {
             <div className="hero-ctas">
               <a href="#consultation" className="btn-primary">Get Free Consultation</a>
               <a href="#pricing" className="btn-secondary">View Pricing</a>
-            </div>
-            
-            <div className="trust-logos">
-              <p className="trust-label">Trusted by leading UAE businesses</p>
-              <div className="logo-list">
-                <span className="logo-text">Zoho</span>
-                <span className="logo-text">Xero</span>
-                <span className="logo-text">QuickBooks</span>
-                <span className="logo-text">FreshBooks</span>
-              </div>
             </div>
           </div>
           
@@ -266,7 +296,7 @@ const NewHomePage = () => {
               <div className="form-badges">
                 <div className="badge-item">
                   <FiCheckCircle className="badge-icon" />
-                  <span>Free First Month</span>
+                  <span>Pay Only if Satisfied</span>
                 </div>
                 <div className="badge-item">
                   <FiCheckCircle className="badge-icon" />
@@ -280,6 +310,17 @@ const NewHomePage = () => {
             </div>
           </div>
         </div>
+
+        <div className="hero-trust-row">
+          <p className="trust-label">Trusted by leading UAE businesses</p>
+          <div className="logo-list-wide">
+            {clientLogos.map((logo) => (
+              <div key={logo.alt} className="trust-logo">
+                <img src={logo.src} alt={`${logo.alt} logo`} className="trust-logo-image" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Stats Section */}
@@ -290,8 +331,8 @@ const NewHomePage = () => {
             <div className="stat-label">Businesses Served</div>
           </div>
           <div className="stat-item">
-            <div className="stat-value">99.9%</div>
-            <div className="stat-label">Tax Compliance Rate</div>
+            <div className="stat-value">4.9%</div>
+            <div className="stat-label">Trustpilot Rating</div>
           </div>
           <div className="stat-item">
             <div className="stat-value">10×</div>
@@ -359,7 +400,7 @@ const NewHomePage = () => {
                 ))}
               </div>
               
-              <button className="btn-primary">Start Your Free Trial</button>
+              <button className="btn-primary">Talk to an Expert</button>
             </div>
             
             <div className="solution-right">
@@ -440,7 +481,7 @@ const NewHomePage = () => {
           
           <div className="pricing-banner">
             <span className="banner-emoji">🎉</span>
-            <strong>Try Your First Month Free — No Commitment!</strong>
+            <strong> Pay Only if Satisfied — No Commitment!</strong>
             <p>Only pay if you're satisfied. No questions asked.</p>
           </div>
           
@@ -494,9 +535,7 @@ const NewHomePage = () => {
           </div>
           
           <div className="testimonials-window">
-            <div
-              className="testimonials-grid"
-            >
+            <div className="testimonials-grid">
               {[...testimonials, ...testimonials].map((testimonial, index) => (
                 <div key={index} className="testimonial-card">
                   <div className="testimonial-stars">
@@ -510,7 +549,13 @@ const NewHomePage = () => {
                   <p className="testimonial-quote">{testimonial.quote}</p>
               
                   <div className="testimonial-author">
-                    <div className="author-avatar">{testimonial.avatar}</div>
+                    <div className="author-avatar">
+                      {testimonial.avatar ? (
+                        <img src={testimonial.avatar} alt={testimonial.name} />
+                      ) : (
+                        <span>{testimonial.name.split(' ').map((n) => n[0]).slice(0, 2).join('')}</span>
+                      )}
+                    </div>
                     <div className="author-info">
                       <div className="author-name">{testimonial.name}</div>
                       <div className="author-role">{testimonial.role}</div>
@@ -528,8 +573,8 @@ const NewHomePage = () => {
                   <FiStar key={i} className="star-icon" fill="#f16610" stroke="#f16610" />
                 ))}
               </div>
-              <span className="rating-text">4.9/5 on Google Reviews</span>
-              <span className="rating-count">(127 reviews)</span>
+              <span className="rating-text">4.9/5 on Trustpilot Reviews</span>
+              <span className="rating-count">(239 reviews)</span>
             </div>
           </div>
         </div>
@@ -591,7 +636,7 @@ const NewHomePage = () => {
               </div>
               <div className="cta-step">
                 <div className="step-number">3</div>
-                <span>Start your free first month — no commitment</span>
+                <span>Pay Only if Satisfied — no commitment</span>
               </div>
             </div>
           </div>
@@ -616,7 +661,7 @@ const NewHomePage = () => {
               <div className="form-badges">
                 <div className="badge-item">
                   <FiCheckCircle className="badge-icon" />
-                  <span>Free First Month</span>
+                  <span>Pay Only if Satisfied</span>
                 </div>
                 <div className="badge-item">
                   <FiCheckCircle className="badge-icon" />

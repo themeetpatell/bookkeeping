@@ -8,7 +8,12 @@
 
 /* Hero Section */
 .hero-section {
-  background: linear-gradient(135deg, #000000 0%, #2c5282 100%);
+  background:
+    linear-gradient(135deg, rgba(0, 0, 0, 0.82) 0%, rgba(44, 82, 130, 0.9) 100%),
+    url('/Dubai.png');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
   color: white;
   padding: 120px 24px 120px;
   position: relative;
@@ -16,7 +21,7 @@
 }
 
 .hero-container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -199,26 +204,134 @@
 }
 
 .trust-logos {
-  padding-top: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 18px;
 }
 
 .trust-label {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 12px;
+  font-weight: 700;
 }
 
 .logo-list {
   display: flex;
-  gap: 32px;
+  gap: 18px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
-.logo-text {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 15px;
-  font-weight: 500;
+.hero-trust-row {
+  max-width: 1200px;
+  margin: 28px auto 0;
+  padding: 0 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.logo-list-wide {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 16px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.trust-logo {
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  backdrop-filter: blur(4px);
+}
+
+.trust-logo-image {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1) grayscale(100%);
+  opacity: 0.9;
+}
+
+.client-logos-section {
+  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0)), linear-gradient(135deg, #170c2f 0%, #1c1140 50%, #100a24 100%);
+  padding: 32px 0 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.logos-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.logos-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.logos-header .section-eyebrow {
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.logos-marquee {
+  position: relative;
+  overflow: hidden;
+}
+
+.logos-track {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  width: max-content;
+  animation: logos-marquee 26s linear infinite;
+  padding: 10px 4px 6px;
+}
+
+.logos-track:hover {
+  animation-play-state: paused;
+}
+
+.logo-tile {
+  background: transparent;
+  border: none;
+  padding: 8px 0;
+  min-width: 120px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-image {
+  max-height: 34px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1) grayscale(100%);
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.logo-tile:hover .logo-image {
+  opacity: 1;
+}
+
+@keyframes logos-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* Consultation Form */
@@ -323,7 +436,7 @@
 }
 
 .stats-container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -363,7 +476,7 @@
 }
 
 .content-container-large {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -1056,6 +1169,14 @@
   justify-content: center;
   font-weight: 700;
   font-size: 16px;
+  overflow: hidden;
+}
+
+.author-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .author-name {
@@ -1195,7 +1316,7 @@
 }
 
 .final-cta-container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
