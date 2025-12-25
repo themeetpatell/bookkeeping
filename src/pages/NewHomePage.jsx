@@ -5,6 +5,9 @@ import './NewHomePage.css';
 
 const NewHomePage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const whatsappNumber = '971521549572';
+  const whatsappMessage = encodeURIComponent('I saw your ad and want to know more about bookkeeping services.');
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   const toggleFaq = (index) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -261,7 +264,7 @@ const NewHomePage = () => {
             <div className="stat-label">Businesses Served</div>
           </div>
           <div className="stat-item">
-            <div className="stat-value">4.9%</div>
+            <div className="stat-value">4.9</div>
             <div className="stat-label">Trustpilot Rating</div>
           </div>
           <div className="stat-item">
@@ -330,7 +333,14 @@ const NewHomePage = () => {
                 ))}
               </div>
               
-              <button className="btn-primary">Talk to an Expert</button>
+              <a
+                className="btn-primary"
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Talk to an Expert
+              </a>
             </div>
             
             <div className="solution-right">
@@ -442,9 +452,14 @@ const NewHomePage = () => {
                   ))}
                 </ul>
                 
-                <button className={`btn-plan ${plan.popular ? 'btn-plan-popular' : ''}`}>
+                <a
+                  className={`btn-plan ${plan.popular ? 'btn-plan-popular' : ''}`}
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Get Started
-                </button>
+                </a>
               </div>
             ))}
           </div>
