@@ -1,4 +1,5 @@
-import { FiStar } from 'react-icons/fi';
+import { useRef } from 'react';
+import { FiStar, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const testimonials = [
   {
@@ -68,6 +69,8 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const railRef = useRef(null);
+
   const avatarStyle = {
     width: 56,
     height: 56,
@@ -98,44 +101,69 @@ const Testimonials = () => {
       .slice(0, 2)
       .join('');
 
+  const scrollByCard = (direction) => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const card = rail.querySelector('.testimonial-card-vb');
+    const scrollAmount = card ? card.getBoundingClientRect().width + 16 : 320;
+    rail.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+  };
+
   return (
     <section className="testimonials-vb">
       <div className="testimonials-header">
-        <div className="pill ghost">Client Success Stories</div>
-        <div>
-          <h2>
-            Trusted by <span className="accent-text">5,000+ Businesses</span>
-          </h2>
-          <p className="muted">Hear what founders say about working with Finanshels.</p>
-        </div>
+        <p className="section-eyebrow">Client Success Stories</p>
+        <h2 className="section-title">
+          Trusted by <span className="highlight-orange">5,000+ Businesses</span>
+        </h2>
+        <p className="section-subtitle">Hear what founders say about working with Finanshels.</p>
         <div className="rating-chip">
           <FiStar /> 4.9/5 · 239 reviews
         </div>
       </div>
 
-      <div className="testimonials-grid-vb">
-        {testimonials.map((t) => (
-          <div key={t.name} className="testimonial-card-vb">
-            <div className="testimonial-rating">
-              {[...Array(5)].map((_, i) => (
-                <FiStar key={i} className="star-icon" fill="#f16610" stroke="#f16610" />
-              ))}
-            </div>
-            <div className="quote-mark">❝</div>
-            <p className="testimonial-quote-vb">“{t.quote}”</p>
-            <div className="testimonial-footer-vb">
-              {t.avatar ? (
-                <img src={t.avatar} alt={t.name} style={avatarStyle} loading="lazy" />
-              ) : (
-                <div style={avatarFallbackStyle}>{getInitials(t.name)}</div>
-              )}
-              <div>
-                <div className="author-name-vb">{t.name}</div>
-                <div className="author-role-vb">{t.title}</div>
+      <div className="testimonials-shell">
+        <button
+          type="button"
+          className="testimonial-nav nav-left"
+          aria-label="Previous testimonials"
+          onClick={() => scrollByCard(-1)}
+        >
+          <FiChevronLeft />
+        </button>
+        <button
+          type="button"
+          className="testimonial-nav nav-right"
+          aria-label="Next testimonials"
+          onClick={() => scrollByCard(1)}
+        >
+          <FiChevronRight />
+        </button>
+
+        <div className="testimonials-rail" ref={railRef}>
+          {testimonials.map((t) => (
+            <div key={t.name} className="testimonial-card-vb">
+              <div className="testimonial-rating">
+                {[...Array(5)].map((_, i) => (
+                  <FiStar key={i} className="star-icon" fill="#f16610" stroke="#f16610" />
+                ))}
+              </div>
+              <div className="quote-mark">❝</div>
+              <p className="testimonial-quote-vb">“{t.quote}”</p>
+              <div className="testimonial-footer-vb">
+                {t.avatar ? (
+                  <img src={t.avatar} alt={t.name} style={avatarStyle} loading="lazy" />
+                ) : (
+                  <div style={avatarFallbackStyle}>{getInitials(t.name)}</div>
+                )}
+                <div>
+                  <div className="author-name-vb">{t.name}</div>
+                  <div className="author-role-vb">{t.title}</div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

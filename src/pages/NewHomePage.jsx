@@ -71,6 +71,57 @@ const NewHomePage = () => {
     }
   ];
 
+  const beforeAfterPoints = [
+    {
+      before: '15–20 hrs/month spent chasing accountants',
+      after: '2 hrs/month reviewing dashboards'
+    },
+    {
+      before: 'No cashflow visibility',
+      after: 'Weekly automated forecasts'
+    },
+    {
+      before: 'Late VAT & filings',
+      after: '100% on-time, audit-ready'
+    },
+    {
+      before: 'Disconnected tools',
+      after: 'One AI-driven finance workspace'
+    },
+    {
+      before: 'Costly in-house team',
+      after: '70% cost reduction with predictable outcomes'
+    }
+  ];
+
+  const howItWorksSteps = [
+    {
+      stage: 'Kickoff & Migration',
+      timeline: 'Day 0–7',
+      description: 'Connect tools (banks, PSPs, Xero), clean historical data'
+    },
+    {
+      stage: 'Setup & Reporting',
+      timeline: 'Day 8–20',
+      description: 'Build dashboards, setup cashflow, tax calendars'
+    },
+    {
+      stage: 'Month-End & Review',
+      timeline: 'Day 30–45',
+      description: 'Deliver first Day-10 pack + review call'
+    },
+    {
+      stage: 'Steady State',
+      timeline: 'Day 45–90',
+      description: 'Automated reporting, cashflow, CFO review cadence'
+    },
+    {
+      stage: 'Expansion (Optional)',
+      timeline: 'Post 90 days',
+      description: 'Add entities, CFO services, or advanced dashboards'
+    }
+  ];
+
   const pricingPlans = [
     {
       name: 'Starter',
@@ -405,6 +456,111 @@ const NewHomePage = () => {
         </div>
       </section>
 
+
+      {/* Comparison Section */}
+      <section className="comparison-section">
+        <div className="content-container">
+          <div className="section-header">
+            <p className="section-eyebrow">TRANSFORMATION</p>
+            <h2 className="section-title">Before Finanshels vs After Finanshels</h2>
+            <p className="section-subtitle">
+              See the shift when automation and a dedicated finance team take over — less time firefighting, more time growing.
+            </p>
+          </div>
+
+          <div className="comparison-card">
+            <div className="comparison-headings">
+              <div className="comparison-heading before-heading">
+                <FiAlertTriangle className="comparison-icon" />
+                <span>Founder Reality (Before)</span>
+              </div>
+              <div className="comparison-heading after-heading">
+                <FiCheckCircle className="comparison-icon" />
+                <span>With Finanshels (After)</span>
+              </div>
+            </div>
+            <div className="comparison-rows">
+              {beforeAfterPoints.map((item, index) => (
+                <div key={index} className="comparison-row">
+                  <div className="comparison-cell before">{item.before}</div>
+                  <div className="comparison-cell after">{item.after}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="comparison-mobile">
+            {beforeAfterPoints.map((item, index) => (
+              <div key={index} className="comparison-mobile-card">
+                <div className="mobile-col">
+                  <div className="mobile-col-heading">
+                    <FiAlertTriangle className="comparison-icon" />
+                    <span>Founder Reality</span>
+                  </div>
+                  <p className="mobile-col-text">{item.before}</p>
+                </div>
+                <div className="mobile-divider">
+                  <span>vs</span>
+                </div>
+                <div className="mobile-col">
+                  <div className="mobile-col-heading after">
+                    <FiCheckCircle className="comparison-icon" />
+                    <span>With Finanshels</span>
+                  </div>
+                  <p className="mobile-col-text after-text">{item.after}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="how-it-works-section">
+        <div className="content-container">
+          <div className="section-header">
+            <p className="section-eyebrow">ONBOARDING</p>
+            <h2 className="section-title">How It Works (Within 45 Days)</h2>
+            <p className="section-subtitle">
+              A clear roadmap from day one to steady-state finance operations, so you know exactly what happens when.
+            </p>
+          </div>
+
+          <div className="how-table">
+            <div className="how-header">
+              <div className="how-heading">Stage</div>
+              <div className="how-heading">Timeline</div>
+              <div className="how-heading">What Happens</div>
+            </div>
+
+            {howItWorksSteps.map((step, index) => (
+              <div key={index} className="how-row">
+                <div className="how-cell">
+                  <div className="how-stage">{step.stage}</div>
+                </div>
+                <div className="how-cell">
+                  <span className="timeline-pill">{step.timeline}</span>
+                </div>
+                <div className="how-cell">
+                  <p className="how-description">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="how-mobile-cards">
+            {howItWorksSteps.map((step, index) => (
+              <div key={index} className="how-card">
+                <div className="how-card-top">
+                  <div className="how-card-stage">{step.stage}</div>
+                  <span className="timeline-pill">{step.timeline}</span>
+                </div>
+                <p className="how-card-description">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Pricing Section */}
       <section className="pricing-section" id="pricing">
