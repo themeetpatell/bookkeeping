@@ -3,11 +3,408 @@ import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAl
 import Testimonials from '../components/Testimonials';
 import './NewHomePage.css';
 
+const countryCodes = [
+  { name: 'Afghanistan', dial: '+93' },
+  { name: 'Albania', dial: '+355' },
+  { name: 'Algeria', dial: '+213' },
+  { name: 'American Samoa', dial: '+1' },
+  { name: 'Andorra', dial: '+376' },
+  { name: 'Angola', dial: '+244' },
+  { name: 'Anguilla', dial: '+1' },
+  { name: 'Antigua and Barbuda', dial: '+1' },
+  { name: 'Argentina', dial: '+54' },
+  { name: 'Armenia', dial: '+374' },
+  { name: 'Aruba', dial: '+297' },
+  { name: 'Australia', dial: '+61' },
+  { name: 'Austria', dial: '+43' },
+  { name: 'Azerbaijan', dial: '+994' },
+  { name: 'Bahamas', dial: '+1' },
+  { name: 'Bahrain', dial: '+973' },
+  { name: 'Bangladesh', dial: '+880' },
+  { name: 'Barbados', dial: '+1' },
+  { name: 'Belarus', dial: '+375' },
+  { name: 'Belgium', dial: '+32' },
+  { name: 'Belize', dial: '+501' },
+  { name: 'Benin', dial: '+229' },
+  { name: 'Bermuda', dial: '+1' },
+  { name: 'Bhutan', dial: '+975' },
+  { name: 'Bolivia', dial: '+591' },
+  { name: 'Bosnia and Herzegovina', dial: '+387' },
+  { name: 'Botswana', dial: '+267' },
+  { name: 'Bouvet Island', dial: '+47' },
+  { name: 'Brazil', dial: '+55' },
+  { name: 'British Indian Ocean Territory', dial: '+246' },
+  { name: 'British Virgin Islands', dial: '+1' },
+  { name: 'Brunei', dial: '+673' },
+  { name: 'Bulgaria', dial: '+359' },
+  { name: 'Burkina Faso', dial: '+226' },
+  { name: 'Burundi', dial: '+257' },
+  { name: 'Cambodia', dial: '+855' },
+  { name: 'Cameroon', dial: '+237' },
+  { name: 'Canada', dial: '+1' },
+  { name: 'Cape Verde', dial: '+238' },
+  { name: 'Caribbean Netherlands', dial: '+599' },
+  { name: 'Cayman Islands', dial: '+1' },
+  { name: 'Central African Republic', dial: '+236' },
+  { name: 'Chad', dial: '+235' },
+  { name: 'Chile', dial: '+56' },
+  { name: 'China', dial: '+86' },
+  { name: 'Christmas Island', dial: '+61' },
+  { name: 'Cocos (Keeling) Islands', dial: '+61' },
+  { name: 'Colombia', dial: '+57' },
+  { name: 'Comoros', dial: '+269' },
+  { name: 'Cook Islands', dial: '+682' },
+  { name: 'Costa Rica', dial: '+506' },
+  { name: 'Croatia', dial: '+385' },
+  { name: 'Cuba', dial: '+53' },
+  { name: 'Curaçao', dial: '+599' },
+  { name: 'Cyprus', dial: '+357' },
+  { name: 'Czechia', dial: '+420' },
+  { name: 'DR Congo', dial: '+243' },
+  { name: 'Denmark', dial: '+45' },
+  { name: 'Djibouti', dial: '+253' },
+  { name: 'Dominica', dial: '+1' },
+  { name: 'Dominican Republic', dial: '+1' },
+  { name: 'Ecuador', dial: '+593' },
+  { name: 'Egypt', dial: '+20' },
+  { name: 'El Salvador', dial: '+503' },
+  { name: 'Equatorial Guinea', dial: '+240' },
+  { name: 'Eritrea', dial: '+291' },
+  { name: 'Estonia', dial: '+372' },
+  { name: 'Eswatini', dial: '+268' },
+  { name: 'Ethiopia', dial: '+251' },
+  { name: 'Falkland Islands', dial: '+500' },
+  { name: 'Faroe Islands', dial: '+298' },
+  { name: 'Fiji', dial: '+679' },
+  { name: 'Finland', dial: '+358' },
+  { name: 'France', dial: '+33' },
+  { name: 'French Guiana', dial: '+594' },
+  { name: 'French Polynesia', dial: '+689' },
+  { name: 'French Southern and Antarctic Lands', dial: '+262' },
+  { name: 'Gabon', dial: '+241' },
+  { name: 'Gambia', dial: '+220' },
+  { name: 'Georgia', dial: '+995' },
+  { name: 'Germany', dial: '+49' },
+  { name: 'Ghana', dial: '+233' },
+  { name: 'Gibraltar', dial: '+350' },
+  { name: 'Greece', dial: '+30' },
+  { name: 'Greenland', dial: '+299' },
+  { name: 'Grenada', dial: '+1' },
+  { name: 'Guadeloupe', dial: '+590' },
+  { name: 'Guam', dial: '+1' },
+  { name: 'Guatemala', dial: '+502' },
+  { name: 'Guernsey', dial: '+44' },
+  { name: 'Guinea', dial: '+224' },
+  { name: 'Guinea-Bissau', dial: '+245' },
+  { name: 'Guyana', dial: '+592' },
+  { name: 'Haiti', dial: '+509' },
+  { name: 'Honduras', dial: '+504' },
+  { name: 'Hong Kong', dial: '+852' },
+  { name: 'Hungary', dial: '+36' },
+  { name: 'Iceland', dial: '+354' },
+  { name: 'India', dial: '+91' },
+  { name: 'Indonesia', dial: '+62' },
+  { name: 'Iran', dial: '+98' },
+  { name: 'Iraq', dial: '+964' },
+  { name: 'Ireland', dial: '+353' },
+  { name: 'Isle of Man', dial: '+44' },
+  { name: 'Israel', dial: '+972' },
+  { name: 'Italy', dial: '+39' },
+  { name: 'Ivory Coast', dial: '+225' },
+  { name: 'Jamaica', dial: '+1' },
+  { name: 'Japan', dial: '+81' },
+  { name: 'Jersey', dial: '+44' },
+  { name: 'Jordan', dial: '+962' },
+  { name: 'Kazakhstan', dial: '+7' },
+  { name: 'Kenya', dial: '+254' },
+  { name: 'Kiribati', dial: '+686' },
+  { name: 'Kosovo', dial: '+383' },
+  { name: 'Kuwait', dial: '+965' },
+  { name: 'Kyrgyzstan', dial: '+996' },
+  { name: 'Laos', dial: '+856' },
+  { name: 'Latvia', dial: '+371' },
+  { name: 'Lebanon', dial: '+961' },
+  { name: 'Lesotho', dial: '+266' },
+  { name: 'Liberia', dial: '+231' },
+  { name: 'Libya', dial: '+218' },
+  { name: 'Liechtenstein', dial: '+423' },
+  { name: 'Lithuania', dial: '+370' },
+  { name: 'Luxembourg', dial: '+352' },
+  { name: 'Macau', dial: '+853' },
+  { name: 'Madagascar', dial: '+261' },
+  { name: 'Malawi', dial: '+265' },
+  { name: 'Malaysia', dial: '+60' },
+  { name: 'Maldives', dial: '+960' },
+  { name: 'Mali', dial: '+223' },
+  { name: 'Malta', dial: '+356' },
+  { name: 'Marshall Islands', dial: '+692' },
+  { name: 'Martinique', dial: '+596' },
+  { name: 'Mauritania', dial: '+222' },
+  { name: 'Mauritius', dial: '+230' },
+  { name: 'Mayotte', dial: '+262' },
+  { name: 'Mexico', dial: '+52' },
+  { name: 'Micronesia', dial: '+691' },
+  { name: 'Moldova', dial: '+373' },
+  { name: 'Monaco', dial: '+377' },
+  { name: 'Mongolia', dial: '+976' },
+  { name: 'Montenegro', dial: '+382' },
+  { name: 'Montserrat', dial: '+1' },
+  { name: 'Morocco', dial: '+212' },
+  { name: 'Mozambique', dial: '+258' },
+  { name: 'Myanmar', dial: '+95' },
+  { name: 'Namibia', dial: '+264' },
+  { name: 'Nauru', dial: '+674' },
+  { name: 'Nepal', dial: '+977' },
+  { name: 'Netherlands', dial: '+31' },
+  { name: 'New Caledonia', dial: '+687' },
+  { name: 'New Zealand', dial: '+64' },
+  { name: 'Nicaragua', dial: '+505' },
+  { name: 'Niger', dial: '+227' },
+  { name: 'Nigeria', dial: '+234' },
+  { name: 'Niue', dial: '+683' },
+  { name: 'Norfolk Island', dial: '+672' },
+  { name: 'North Korea', dial: '+850' },
+  { name: 'North Macedonia', dial: '+389' },
+  { name: 'Northern Mariana Islands', dial: '+1' },
+  { name: 'Norway', dial: '+47' },
+  { name: 'Oman', dial: '+968' },
+  { name: 'Pakistan', dial: '+92' },
+  { name: 'Palau', dial: '+680' },
+  { name: 'Palestine', dial: '+970' },
+  { name: 'Panama', dial: '+507' },
+  { name: 'Papua New Guinea', dial: '+675' },
+  { name: 'Paraguay', dial: '+595' },
+  { name: 'Peru', dial: '+51' },
+  { name: 'Philippines', dial: '+63' },
+  { name: 'Pitcairn Islands', dial: '+64' },
+  { name: 'Poland', dial: '+48' },
+  { name: 'Portugal', dial: '+351' },
+  { name: 'Puerto Rico', dial: '+1' },
+  { name: 'Qatar', dial: '+974' },
+  { name: 'Republic of the Congo', dial: '+242' },
+  { name: 'Romania', dial: '+40' },
+  { name: 'Russia', dial: '+7' },
+  { name: 'Rwanda', dial: '+250' },
+  { name: 'Réunion', dial: '+262' },
+  { name: 'Saint Barthélemy', dial: '+590' },
+  { name: 'Saint Helena, Ascension and Tristan da Cunha', dial: '+290' },
+  { name: 'Saint Kitts and Nevis', dial: '+1' },
+  { name: 'Saint Lucia', dial: '+1' },
+  { name: 'Saint Martin', dial: '+590' },
+  { name: 'Saint Pierre and Miquelon', dial: '+508' },
+  { name: 'Saint Vincent and the Grenadines', dial: '+1' },
+  { name: 'Samoa', dial: '+685' },
+  { name: 'San Marino', dial: '+378' },
+  { name: 'Saudi Arabia', dial: '+966' },
+  { name: 'Senegal', dial: '+221' },
+  { name: 'Serbia', dial: '+381' },
+  { name: 'Seychelles', dial: '+248' },
+  { name: 'Sierra Leone', dial: '+232' },
+  { name: 'Singapore', dial: '+65' },
+  { name: 'Sint Maarten', dial: '+1' },
+  { name: 'Slovakia', dial: '+421' },
+  { name: 'Slovenia', dial: '+386' },
+  { name: 'Solomon Islands', dial: '+677' },
+  { name: 'Somalia', dial: '+252' },
+  { name: 'South Africa', dial: '+27' },
+  { name: 'South Georgia', dial: '+500' },
+  { name: 'South Korea', dial: '+82' },
+  { name: 'South Sudan', dial: '+211' },
+  { name: 'Spain', dial: '+34' },
+  { name: 'Sri Lanka', dial: '+94' },
+  { name: 'Sudan', dial: '+249' },
+  { name: 'Suriname', dial: '+597' },
+  { name: 'Svalbard and Jan Mayen', dial: '+4779' },
+  { name: 'Sweden', dial: '+46' },
+  { name: 'Switzerland', dial: '+41' },
+  { name: 'Syria', dial: '+963' },
+  { name: 'São Tomé and Príncipe', dial: '+239' },
+  { name: 'Taiwan', dial: '+886' },
+  { name: 'Tajikistan', dial: '+992' },
+  { name: 'Tanzania', dial: '+255' },
+  { name: 'Thailand', dial: '+66' },
+  { name: 'Timor-Leste', dial: '+670' },
+  { name: 'Togo', dial: '+228' },
+  { name: 'Tokelau', dial: '+690' },
+  { name: 'Tonga', dial: '+676' },
+  { name: 'Trinidad and Tobago', dial: '+1' },
+  { name: 'Tunisia', dial: '+216' },
+  { name: 'Turkey', dial: '+90' },
+  { name: 'Turkmenistan', dial: '+993' },
+  { name: 'Turks and Caicos Islands', dial: '+1' },
+  { name: 'Tuvalu', dial: '+688' },
+  { name: 'Uganda', dial: '+256' },
+  { name: 'Ukraine', dial: '+380' },
+  { name: 'United Arab Emirates', dial: '+971' },
+  { name: 'United Kingdom', dial: '+44' },
+  { name: 'United States', dial: '+1' },
+  { name: 'United States Minor Outlying Islands', dial: '+268' },
+  { name: 'United States Virgin Islands', dial: '+1' },
+  { name: 'Uruguay', dial: '+598' },
+  { name: 'Uzbekistan', dial: '+998' },
+  { name: 'Vanuatu', dial: '+678' },
+  { name: 'Vatican City', dial: '+3906698' },
+  { name: 'Venezuela', dial: '+58' },
+  { name: 'Vietnam', dial: '+84' },
+  { name: 'Wallis and Futuna', dial: '+681' },
+  { name: 'Western Sahara', dial: '+2125288' },
+  { name: 'Yemen', dial: '+967' },
+  { name: 'Zambia', dial: '+260' },
+  { name: 'Zimbabwe', dial: '+263' },
+  { name: 'Åland Islands', dial: '+35818' }
+];
+
+const ZohoConsultationForm = ({ formId }) => (
+  <form
+    action="https://forms.zohopublic.com/finanshelsllc/form/GetYourFreeAccountingConsultation/formperma/QCbszPbiYZx16ed2dttj_d614SUen1t8U5iXQVgng7U/htmlRecords/submit"
+    name="form"
+    id={formId || 'form'}
+    method="POST"
+    acceptCharset="UTF-8"
+    encType="multipart/form-data"
+    noValidate
+  >
+    {/* Change or deletion of the name attributes in the input tag will lead to empty values on record submission */}
+    <input type="hidden" name="zf_referrer_name" value="" />
+    <input type="hidden" name="zf_redirect_url" value="" />
+    <input type="hidden" name="zc_gad" value="" />
+    <h2 className="form-title">Get Your Free Accounting Consultation</h2>
+    <p className="form-subtitle">Book a 30-minute call with our finance experts. No obligation.</p>
+    <div className="form-row form-row-half">
+      <div className="form-field">
+        <label>First Name</label>
+        <input
+          type="text"
+          maxLength="255"
+          name="Name_First"
+          fieldType="7"
+          placeholder="First name"
+          className="form-input"
+          autoComplete="given-name"
+        />
+      </div>
+      <div className="form-field">
+        <label>Last Name</label>
+        <input
+          type="text"
+          maxLength="255"
+          name="Name_Last"
+          fieldType="7"
+          placeholder="Last name"
+          className="form-input"
+          autoComplete="family-name"
+        />
+      </div>
+    </div>
+    <div className="form-field">
+      <label>
+        Email <em>*</em>
+      </label>
+      <input
+        type="email"
+        maxLength="255"
+        name="Email"
+        fieldType="9"
+        placeholder="i.e. name@yourdomain.com"
+        className="form-input"
+        required
+        autoComplete="email"
+      />
+    </div>
+    <div className="form-row form-row-25-75">
+      <div className="form-field">
+        <label>Code</label>
+        <select
+          compname="PhoneNumber"
+          name="PhoneNumber_countrycode"
+          phoneFormat="1"
+          isCountryCodeEnabled="true"
+          fieldType="11"
+          id="international_PhoneNumber_countrycode"
+          className="form-select"
+          defaultValue="+971"
+          autoComplete="tel-country-code"
+        >
+          {countryCodes.map((country) => (
+            <option key={country.name} value={country.dial}>
+              {country.name} ({country.dial})
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="form-field">
+        <label>Number</label>
+        <input
+          type="text"
+          compname="PhoneNumber_countrycodeval"
+          name="PhoneNumber_countrycodeval"
+          phoneFormat="1"
+          maxLength="10"
+          id="international_PhoneNumber_countrycodeval"
+          placeholder="5xxxxxxx"
+          className="form-input"
+          autoComplete="tel-national"
+          inputMode="tel"
+        />
+      </div>
+    </div>
+    <div className="form-field">
+      <label>
+        Company Name <em>*</em>
+      </label>
+      <input
+        type="text"
+        name="SingleLine1"
+        fieldType="1"
+        maxLength="255"
+        placeholder="i.e. dropxcell LLC"
+        className="form-input"
+        required
+        autoComplete="organization"
+      />
+    </div>
+    <div className="form-field">
+      <label>Job Title</label>
+      <input
+        type="text"
+        name="SingleLine2"
+        fieldType="1"
+        maxLength="255"
+        placeholder="e.g. Finance Manager"
+        className="form-input"
+        autoComplete="organization-title"
+      />
+    </div>
+    <button type="submit" className="form-submit">
+      Submit
+    </button>
+  </form>
+);
+
 const NewHomePage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const whatsappNumber = '971521549572';
   const whatsappMessage = encodeURIComponent('I saw your ad and want to know more about bookkeeping services.');
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  const seoJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: 'Finanshels Bookkeeping & Tax (UAE)',
+    url: 'https://finanshels.com/bookkeeping',
+    image: 'https://finanshels.com/Dubai.png',
+    description:
+      'UAE bookkeeping, corporate tax, and VAT filing with real-time dashboards. Free consultation and pay only if satisfied.',
+    areaServed: 'AE',
+    telephone: '+971521549572',
+    serviceType: [
+      'Bookkeeping',
+      'Corporate Tax Filing',
+      'VAT Registration & Filing',
+      'Financial Reporting',
+      'Cash Flow Forecasting'
+    ],
+    priceRange: '$$'
+  };
 
   const toggleFaq = (index) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -213,6 +610,10 @@ const NewHomePage = () => {
     <div className="new-homepage">
       {/* Hero Section */}
       <section className="hero-section">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seoJsonLd) }}
+        />
         <div className="hero-container">
           <div className="hero-left">
             <div className="trust-badge">
@@ -262,16 +663,7 @@ const NewHomePage = () => {
           
           <div className="hero-right">
             <div className="consultation-form">
-              <h3 className="form-title">Get Your Free Consultation</h3>
-              <p className="form-subtitle">Book a 30-minute call with our finance experts. No obligation.</p>
-              
-              <form>
-                <input type="text" placeholder="Your Name *" className="form-input" required />
-                <input type="email" placeholder="Email Address *" className="form-input" required />
-                <input type="tel" placeholder="Phone Number *" className="form-input" required />
-                <input type="text" placeholder="Company Name (Optional)" className="form-input" />
-                <button type="submit" className="form-submit">Claim Free Consultation</button>
-              </form>
+              <ZohoConsultationForm formId="zoho-consultation-hero" />
               
               <p className="form-disclaimer">
                 By submitting, you agree to receive communications from Finanshels. Your data is secure and will never be shared.
@@ -300,7 +692,13 @@ const NewHomePage = () => {
           <div className="logo-list-wide">
             {clientLogos.map((logo) => (
               <div key={logo.alt} className="trust-logo">
-                <img src={logo.src} alt={`${logo.alt} logo`} className="trust-logo-image" loading="lazy" />
+                <img
+                  src={logo.src}
+                  alt={`${logo.alt} logo`}
+                  className="trust-logo-image"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             ))}
           </div>
@@ -688,16 +1086,7 @@ const NewHomePage = () => {
           
           <div className="final-cta-right">
             <div className="final-consultation-form">
-              <h3 className="form-title">Get Your Free Consultation</h3>
-              <p className="form-subtitle">Book a 30-minute call with our finance experts. No obligation.</p>
-              
-              <form>
-                <input type="text" placeholder="Your Name *" className="form-input" required />
-                <input type="email" placeholder="Email Address *" className="form-input" required />
-                <input type="tel" placeholder="Phone Number *" className="form-input" required />
-                <input type="text" placeholder="Company Name (Optional)" className="form-input" />
-                <button type="submit" className="form-submit">Claim Free Consultation</button>
-              </form>
+              <ZohoConsultationForm formId="zoho-consultation-final" />
               
               <p className="form-disclaimer">
                 By submitting, you agree to receive communications from Finanshels. Your data is secure and will never be shared.

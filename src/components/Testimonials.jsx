@@ -117,9 +117,6 @@ const Testimonials = () => {
           Trusted by <span className="highlight-orange">5,000+ Businesses</span>
         </h2>
         <p className="section-subtitle">Hear what founders say about working with Finanshels.</p>
-        <div className="rating-chip">
-          <FiStar /> 4.9/5 · 239 reviews
-        </div>
       </div>
 
       <div className="testimonials-shell">
@@ -163,6 +160,19 @@ const Testimonials = () => {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className="testimonials-footer">
+        <div className="rating-chip">
+          <div className="rating-stars-display">
+            {[...Array(5)].map((_, i) => (
+              <FiStar key={i} fill="#f16610" stroke="#f16610" />
+            ))}
+          </div>
+          <span className="rating-score">4.9/5</span>
+          <span className="trustpilot-link">on Trustpilot Reviews</span>
+          <span className="review-count">239 reviews</span>
         </div>
       </div>
     </section>

@@ -19,9 +19,14 @@ const Nav = () => {
           <img src={finanshelsLogo} alt="Finanshels" className="nav-logo-img" />
         </a>
         
-        <a href="mailto:hello@finanshels.com" className="btn-nav-primary">
-          Get Free Consultation
-          </a>
+        <a
+          href="https://contact-finanshels.zohobookings.com/#/accounting-consultation"
+          className="btn-nav-primary"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Book a Free Call
+        </a>
       </div>
     </header>
   );

@@ -28,17 +28,22 @@ const Footer = () => {
             </div>
             <div className="footer-column">
               <h4 className="footer-heading">Company</h4>
-              <a href="mailto:hello@finanshels.com" className="footer-link">Contact Us</a>
-            </div>
+            <a href="mailto:hello@finanshels.com" className="footer-link">Contact Us</a>
           </div>
+        </div>
 
-          <div className="footer-cta-modern">
-            <h4 className="footer-heading">Ready to get started?</h4>
-            <p className="footer-cta-text">Tell us where you operate and we&apos;ll match you with the right finance pod.</p>
-            <a href="mailto:hello@finanshels.com" className="btn-footer-cta">
-              Book Strategy Call
-            </a>
-          </div>
+        <div className="footer-cta-modern">
+          <h4 className="footer-heading">Ready to get started?</h4>
+          <p className="footer-cta-text">Tell us where you operate and we&apos;ll match you with the right finance pod.</p>
+          <a
+            href="https://contact-finanshels.zohobookings.com/#/accounting-consultation"
+            className="btn-footer-cta"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Book Strategy Call
+          </a>
+        </div>
         </div>
 
         <div className="footer-bottom-modern">

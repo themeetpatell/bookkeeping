@@ -1716,25 +1716,29 @@ body {
 }
 
 .contact-btn.whatsapp {
-  color: #25D366;
-  border-color: #25D366;
+  color: white;
+  background: #25d366;
+  border-color: #25d366;
 }
 
 .contact-btn.whatsapp:hover {
-  background: #25D366;
+  background: #1daa57;
+  border-color: #1daa57;
   color: white;
-  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.25);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
 }
 
 .contact-btn.phone {
-  color: #f16610;
+  color: white;
+  background: #f16610;
   border-color: #f16610;
 }
 
 .contact-btn.phone:hover {
-  background: #f16610;
+  background: #d7540d;
+  border-color: #d7540d;
   color: white;
-  box-shadow: 0 6px 16px rgba(241, 102, 16, 0.25);
+  box-shadow: 0 6px 16px rgba(241, 102, 16, 0.3);
 }
 
 .contact-icon {
