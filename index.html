@@ -49,16 +49,17 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <!-- Gallabox WhatsApp Tracker -->
-    <script>
-      (function(w, d, s, u) {
-        w.gbwatracker = { autoInit: true, selector: ".data-wa-track" };
-        var h = d.getElementsByTagName(s)[0],
-            j = d.createElement(s);
-        j.async = true;
-        j.src = u;
-        h.parentNode.insertBefore(j, h);
-      })(window, document, 'script', 'https://waw.gallabox.com/whatsapp-tracker.min.js');
+    <script> 
+      (function (w, d, s, u) { 
+      w.gbwatracker = { selector: ".data-wa-track", autoInit: true, }; 
+      var h = d.getElementsByTagName(s)[0], 
+          j = d.createElement(s); 
+      j.async = true; 
+      j.src = u + "?_=" + Math.random(); 
+      h.parentNode.insertBefore(j, h); 
+      })(window, document, "script", "https://waw.gallabox.com/whatsapp-tracker.min.js"); 
     </script>
+  
     <!-- End Gallabox WhatsApp Tracker -->
   </body>
 </html>
