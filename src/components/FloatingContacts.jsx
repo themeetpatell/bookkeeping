@@ -4,13 +4,13 @@ import { brand } from '../content/countries';
 
 const FloatingContacts = () => {
   const phoneHref = brand.phone.replace(/\s+/g, '');
-  const whatsappMessage = encodeURIComponent('I saw your ad and want to know more about bookkeeping services.');
+  const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+on+meta.+I%E2%80%99d+like+to+get+started.&type=phone_number&app_absent=0';
 
   return (
     <div className="floating-contacts" aria-label="Contact options">
       <a
-        className="contact-btn whatsapp"
-        href={`https://wa.me/971521549572?text=${whatsappMessage}`}
+        className="contact-btn whatsapp data-wa-track"
+        href={whatsappUrl}
         target="_blank"
         rel="noreferrer"
         aria-label="Chat on WhatsApp"

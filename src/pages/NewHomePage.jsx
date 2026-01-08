@@ -383,9 +383,7 @@ const ZohoConsultationForm = ({ formId }) => (
 
 const NewHomePage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-  const whatsappNumber = '971521549572';
-  const whatsappMessage = encodeURIComponent('I saw your ad and want to know more about bookkeeping services.');
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+on+meta.+I%E2%80%99d+like+to+get+started.&type=phone_number&app_absent=0';
   const seoJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
@@ -783,7 +781,7 @@ const NewHomePage = () => {
               </div>
               
               <a
-                className="btn-primary"
+                className="btn-primary data-wa-track"
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
@@ -1007,7 +1005,7 @@ const NewHomePage = () => {
                 </ul>
                 
                 <a
-                  className={`btn-plan ${plan.popular ? 'btn-plan-popular' : ''}`}
+                  className={`btn-plan ${plan.popular ? 'btn-plan-popular' : ''} data-wa-track`}
                   href={whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
