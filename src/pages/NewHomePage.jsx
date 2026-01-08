@@ -383,7 +383,7 @@ const ZohoConsultationForm = ({ formId }) => (
 
 const NewHomePage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-  const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+on+meta.+I%E2%80%99d+like+to+get+started.&type=phone_number&app_absent=0';
+  const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+on+google.+I%E2%80%99d+like+to+get+started.&type=phone_number&app_absent=0';
   const seoJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',

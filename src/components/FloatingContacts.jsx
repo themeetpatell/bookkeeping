@@ -4,7 +4,7 @@ import { brand } from '../content/countries';
 
 const FloatingContacts = () => {
   const phoneHref = brand.phone.replace(/\s+/g, '');
-  const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+on+meta.+I%E2%80%99d+like+to+get+started.&type=phone_number&app_absent=0';
+  const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+on+google.+I%E2%80%99d+like+to+get+started.&type=phone_number&app_absent=0';
 
   return (
     <div className="floating-contacts" aria-label="Contact options">
