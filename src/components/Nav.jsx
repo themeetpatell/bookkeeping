@@ -12,12 +12,26 @@ const Nav = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <header className={`nav-modern ${isScrolled ? 'nav-scrolled' : ''}`}>
       <div className="nav-container-modern">
         <a href="/" className="nav-logo-modern">
           <img src={finanshelsLogo} alt="Finanshels" className="nav-logo-img" />
         </a>
+        
+        <nav className="nav-links">
+          <button onClick={() => scrollToSection('services')} className="nav-link">Services</button>
+          <button onClick={() => scrollToSection('pricing')} className="nav-link">Pricing</button>
+          <button onClick={() => scrollToSection('testimonials')} className="nav-link">Testimonials</button>
+          <button onClick={() => scrollToSection('faq')} className="nav-link">FAQ</button>
+        </nav>
         
         <a
           href="https://contact-finanshels.zohobookings.com/#/accounting-consultation"

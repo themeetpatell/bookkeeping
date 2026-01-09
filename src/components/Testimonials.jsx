@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { FiStar, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const testimonials = [
@@ -69,7 +69,13 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
-  const railRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const testimonialGroups = [];
+  
+  // Group testimonials into sets of 3
+  for (let i = 0; i < testimonials.length; i += 3) {
+    testimonialGroups.push(testimonials.slice(i, i + 3));
+  }
 
   const avatarStyle = {
     width: 56,
@@ -101,12 +107,12 @@ const Testimonials = () => {
       .slice(0, 2)
       .join('');
 
-  const scrollByCard = (direction) => {
-    const rail = railRef.current;
-    if (!rail) return;
-    const card = rail.querySelector('.testimonial-card-vb');
-    const scrollAmount = card ? card.getBoundingClientRect().width + 16 : 320;
-    rail.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+  const handlePrevious = () => {
+    setCurrentIndex((prev) => (prev === 0 ? testimonialGroups.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === testimonialGroups.length - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -124,7 +130,7 @@ const Testimonials = () => {
           type="button"
           className="testimonial-nav nav-left"
           aria-label="Previous testimonials"
-          onClick={() => scrollByCard(-1)}
+          onClick={handlePrevious}
         >
           <FiChevronLeft />
         </button>
@@ -132,13 +138,13 @@ const Testimonials = () => {
           type="button"
           className="testimonial-nav nav-right"
           aria-label="Next testimonials"
-          onClick={() => scrollByCard(1)}
+          onClick={handleNext}
         >
           <FiChevronRight />
         </button>
 
-        <div className="testimonials-rail" ref={railRef}>
-          {testimonials.map((t) => (
+        <div className="testimonials-rail">
+          {testimonialGroups[currentIndex]?.map((t) => (
             <div key={t.name} className="testimonial-card-vb">
               <div className="testimonial-rating">
                 {[...Array(5)].map((_, i) => (
@@ -146,7 +152,7 @@ const Testimonials = () => {
                 ))}
               </div>
               <div className="quote-mark">❝</div>
-              <p className="testimonial-quote-vb">“{t.quote}”</p>
+              <p className="testimonial-quote-vb">"{t.quote}"</p>
               <div className="testimonial-footer-vb">
                 {t.avatar ? (
                   <img src={t.avatar} alt={t.name} style={avatarStyle} loading="lazy" />
@@ -170,9 +176,8 @@ const Testimonials = () => {
               <FiStar key={i} fill="#f16610" stroke="#f16610" />
             ))}
           </div>
-          <span className="rating-score">4.9/5</span>
-          <span className="trustpilot-link">on Trustpilot Reviews</span>
-          <span className="review-count">239 reviews</span>
+          <span className="rating-score">4.9/5 on Trustpilot</span>
+          <span className="review-count">Based on 239 reviews</span>
         </div>
       </div>
     </section>
