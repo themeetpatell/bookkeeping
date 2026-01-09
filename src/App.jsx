@@ -9,7 +9,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<FinanshelsLanding />} />
-        <Route path="/v2" element={<NewHomePage />} />
+        <Route path="/accounting-services-with-finanshels" element={<NewHomePage />} />
       </Routes>
     </Layout>
   );

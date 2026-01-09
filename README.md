@@ -14,15 +14,21 @@ Marketing site for Finanshels’ UAE bookkeeping, tax, and consultation offering
 - Floating contacts: WhatsApp + phone links configured in `src/components/FloatingContacts.jsx`.
 
 ## Project Structure
-- `src/pages/NewHomePage.jsx` — main landing content and CTAs.
+- `src/pages/FinanshelsLanding.jsx` — home page at `/`
+- `src/pages/NewHomePage.jsx` — alternative landing at `/accounting-services-with-finanshels`
 - `src/components/` — navigation, footer, floating contact buttons, testimonials.
-- `src/pages/NewHomePage.css` & `src/App.css` — styling.
+- `src/pages/NewHomePage.css`, `src/pages/FinanshelsLanding.css` & `src/App.css` — styling.
 - `public/clients` and `public/Dubai.png` — assets referenced in the page.
+
+## Routes
+- `/` — FinanshelsLanding (primary home page)
+- `/accounting-services-with-finanshels` — NewHomePage (alternative landing page)
 
 ## SEO & Analytics
 - Base meta, OG/Twitter tags defined in `index.html`.
 - JSON-LD `ProfessionalService` schema injected in `NewHomePage.jsx`.
-- Google Tag Manager: `GTM-MXFJ6CGB`.
+- Google Tag Manager: `GTM-MXFJ6CGB` (configured for conversion tracking).
+- Gallabox WhatsApp Tracker: All WhatsApp CTAs tracked with `data-wa-track="true"` attribute.
 
 ## Deployment Notes
 - Built with Vite; output in `dist/`.
