@@ -1,14 +1,79 @@
 import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield, FiX } from 'react-icons/fi';
-import Testimonials from '../components/Testimonials';
+import { Star } from 'lucide-react';
 import './FinanshelsLanding.css';
 
 const FinanshelsLanding = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    companyName: ''
+  });
+
   const [openFaq, setOpenFaq] = useState(null);
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+  };
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);
   };
+
+  const testimonials = [
+    {
+      text: "Fast, friendly, and very professional. I love how communicative they were handling our Corporate tax registration.",
+      name: "Abdulla Al-Ogail",
+      title: "Co-founder & CEO, Olymon",
+      initials: "AA",
+      avatar: "/Founders/abdulla.jpeg"
+    },
+    {
+      text: "Always very responsive, supportive, having a business mindset, providing visuals and on top of all that, open for feedback so they can keep improving. Very happy that I took the decision to work with them.",
+      name: "Szilvia Vitos",
+      title: "Founder, Livvity",
+      initials: "SV",
+      avatar: "/Founders/szilvia.jpeg"
+    },
+    {
+      text: "They designed an accounting system tailor made to our needs & completely automated our finance operations just like they promised. They've been super helpful for us to scale.",
+      name: "Jeremy Khatar",
+      title: "CEO, Ronin Global LLC, USA",
+      initials: "JK",
+      avatar: "/Founders/jeremy.png"
+    },
+    {
+      text: "If you ever do any financial modeling/forecasting, I seriously can't recommend Finanshels enough. they are a dependable team of professionals who work hard to deliver results.",
+      name: "Bader Al Kazimi",
+      title: "Founder, Optimize App",
+      initials: "BA",
+      avatar: "/Founders/bader.jpeg"
+    },
+    {
+      text: "Bookkeeping, a piece of cake with Finanshels! Sahal has been extremely helpful in managing the books! He makes sure its up-to-date and super clean! Sometimes, for advice, I refer to him as well and again, he has been super supportive and helpful to my needs!",
+      name: "Sapna Mulani",
+      title: "Sr Accountant, Growdash",
+      initials: "SM",
+      avatar: "/Founders/sapna.jpg"
+    },
+    {
+      text: "They thoroughly understood our business processes and streamlined our accounting processes perfectly where our both in-house and outsourced accountants failed multiple times to streamline and structure our complex financial ops.",
+      name: "Meet Patel",
+      title: "Former COO, StudentHub & BAWES",
+      initials: "MP",
+      avatar: "/Founders/themeetpatel.png"
+    }
+  ];
 
   const faqs = [
     {
@@ -100,99 +165,74 @@ const FinanshelsLanding = () => {
                   Book a 30-minute call with our finance experts. No obligation.
                 </p>
                 
-                <form 
-                  action="https://forms.zohopublic.com/finanshelsllc/form/GetYourFreeAuditConsultation/formperma/EikNR5Pwn-Ak9PHJxB-cTO47ehdcxhrZeW_itd-c-I0/htmlRecords/submit"
-                  name="form"
-                  method="POST"
-                  acceptCharset="UTF-8"
-                  encType="multipart/form-data"
-                  className="consultation-form-new"
-                >
-                  <input type="hidden" name="zf_referrer_name" value="" />
-                  <input type="hidden" name="zf_redirect_url" value="" />
-                  <input type="hidden" name="zc_gad" value="" />
-                  
+                <form onSubmit={handleSubmit} className="consultation-form-new">
                   <div className="form-row-new">
                     <div className="form-field-new">
-                      <label htmlFor="Name_First" className="form-label-new">First Name</label>
+                      <label htmlFor="firstName" className="form-label-new">First Name</label>
                       <input
-                        id="Name_First"
+                        id="firstName"
                         type="text"
-                        maxLength="255"
-                        name="Name_First"
-                        fieldType="7"
+                        name="firstName"
                         placeholder="John"
                         className="form-input-new"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div className="form-field-new">
-                      <label htmlFor="Name_Last" className="form-label-new">Last Name</label>
+                      <label htmlFor="lastName" className="form-label-new">Last Name</label>
                       <input
-                        id="Name_Last"
+                        id="lastName"
                         type="text"
-                        maxLength="255"
-                        name="Name_Last"
-                        fieldType="7"
+                        name="lastName"
                         placeholder="Smith"
                         className="form-input-new"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        required
                       />
                     </div>
                   </div>
                   
                   <div className="form-field-new">
-                    <label htmlFor="Email" className="form-label-new">Email *</label>
+                    <label htmlFor="email" className="form-label-new">Email *</label>
                     <input
-                      id="Email"
-                      type="text"
-                      maxLength="255"
-                      name="Email"
-                      fieldType="9"
-                      placeholder="i.e. name@yourdomain.com"
+                      id="email"
+                      type="email"
+                      name="email"
+                      placeholder="john@company.com"
                       className="form-input-new"
+                      value={formData.email}
+                      onChange={handleInputChange}
                       required
                     />
                   </div>
                   
                   <div className="form-field-new">
-                    <label htmlFor="PhoneNumber_countrycode" className="form-label-new">Phone</label>
+                    <label htmlFor="phone" className="form-label-new">Phone Number</label>
                     <input
-                      id="PhoneNumber_countrycode"
-                      type="text"
-                      compname="PhoneNumber"
-                      name="PhoneNumber_countrycode"
-                      phoneFormat="1"
-                      isCountryCodeEnabled="false"
-                      maxLength="20"
-                      fieldType="11"
-                      placeholder="+971 00 000 0000"
+                      id="phone"
+                      type="tel"
+                      name="phone"
+                      placeholder="+1 (555) 000-0000"
                       className="form-input-new"
+                      value={formData.phone}
+                      onChange={handleInputChange}
                     />
                   </div>
                   
                   <div className="form-field-new">
-                    <label htmlFor="SingleLine1" className="form-label-new">Company Name *</label>
+                    <label htmlFor="company" className="form-label-new">Company Name *</label>
                     <input
-                      id="SingleLine1"
+                      id="company"
                       type="text"
-                      name="SingleLine1"
-                      fieldType="1"
-                      maxLength="255"
-                      placeholder="i.e. dropxcell LLC"
+                      name="companyName"
+                      placeholder="Your Company LLC"
                       className="form-input-new"
+                      value={formData.companyName}
+                      onChange={handleInputChange}
                       required
-                    />
-                  </div>
-                  
-                  <div className="form-field-new">
-                    <label htmlFor="SingleLine2" className="form-label-new">Job Title</label>
-                    <input
-                      id="SingleLine2"
-                      type="text"
-                      name="SingleLine2"
-                      fieldType="1"
-                      maxLength="255"
-                      placeholder="e.g. Finance Manager"
-                      className="form-input-new"
                     />
                   </div>
                   
@@ -203,22 +243,22 @@ const FinanshelsLanding = () => {
                   <p className="form-disclaimer-new">
                     By submitting, you agree to receive communications. Your data is secure and will never be shared.
                   </p>
-                  
-                  <div className="form-footer-new">
-                    <div className="footer-item-new">
-                      <FiCheckCircle className="footer-icon-new" />
-                      <span>Pay Only if Satisfied</span>
-                    </div>
-                    <div className="footer-item-new">
-                      <FiCheckCircle className="footer-icon-new" />
-                      <span>No Commitment</span>
-                    </div>
-                    <div className="footer-item-new">
-                      <FiCheckCircle className="footer-icon-new" />
-                      <span>24h Response</span>
-                    </div>
-                  </div>
                 </form>
+                
+                <div className="form-footer-new">
+                  <div className="footer-item-new">
+                    <FiCheckCircle className="footer-icon-new" />
+                    <span>Pay Only if Satisfied</span>
+                  </div>
+                  <div className="footer-item-new">
+                    <FiCheckCircle className="footer-icon-new" />
+                    <span>No Commitment</span>
+                  </div>
+                  <div className="footer-item-new">
+                    <FiCheckCircle className="footer-icon-new" />
+                    <span>24h Response</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -767,7 +807,61 @@ const FinanshelsLanding = () => {
       </section>
 
       {/* Testimonials Section */}
-      <Testimonials />
+      <section id="testimonials" className="testimonials-section">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-label">CLIENT SUCCESS STORIES</span>
+            <h2 className="section-title">
+              Trusted by <span className="highlight">5,000+ Businesses</span>
+            </h2>
+            <p className="section-description">
+              Hear what founders say about working with our accounting company.
+            </p>
+          </div>
+          
+          <div className="testimonials-grid">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="testimonial-card">
+                <svg className="quote-icon-svg" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 24C12 19.58 13.79 16.18 17.37 13.79C18.24 13.15 18.44 11.95 17.8 11.08C17.16 10.21 15.96 10.01 15.09 10.65C10.55 13.72 8 18.23 8 24C8 29.52 12.48 34 18 34C20.12 34 22 32.12 22 30C22 27.88 20.12 26 18 26C15.88 26 14 27.88 14 30C14 27.34 14 26.32 12 24Z" stroke="#ff6b35" strokeWidth="2.5" fill="none"/>
+                  <path d="M32 24C32 19.58 33.79 16.18 37.37 13.79C38.24 13.15 38.44 11.95 37.8 11.08C37.16 10.21 35.96 10.01 35.09 10.65C30.55 13.72 28 18.23 28 24C28 29.52 32.48 34 38 34C40.12 34 42 32.12 42 30C42 27.88 40.12 26 38 26C35.88 26 34 27.88 34 30C34 27.34 34 26.32 32 24Z" stroke="#ff6b35" strokeWidth="2.5" fill="none"/>
+                </svg>
+                <p className="testimonial-text">"{testimonial.text}"</p>
+                <div className="testimonial-author">
+                  <img 
+                    src={testimonial.avatar} 
+                    alt={testimonial.name}
+                    className="author-avatar-img"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="author-avatar-fallback" style={{display: 'none'}}>
+                    <span className="author-initials">{testimonial.initials}</span>
+                  </div>
+                  <div className="author-info">
+                    <p className="author-name">{testimonial.name}</p>
+                    <p className="author-title">{testimonial.title}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="trustpilot-badge">
+            <div className="trustpilot-stars">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="star-icon" fill="currentColor" />
+              ))}
+            </div>
+            <div className="trustpilot-info">
+              <p className="trustpilot-rating">4.9/5 on Trustpilot</p>
+              <p className="trustpilot-count">Based on 239 reviews</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* FAQ Section */}
       <section id="faq" className="faq-section">
@@ -801,153 +895,116 @@ const FinanshelsLanding = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="final-cta-section" id="consultation">
-        <div className="final-cta-container">
-          <div className="final-cta-left">
-            <p className="section-eyebrow">GET STARTED TODAY</p>
-            <h2 className="cta-title">
-              Ready to Stop Stressing<br />
-              About Your Books?
+      <section className="final-cta-section">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-label">GET STARTED TODAY</span>
+            <h2 className="section-title">
+              Ready to Stop Stressing <span className="highlight">About Your Books?</span>
             </h2>
-            <p className="cta-description">
-              Join 5,000+ UAE businesses who've transformed their financial
-              operations with Finanshels. Get your free consultation and see the
-              difference expert bookkeeping can make.
+            <p className="section-description">
+              Join 5,000+ businesses across Dubai, Abu Dhabi, Sharjah & UAE who've transformed their financial operations with our accounting services. Get your free consultation and see the difference expert bookkeeping can make.
             </p>
-            
-            <div className="cta-steps">
-              <div className="cta-step">
-                <div className="step-number">1</div>
-                <span>Book your free 30-minute consultation</span>
-              </div>
-              <div className="cta-step">
-                <div className="step-number">2</div>
-                <span>Get a customized financial health assessment</span>
-              </div>
-              <div className="cta-step">
-                <div className="step-number">3</div>
-                <span>Pay Only if Satisfied — no commitment</span>
-              </div>
+          </div>
+          
+          <div className="cta-steps">
+            <div className="cta-step">
+              <div className="step-number">1</div>
+              <span>Book your free 30-minute consultation</span>
+            </div>
+            <div className="cta-step">
+              <div className="step-number">2</div>
+              <span>Get a customized financial health assessment</span>
+            </div>
+            <div className="cta-step">
+              <div className="step-number">3</div>
+              <span>Pay Only if Satisfied — no commitment</span>
             </div>
           </div>
           
-          <div className="final-cta-right">
-            <div className="final-consultation-form">
-              <form 
-                action="https://forms.zohopublic.com/finanshelsllc/form/GetYourFreeAuditConsultation/formperma/EikNR5Pwn-Ak9PHJxB-cTO47ehdcxhrZeW_itd-c-I0/htmlRecords/submit"
-                name="form"
-                method="POST"
-                acceptCharset="UTF-8"
-                encType="multipart/form-data"
-              >
-                <input type="hidden" name="zf_referrer_name" value="" />
-                <input type="hidden" name="zf_redirect_url" value="" />
-                <input type="hidden" name="zc_gad" value="" />
-                
-                <h2 className="form-title">Get Your Free Consultation</h2>
-                <p className="form-subtitle">Book a 30-minute call with our finance experts. No obligation.</p>
-                
-                <div className="form-row form-row-half">
-                  <div className="form-field">
+          <div className="final-form-container">
+            <div className="consultation-card-final">
+              <h3 className="card-title">Get Your Free Accounting Consultation</h3>
+              <p className="card-subtitle">Book a 30-minute call with our finance experts. No obligation.</p>
+              
+              <form onSubmit={handleSubmit} className="consultation-form-final">
+                <div className="form-row">
+                  <div className="form-group">
                     <label>First Name</label>
                     <input
                       type="text"
-                      maxLength="255"
-                      name="Name_First"
-                      fieldType="7"
+                      name="firstName"
                       placeholder="John"
-                      className="form-input"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      required
                     />
                   </div>
-                  <div className="form-field">
+                  <div className="form-group">
                     <label>Last Name</label>
                     <input
                       type="text"
-                      maxLength="255"
-                      name="Name_Last"
-                      fieldType="7"
+                      name="lastName"
                       placeholder="Smith"
-                      className="form-input"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      required
                     />
                   </div>
                 </div>
                 
-                <div className="form-field">
+                <div className="form-group">
                   <label>Email *</label>
                   <input
-                    type="text"
-                    maxLength="255"
-                    name="Email"
-                    fieldType="9"
-                    placeholder="i.e. name@yourdomain.com"
-                    className="form-input"
+                    type="email"
+                    name="email"
+                    placeholder="john@company.com"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     required
                   />
                 </div>
                 
-                <div className="form-field">
-                  <label>Phone</label>
+                <div className="form-group">
+                  <label>Phone Number</label>
                   <input
-                    type="text"
-                    compname="PhoneNumber"
-                    name="PhoneNumber_countrycode"
-                    phoneFormat="1"
-                    isCountryCodeEnabled="false"
-                    maxLength="20"
-                    fieldType="11"
-                    placeholder="+971 00 000 0000"
-                    className="form-input"
+                    type="tel"
+                    name="phone"
+                    placeholder="+1 (555) 000-0000"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                   />
                 </div>
                 
-                <div className="form-field">
+                <div className="form-group">
                   <label>Company Name *</label>
                   <input
                     type="text"
-                    name="SingleLine1"
-                    fieldType="1"
-                    maxLength="255"
-                    placeholder="i.e. dropxcell LLC"
-                    className="form-input"
+                    name="companyName"
+                    placeholder="Your Company LLC"
+                    value={formData.companyName}
+                    onChange={handleInputChange}
                     required
                   />
                 </div>
                 
-                <div className="form-field">
-                  <label>Job Title</label>
-                  <input
-                    type="text"
-                    name="SingleLine2"
-                    fieldType="1"
-                    maxLength="255"
-                    placeholder="e.g. Finance Manager"
-                    className="form-input"
-                  />
-                </div>
+                <button type="submit" className="btn-submit-final">Get Free Consultation</button>
                 
-                <button type="submit" className="form-submit">
-                  <em>Submit</em>
-                </button>
+                <div className="trust-indicators-final">
+                  <div className="trust-item">
+                    <FiCheckCircle className="trust-icon" />
+                    <span>Pay Only if Satisfied</span>
+                  </div>
+                  <div className="trust-item">
+                    <FiCheckCircle className="trust-icon" />
+                    <span>No Commitment</span>
+                  </div>
+                  <div className="trust-item">
+                    <FiCheckCircle className="trust-icon" />
+                    <span>24h Response</span>
+                  </div>
+                </div>
               </form>
-              
-              <p className="form-disclaimer">
-                By submitting, you agree to receive communications from Finanshels. Your data is secure and will never be shared.
-              </p>
-              
-              <div className="form-badges">
-                <div className="badge-item">
-                  <FiCheckCircle className="badge-icon" />
-                  <span>Pay Only if Satisfied</span>
-                </div>
-                <div className="badge-item">
-                  <FiCheckCircle className="badge-icon" />
-                  <span>No Commitment</span>
-                </div>
-                <div className="badge-item">
-                  <FiCheckCircle className="badge-icon" />
-                  <span>24h Response</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

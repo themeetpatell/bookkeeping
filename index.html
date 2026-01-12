@@ -46,6 +46,25 @@
       ></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <script>
+      // make sure dataLayer exists
+      window.dataLayer = window.dataLayer || [];
+    
+      // attach to your form
+      document.getElementById('form').addEventListener('submit', function () {
+        // read email from the form
+        var emailField = document.querySelector('input[name="Email"]');
+        var emailValue = emailField ? emailField.value.trim() : '';
+    
+        // push event for Enhanced Conversions
+        window.dataLayer.push({
+          event: 'consultation_form_ec',
+          enhanced_conversion_data: {
+          "email": 'Email',
+          }
+        });
+      });
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <!-- Gallabox WhatsApp Tracker -->
