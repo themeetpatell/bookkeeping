@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield } from 'react-icons/fi';
 import Testimonials from '../components/Testimonials';
+import Seo from '../components/Seo';
 import './BookkeepingLanding.css';
 
 const ZohoConsultationForm = ({ formId }) => (
@@ -114,13 +116,15 @@ const ZohoConsultationForm = ({ formId }) => (
 
 const BookkeepingLanding = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const { pathname } = useLocation();
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://finanshels.com';
   const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+on+google.+I%E2%80%99d+like+to+get+started.&type=phone_number&app_absent=0';
   const seoJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'Finanshels Bookkeeping & Tax (UAE)',
-    url: 'https://finanshels.com/bookkeeping',
-    image: 'https://finanshels.com/Dubai.png',
+    url: `${baseUrl}${pathname}`,
+    image: `${baseUrl}/Dubai.png`,
     description:
       'UAE bookkeeping, corporate tax, and VAT filing with real-time dashboards. Free consultation and pay only if satisfied.',
     areaServed: 'AE',
@@ -337,12 +341,15 @@ const BookkeepingLanding = () => {
 
   return (
     <div className="new-homepage">
+      <Seo
+        title="Bookkeeping Services UAE | Finanshels - Get Investor-Ready Books in 48 Hours"
+        description="UAE's #1 bookkeeping service. Get investor-ready books in 48 hours. Automated accounting, tax compliance, and real-time dashboards."
+        canonicalPath={pathname}
+        image="/Dubai.png"
+        jsonLd={seoJsonLd}
+      />
       {/* Hero Section */}
       <section className="hero-section">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(seoJsonLd) }}
-        />
         <div className="hero-container">
           <div className="hero-left">
             <div className="trust-badge">

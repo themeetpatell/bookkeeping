@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiX } from 'react-icons/fi';
+import Seo from '../components/Seo';
 import './AccountingSoftwareLanding.css';
 
 const ZohoConsultationForm = ({ formId }) => (
@@ -127,6 +129,8 @@ const ZohoConsultationForm = ({ formId }) => (
 
 const AccountingSoftwareLanding = () => {
   const [openFaq, setOpenFaq] = useState(null);
+  const { pathname } = useLocation();
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://finanshels.com';
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -268,10 +272,35 @@ const AccountingSoftwareLanding = () => {
     }
   ];
 
+  const seoJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: 'Finanshels Accounting Experts (UAE)',
+    url: `${baseUrl}${pathname}`,
+    image: `${baseUrl}/Dubai.png`,
+    description:
+      "Stop paying for accounting software that can't think. Get expert accountants + a client portal + real-time insights.",
+    areaServed: 'AE',
+    telephone: '+971521549572',
+    serviceType: [
+      'Accounting',
+      'Bookkeeping',
+      'Tax Compliance',
+      'Financial Reporting',
+      'CFO Advisory'
+    ],
+    priceRange: '$$'
+  };
+
   return (
     <div className="software-landing">
-      {/* SEO Meta Tags - Should be in Head */}
-      <title>Stop Paying for Accounting Software That Can't Think | Finanshels</title>
+      <Seo
+        title="Stop Paying for Accounting Software That Can't Think | Finanshels"
+        description="QuickBooks, Xero, Zoho Books — they're tools. Get expert accountants + a client portal + real-time financial insights."
+        canonicalPath={pathname}
+        image="/Dubai.png"
+        jsonLd={seoJsonLd}
+      />
       
       {/* Hero Section */}
       <section className="software-hero">

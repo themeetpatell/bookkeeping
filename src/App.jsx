@@ -10,6 +10,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<AccountingLanding />} />
+        <Route path="/accounting" element={<AccountingLanding />} />
         <Route path="/bookkeeping" element={<BookkeepingLanding />} />
         <Route path="/accounting-software" element={<AccountingSoftwareLanding />} />
       </Routes>

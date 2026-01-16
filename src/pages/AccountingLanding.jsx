@@ -1,5 +1,8 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield, FiX } from 'react-icons/fi';
+import Testimonials from '../components/Testimonials';
+import Seo from '../components/Seo';
 import './AccountingLanding.css';
 
 const ZohoConsultationForm = ({ formId }) => (
@@ -109,49 +112,12 @@ const ZohoConsultationForm = ({ formId }) => (
 
 const AccountingLanding = () => {
   const [openFaq, setOpenFaq] = useState(null);
+  const { pathname } = useLocation();
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://finanshels.com';
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);
   };
-
-  const testimonials = [
-    {
-      text: "Fast, friendly, and very professional. I love how communicative they were handling our tax registration and accounting compliance.",
-      name: "Michael Roberts",
-      title: "CEO, TechStart Inc",
-      initials: "MR"
-    },
-    {
-      text: "Always very responsive, supportive, having a business mindset. Very happy that I took the decision to work with them for our accounting outsourcing needs.",
-      name: "Sarah Chen",
-      title: "Founder, GrowthLabs",
-      initials: "SC"
-    },
-    {
-      text: "They designed an accounting system tailor-made to our needs & completely automated our finance operations. They've been super helpful for us to scale.",
-      name: "James Wilson",
-      title: "CFO, Scale Ventures",
-      initials: "JW"
-    },
-    {
-      text: "If you ever need financial modeling or cash flow forecasting, I seriously can't recommend them enough. A dependable team who deliver results.",
-      name: "Emily Parker",
-      title: "Founder, Optimize Digital",
-      initials: "EP"
-    },
-    {
-      text: "Bookkeeping is a piece of cake now! They make sure everything is up-to-date and super clean. Highly recommend their accounting and bookkeeping service.",
-      name: "David Martinez",
-      title: "Operations Manager, FastTrack",
-      initials: "DM"
-    },
-    {
-      text: "They thoroughly understood our business processes and streamlined our accounting. Our profit and loss statements are always ready on time now.",
-      name: "Lisa Thompson",
-      title: "Director, Global Solutions",
-      initials: "LT"
-    }
-  ];
 
   const faqs = [
     {
@@ -180,8 +146,35 @@ const AccountingLanding = () => {
     }
   ];
 
+  const seoJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: 'Finanshels Accounting & Bookkeeping (UAE)',
+    url: `${baseUrl}${pathname}`,
+    image: `${baseUrl}/Dubai.png`,
+    description:
+      "Expert accounting & bookkeeping services in Dubai, Abu Dhabi, Sharjah & across the UAE. From tax compliance to real-time dashboards.",
+    areaServed: 'AE',
+    telephone: '+971521549572',
+    serviceType: [
+      'Accounting',
+      'Bookkeeping',
+      'Tax Compliance',
+      'Financial Reporting',
+      'CFO Advisory'
+    ],
+    priceRange: '$$'
+  };
+
   return (
     <div className="accounting-landing">
+      <Seo
+        title="Accounting & Bookkeeping Services UAE | Finanshels"
+        description="Expert accounting & bookkeeping services for UAE businesses. Corporate tax, VAT filing, automated reporting, and real-time dashboards."
+        canonicalPath={pathname}
+        image="/Dubai.png"
+        jsonLd={seoJsonLd}
+      />
       {/* Hero Section - Complete Redesign */}
       <section className="hero">
         <div className="hero-container">
@@ -717,43 +710,7 @@ const AccountingLanding = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="testimonials">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-label">CLIENT SUCCESS STORIES</span>
-            <h2 className="section-title">
-              Trusted by <span className="text-orange">5,000+ Businesses</span>
-            </h2>
-            <p className="section-description">
-              Hear what founders say about working with our accounting company.
-            </p>
-          </div>
-          
-          <div className="testimonials-grid">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="testimonial-card">
-                <div className="quote-mark">"</div>
-                <p className="testimonial-text">{testimonial.text}</p>
-                <div className="testimonial-author">
-                  <div className="author-avatar">{testimonial.initials}</div>
-                  <div className="author-info">
-                    <h4 className="author-name">{testimonial.name}</h4>
-                    <p className="author-title">{testimonial.title}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="trustpilot-rating">
-            <div className="stars">★★★★★</div>
-            <div className="rating-info">
-              <strong>4.9/5 on Trustpilot</strong>
-              <span>Based on 239 reviews</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Testimonials />
 
       {/* FAQ Section */}
       <section className="faq" id="faq">
