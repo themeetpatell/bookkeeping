@@ -29,6 +29,22 @@ body {
   overflow-x: hidden;
 }
 
+main {
+  padding-top: 80px;
+}
+
+@media (max-width: 768px) {
+  main {
+    padding-top: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding-top: 100px;
+  }
+}
+
 /* NAVIGATION - SHARED ACROSS ALL PAGES */
 .nav-modern {
   position: fixed;
