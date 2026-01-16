@@ -136,6 +136,40 @@ const AccountingSoftwareLanding = () => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
+  const clientLogos = [
+    { src: '/clients/Binary.png', alt: 'Binary' },
+    { src: '/clients/actualize.png', alt: 'Actualize' },
+    { src: '/clients/carbonsirf.png', alt: 'Carbonsirf' },
+    { src: '/clients/cotu.avif', alt: 'Cotu' },
+    { src: '/clients/fuze.png', alt: 'Fuze' },
+    { src: '/clients/growdash.png', alt: 'Growdash' },
+    { src: '/clients/humlog.png', alt: 'Humlog' },
+    { src: '/clients/veehive.png', alt: 'Veehive' },
+    { src: '/clients/zywa.png', alt: 'Zywa' }
+  ];
+
+  const getSoftwareStatus = (value) => {
+    if (value === false) {
+      return {
+        className: 'status-unavailable',
+        text: 'Not available',
+        icon: <FiX className="software-icon-red" />
+      };
+    }
+    if (value === 'limited') {
+      return {
+        className: 'status-limited',
+        text: 'Limited / add-on',
+        icon: <span className="software-limited-badge">—</span>
+      };
+    }
+    return {
+      className: 'status-included',
+      text: 'Included',
+      icon: <FiCheckCircle className="software-icon-check" />
+    };
+  };
+
   const comparisonFeatures = [
     {
       feature: 'Transactional Bookkeeping',
@@ -374,6 +408,23 @@ const AccountingSoftwareLanding = () => {
             </div>
           </div>
         </div>
+
+        <div className="software-hero-trust-row">
+          <p className="software-trust-label">Trusted by leading UAE businesses</p>
+          <div className="software-logo-list-wide">
+            {clientLogos.map((logo) => (
+              <div key={logo.alt} className="software-trust-logo">
+                <img
+                  src={logo.src}
+                  alt={`${logo.alt} logo`}
+                  className="software-trust-logo-image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Stats Section */}
@@ -470,25 +521,30 @@ const AccountingSoftwareLanding = () => {
             </div>
             
             <div className="software-comparison-body">
-              {comparisonFeatures.map((item, index) => (
-                <div key={index} className="software-comparison-row">
+              {comparisonFeatures.map((item, index) => {
+                const softwareStatus = getSoftwareStatus(item.software);
+                return (
+                  <div key={index} className="software-comparison-row">
                   <div className="software-comparison-cell feature-cell">
-                    <span>{item.feature}</span>
+                    <span className="software-feature-title">{item.feature}</span>
                   </div>
                   <div className="software-comparison-cell software-column">
-                    {item.software === false ? (
-                      <FiX className="software-icon-red" />
-                    ) : item.software === 'limited' ? (
-                      <span className="software-limited-badge">—</span>
-                    ) : (
-                      <FiCheckCircle className="software-icon-check" />
-                    )}
+                    <span className="software-comparison-cell-label">Accounting Software</span>
+                    <span className={`software-comparison-status ${softwareStatus.className}`}>
+                      {softwareStatus.icon}
+                      <span>{softwareStatus.text}</span>
+                    </span>
                   </div>
                   <div className="software-comparison-cell finanshels-column">
-                    {item.finanshels && <FiCheckCircle className="software-icon-green" />}
+                    <span className="software-comparison-cell-label">Finanshels</span>
+                    <span className="software-comparison-status status-included">
+                      <FiCheckCircle className="software-icon-green" />
+                      <span>Included</span>
+                    </span>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
           
@@ -512,7 +568,7 @@ const AccountingSoftwareLanding = () => {
       </section>
 
       {/* Solution Section */}
-      <section className="software-solution">
+      <section className="software-solution" id="services">
         <div className="software-container">
           <div className="software-section-header">
             <span className="software-section-label">THE SOLUTION</span>
@@ -798,7 +854,7 @@ const AccountingSoftwareLanding = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="software-testimonials">
+      <section className="software-testimonials" id="testimonials">
         <div className="software-container">
           <div className="software-section-header">
             <span className="software-section-label">CLIENT SUCCESS STORIES</span>

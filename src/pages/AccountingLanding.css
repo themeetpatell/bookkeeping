@@ -99,7 +99,7 @@
 }
 
 .accounting-landing .hero-container {
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 32px;
   display: block;
@@ -107,8 +107,8 @@
 
 .accounting-landing .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
-  gap: 48px;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
   align-items: start;
   width: 100%;
   box-sizing: border-box;
@@ -281,7 +281,6 @@
   top: 120px;
   height: fit-content;
   width: 100%;
-  max-width: 400px;
   justify-self: end;
   box-sizing: border-box;
   overflow: hidden;
@@ -335,6 +334,17 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
+}
+
+.form-row > .form-group {
+  flex: 1;
 }
 
 .form-group {
@@ -1380,13 +1390,13 @@
 /* Large Screen Optimization - Screens wider than 1200px */
 @media (min-width: 1201px) {
   .accounting-landing .hero-container {
-    max-width: 1280px;
+    max-width: 1400px;
     padding: 0 32px;
   }
   
   .accounting-landing .hero-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
-    gap: 48px;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 64px;
     max-width: 100%;
   }
   
@@ -1398,7 +1408,6 @@
   
   .hero-form-wrapper {
     width: 100%;
-    max-width: 400px;
     padding-left: 0;
     justify-self: end;
   }
@@ -1526,6 +1535,11 @@
 }
 
 @media (max-width: 640px) {
+  .form-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
   .hero {
     padding: 60px 0 80px;
   }

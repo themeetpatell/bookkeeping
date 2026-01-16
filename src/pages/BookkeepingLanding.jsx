@@ -35,7 +35,7 @@ const ZohoConsultationForm = ({ formId }) => (
           maxLength="255"
           name="Name_First"
           fieldType="7"
-          placeholder=""
+          placeholder="First name"
           className="form-input"
         />
       </div>
@@ -46,7 +46,7 @@ const ZohoConsultationForm = ({ formId }) => (
           maxLength="255"
           name="Name_Last"
           fieldType="7"
-          placeholder=""
+          placeholder="Last name"
           className="form-input"
         />
       </div>
@@ -360,8 +360,7 @@ const BookkeepingLanding = () => {
             <h1 className="hero-title">
               Buried in<br />
               <span className="highlight-green">Bookkeeping?</span><br />
-              Let Experts Manage it<br />
-              For You
+              Let Experts Manage It For You
             </h1>
             
             <p className="hero-description">
@@ -491,7 +490,7 @@ const BookkeepingLanding = () => {
       </section>
 
       {/* Solution Section */}
-      <section className="solution-section">
+      <section className="solution-section" id="services">
         <div className="content-container-large">
           <div className="solution-content">
             <div className="solution-left">
@@ -779,7 +778,7 @@ const BookkeepingLanding = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="faq-section">
+      <section className="faq-section" id="faq">
         <div className="content-container-small">
           <div className="section-header">
             <p className="section-eyebrow">FAQ</p>

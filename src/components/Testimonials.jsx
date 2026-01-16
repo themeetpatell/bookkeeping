@@ -116,7 +116,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="testimonials-vb">
+    <section className="testimonials-vb" id="testimonials">
       <div className="testimonials-header">
         <p className="section-eyebrow">Client Success Stories</p>
         <h2 className="section-title">

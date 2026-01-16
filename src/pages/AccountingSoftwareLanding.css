@@ -22,6 +22,53 @@
   align-items: start;
 }
 
+.software-hero-trust-row {
+  max-width: 1280px;
+  margin: 28px auto 0;
+  padding: 0 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.software-trust-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 6px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.software-logo-list-wide {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 16px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.software-trust-logo {
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  backdrop-filter: blur(4px);
+}
+
+.software-trust-logo-image {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1) grayscale(100%);
+  opacity: 0.9;
+}
+
 .software-hero-left {
   padding-top: 40px;
 }
@@ -424,6 +471,7 @@
   border: 1px solid rgba(75, 85, 99, 0.3);
   border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
 }
 
 .software-comparison-header {
@@ -471,6 +519,10 @@
   border-bottom: 1px solid rgba(75, 85, 99, 0.2);
 }
 
+.software-comparison-row:nth-child(odd) {
+  background: rgba(17, 24, 39, 0.35);
+}
+
 .software-comparison-row:last-child {
   border-bottom: none;
 }
@@ -489,6 +541,12 @@
   font-weight: 500;
 }
 
+.software-feature-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
 .software-comparison-cell.software-column {
   border-left: 1px solid rgba(75, 85, 99, 0.2);
   border-right: 1px solid rgba(75, 85, 99, 0.2);
@@ -496,6 +554,48 @@
 
 .software-comparison-cell.finanshels-column {
   background: rgba(249, 115, 22, 0.03);
+}
+
+.software-comparison-cell-label {
+  display: none;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #9ca3af;
+}
+
+.software-comparison-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.software-comparison-status span {
+  color: inherit;
+}
+
+.software-comparison-status.status-included {
+  color: #a7f3d0;
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.software-comparison-status.status-limited {
+  color: #cbd5f5;
+  background: rgba(148, 163, 184, 0.12);
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+.software-comparison-status.status-unavailable {
+  color: #fecaca;
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.35);
 }
 
 .software-icon-red {
@@ -1219,6 +1319,16 @@
   .software-hero-right {
     position: static;
   }
+
+  .software-hero-trust-row {
+    padding: 0 20px 16px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .software-logo-list-wide {
+    justify-content: center;
+  }
   
   .software-pricing-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1293,6 +1403,56 @@
     flex-direction: column;
     gap: 12px;
     align-items: flex-start;
+  }
+
+  .software-comparison-header {
+    display: none;
+  }
+
+  .software-comparison-row {
+    grid-template-columns: 1fr;
+    border: 1px solid rgba(75, 85, 99, 0.35);
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(15, 29, 51, 0.7);
+  }
+
+  .software-comparison-cell {
+    justify-content: flex-start;
+    text-align: left;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgba(75, 85, 99, 0.2);
+    padding: 14px 18px;
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .software-comparison-row .software-comparison-cell:last-child {
+    border-bottom: none;
+  }
+
+  .software-comparison-cell::before {
+    content: none;
+    display: none;
+  }
+
+  .software-comparison-cell-label {
+    display: block;
+  }
+
+  .software-comparison-body {
+    gap: 16px;
+  }
+
+  .software-comparison-row:nth-child(odd) {
+    background: rgba(15, 29, 51, 0.7);
+  }
+
+  .software-comparison-status {
+    width: 100%;
+    justify-content: flex-start;
   }
   
   .software-dashboard-compliance {

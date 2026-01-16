@@ -26,28 +26,30 @@ const ZohoConsultationForm = ({ formId }) => (
     <input type="hidden" name="gclid" value="" />
     <input type="hidden" name="referrername" value="" />
     
-    <div className="form-group">
-      <label>First Name</label>
-      <input
-        type="text"
-        maxLength="255"
-        name="Name_First"
-        fieldType="7"
-        placeholder=""
-        className="form-control"
-      />
-    </div>
-    
-    <div className="form-group">
-      <label>Last Name</label>
-      <input
-        type="text"
-        maxLength="255"
-        name="Name_Last"
-        fieldType="7"
-        placeholder=""
-        className="form-control"
-      />
+    <div className="form-row">
+      <div className="form-group">
+        <label>First Name</label>
+        <input
+          type="text"
+          maxLength="255"
+          name="Name_First"
+          fieldType="7"
+          placeholder="First name"
+          className="form-control"
+        />
+      </div>
+      
+      <div className="form-group">
+        <label>Last Name</label>
+        <input
+          type="text"
+          maxLength="255"
+          name="Name_Last"
+          fieldType="7"
+          placeholder="Last name"
+          className="form-control"
+        />
+      </div>
     </div>
     
     <div className="form-group">
