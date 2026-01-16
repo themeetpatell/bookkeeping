@@ -21,8 +21,8 @@ Marketing site for Finanshels’ UAE bookkeeping, tax, and consultation offering
 - `public/clients` and `public/Dubai.png` — assets referenced in the page.
 
 ## Routes
-- `/` — FinanshelsLanding (primary home page)
-- `/accounting-services-with-finanshels` — NewHomePage (alternative landing page)
+- `/` — AccountingLanding (primary home page - new design matching Lovable)
+- `/bookkeeping` — BookkeepingLanding (original bookkeeping page)
 
 ## SEO & Analytics
 - Base meta, OG/Twitter tags defined in `index.html`.

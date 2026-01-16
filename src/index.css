@@ -1,5 +1,7 @@
+@import './styles/variables.css';
+
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 *,

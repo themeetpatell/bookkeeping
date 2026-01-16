@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield } from 'react-icons/fi';
 import Testimonials from '../components/Testimonials';
-import './NewHomePage.css';
+import './BookkeepingLanding.css';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
@@ -16,6 +16,13 @@ const ZohoConsultationForm = ({ formId }) => (
     <input type="hidden" name="zf_referrer_name" value="" />
     <input type="hidden" name="zf_redirect_url" value="" />
     <input type="hidden" name="zc_gad" value="" />
+    <input type="hidden" name="utm_source" value="" />
+    <input type="hidden" name="utm_medium" value="" />
+    <input type="hidden" name="utm_campaign" value="" />
+    <input type="hidden" name="utm_term" value="" />
+    <input type="hidden" name="utm_content" value="" />
+    <input type="hidden" name="gclid" value="" />
+    <input type="hidden" name="referrername" value="" />
     <h2 className="form-title">Get Your Free Consultation</h2>
     <p className="form-subtitle">Book a 30-minute call with our finance experts. No obligation.</p>
     <div className="form-row form-row-half">
@@ -54,6 +61,7 @@ const ZohoConsultationForm = ({ formId }) => (
         fieldType="9"
         placeholder="i.e. name@yourdomain.com"
         className="form-input"
+        required
       />
     </div>
     <div className="form-field">
@@ -83,6 +91,7 @@ const ZohoConsultationForm = ({ formId }) => (
         maxLength="255"
         placeholder="i.e. dropxcell LLC"
         className="form-input"
+        required
       />
     </div>
     <div className="form-field">
@@ -93,7 +102,7 @@ const ZohoConsultationForm = ({ formId }) => (
         value=""
         fieldType="1"
         maxLength="255"
-        placeholder=""
+        placeholder="i.e. Founder"
         className="form-input"
       />
     </div>
@@ -103,7 +112,7 @@ const ZohoConsultationForm = ({ formId }) => (
   </form>
 );
 
-const NewHomePage = () => {
+const BookkeepingLanding = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+on+google.+I%E2%80%99d+like+to+get+started.&type=phone_number&app_absent=0';
   const seoJsonLd = {
@@ -258,7 +267,7 @@ const NewHomePage = () => {
     {
       name: 'Essential',
       subtitle: 'Ideal for growing small businesses',
-      price: '560',
+      price: '599',
       period: '/mo',
       transactions: 'Up to 200 transactions/year',
       features: [
@@ -273,7 +282,7 @@ const NewHomePage = () => {
     {
       name: 'Growth',
       subtitle: 'For businesses with higher volume',
-      price: '800',
+      price: '999',
       period: '/mo',
       transactions: 'Up to 2,000 transactions/year',
       popular: true,
@@ -289,7 +298,7 @@ const NewHomePage = () => {
     {
       name: 'Scale',
       subtitle: 'Enterprise-grade financial management',
-      price: '2,000',
+      price: '1,999',
       period: '/mo',
       transactions: 'Up to 3,600 transactions/year',
       features: [
@@ -852,4 +861,4 @@ const NewHomePage = () => {
   );
 };
 
-export default NewHomePage;
+export default BookkeepingLanding;

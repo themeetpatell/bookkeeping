@@ -1,15 +1,17 @@
-import { Routes, Route } from 'react-router-dom';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
-import FinanshelsLanding from './pages/FinanshelsLanding';
-import NewHomePage from './pages/NewHomePage';
+import AccountingLanding from './pages/AccountingLanding';
+import BookkeepingLanding from './pages/BookkeepingLanding';
+import AccountingSoftwareLanding from './pages/AccountingSoftwareLanding';
 
 function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<FinanshelsLanding />} />
-        <Route path="/accounting-services-with-finanshels" element={<NewHomePage />} />
+        <Route path="/" element={<AccountingLanding />} />
+        <Route path="/bookkeeping" element={<BookkeepingLanding />} />
+        <Route path="/accounting-software" element={<AccountingSoftwareLanding />} />
       </Routes>
     </Layout>
   );
