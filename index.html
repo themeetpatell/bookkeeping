@@ -44,12 +44,10 @@
       // Use capture-phase listener so dynamically rendered React forms are covered
       document.addEventListener('submit', function(event) {
         var formEl = event.target;
-        if (
-          !formEl ||
-          !formEl.matches('#form, #zoho-consultation-hero, #zoho-consultation-final, #hero-form, #final-form')
-        ) {
-          return;
-        }
+        var isTargetForm = formEl && formEl.matches(
+          '#form, #zoho-consultation-hero, #zoho-consultation-final, #hero-form, #final-form, #software-hero-form, #software-final-form'
+        );
+        if (!isTargetForm) return;
 
         var emailField = formEl.querySelector('input[name=\"Email\"]');
         var emailValue = emailField ? emailField.value.trim() : '';
