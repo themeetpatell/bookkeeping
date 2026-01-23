@@ -285,7 +285,7 @@ const AccountingLanding = () => {
             <p className="section-description">
               You started your business to pursue your passion — not to wrestle with spreadsheets and tax filings. Yet here you are, spending hours on tasks that drain your energy.
             </p>
-                               onClick={() => trackWhatsAppClick('accounting_pricing_cta')}
+          </div>
           
           <div className="problem-grid">
             <div className="problem-card">
