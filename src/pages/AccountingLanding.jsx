@@ -109,6 +109,11 @@ const ZohoConsultationForm = ({ formId }) => (
 
 const AccountingLanding = () => {
   const [openFaq, setOpenFaq] = useState(null);
+  const trackWhatsAppClick = (source) => {
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({ event: 'whatsapp_click', source });
+    }
+  };
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -280,7 +285,7 @@ const AccountingLanding = () => {
             <p className="section-description">
               You started your business to pursue your passion — not to wrestle with spreadsheets and tax filings. Yet here you are, spending hours on tasks that drain your energy.
             </p>
-          </div>
+                               onClick={() => trackWhatsAppClick('accounting_pricing_cta')}
           
           <div className="problem-grid">
             <div className="problem-card">
@@ -378,6 +383,7 @@ const AccountingLanding = () => {
                 target="_blank"
                 rel="noreferrer"
                 className="btn-primary"
+                onClick={() => trackWhatsAppClick('accounting_solution_cta')}
                 data-wa-track="true"
               >
                 Talk to an Expert

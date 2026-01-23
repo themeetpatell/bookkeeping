@@ -6,6 +6,9 @@ import './ThankYou.css';
 const ThankYou = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({ event: 'thank_you_page_view' });
+    }
   }, []);
 
   return (

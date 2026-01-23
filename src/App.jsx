@@ -14,6 +14,7 @@ function App() {
         <Route path="/bookkeeping" element={<BookkeepingLanding />} />
         <Route path="/accounting-software" element={<AccountingSoftwareLanding />} />
         <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/thank-you-from-finanshels" element={<ThankYou />} />
       </Routes>
     </Layout>
   );

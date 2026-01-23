@@ -113,6 +113,11 @@ const ZohoConsultationForm = ({ formId }) => (
 const BookkeepingLanding = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+on+google.+I%E2%80%99d+like+to+get+started.&type=phone_number&app_absent=0';
+  const trackWhatsAppClick = (source) => {
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({ event: 'whatsapp_click', source });
+    }
+  };
   const seoJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
@@ -514,6 +519,7 @@ const BookkeepingLanding = () => {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackWhatsAppClick('bookkeeping_solution_cta')}
                 data-wa-track="true"
               >
                 Talk to an Expert
@@ -739,6 +745,7 @@ const BookkeepingLanding = () => {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => trackWhatsAppClick('bookkeeping_pricing_plan')}
                   data-wa-track="true"
                 >
                   Get Started
