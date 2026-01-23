@@ -36,28 +36,51 @@
     <script>
       window.dataLayer = window.dataLayer || [];
     
-      // attach to your form
       document.addEventListener('DOMContentLoaded', function() {
-        var form = document.getElementById('form');
-        if (form) {
-          form.addEventListener('submit', function () {
-            // read email from the form
-            var emailField = document.querySelector('input[name="Email"]');
+        // form view event for Zoho/GTM triggers
+        window.dataLayer.push({ event: 'zf_formview' });
+
+        var forms = document.querySelectorAll('#form, #zoho-consultation-hero, #zoho-consultation-final, #hero-form, #final-form');
+        forms.forEach(function(formEl) {
+          formEl.addEventListener('submit', function () {
+            var emailField = formEl.querySelector('input[name="Email"]');
             var emailValue = emailField ? emailField.value.trim() : '';
-        
-            // push event for Enhanced Conversions
+
+            // Custom events for GTM triggers
+            window.dataLayer.push({ event: 'zf_submitform' });
             window.dataLayer.push({
               event: 'consultation_form_ec',
-              enhanced_conversion_data: {
-                "email": emailValue,
-              }
+              enhanced_conversion_data: { email: emailValue },
+              user_data: { email: emailValue }
             });
           });
-        }
+        });
       });
     </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <!-- Podscribe pixel -->
+    <script>
+      (function (w, d) {
+        var id = 'podscribe-capture';
+        var n = 'script';
+        var e = d.createElement(n);
+        e.id = id;
+        e.async = true;
+        e.src = 'https://d34r8q7sht0t9k.cloudfront.net/tag.js';
+        var s = d.getElementsByTagName(n)[0];
+        s.parentNode.insertBefore(e, s);
+        e.addEventListener('load', function() {
+          w.podscribe('init', { user_id: '78570250-180c-4afd-97bb-be9e23caf873', advertiser: 'finanshels' });
+          w.podscribe('getcallback', {
+            // TODO: supply hashed email/device macros when available
+            hashed_email: '',
+            device_id: ''
+          });
+        });
+      })(window, document);
+    </script>
+    <!-- /Podscribe pixel -->
     <!-- Gallabox WhatsApp Tracker -->
     <script> 
       (function (w, d, s, u) { 
@@ -340,6 +363,35 @@
           zfutm_zfAdvLead.zfautm_DHtmlSprt();
         }, false);
       }
+    </script>
+    <script>
+  // make sure dataLayer exists
+    window.dataLayer = window.dataLayer || [];
+
+    // attach to your form
+    document.getElementById('form').addEventListener('submit', function () {
+      // read email from the form
+      var emailField = document.querySelector('input[name="Email"]');
+      var emailValue = emailField ? emailField.value.trim() : '';
+
+      // push event for Enhanced Conversions
+      window.dataLayer.push({
+        event: 'consultation_form_ec',
+        enhanced_conversion_data: {
+        "email": 'yourEmailVariable',
+        }
+      });
+      });
+    </script>
+    <script>
+      (function(w, d, s, u) {
+        w.gbwatracker = { autoInit: true, selector: ".data-wa-track" };
+        var h = d.getElementsByTagName(s)[0],
+            j = d.createElement(s);
+        j.async = true;
+        j.src = u;
+        h.parentNode.insertBefore(j, h);
+      })(window, document, 'script', 'https://waw.gallabox.com/whatsapp-tracker.min.js');
     </script>
     <!-- End Zoho Forms Advanced Tracking Script -->
   </body>

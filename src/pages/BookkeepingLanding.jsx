@@ -57,7 +57,6 @@ const ZohoConsultationForm = ({ formId }) => (
         type="text"
         maxLength="255"
         name="Email"
-        value=""
         fieldType="9"
         placeholder="i.e. name@yourdomain.com"
         className="form-input"
@@ -85,7 +84,6 @@ const ZohoConsultationForm = ({ formId }) => (
       <input
         type="text"
         name="SingleLine1"
-        value=""
         fieldType="1"
         maxLength="255"
         placeholder="i.e. dropxcell LLC"
@@ -97,7 +95,6 @@ const ZohoConsultationForm = ({ formId }) => (
       <input
         type="text"
         name="SingleLine2"
-        value=""
         fieldType="1"
         maxLength="255"
         placeholder=""
