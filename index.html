@@ -39,23 +39,30 @@
       document.addEventListener('DOMContentLoaded', function() {
         // form view event for Zoho/GTM triggers
         window.dataLayer.push({ event: 'zf_formview' });
-
-        var forms = document.querySelectorAll('#form, #zoho-consultation-hero, #zoho-consultation-final, #hero-form, #final-form');
-        forms.forEach(function(formEl) {
-          formEl.addEventListener('submit', function () {
-            var emailField = formEl.querySelector('input[name="Email"]');
-            var emailValue = emailField ? emailField.value.trim() : '';
-
-            // Custom events for GTM triggers
-            window.dataLayer.push({ event: 'zf_submitform' });
-            window.dataLayer.push({
-              event: 'consultation_form_ec',
-              enhanced_conversion_data: { email: emailValue },
-              user_data: { email: emailValue }
-            });
-          });
-        });
       });
+
+      // Use capture-phase listener so dynamically rendered React forms are covered
+      document.addEventListener('submit', function(event) {
+        var formEl = event.target;
+        if (
+          !formEl ||
+          !formEl.matches('#form, #zoho-consultation-hero, #zoho-consultation-final, #hero-form, #final-form')
+        ) {
+          return;
+        }
+
+        var emailField = formEl.querySelector('input[name=\"Email\"]');
+        var emailValue = emailField ? emailField.value.trim() : '';
+
+        // Fire Zoho + GTM custom events with the exact key GTM trigger expects
+        window.dataLayer.push({ event: 'zf_submitform', _event: 'zf_submitform' });
+        window.dataLayer.push({
+          event: 'consultation_form_ec',
+          _event: 'consultation_form_ec',
+          enhanced_conversion_data: { email: emailValue },
+          user_data: { email: emailValue }
+        });
+      }, true);
     </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
