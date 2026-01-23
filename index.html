@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MXFJ6CGB');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,50 +26,34 @@
     <meta name="twitter:description" content="UAE's #1 bookkeeping service. Get investor-ready books in 48 hours. Automated accounting, tax compliance, and real-time dashboards. First month free, no commitment." />
     <meta name="twitter:image" content="/Dubai.png" />
     <meta name="theme-color" content="#0b243a" />
-    <!-- Google Tag Manager -->
-    <script>
-      (function(w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', 'GTM-MXFJ6CGB');
-    </script>
-    <!-- End Google Tag Manager -->
     <title>Bookkeeping Services UAE | Finanshels - Get Investor-Ready Books in 48 Hours</title>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript>
-      <iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-MXFJ6CGB"
-        height="0"
-        width="0"
-        style="display:none;visibility:hidden"
-      ></iframe>
-    </noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MXFJ6CGB"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <script>
-      // make sure dataLayer exists
       window.dataLayer = window.dataLayer || [];
     
       // attach to your form
-      document.getElementById('form').addEventListener('submit', function () {
-        // read email from the form
-        var emailField = document.querySelector('input[name="Email"]');
-        var emailValue = emailField ? emailField.value.trim() : '';
-    
-        // push event for Enhanced Conversions
-        window.dataLayer.push({
-          event: 'consultation_form_ec',
-          enhanced_conversion_data: {
-          "email": 'Email',
-          }
-        });
+      document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('form');
+        if (form) {
+          form.addEventListener('submit', function () {
+            // read email from the form
+            var emailField = document.querySelector('input[name="Email"]');
+            var emailValue = emailField ? emailField.value.trim() : '';
+        
+            // push event for Enhanced Conversions
+            window.dataLayer.push({
+              event: 'consultation_form_ec',
+              enhanced_conversion_data: {
+                "email": emailValue,
+              }
+            });
+          });
+        }
       });
     </script>
     <div id="root"></div>

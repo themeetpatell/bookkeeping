@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield } from 'react-icons/fi';
 import Testimonials from '../components/Testimonials';
-import Seo from '../components/Seo';
 import './BookkeepingLanding.css';
 
 const ZohoConsultationForm = ({ formId }) => (
@@ -35,7 +33,7 @@ const ZohoConsultationForm = ({ formId }) => (
           maxLength="255"
           name="Name_First"
           fieldType="7"
-          placeholder="First name"
+          placeholder=""
           className="form-input"
         />
       </div>
@@ -46,7 +44,7 @@ const ZohoConsultationForm = ({ formId }) => (
           maxLength="255"
           name="Name_Last"
           fieldType="7"
-          placeholder="Last name"
+          placeholder=""
           className="form-input"
         />
       </div>
@@ -63,7 +61,6 @@ const ZohoConsultationForm = ({ formId }) => (
         fieldType="9"
         placeholder="i.e. name@yourdomain.com"
         className="form-input"
-        required
       />
     </div>
     <div className="form-field">
@@ -93,7 +90,6 @@ const ZohoConsultationForm = ({ formId }) => (
         maxLength="255"
         placeholder="i.e. dropxcell LLC"
         className="form-input"
-        required
       />
     </div>
     <div className="form-field">
@@ -104,7 +100,7 @@ const ZohoConsultationForm = ({ formId }) => (
         value=""
         fieldType="1"
         maxLength="255"
-        placeholder="i.e. Founder"
+        placeholder=""
         className="form-input"
       />
     </div>
@@ -116,15 +112,13 @@ const ZohoConsultationForm = ({ formId }) => (
 
 const BookkeepingLanding = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-  const { pathname } = useLocation();
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://finanshels.com';
   const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+on+google.+I%E2%80%99d+like+to+get+started.&type=phone_number&app_absent=0';
   const seoJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'Finanshels Bookkeeping & Tax (UAE)',
-    url: `${baseUrl}${pathname}`,
-    image: `${baseUrl}/Dubai.png`,
+    url: 'https://finanshels.com/bookkeeping',
+    image: 'https://finanshels.com/Dubai.png',
     description:
       'UAE bookkeeping, corporate tax, and VAT filing with real-time dashboards. Free consultation and pay only if satisfied.',
     areaServed: 'AE',
@@ -271,7 +265,7 @@ const BookkeepingLanding = () => {
     {
       name: 'Essential',
       subtitle: 'Ideal for growing small businesses',
-      price: '599',
+      price: '560',
       period: '/mo',
       transactions: 'Up to 200 transactions/year',
       features: [
@@ -286,7 +280,7 @@ const BookkeepingLanding = () => {
     {
       name: 'Growth',
       subtitle: 'For businesses with higher volume',
-      price: '999',
+      price: '800',
       period: '/mo',
       transactions: 'Up to 2,000 transactions/year',
       popular: true,
@@ -302,7 +296,7 @@ const BookkeepingLanding = () => {
     {
       name: 'Scale',
       subtitle: 'Enterprise-grade financial management',
-      price: '1,999',
+      price: '2,000',
       period: '/mo',
       transactions: 'Up to 3,600 transactions/year',
       features: [
@@ -341,15 +335,12 @@ const BookkeepingLanding = () => {
 
   return (
     <div className="new-homepage">
-      <Seo
-        title="Bookkeeping Services UAE | Finanshels - Get Investor-Ready Books in 48 Hours"
-        description="UAE's #1 bookkeeping service. Get investor-ready books in 48 hours. Automated accounting, tax compliance, and real-time dashboards."
-        canonicalPath={pathname}
-        image="/Dubai.png"
-        jsonLd={seoJsonLd}
-      />
       {/* Hero Section */}
       <section className="hero-section">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seoJsonLd) }}
+        />
         <div className="hero-container">
           <div className="hero-left">
             <div className="trust-badge">
@@ -360,7 +351,8 @@ const BookkeepingLanding = () => {
             <h1 className="hero-title">
               Buried in<br />
               <span className="highlight-green">Bookkeeping?</span><br />
-              Let Experts Manage It For You
+              Let Experts Manage it<br />
+              For You
             </h1>
             
             <p className="hero-description">
@@ -490,7 +482,7 @@ const BookkeepingLanding = () => {
       </section>
 
       {/* Solution Section */}
-      <section className="solution-section" id="services">
+      <section className="solution-section">
         <div className="content-container-large">
           <div className="solution-content">
             <div className="solution-left">
@@ -759,26 +751,9 @@ const BookkeepingLanding = () => {
 
       {/* Testimonials Section */}
       <Testimonials />
-      
-      {/* Trustpilot Rating Section */}
-      <section className="trustpilot-section">
-        <div className="trustpilot-container">
-          <div className="trustpilot-badge">
-            <div className="trustpilot-stars">
-              {[...Array(5)].map((_, i) => (
-                <span key={i} className="trustpilot-star">⭐</span>
-              ))}
-            </div>
-            <div className="trustpilot-text">
-              <strong className="trustpilot-rating">4.9/5 on Trustpilot</strong>
-              <p className="trustpilot-reviews">Based on 239 reviews</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* FAQ Section */}
-      <section className="faq-section" id="faq">
+      <section className="faq-section">
         <div className="content-container-small">
           <div className="section-header">
             <p className="section-eyebrow">FAQ</p>
