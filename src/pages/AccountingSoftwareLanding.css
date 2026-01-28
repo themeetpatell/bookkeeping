@@ -214,24 +214,24 @@
 }
 
 .software-consultation-card {
-  background: rgba(15, 29, 51, 0.8);
-  border: 1px solid rgba(249, 115, 22, 0.2);
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.12);
   border-radius: 16px;
   padding: 32px;
-  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
 }
 
 .software-consultation-card h2,
 .software-consultation-card h3 {
   font-size: 24px;
   font-weight: 700;
-  color: #ffffff;
+  color: #0f172a;
   margin: 0 0 8px 0;
 }
 
 .software-card-subtitle {
   font-size: 14px;
-  color: #9ca3af;
+  color: #475569;
   margin: 0 0 24px 0;
 }
 
@@ -266,15 +266,15 @@
 .software-form-group label {
   font-size: 14px;
   font-weight: 500;
-  color: #e5e7eb;
+  color: #1f2937;
 }
 
 .software-form-control {
   padding: 12px 16px;
-  background: rgba(31, 41, 55, 0.5);
-  border: 1px solid rgba(75, 85, 99, 0.5);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
-  color: #e5e7eb;
+  color: #0f172a;
   font-size: 14px;
   transition: all 0.2s;
 }
@@ -283,7 +283,7 @@
   outline: 2px solid var(--orange-primary);
   outline-offset: 2px;
   border-color: var(--orange-primary);
-  background: rgba(31, 41, 55, 0.8);
+  background: #ffffff;
 }
 
 .software-form-control::placeholder {
@@ -310,7 +310,7 @@
 
 .software-form-disclaimer {
   font-size: 12px;
-  color: #6b7280;
+  color: #64748b;
   line-height: 1.5;
   margin: 16px 0 0 0;
 }
@@ -320,7 +320,7 @@
   gap: 16px;
   margin-top: 20px;
   padding-top: 20px;
-  border-top: 1px solid rgba(75, 85, 99, 0.3);
+  border-top: 1px solid rgba(15, 23, 42, 0.12);
 }
 
 .software-trust-item {
