@@ -512,12 +512,11 @@ const BookkeepingLanding = () => {
               </div>
               
               <a
-                className="btn-primary"
+                className="btn-primary data-wa-track"
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => trackWhatsAppClick('bookkeeping_solution_cta')}
-                data-wa-track="true"
               >
                 Talk to an Expert
               </a>
@@ -738,12 +737,11 @@ const BookkeepingLanding = () => {
                 </ul>
                 
                 <a
-                  className={`btn-plan ${plan.popular ? 'btn-plan-popular' : ''}`}
+                  className={`btn-plan ${plan.popular ? 'btn-plan-popular' : ''} data-wa-track`}
                   href={whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => trackWhatsAppClick('bookkeeping_pricing_plan')}
-                  data-wa-track="true"
                 >
                   Get Started
                 </a>

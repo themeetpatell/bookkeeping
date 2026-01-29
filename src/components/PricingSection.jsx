@@ -128,8 +128,7 @@ const PricingSection = () => {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
-                data-wa-track="true"
-                className="block w-full"
+                className="block w-full data-wa-track"
               >
                 <Button 
                   className={`w-full ${plan.popular ? "shadow-button" : ""}`}

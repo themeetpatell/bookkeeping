@@ -609,8 +609,7 @@ const AccountingSoftwareLanding = () => {
               href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
               target="_blank"
               rel="noreferrer"
-              className="software-btn-primary"
-              data-wa-track="true"
+               className="software-btn-primary data-wa-track"
             >
               Talk to an Expert
             </a>
@@ -747,8 +746,7 @@ const AccountingSoftwareLanding = () => {
                 href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noreferrer"
-                className="software-btn-pricing"
-                data-wa-track="true"
+                className="software-btn-pricing data-wa-track"
               >
                 Get Started
               </a>
@@ -777,8 +775,7 @@ const AccountingSoftwareLanding = () => {
                 href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noreferrer"
-                className="software-btn-pricing"
-                data-wa-track="true"
+                className="software-btn-pricing data-wa-track"
               >
                 Get Started
               </a>
@@ -808,8 +805,7 @@ const AccountingSoftwareLanding = () => {
                 href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noreferrer"
-                className="software-btn-pricing primary"
-                data-wa-track="true"
+                className="software-btn-pricing primary data-wa-track"
               >
                 Get Started
               </a>
@@ -838,8 +834,7 @@ const AccountingSoftwareLanding = () => {
                 href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noreferrer"
-                className="software-btn-pricing"
-                data-wa-track="true"
+                className="software-btn-pricing data-wa-track"
               >
                 Get Started
               </a>

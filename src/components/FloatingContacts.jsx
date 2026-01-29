@@ -15,12 +15,11 @@ const FloatingContacts = () => {
   return (
     <div className="floating-contacts" aria-label="Contact options">
       <a
-        className="contact-btn whatsapp"
+        className="contact-btn whatsapp data-wa-track"
         href={whatsappUrl}
         target="_blank"
         rel="noreferrer"
         aria-label="Chat on WhatsApp"
-        data-wa-track="true"
         onClick={trackWhatsAppClick}
       >
         <FaWhatsapp className="contact-icon" />
