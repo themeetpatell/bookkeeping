@@ -197,6 +197,28 @@ main {
   font-size: 15px;
   line-height: 1.7;
   text-align: left;
+  margin-bottom: 1rem;
+}
+
+.footer-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #0f172a;
+  font-size: 15px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-email:hover {
+  color: hsl(24, 95%, 53%);
+}
+
+.footer-email-icon {
+  width: 18px;
+  height: 18px;
+  color: #64748b;
 }
 
 .footer-trust {
@@ -243,15 +265,20 @@ main {
 
 .footer-bottom-content {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
+  text-align: center;
+  gap: 0.25rem;
 }
 
 .footer-copyright {
   color: #64748b;
   font-size: 14px;
+}
+
+.footer-subtext {
+  color: #94a3b8;
+  font-size: 13px;
 }
 
 .footer-bottom-links {
