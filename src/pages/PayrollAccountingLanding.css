@@ -296,14 +296,19 @@
 .form-control {
   width: 100%;
   padding: 14px 16px;
-  background: var(--bg-secondary);
+  background: #0a1018 !important;
+  background-color: #0a1018 !important;
   border: 1.5px solid var(--border);
   border-radius: 10px;
-  color: var(--text-primary);
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
   font-size: 15px;
-  transition: all 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
   font-family: inherit;
   box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .form-control::placeholder {
@@ -318,6 +323,31 @@
   outline: none;
   border-color: var(--orange);
   box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
+  background: #0a1018 !important;
+  background-color: #0a1018 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+/* Fix for browser autofill styling */
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover,
+.form-control:-webkit-autofill:focus,
+.form-control:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #0a1018 inset !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
+  transition: background-color 5000s ease-in-out 0s;
+  background-color: #0a1018 !important;
+}
+
+/* Additional fix for input states */
+.form-control:valid,
+.form-control:invalid {
+  background: #0a1018 !important;
+  background-color: #0a1018 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
 }
 
 .btn-submit-form {
