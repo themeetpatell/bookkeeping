@@ -347,7 +347,7 @@ const BookkeepingLanding = () => {
           <div className="hero-left">
             <div className="trust-badge">
               <span className="trust-dot" aria-hidden="true" />
-              <span className="trust-text">Trusted by 5,000+ UAE businesses</span>
+              <span className="trust-text">Trusted by 6,000+ UAE businesses</span>
             </div>
             
             <h1 className="hero-title">
@@ -438,7 +438,7 @@ const BookkeepingLanding = () => {
       <section className="stats-section">
         <div className="stats-container">
           <div className="stat-item">
-            <div className="stat-value">5,000+</div>
+            <div className="stat-value">6,000+</div>
             <div className="stat-label">Businesses Served</div>
           </div>
           <div className="stat-item">
@@ -793,7 +793,7 @@ const BookkeepingLanding = () => {
               About Your Books?
             </h2>
             <p className="cta-description">
-              Join 5,000+ UAE businesses who've transformed their financial
+              Join 6,000+ UAE businesses who've transformed their financial
               operations with Finanshels. Get your free consultation and see the
               difference expert bookkeeping can make.
             </p>

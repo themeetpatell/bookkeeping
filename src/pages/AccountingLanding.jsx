@@ -197,7 +197,7 @@ const AccountingLanding = () => {
             <div className="hero-content-wrapper">
               <div className="hero-badge">
                 <span className="badge-dot"></span>
-                <span className="badge-text">Trusted by 5,000+ Businesses in UAE</span>
+                <span className="badge-text">Trusted by 6,000+ Businesses in UAE</span>
               </div>
               
               <h1 className="hero-headline">
@@ -257,7 +257,7 @@ const AccountingLanding = () => {
         <div className="container">
           <div className="stats-grid">
             <div className="stat-item">
-              <h3 className="stat-number">5,000+</h3>
+              <h3 className="stat-number">6,000+</h3>
               <p className="stat-label">UAE Businesses Served</p>
             </div>
             <div className="stat-item">
@@ -725,7 +725,7 @@ const AccountingLanding = () => {
           <div className="section-header">
             <span className="section-label">CLIENT SUCCESS STORIES</span>
             <h2 className="section-title">
-              Trusted by <span className="text-orange">5,000+ Businesses</span>
+              Trusted by <span className="text-orange">6,000+ Businesses</span>
             </h2>
             <p className="section-description">
               Hear what founders say about working with our accounting company.
@@ -799,7 +799,7 @@ const AccountingLanding = () => {
                 Ready to Stop Stressing <span className="text-orange">About Your Books?</span>
               </h2>
               <p className="section-description">
-                Join 5,000+ businesses across Dubai, Abu Dhabi, Sharjah & UAE who've transformed their financial operations with our accounting services. Get your free consultation and see the difference expert bookkeeping can make.
+                Join 6,000+ businesses across Dubai, Abu Dhabi, Sharjah & UAE who've transformed their financial operations with our accounting services. Get your free consultation and see the difference expert bookkeeping can make.
               </p>
               
               <div className="cta-steps">

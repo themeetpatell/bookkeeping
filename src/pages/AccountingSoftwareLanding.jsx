@@ -342,7 +342,7 @@ const AccountingSoftwareLanding = () => {
           <div className="software-hero-left">
             <div className="software-trust-badge">
               <span className="software-trust-dot"></span>
-              <span>Trusted by 5,000+ UAE businesses</span>
+              <span>Trusted by 6,000+ UAE businesses</span>
             </div>
             
             <h1 className="software-hero-title">
@@ -433,7 +433,7 @@ const AccountingSoftwareLanding = () => {
           <p className="software-stats-title">Trusted by leading UAE businesses</p>
           <div className="software-stats-grid">
             <div className="software-stat-item">
-              <h3 className="software-stat-number">5,000+</h3>
+              <h3 className="software-stat-number">6,000+</h3>
               <p className="software-stat-label">Businesses Served</p>
             </div>
             <div className="software-stat-item">
@@ -854,7 +854,7 @@ const AccountingSoftwareLanding = () => {
           <div className="software-section-header">
             <span className="software-section-label">CLIENT SUCCESS STORIES</span>
             <h2 className="software-section-title">
-              Trusted by <span className="software-text-orange">5,000+ Businesses</span>
+              Trusted by <span className="software-text-orange">6,000+ Businesses</span>
             </h2>
             <p className="software-section-description">
               Hear what founders say about switching from accounting software to Finanshels.
@@ -927,7 +927,7 @@ const AccountingSoftwareLanding = () => {
                 <span className="software-text-orange">Software That Can't Think?</span>
               </h2>
               <p className="software-section-description">
-                Join 5,000+ UAE businesses who've switched from standalone accounting software to Finanshels. Get expert accountants, a powerful client portal, and financial insights that drive real decisions.
+                Join 6,000+ UAE businesses who've switched from standalone accounting software to Finanshels. Get expert accountants, a powerful client portal, and financial insights that drive real decisions.
               </p>
               
               <div className="software-cta-steps">

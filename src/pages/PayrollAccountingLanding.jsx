@@ -261,7 +261,7 @@ const PayrollAccountingLanding = () => {
             <div className="hero-content-wrapper">
               <div className="hero-badge">
                 <span className="badge-dot"></span>
-                <span className="badge-text">Trusted by 5,000+ Businesses in UAE</span>
+                <span className="badge-text">Trusted by 6,000+ Businesses in UAE</span>
               </div>
               
               <h1 className="hero-headline">
@@ -291,7 +291,7 @@ const PayrollAccountingLanding = () => {
               
               <div className="hero-stats">
                 <div className="hero-stat">
-                  <span className="stat-value">5,000+</span>
+                  <span className="stat-value">6,000+</span>
                   <span className="stat-label">UAE Businesses Served</span>
                 </div>
                 <div className="hero-stat">
@@ -742,7 +742,7 @@ const PayrollAccountingLanding = () => {
                 Ready to Simplify Your <span className="text-orange">Payroll Accounting?</span>
               </h2>
               <p className="final-cta-description">
-                Join 5,000+ UAE businesses who've transformed their payroll accounting operations. Get a free consultation with our finance experts today.
+                Join 6,000+ UAE businesses who've transformed their payroll accounting operations. Get a free consultation with our finance experts today.
               </p>
               
               <ul className="cta-benefits">
