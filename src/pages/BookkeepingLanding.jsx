@@ -23,8 +23,10 @@ const ZohoConsultationForm = ({ formId }) => (
     <input type="hidden" name="utm_content" value="" />
     <input type="hidden" name="gclid" value="" />
     <input type="hidden" name="referrername" value="" />
-    <h2 className="form-title">Get Your Free Consultation</h2>
-    <p className="form-subtitle">Book a 30-minute call with our finance experts. No obligation.</p>
+    <div className="form-header">
+      <h2 className="form-title">Get Your Free Consultation</h2>
+      <p className="form-subtitle">Book a 30-minute call with our finance experts. No obligation.</p>
+    </div>
     <div className="form-row form-row-half">
       <div className="form-field">
         <label>First Name</label>
@@ -33,7 +35,7 @@ const ZohoConsultationForm = ({ formId }) => (
           maxLength="255"
           name="Name_First"
           fieldType="7"
-          placeholder=""
+          placeholder="i.e. John"
           className="form-input"
         />
       </div>
@@ -44,7 +46,7 @@ const ZohoConsultationForm = ({ formId }) => (
           maxLength="255"
           name="Name_Last"
           fieldType="7"
-          placeholder=""
+          placeholder="i.e. Smith"
           className="form-input"
         />
       </div>
@@ -97,7 +99,7 @@ const ZohoConsultationForm = ({ formId }) => (
         name="SingleLine2"
         fieldType="1"
         maxLength="255"
-        placeholder=""
+        placeholder="e.g. Finance Manager"
         className="form-input"
       />
     </div>

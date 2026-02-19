@@ -311,7 +311,10 @@ const PayrollAccountingLanding = () => {
             
             {/* Right Column - Form */}
             <div className="hero-form-wrapper">
-              <div className="hero-form-card">
+              <div
+                className="hero-form-card payroll-form-card"
+                style={{ background: '#ffffff', color: '#0f172a' }}
+              >
                 <div className="form-intro">
                   <h2 className="form-title">Get Your Free Payroll Consultation</h2>
                   <p className="form-subtitle">Book a 30-minute call with our payroll experts. No obligation.</p>

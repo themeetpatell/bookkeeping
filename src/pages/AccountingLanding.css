@@ -1249,7 +1249,7 @@
   margin-bottom: 40px;
 }
 
-.consultation-card {
+.accounting-landing .consultation-card {
   background: #ffffff;
   border: 1px solid rgba(15, 23, 42, 0.12);
   border-radius: 20px;
@@ -1257,14 +1257,14 @@
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
 }
 
-.consultation-card h3 {
+.accounting-landing .consultation-card h3 {
   font-size: 24px;
   font-weight: 700;
   color: #0f172a;
   margin: 0 0 8px 0;
 }
 
-.card-subtitle {
+.accounting-landing .card-subtitle {
   font-size: 14px;
   color: #475569;
   margin: 0 0 24px 0;
