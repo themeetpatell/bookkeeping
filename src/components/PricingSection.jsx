@@ -3,7 +3,7 @@ import { Check } from "lucide-react";
 import './PricingSection.css';
 
 const PricingSection = () => {
-  const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+starting+from+$499/mo.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0';
+  const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0';
   
   const plans = [
     {
