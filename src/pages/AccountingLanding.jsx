@@ -217,7 +217,7 @@ const AccountingLanding = () => {
               </h1>
               
               <p className="hero-subheadline">
-                Expert accounting & bookkeeping services for growing businesses in Dubai, Abu Dhabi, Sharjah & across the UAE. From profit and loss statements to tax compliance — we streamline your finance and accounting operations so you can focus on growth.
+                Expert outsourced accounting & bookkeeping services for growing businesses in Dubai, Abu Dhabi, Sharjah & across the UAE. From profit and loss statements to tax compliance — we streamline your finance and accounting operations so you can focus on growth.
               </p>
               
               <div className="hero-features">

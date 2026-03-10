@@ -360,7 +360,7 @@ const BookkeepingLanding = () => {
             </h1>
             
             <p className="hero-description">
-              Expert accounting & bookkeeping for UAE small businesses.
+              Expert outsourced accounting & bookkeeping for UAE small businesses.
               Corporate tax compliance, VAT filing, and real-time financial
               insights — all handled by our dedicated team.
             </p>
