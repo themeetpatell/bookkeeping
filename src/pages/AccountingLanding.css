@@ -328,6 +328,67 @@
   opacity: 0.8;
 }
 
+/* Client Logos Section */
+.accounting-client-logos-section {
+  position: relative;
+  padding: 22px 0 24px;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(60, 130, 246, 0.22), transparent 34%),
+    radial-gradient(circle at 78% 50%, rgba(148, 163, 184, 0.12), transparent 30%),
+    linear-gradient(180deg, #0b1221 0%, #12294a 72%, #13233c 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.accounting-logos-label {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.72);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.accounting-logos-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 4px 0 2px;
+  scrollbar-width: none;
+}
+
+.accounting-logos-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.accounting-logo-tile {
+  flex: 0 0 118px;
+  min-height: 56px;
+  padding: 6px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.accounting-logo-image {
+  max-height: 28px;
+  max-width: 100%;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1) grayscale(100%);
+  opacity: 0.88;
+}
+
 /* Zoho Form Styling */
 .zoho-form {
   display: flex;
@@ -1515,6 +1576,10 @@
     flex-direction: row;
     justify-content: space-around;
   }
+
+  .accounting-client-logos-section {
+    padding: 18px 0 20px;
+  }
   
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1623,6 +1688,34 @@
   .trust-indicators {
     flex-direction: column;
     gap: 12px;
+  }
+
+  .accounting-client-logos-section {
+    padding: 16px 0 18px;
+  }
+
+  .accounting-logos-label {
+    margin-bottom: 12px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+
+  .accounting-logos-grid {
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 2px 2px 6px;
+    scroll-snap-type: x proximity;
+  }
+
+  .accounting-logo-tile {
+    flex: 0 0 112px;
+    min-height: 52px;
+    padding: 6px 8px;
+    scroll-snap-align: start;
+  }
+
+  .accounting-logo-image {
+    max-height: 24px;
   }
 
   .trust-item {

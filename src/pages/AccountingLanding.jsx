@@ -187,6 +187,18 @@ const AccountingLanding = () => {
     }
   ];
 
+  const clientLogos = [
+    { src: '/clients/Binary.png', alt: 'Binary' },
+    { src: '/clients/actualize.png', alt: 'Actualize' },
+    { src: '/clients/carbonsirf.png', alt: 'CarbonSirf' },
+    { src: '/clients/cotu.avif', alt: 'COTU Ventures' },
+    { src: '/clients/fuze.png', alt: 'Fuze' },
+    { src: '/clients/growdash.png', alt: 'Growdash' },
+    { src: '/clients/humlog.png', alt: 'Humlog' },
+    { src: '/clients/veehive.png', alt: 'Veehive' },
+    { src: '/clients/zywa.png', alt: 'Zywa' }
+  ];
+
   return (
     <div className="accounting-landing">
       {/* Hero Section - Complete Redesign */}
@@ -248,6 +260,25 @@ const AccountingLanding = () => {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="accounting-client-logos-section" aria-label="Client logos">
+        <div className="container">
+          <p className="accounting-logos-label">Trusted by leading UAE businesses</p>
+          <div className="accounting-logos-grid">
+            {clientLogos.map((logo) => (
+              <div key={logo.alt} className="accounting-logo-tile">
+                <img
+                  src={logo.src}
+                  alt={`${logo.alt} logo`}
+                  className="accounting-logo-image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
