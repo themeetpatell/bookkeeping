@@ -636,7 +636,7 @@ const AccountingLanding = () => {
               <p className="pricing-subtitle">Perfect for freelancers and solopreneurs</p>
               <div className="pricing-amount">
                 <span className="currency">AED</span>
-                <span className="price">299</span>
+                <span className="price">499</span>
                 <span className="period">/mo</span>
               </div>
               <p className="pricing-limit">Up to 50 transactions/year</p>
@@ -664,7 +664,7 @@ const AccountingLanding = () => {
               <p className="pricing-subtitle">Ideal for growing small businesses</p>
               <div className="pricing-amount">
                 <span className="currency">AED</span>
-                <span className="price">599</span>
+                <span className="price">799</span>
                 <span className="period">/mo</span>
               </div>
               <p className="pricing-limit">Up to 200 transactions/year</p>

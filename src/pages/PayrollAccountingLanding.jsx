@@ -185,7 +185,7 @@ const PayrollAccountingLanding = () => {
     },
     {
       question: "What if I'm not satisfied with the service?",
-      answer: "We offer a satisfaction guarantee. If you're not happy with our service within the first 30 days, we'll work with you to resolve any issues or provide a full refund. Your success is our priority."
+      answer: "mWe offer a satisfaction guarantee. If you're not happy with our service within the first 30 days, we'll work with you to resolve any issues or provide a full refund. Your success is our priority."
     }
   ];
 
@@ -193,7 +193,7 @@ const PayrollAccountingLanding = () => {
     {
       name: "Starter",
       subtitle: "Perfect for freelancers and solopreneurs",
-      price: "299",
+      price: "499",
       limit: "Up to 50 transactions/year",
       features: [
         "Annual Tax Filing",
@@ -207,7 +207,7 @@ const PayrollAccountingLanding = () => {
     {
       name: "Essential",
       subtitle: "Ideal for growing small businesses",
-      price: "599",
+      price: "799",
       limit: "Up to 200 transactions/year",
       features: [
         "Everything in Starter, plus:",

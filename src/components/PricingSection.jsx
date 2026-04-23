@@ -9,7 +9,7 @@ const PricingSection = () => {
     {
       name: "Starter",
       description: "Perfect for freelancers and solopreneurs",
-      price: "AED 299",
+      price: "AED 499",
       period: "/mo",
       transactions: "Up to 50 transactions/year",
       features: [
@@ -24,7 +24,7 @@ const PricingSection = () => {
     {
       name: "Essential",
       description: "Ideal for growing small businesses",
-      price: "AED 599",
+      price: "AED 799",
       period: "/mo",
       transactions: "Up to 200 transactions/year",
       features: [

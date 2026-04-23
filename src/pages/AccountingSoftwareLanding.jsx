@@ -290,7 +290,7 @@ const AccountingSoftwareLanding = () => {
     },
     {
       question: "How does Finanshels pricing compare to accounting software costs?",
-      answer: "QuickBooks costs AED 80-300/month plus your time to manage it (and potential accountant fees for cleanup and tax filing). Finanshels includes everything — bookkeeping, expert advice, tax compliance, and your client portal — starting at AED 299/month with no hidden costs."
+      answer: "QuickBooks costs AED 80-300/month plus your time to manage it (and potential accountant fees for cleanup and tax filing). Finanshels includes everything — bookkeeping, expert advice, tax compliance, and your client portal — starting at AED 499/month with no hidden costs."
     },
     {
       question: "Do you replace my current bookkeeping software?",
@@ -728,7 +728,7 @@ const AccountingSoftwareLanding = () => {
               <p className="software-pricing-subtitle">Perfect for freelancers and solopreneurs</p>
               <div className="software-pricing-amount">
                 <span className="software-currency">AED</span>
-                <span className="software-price">299</span>
+                <span className="software-price">499</span>
                 <span className="software-period">/mo</span>
               </div>
               <p className="software-pricing-limit">Up to 50 transactions/year</p>
@@ -757,7 +757,7 @@ const AccountingSoftwareLanding = () => {
               <p className="software-pricing-subtitle">Ideal for growing small businesses</p>
               <div className="software-pricing-amount">
                 <span className="software-currency">AED</span>
-                <span className="software-price">599</span>
+                <span className="software-price">799</span>
                 <span className="software-period">/mo</span>
               </div>
               <p className="software-pricing-limit">Up to 200 transactions/year</p>
