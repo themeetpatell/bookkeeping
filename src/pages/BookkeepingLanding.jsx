@@ -254,7 +254,7 @@ const BookkeepingLanding = () => {
     {
       name: 'Starter',
       subtitle: 'Perfect for freelancers and solopreneurs',
-      price: '299',
+      price: '499',
       period: '/mo',
       transactions: 'Up to 50 transactions/year',
       features: [
