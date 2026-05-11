@@ -661,7 +661,7 @@ const PayrollAccountingLandingBing = () => {
                 </ul>
                 
                 <a 
-                  href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Payroll+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
+                  href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+bing+ads+for+Payroll+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
                   target="_blank"
                   rel="noreferrer"
                   className={`btn-pricing ${plan.popular ? 'primary' : ''} data-wa-track`}

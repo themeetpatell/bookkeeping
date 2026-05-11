@@ -111,7 +111,7 @@ const ZohoConsultationForm = ({ formId }) => (
 
 const BookkeepingLandingBing = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-  const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+on+google.+I%E2%80%99d+like+to+get+started.&type=phone_number&app_absent=0';
+  const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+bing+ads+for+Accounting+Services.+I%E2%80%99d+like+to+get+started.&type=phone_number&app_absent=0';
   const trackWhatsAppClick = (source) => {
     if (typeof window !== 'undefined' && window.dataLayer) {
       window.dataLayer.push({ event: 'whatsapp_click', source });
@@ -269,7 +269,7 @@ const BookkeepingLandingBing = () => {
     {
       name: 'Essential',
       subtitle: 'Ideal for growing small businesses',
-      price: '560',
+      price: '799',
       period: '/mo',
       transactions: 'Up to 200 transactions/year',
       features: [
@@ -284,7 +284,7 @@ const BookkeepingLandingBing = () => {
     {
       name: 'Growth',
       subtitle: 'For businesses with higher volume',
-      price: '800',
+      price: '999',
       period: '/mo',
       transactions: 'Up to 2,000 transactions/year',
       popular: true,
@@ -300,7 +300,7 @@ const BookkeepingLandingBing = () => {
     {
       name: 'Scale',
       subtitle: 'Enterprise-grade financial management',
-      price: '2,000',
+      price: '1,999',
       period: '/mo',
       transactions: 'Up to 3,600 transactions/year',
       features: [

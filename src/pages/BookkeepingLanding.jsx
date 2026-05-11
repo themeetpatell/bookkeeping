@@ -269,7 +269,7 @@ const BookkeepingLanding = () => {
     {
       name: 'Essential',
       subtitle: 'Ideal for growing small businesses',
-      price: '560',
+      price: '799',
       period: '/mo',
       transactions: 'Up to 200 transactions/year',
       features: [
@@ -284,7 +284,7 @@ const BookkeepingLanding = () => {
     {
       name: 'Growth',
       subtitle: 'For businesses with higher volume',
-      price: '800',
+      price: '999',
       period: '/mo',
       transactions: 'Up to 2,000 transactions/year',
       popular: true,
@@ -300,7 +300,7 @@ const BookkeepingLanding = () => {
     {
       name: 'Scale',
       subtitle: 'Enterprise-grade financial management',
-      price: '2,000',
+      price: '1,999',
       period: '/mo',
       transactions: 'Up to 3,600 transactions/year',
       features: [
