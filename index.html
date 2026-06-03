@@ -34,6 +34,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-MXFJ6CGB');</script>
 <!-- End Google Tag Manager -->
+    <!-- Reddit Pixel -->
+    <script>
+      !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js?pixel_id=a2_ith4tan40evc",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','a2_ith4tan40evc');rdt('track', 'PageVisit');
+    </script>
+    <!-- Persist the Reddit click id (rdt_cid) from the landing URL so it is
+         still available for the Conversions API after client-side navigation. -->
+    <script>
+      (function () {
+        try {
+          var clickId = new URLSearchParams(window.location.search).get('rdt_cid');
+          if (clickId) { window.localStorage.setItem('rdt_cid', clickId); }
+        } catch (e) {}
+      })();
+    </script>
+    <!-- End Reddit Pixel -->
   </head>
   <body>
     <!-- Google Tag Manager  -->
@@ -67,6 +82,41 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           enhanced_conversion_data: { email: emailValue },
           user_data: { email: emailValue }
         });
+
+        // Reddit conversion: report the form submit as a Lead via BOTH the
+        // browser pixel and the server-side Conversions API. The SAME
+        // conversionId is sent to both so Reddit deduplicates them.
+        var conversionId = (window.crypto && window.crypto.randomUUID)
+          ? window.crypto.randomUUID()
+          : 'lead-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+
+        if (typeof window.rdt === 'function') {
+          window.rdt('track', 'Lead', { conversionId: conversionId });
+        }
+
+        // Server-side Conversions API (survives ad/tracker blockers).
+        try {
+          var rdtClickId = '';
+          try {
+            rdtClickId = window.localStorage.getItem('rdt_cid')
+              || new URLSearchParams(window.location.search).get('rdt_cid')
+              || '';
+          } catch (e) {}
+
+          fetch('/api/reddit-capi', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            keepalive: true,
+            body: JSON.stringify({
+              conversionId: conversionId,
+              email: emailValue,
+              clickId: rdtClickId,
+              eventType: 'Lead',
+              screenWidth: window.screen ? window.screen.width : undefined,
+              screenHeight: window.screen ? window.screen.height : undefined
+            })
+          }).catch(function () {});
+        } catch (e) {}
       }, true);
     </script>
     <div id="root"></div>

@@ -1,5 +1,6 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import AccountingLanding from './pages/AccountingLanding';
 import AccountingLandingBing from './pages/AccountingLandingBing';
@@ -12,6 +13,16 @@ import PayrollAccountingLandingBing from './pages/PayrollAccountingLandingBing';
 import ThankYou from './pages/ThankYou';
 
 function App() {
+  const { pathname } = useLocation();
+
+  // Fire a Reddit Pixel PageVisit on each client-side route change.
+  // The base pixel in index.html only fires PageVisit on the initial hard load.
+  useEffect(() => {
+    if (typeof window !== 'undefined' && typeof window.rdt === 'function') {
+      window.rdt('track', 'PageVisit');
+    }
+  }, [pathname]);
+
   return (
     <Layout>
       <Routes>
