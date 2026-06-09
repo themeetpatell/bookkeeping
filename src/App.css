@@ -34,9 +34,15 @@ main {
   padding-top: calc(80px + var(--offer-bar-h));
 }
 
+@media (max-width: 1024px) {
+  :root {
+    --offer-bar-h: 72px;
+  }
+}
+
 @media (max-width: 768px) {
   :root {
-    --offer-bar-h: 52px;
+    --offer-bar-h: 72px;
   }
 
   main {
@@ -46,7 +52,7 @@ main {
 
 @media (max-width: 480px) {
   :root {
-    --offer-bar-h: 58px;
+    --offer-bar-h: 96px;
   }
 
   main {
@@ -70,14 +76,15 @@ main {
 }
 
 .offer-bar-inner {
-  position: relative;
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0.3rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.5rem 1.1rem;
 }
 
 .offer-bar-message {
@@ -117,11 +124,57 @@ main {
   font-weight: 400;
 }
 
+/* COUNTDOWN - RESETS EVERY WEEKEND THROUGH JUNE 2026 */
+.offer-bar-countdown {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-variant-numeric: tabular-nums;
+}
+
+.offer-cd-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-right: 0.1rem;
+  white-space: nowrap;
+}
+
+.offer-cd-unit {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+}
+
+.offer-cd-unit b {
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.offer-cd-unit i {
+  font-size: 0.58rem;
+  font-style: normal;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.offer-cd-sep {
+  color: var(--primary-light);
+  font-weight: 800;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
 .offer-bar-cta {
-  position: absolute;
-  right: 1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -139,7 +192,7 @@ main {
 
 .offer-bar-cta:hover {
   background: #20bd5a;
-  transform: translateY(-50%) scale(1.04);
+  transform: scale(1.04);
   box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45);
 }
 
@@ -149,16 +202,24 @@ main {
   flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
+/* TABLET: message on its own row, countdown + CTA share the second row */
+@media (max-width: 1024px) {
   .offer-bar-inner {
-    padding: 0 0.9rem;
-    gap: 0.6rem;
+    flex-wrap: wrap;
     justify-content: space-between;
+    gap: 0.35rem 0.8rem;
+    padding: 0.4rem 1.25rem;
   }
 
   .offer-bar-message {
-    gap: 0.5rem;
-    min-width: 0;
+    flex-basis: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .offer-bar-inner {
+    padding: 0.4rem 0.9rem;
   }
 
   .offer-bar-badge {
@@ -168,28 +229,30 @@ main {
   .offer-bar-text {
     font-size: 0.78rem;
     line-height: 1.2;
-    text-align: left;
+    text-align: center;
   }
 
-  .offer-bar-sub {
-    display: none;
+  .offer-cd-unit b {
+    font-size: 0.85rem;
   }
 
   .offer-bar-cta {
-    position: static;
-    transform: none;
     font-size: 0.78rem;
     padding: 0.4rem 0.75rem;
-  }
-
-  .offer-bar-cta:hover {
-    transform: scale(1.04);
   }
 }
 
 @media (max-width: 480px) {
   .offer-bar-text {
     font-size: 0.72rem;
+  }
+
+  .offer-cd-label {
+    font-size: 0.55rem;
+  }
+
+  .offer-cd-unit b {
+    font-size: 0.8rem;
   }
 
   .offer-bar-cta {

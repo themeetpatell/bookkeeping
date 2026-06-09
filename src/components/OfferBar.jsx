@@ -1,7 +1,67 @@
+import { useEffect, useState } from 'react';
+
 const WHATSAPP_URL =
-  'https://api.whatsapp.com/send/?phone=971521549572&text=Hi%2C+I%27d+like+to+claim+the+20%25+OFF+%2B+AED+100+Voucher+offer+on+your+Audit+%26+Accounting+plans.&type=phone_number&app_absent=0';
+  'https://api.whatsapp.com/send/?phone=971521549572&text=Hi%2C+I%27d+like+to+claim+the+3+months+FREE+Accounting+offer+on+your+Annual+Plans.&type=phone_number&app_absent=0';
+
+const DAYS_IN_WEEK = 7;
+const TICK_MS = 1000;
+
+const MS_PER_SECOND = 1000;
+const MS_PER_MINUTE = 60 * MS_PER_SECOND;
+const MS_PER_HOUR = 60 * MS_PER_MINUTE;
+const MS_PER_DAY = 24 * MS_PER_HOUR;
+
+// Offer runs every weekend through June 2026; the final weekly countdown
+// ends on the last weekend of the month (Sun 28 Jun 2026, 23:59:59 local).
+const LAST_WEEKEND_END = new Date(2026, 5, 28, 23, 59, 59, 999);
+
+// End of the current weekend = the upcoming Sunday at 23:59:59 (local time).
+// Once a weekend passes, this rolls forward to the next Sunday automatically.
+const getWeekendEnd = (now) => {
+  const target = new Date(now);
+  const daysUntilSunday = (DAYS_IN_WEEK - target.getDay()) % DAYS_IN_WEEK;
+  target.setDate(target.getDate() + daysUntilSunday);
+  target.setHours(23, 59, 59, 999);
+
+  if (target.getTime() <= now.getTime()) {
+    target.setDate(target.getDate() + DAYS_IN_WEEK);
+  }
+
+  return target.getTime() > LAST_WEEKEND_END.getTime() ? LAST_WEEKEND_END : target;
+};
+
+const getRemaining = (now) => {
+  const diff = getWeekendEnd(now).getTime() - now.getTime();
+
+  if (diff <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true };
+  }
+
+  return {
+    days: Math.floor(diff / MS_PER_DAY),
+    hours: Math.floor((diff % MS_PER_DAY) / MS_PER_HOUR),
+    minutes: Math.floor((diff % MS_PER_HOUR) / MS_PER_MINUTE),
+    seconds: Math.floor((diff % MS_PER_MINUTE) / MS_PER_SECOND),
+    isExpired: false,
+  };
+};
+
+const pad = (value) => String(value).padStart(2, '0');
+
+const useWeekendCountdown = () => {
+  const [remaining, setRemaining] = useState(() => getRemaining(new Date()));
+
+  useEffect(() => {
+    const id = setInterval(() => setRemaining(getRemaining(new Date())), TICK_MS);
+    return () => clearInterval(id);
+  }, []);
+
+  return remaining;
+};
 
 const OfferBar = () => {
+  const { days, hours, minutes, seconds, isExpired } = useWeekendCountdown();
+
   const handleClick = () => {
     if (typeof window !== 'undefined' && window.dataLayer) {
       window.dataLayer.push({ event: 'whatsapp_click', source: 'offer_bar' });
@@ -14,9 +74,39 @@ const OfferBar = () => {
         <div className="offer-bar-message">
           <span className="offer-bar-badge">Limited Offer</span>
           <p className="offer-bar-text">
-            Get <strong>20% OFF</strong> and an <strong>AED&nbsp;100 Voucher</strong> on all Audit &amp; Accounting plans.
+            Get <strong>3 Months FREE Accounting</strong> with Annual Plans &mdash; Switch Easily in <strong>48&nbsp;Hrs</strong>.
           </p>
         </div>
+
+        {!isExpired && (
+          <div
+            className="offer-bar-countdown"
+            role="timer"
+            aria-label={`Offer ends in ${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`}
+          >
+            <span className="offer-cd-label">Ends in</span>
+            <span className="offer-cd-unit">
+              <b>{pad(days)}</b>
+              <i>d</i>
+            </span>
+            <span className="offer-cd-sep">:</span>
+            <span className="offer-cd-unit">
+              <b>{pad(hours)}</b>
+              <i>h</i>
+            </span>
+            <span className="offer-cd-sep">:</span>
+            <span className="offer-cd-unit">
+              <b>{pad(minutes)}</b>
+              <i>m</i>
+            </span>
+            <span className="offer-cd-sep">:</span>
+            <span className="offer-cd-unit">
+              <b>{pad(seconds)}</b>
+              <i>s</i>
+            </span>
+          </div>
+        )}
+
         <a
           href={WHATSAPP_URL}
           className="offer-bar-cta data-wa-track"
