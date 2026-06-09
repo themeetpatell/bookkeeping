@@ -628,6 +628,10 @@ const AccountingLanding = () => {
               <span className="emoji">🎉</span>
               <span>Pay Only if Satisfied — No Commitment!</span>
             </div>
+            <div className="pricing-tax-highlight">
+              <span className="emoji">✅</span>
+              <span>Every plan includes <strong>FREE VAT &amp; Corporate Tax (CT) Filing</strong></span>
+            </div>
           </div>
           
           <div className="pricing-grid">
@@ -642,11 +646,12 @@ const AccountingLanding = () => {
               <p className="pricing-limit">Up to 50 transactions/year</p>
               
               <ul className="pricing-features">
-                <li><FiCheckCircle /> Annual Tax Filing</li>
-                <li><FiCheckCircle /> Tax Registration</li>
-                <li><FiCheckCircle /> Basic Financial Statements</li>
+                <li><FiCheckCircle /> <strong>Free Corporate Tax (CT) Filing</strong></li>
+                <li><FiCheckCircle /> CT Registration</li>
+                <li><FiCheckCircle /> <strong>Free VAT Registration &amp; Filing</strong></li>
+                <li><FiCheckCircle /> Quarterly Financial Statements</li>
                 <li><FiCheckCircle /> Dedicated Support Manager</li>
-                <li><FiCheckCircle /> 30 Min Free Consultation</li>
+                <li><FiCheckCircle /> 30 Min Free Tax Consultation</li>
               </ul>
               
               <a 
