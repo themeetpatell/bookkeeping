@@ -342,7 +342,7 @@ const AccountingSoftwareLanding = () => {
           <div className="software-hero-left">
             <div className="software-trust-badge">
               <span className="software-trust-dot"></span>
-              <span>Trusted by 6,000+ UAE businesses</span>
+              <span>Trusted by 7,000+ UAE businesses</span>
             </div>
             
             <h1 className="software-hero-title">
@@ -377,6 +377,25 @@ const AccountingSoftwareLanding = () => {
             <div className="software-hero-buttons">
               <a href="#consultation" className="software-btn-primary">Get Free Consultation</a>
               <a href="#pricing" className="software-btn-secondary">View Pricing</a>
+            </div>
+
+            <div className="software-hero-stats">
+              <div className="software-hero-stat">
+                <span className="software-stat-number">7,000+</span>
+                <span className="software-stat-label">Businesses Served</span>
+              </div>
+              <div className="software-hero-stat">
+                <span className="software-stat-number">4.9</span>
+                <span className="software-stat-label">Trustpilot Rating</span>
+              </div>
+              <div className="software-hero-stat">
+                <span className="software-stat-number">10×</span>
+                <span className="software-stat-label">Faster Than Manual</span>
+              </div>
+              <div className="software-hero-stat">
+                <span className="software-stat-number">150+</span>
+                <span className="software-stat-label">Accountants</span>
+              </div>
             </div>
           </div>
           
@@ -423,31 +442,6 @@ const AccountingSoftwareLanding = () => {
                 />
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="software-stats">
-        <div className="software-container">
-          <p className="software-stats-title">Trusted by leading UAE businesses</p>
-          <div className="software-stats-grid">
-            <div className="software-stat-item">
-              <h3 className="software-stat-number">6,000+</h3>
-              <p className="software-stat-label">Businesses Served</p>
-            </div>
-            <div className="software-stat-item">
-              <h3 className="software-stat-number">4.9</h3>
-              <p className="software-stat-label">Trustpilot Rating</p>
-            </div>
-            <div className="software-stat-item">
-              <h3 className="software-stat-number">10×</h3>
-              <p className="software-stat-label">Faster Than Manual</p>
-            </div>
-            <div className="software-stat-item">
-              <h3 className="software-stat-number">24/7</h3>
-              <p className="software-stat-label">Dedicated Support</p>
-            </div>
           </div>
         </div>
       </section>
@@ -854,7 +848,7 @@ const AccountingSoftwareLanding = () => {
           <div className="software-section-header">
             <span className="software-section-label">CLIENT SUCCESS STORIES</span>
             <h2 className="software-section-title">
-              Trusted by <span className="software-text-orange">6,000+ Businesses</span>
+              Trusted by <span className="software-text-orange">7,000+ Businesses</span>
             </h2>
             <p className="software-section-description">
               Hear what founders say about switching from accounting software to Finanshels.
@@ -927,7 +921,7 @@ const AccountingSoftwareLanding = () => {
                 <span className="software-text-orange">Software That Can't Think?</span>
               </h2>
               <p className="software-section-description">
-                Join 6,000+ UAE businesses who've switched from standalone accounting software to Finanshels. Get expert accountants, a powerful client portal, and financial insights that drive real decisions.
+                Join 7,000+ UAE businesses who've switched from standalone accounting software to Finanshels. Get expert accountants, a powerful client portal, and financial insights that drive real decisions.
               </p>
               
               <div className="software-cta-steps">

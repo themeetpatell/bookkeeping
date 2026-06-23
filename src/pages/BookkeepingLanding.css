@@ -46,7 +46,7 @@
   box-shadow:
     0 15px 35px rgba(241, 102, 16, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 600;
   color: #fff6ef;
   margin-bottom: 32px;
@@ -160,7 +160,7 @@
 .hero-ctas {
   display: flex;
   gap: 16px;
-  margin-bottom: 48px;
+  margin-bottom: 28px;
   flex-wrap: wrap;
 }
 
@@ -531,6 +531,41 @@
   color: var(--orange-primary);
   font-size: 22px;
   flex-shrink: 0;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-stat .stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--orange-primary);
+  margin-bottom: 0;
+}
+
+.hero-stat .stat-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 640px) {
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
 /* Stats Section */

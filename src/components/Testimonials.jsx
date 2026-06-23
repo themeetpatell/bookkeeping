@@ -120,7 +120,7 @@ const Testimonials = () => {
       <div className="testimonials-header">
         <p className="section-eyebrow">Client Success Stories</p>
         <h2 className="section-title">
-          Trusted by <span className="highlight-orange">6,000+ Businesses</span>
+          Trusted by <span className="highlight-orange">7,000+ Businesses</span>
         </h2>
         <p className="section-subtitle">Hear what founders say about working with Finanshels.</p>
       </div>

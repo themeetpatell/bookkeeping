@@ -349,7 +349,7 @@ const BookkeepingLandingBing = () => {
           <div className="hero-left">
             <div className="trust-badge">
               <span className="trust-dot" aria-hidden="true" />
-              <span className="trust-text">Trusted by 6,000+ UAE businesses</span>
+              <span className="trust-text">Trusted by 7,000+ UAE businesses</span>
             </div>
             
             <h1 className="hero-title">
@@ -389,6 +389,25 @@ const BookkeepingLandingBing = () => {
             <div className="hero-ctas">
               <a href="#consultation" className="btn-primary">Get Free Consultation</a>
               <a href="#pricing" className="btn-secondary">View Pricing</a>
+            </div>
+
+            <div className="hero-stats">
+              <div className="hero-stat">
+                <span className="stat-value">7,000+</span>
+                <span className="stat-label">Businesses Served</span>
+              </div>
+              <div className="hero-stat">
+                <span className="stat-value">4.9</span>
+                <span className="stat-label">Trustpilot Rating</span>
+              </div>
+              <div className="hero-stat">
+                <span className="stat-value">10×</span>
+                <span className="stat-label">Faster Than Manual</span>
+              </div>
+              <div className="hero-stat">
+                <span className="stat-value">150+</span>
+                <span className="stat-label">Accountants</span>
+              </div>
             </div>
           </div>
           
@@ -432,28 +451,6 @@ const BookkeepingLandingBing = () => {
                 />
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="stats-section">
-        <div className="stats-container">
-          <div className="stat-item">
-            <div className="stat-value">6,000+</div>
-            <div className="stat-label">Businesses Served</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">4.9</div>
-            <div className="stat-label">Trustpilot Rating</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">10×</div>
-            <div className="stat-label">Faster Than Manual</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">24/7</div>
-            <div className="stat-label">Dedicated Support</div>
           </div>
         </div>
       </section>
@@ -795,7 +792,7 @@ const BookkeepingLandingBing = () => {
               About Your Books?
             </h2>
             <p className="cta-description">
-              Join 6,000+ UAE businesses who've transformed their financial
+              Join 7,000+ UAE businesses who've transformed their financial
               operations with Finanshels. Get your free consultation and see the
               difference expert bookkeeping can make.
             </p>
