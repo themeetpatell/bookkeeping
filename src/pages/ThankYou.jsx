@@ -6,8 +6,38 @@ import './ThankYou.css';
 const ThankYou = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (typeof window !== 'undefined' && window.dataLayer) {
-      window.dataLayer.push({ event: 'thank_you_page_view' });
+    if (typeof window === 'undefined') return;
+
+    window.dataLayer = window.dataLayer || [];
+    // Always record the thank-you page view.
+    window.dataLayer.push({ event: 'thank_you_page_view' });
+
+    // Fire the Google Ads conversion (consultation_form_ec) HERE — only when this
+    // page was reached via a real form submission. The flag + email are set by the
+    // submit handler in index.html, then cleared after firing so a refresh or a
+    // direct/bookmarked visit to /thank-you never double-counts the conversion.
+    let submitted = '';
+    let email = '';
+    try {
+      submitted = window.sessionStorage.getItem('consultation_submitted') || '';
+      email = window.sessionStorage.getItem('consultation_email') || '';
+    } catch {
+      // sessionStorage unavailable (private mode / blocked) — skip enhanced data.
+    }
+
+    if (submitted) {
+      window.dataLayer.push({
+        event: 'consultation_form_ec',
+        _event: 'consultation_form_ec',
+        enhanced_conversion_data: { email },
+        user_data: { email }
+      });
+      try {
+        window.sessionStorage.removeItem('consultation_submitted');
+        window.sessionStorage.removeItem('consultation_email');
+      } catch {
+        // Ignore cleanup failures; firing once is the priority.
+      }
     }
   }, []);
 

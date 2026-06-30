@@ -74,14 +74,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         var emailField = formEl.querySelector('input[name=\"Email\"]');
         var emailValue = emailField ? emailField.value.trim() : '';
 
-        // Fire Zoho + GTM custom events with the exact key GTM trigger expects
+        // The form WAS submitted, so the Zoho submit signal is accurate here.
         window.dataLayer.push({ event: 'zf_submitform', _event: 'zf_submitform' });
-        window.dataLayer.push({
-          event: 'consultation_form_ec',
-          _event: 'consultation_form_ec',
-          enhanced_conversion_data: { email: emailValue },
-          user_data: { email: emailValue }
-        });
+
+        // DO NOT fire the Google Ads conversion (consultation_form_ec) on the
+        // landing page. It must fire only after a confirmed submission, i.e. when
+        // Zoho redirects to /thank-you. Persist the email + a one-shot flag so the
+        // thank-you page can fire the enhanced conversion with user-provided data.
+        // Same-origin sessionStorage survives the Zoho redirect back in the same tab.
+        try {
+          window.sessionStorage.setItem('consultation_submitted', '1');
+          window.sessionStorage.setItem('consultation_email', emailValue);
+        } catch (e) {}
 
         // Reddit conversion: report the form submit as a Lead via BOTH the
         // browser pixel and the server-side Conversions API. The SAME
@@ -425,25 +429,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           zfutm_zfAdvLead.zfautm_DHtmlSprt();
         }, false);
       }
-    </script>
-    <script>
-  // make sure dataLayer exists
-    window.dataLayer = window.dataLayer || [];
-
-    // attach to your form
-    document.getElementById('form').addEventListener('submit', function () {
-      // read email from the form
-      var emailField = document.querySelector('input[name="Email"]');
-      var emailValue = emailField ? emailField.value.trim() : '';
-
-      // push event for Enhanced Conversions
-      window.dataLayer.push({
-        event: 'consultation_form_ec',
-        enhanced_conversion_data: {
-        "email": 'yourEmailVariable',
-        }
-      });
-      });
     </script>
     <!-- End Zoho Forms Advanced Tracking Script -->
   <script> 
