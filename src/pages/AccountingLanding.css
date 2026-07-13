@@ -1824,3 +1824,65 @@
     text-align: left;
   }
 }
+
+/* ---------------------------------------------------------------
+ * CTA buttons (WhatsApp + Calendar) — used on the WhatsApp variant
+ * --------------------------------------------------------------- */
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 4px 0 8px;
+}
+
+.cta-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 24px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-button-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.cta-button-whatsapp {
+  background: #25d366;
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+}
+
+.cta-button-whatsapp:hover {
+  background: #1ebe5b;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45);
+  transform: translateY(-2px);
+}
+
+.cta-button-calendar {
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+}
+
+.cta-button-calendar:hover {
+  background: var(--orange-hover);
+  box-shadow: 0 6px 24px rgba(255, 107, 53, 0.5);
+  transform: translateY(-2px);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+}
