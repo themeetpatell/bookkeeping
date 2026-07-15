@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { buildWhatsAppUrl, getAdKeyword, isBingRoute } from '../utils/whatsapp';
 
-const WHATSAPP_URL =
-  'https://api.whatsapp.com/send/?phone=971521549572&text=Hi%2C+I%27d+like+to+claim+the+3+months+FREE+Accounting+offer+on+your+Annual+Plans.&type=phone_number&app_absent=0';
+const OFFER_MESSAGE =
+  "Hi, I'd like to claim the 3 months FREE Accounting offer on your Annual Plans.";
 
 const DAYS_IN_WEEK = 7;
 const TICK_MS = 1000;
@@ -61,6 +63,14 @@ const useWeekendCountdown = () => {
 
 const OfferBar = () => {
   const { days, hours, minutes, seconds, isExpired } = useWeekendCountdown();
+  const { pathname, search } = useLocation();
+
+  const keyword = getAdKeyword(search);
+  const message =
+    isBingRoute(pathname) && keyword
+      ? `${OFFER_MESSAGE} (I searched for “${keyword}” on Bing.)`
+      : OFFER_MESSAGE;
+  const whatsappUrl = buildWhatsAppUrl(message);
 
   const handleClick = () => {
     if (typeof window !== 'undefined' && window.dataLayer) {
@@ -108,7 +118,7 @@ const OfferBar = () => {
         )}
 
         <a
-          href={WHATSAPP_URL}
+          href={whatsappUrl}
           className="offer-bar-cta data-wa-track"
           target="_blank"
           rel="noreferrer"

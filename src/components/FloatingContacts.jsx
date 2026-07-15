@@ -1,10 +1,20 @@
 import { FaWhatsapp } from 'react-icons/fa';
 import { FiPhoneCall } from 'react-icons/fi';
+import { useLocation } from 'react-router-dom';
 import { brand } from '../content/countries';
+import { buildWhatsAppUrl, getAdKeyword, isBingRoute } from '../utils/whatsapp';
+
+const DEFAULT_MESSAGE = 'Hi I saw your ad for Accounting Services. I’d like to know more.';
 
 const FloatingContacts = () => {
+  const { pathname, search } = useLocation();
   const phoneHref = brand.phone.replace(/\s+/g, '');
-  const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0';
+  const keyword = getAdKeyword(search);
+  const message =
+    isBingRoute(pathname) && keyword
+      ? `Hi I saw your bing ads for ${keyword}. I’d like to know more.`
+      : DEFAULT_MESSAGE;
+  const whatsappUrl = buildWhatsAppUrl(message);
 
   const trackWhatsAppClick = () => {
     if (typeof window !== 'undefined' && window.dataLayer) {
