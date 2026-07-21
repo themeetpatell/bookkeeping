@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { usePostHog } from '@posthog/react';
 import finanshelsLogo from '../assets/finanshelslogo.svg';
 
 const Nav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const posthog = usePostHog();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +40,7 @@ const Nav = () => {
           className="btn-nav-primary"
           target="_blank"
           rel="noreferrer"
+          onClick={() => posthog?.capture('book_call_clicked', { location: 'nav' })}
         >
           Book a Free Call
         </a>

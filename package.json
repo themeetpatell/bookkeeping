@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@posthog/react": "^1.10.3",
     "lucide-react": "^0.562.0",
+    "posthog-js": "^1.405.3",
+    "posthog-node": "^5.46.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",

@@ -77,6 +77,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         // The form WAS submitted, so the Zoho submit signal is accurate here.
         window.dataLayer.push({ event: 'zf_submitform', _event: 'zf_submitform' });
 
+        // PostHog: identify the lead by email and capture the conversion. The
+        // instance is set on window by main.jsx once React boots (well before a
+        // real user can submit), so this global handler can share the session.
+        try {
+          if (window.posthog) {
+            if (emailValue) {
+              window.posthog.identify(emailValue, { email: emailValue });
+            }
+            window.posthog.capture('consultation_form_submitted', {
+              form_id: formEl.id || '',
+              page_path: window.location.pathname,
+              keyword: new URLSearchParams(window.location.search).get('utm_term') || ''
+            });
+          }
+        } catch (e) {}
+
         // DO NOT fire the Google Ads conversion (consultation_form_ec) on the
         // landing page. It must fire only after a confirmed submission, i.e. when
         // Zoho redirects to /thank-you. Persist the email + a one-shot flag so the
@@ -107,9 +123,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               || '';
           } catch (e) {}
 
+          // Forward the PostHog distinct + session IDs so the server-side Lead
+          // event is attributed to the same person as the client-side events.
+          var phHeaders = { 'Content-Type': 'application/json' };
+          try {
+            if (window.posthog) {
+              phHeaders['X-POSTHOG-DISTINCT-ID'] = window.posthog.get_distinct_id();
+              phHeaders['X-POSTHOG-SESSION-ID'] = window.posthog.get_session_id();
+            }
+          } catch (e) {}
+
           fetch('/api/reddit-capi', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: phHeaders,
             keepalive: true,
             body: JSON.stringify({
               conversionId: conversionId,

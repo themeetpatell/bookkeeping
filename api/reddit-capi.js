@@ -1,5 +1,18 @@
 /* global process */
 import crypto from 'node:crypto';
+import { PostHog } from 'posthog-node';
+
+// Server-side PostHog client. Uses the same PUBLIC project token as the browser
+// (posthog-node authenticates capture with the `phc_` project key). `flushAt: 1`
+// makes each event send immediately, which suits short-lived serverless
+// invocations that would otherwise exit before a batched flush.
+const POSTHOG_KEY =
+  process.env.POSTHOG_KEY ||
+  process.env.VITE_PUBLIC_POSTHOG_KEY ||
+  'phc_saLqpV3uLmLXEqprdnXTpoFKyMp5hcZEnPXkYajpwzSk';
+const POSTHOG_HOST = process.env.POSTHOG_HOST || 'https://us.i.posthog.com';
+
+const posthog = new PostHog(POSTHOG_KEY, { host: POSTHOG_HOST, flushAt: 1, flushInterval: 0 });
 
 // Reddit Conversions API (server-side / CAPI).
 // Mirrors the client-side Reddit Pixel events so conversions are still
@@ -104,6 +117,30 @@ export default async function handler(req, res) {
       .json({ error: 'Missing attribution signal (email, clickId, or ip+user-agent required)' });
   }
 
+  // Mirror the lead into PostHog server-side. Prefer the client's distinct ID
+  // (forwarded by the browser) so this event merges with the same person; fall
+  // back to email/conversionId so a lead is never dropped. Captured here — once
+  // the request is validated — independent of Reddit's response.
+  const distinctId =
+    req.headers['x-posthog-distinct-id'] || email || conversionId || `anon-${sha256Hex(ip || userAgent || 'unknown')}`;
+  try {
+    posthog.capture({
+      distinctId,
+      event: 'consultation_lead_captured',
+      properties: {
+        $session_id: req.headers['x-posthog-session-id'] || undefined,
+        source: 'reddit_capi',
+        event_type: eventType,
+        has_email: Boolean(email),
+        has_click_id: Boolean(clickId),
+        conversion_id: conversionId,
+      },
+    });
+    await posthog.flush();
+  } catch (phError) {
+    console.error('PostHog server-side capture failed', phError);
+  }
+
   // click_id must NOT be hashed (hashing breaks click attribution).
   const user = { user_agent: userAgent };
   if (hashedEmail) user.email = hashedEmail;
@@ -163,6 +200,12 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true });
   } catch (error) {
     console.error('Reddit CAPI request failed', error);
+    try {
+      posthog.captureException(error, distinctId, { endpoint: 'api/reddit-capi' });
+      await posthog.flush();
+    } catch (phError) {
+      console.error('PostHog exception capture failed', phError);
+    }
     return res.status(502).json({ error: 'Failed to reach Reddit CAPI' });
   }
 }

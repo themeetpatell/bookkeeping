@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { usePostHog } from '@posthog/react';
 import { FiCheckCircle, FiArrowLeft } from 'react-icons/fi';
 import './ThankYou.css';
 
@@ -27,6 +28,7 @@ const readCustomerEmail = () => {
 
 const ThankYou = () => {
   const [customerEmail, setCustomerEmail] = useState('');
+  const posthog = usePostHog();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -60,6 +62,11 @@ const ThankYou = () => {
         enhanced_conversion_data: { email },
         user_data: { email }
       });
+      // Confirmed conversion — fires only when this page was reached via a real
+      // submission (the one-shot flag is cleared below so refreshes/direct
+      // visits never double-count it in PostHog either).
+      if (email) posthog?.identify(email, { email });
+      posthog?.capture('consultation_completed', { has_email: Boolean(email) });
       try {
         window.sessionStorage.removeItem('consultation_submitted');
         window.sessionStorage.removeItem('consultation_email');
@@ -67,7 +74,7 @@ const ThankYou = () => {
         // Ignore cleanup failures; firing once is the priority.
       }
     }
-  }, []);
+  }, [posthog]);
 
   return (
     <div className="thank-you-page">

@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import { usePostHog } from '@posthog/react';
 import './PricingSection.css';
 
 const PricingSection = () => {
+  const posthog = usePostHog();
   const whatsappUrl = 'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0';
   
   const plans = [
@@ -124,13 +126,20 @@ const PricingSection = () => {
                 ))}
               </ul>
 
-              <a 
+              <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="block w-full data-wa-track"
+                onClick={() =>
+                  posthog?.capture('pricing_plan_cta_clicked', {
+                    plan: plan.name,
+                    price: plan.price,
+                    source: 'pricing_section',
+                  })
+                }
               >
-                <Button 
+                <Button
                   className={`w-full ${plan.popular ? "shadow-button" : ""}`}
                   variant={plan.popular ? "default" : "outline"}
                 >

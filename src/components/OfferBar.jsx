@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { usePostHog } from '@posthog/react';
 import { buildWhatsAppUrl, getAdKeyword, isBingRoute } from '../utils/whatsapp';
 
 const OFFER_MESSAGE =
@@ -64,6 +65,7 @@ const useWeekendCountdown = () => {
 const OfferBar = () => {
   const { days, hours, minutes, seconds, isExpired } = useWeekendCountdown();
   const { pathname, search } = useLocation();
+  const posthog = usePostHog();
 
   const keyword = getAdKeyword(search);
   const message =
@@ -73,6 +75,12 @@ const OfferBar = () => {
   const whatsappUrl = buildWhatsAppUrl(message);
 
   const handleClick = () => {
+    posthog?.capture('whatsapp_click', {
+      source: 'offer_bar',
+      offer: '3_months_free_annual',
+      page_path: pathname,
+      keyword,
+    });
     if (typeof window !== 'undefined' && window.dataLayer) {
       window.dataLayer.push({ event: 'whatsapp_click', source: 'offer_bar' });
     }
