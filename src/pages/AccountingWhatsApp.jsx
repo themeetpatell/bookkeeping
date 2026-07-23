@@ -121,7 +121,7 @@ const AccountingWhatsApp = () => {
   ];
 
   return (
-    <div className="accounting-landing">
+    <div className="accounting-landing accounting-whatsapp-page">
       {/* Hero Section - Complete Redesign */}
       <section className="hero">
         <div className="hero-container">
@@ -156,33 +156,6 @@ const AccountingWhatsApp = () => {
                 </div>
               </div>
               
-              <div className="hero-actions">
-                <a href="#consultation" className="hero-btn hero-btn-primary">
-                  Get Free Consultation
-                </a>
-                <a href="#pricing" className="hero-btn hero-btn-secondary">
-                  View Pricing
-                </a>
-              </div>
-
-              <div className="hero-stats">
-                <div className="hero-stat">
-                  <span className="stat-number">7,000+</span>
-                  <span className="stat-label">UAE Businesses Served</span>
-                </div>
-                <div className="hero-stat">
-                  <span className="stat-number">4.9</span>
-                  <span className="stat-label">Trustpilot Rating</span>
-                </div>
-                <div className="hero-stat">
-                  <span className="stat-number">10×</span>
-                  <span className="stat-label">Faster Than Manual</span>
-                </div>
-                <div className="hero-stat">
-                  <span className="stat-number">150+</span>
-                  <span className="stat-label">Accountants</span>
-                </div>
-              </div>
             </div>
             
             {/* Right Column - Form */}
@@ -200,6 +173,26 @@ const AccountingWhatsApp = () => {
                 </p>
               </div>
             </div>
+
+            {/* Stats row — below the content on desktop, below the CTA card on mobile */}
+            <div className="hero-stats">
+              <div className="hero-stat">
+                <span className="stat-number">7,000+</span>
+                <span className="stat-label">UAE Businesses Served</span>
+              </div>
+              <div className="hero-stat">
+                <span className="stat-number">4.9</span>
+                <span className="stat-label">Trustpilot Rating</span>
+              </div>
+              <div className="hero-stat">
+                <span className="stat-number">10×</span>
+                <span className="stat-label">Faster Than Manual</span>
+              </div>
+              <div className="hero-stat">
+                <span className="stat-number">150+</span>
+                <span className="stat-label">Accountants</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -207,18 +200,24 @@ const AccountingWhatsApp = () => {
       <section className="accounting-client-logos-section" aria-label="Client logos">
         <div className="container">
           <p className="accounting-logos-label">Trusted by leading UAE businesses</p>
-          <div className="accounting-logos-grid">
-            {clientLogos.map((logo) => (
-              <div key={logo.alt} className="accounting-logo-tile">
-                <img
-                  src={logo.src}
-                  alt={`${logo.alt} logo`}
-                  className="accounting-logo-image"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            ))}
+          <div className="accounting-logos-marquee">
+            <div className="accounting-logos-track">
+              {[...clientLogos, ...clientLogos].map((logo, index) => (
+                <div
+                  key={`${logo.alt}-${index}`}
+                  className="accounting-logo-tile"
+                  aria-hidden={index >= clientLogos.length}
+                >
+                  <img
+                    src={logo.src}
+                    alt={`${logo.alt} logo`}
+                    className="accounting-logo-image"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -464,71 +463,6 @@ const AccountingWhatsApp = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="how-it-works">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-label">ONBOARDING</span>
-            <h2 className="section-title">
-              How It Works <span className="text-orange">(Within 45 Days)</span>
-            </h2>
-            <p className="section-description">
-              A clear roadmap from day one to steady-state finance operations, so you know exactly what happens when.
-            </p>
-          </div>
-          
-          <div className="timeline-table">
-            <div className="timeline-header">
-              <div className="timeline-col">Stage</div>
-              <div className="timeline-col">Timeline</div>
-              <div className="timeline-col">What Happens</div>
-            </div>
-            
-            <div className="timeline-body">
-              <div className="timeline-row">
-                <div className="timeline-cell">Kickoff & Migration</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Day 0–7</span>
-                </div>
-                <div className="timeline-cell">Connect your tools (banks, software), clean historical data</div>
-              </div>
-              
-              <div className="timeline-row">
-                <div className="timeline-cell">Setup & Reporting</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Day 8–20</span>
-                </div>
-                <div className="timeline-cell">Build dashboards, setup cash flow tracking, tax calendars</div>
-              </div>
-              
-              <div className="timeline-row">
-                <div className="timeline-cell">Month-End & Review</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Day 30–45</span>
-                </div>
-                <div className="timeline-cell">Deliver first complete financial pack + review call</div>
-              </div>
-              
-              <div className="timeline-row">
-                <div className="timeline-cell">Steady State</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Day 45–90</span>
-                </div>
-                <div className="timeline-cell">Automated reporting, cash flow forecasting, regular reviews</div>
-              </div>
-              
-              <div className="timeline-row">
-                <div className="timeline-cell">Expansion (Optional)</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Post 90 days</span>
-                </div>
-                <div className="timeline-cell">Add entities, CFO services, or advanced accounting dashboards</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Pricing Section */}
       <section className="pricing" id="pricing">
         <div className="container">
@@ -666,6 +600,71 @@ const AccountingWhatsApp = () => {
               >
                 Get Started
               </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="how-it-works">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-label">ONBOARDING</span>
+            <h2 className="section-title">
+              How It Works <span className="text-orange">(Within 45 Days)</span>
+            </h2>
+            <p className="section-description">
+              A clear roadmap from day one to steady-state finance operations, so you know exactly what happens when.
+            </p>
+          </div>
+          
+          <div className="timeline-table">
+            <div className="timeline-header">
+              <div className="timeline-col">Stage</div>
+              <div className="timeline-col">Timeline</div>
+              <div className="timeline-col">What Happens</div>
+            </div>
+            
+            <div className="timeline-body">
+              <div className="timeline-row">
+                <div className="timeline-cell">Kickoff & Migration</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Day 0–7</span>
+                </div>
+                <div className="timeline-cell">Connect your tools (banks, software), clean historical data</div>
+              </div>
+              
+              <div className="timeline-row">
+                <div className="timeline-cell">Setup & Reporting</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Day 8–20</span>
+                </div>
+                <div className="timeline-cell">Build dashboards, setup cash flow tracking, tax calendars</div>
+              </div>
+              
+              <div className="timeline-row">
+                <div className="timeline-cell">Month-End & Review</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Day 30–45</span>
+                </div>
+                <div className="timeline-cell">Deliver first complete financial pack + review call</div>
+              </div>
+              
+              <div className="timeline-row">
+                <div className="timeline-cell">Steady State</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Day 45–90</span>
+                </div>
+                <div className="timeline-cell">Automated reporting, cash flow forecasting, regular reviews</div>
+              </div>
+              
+              <div className="timeline-row">
+                <div className="timeline-cell">Expansion (Optional)</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Post 90 days</span>
+                </div>
+                <div className="timeline-cell">Add entities, CFO services, or advanced accounting dashboards</div>
+              </div>
             </div>
           </div>
         </div>

@@ -543,71 +543,6 @@ const AccountingLandingBing = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="how-it-works">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-label">ONBOARDING</span>
-            <h2 className="section-title">
-              How It Works <span className="text-orange">(Within 45 Days)</span>
-            </h2>
-            <p className="section-description">
-              A clear roadmap from day one to steady-state finance operations, so you know exactly what happens when.
-            </p>
-          </div>
-          
-          <div className="timeline-table">
-            <div className="timeline-header">
-              <div className="timeline-col">Stage</div>
-              <div className="timeline-col">Timeline</div>
-              <div className="timeline-col">What Happens</div>
-            </div>
-            
-            <div className="timeline-body">
-              <div className="timeline-row">
-                <div className="timeline-cell">Kickoff & Migration</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Day 0–7</span>
-                </div>
-                <div className="timeline-cell">Connect your tools (banks, software), clean historical data</div>
-              </div>
-              
-              <div className="timeline-row">
-                <div className="timeline-cell">Setup & Reporting</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Day 8–20</span>
-                </div>
-                <div className="timeline-cell">Build dashboards, setup cash flow tracking, tax calendars</div>
-              </div>
-              
-              <div className="timeline-row">
-                <div className="timeline-cell">Month-End & Review</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Day 30–45</span>
-                </div>
-                <div className="timeline-cell">Deliver first complete financial pack + review call</div>
-              </div>
-              
-              <div className="timeline-row">
-                <div className="timeline-cell">Steady State</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Day 45–90</span>
-                </div>
-                <div className="timeline-cell">Automated reporting, cash flow forecasting, regular reviews</div>
-              </div>
-              
-              <div className="timeline-row">
-                <div className="timeline-cell">Expansion (Optional)</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Post 90 days</span>
-                </div>
-                <div className="timeline-cell">Add entities, CFO services, or advanced accounting dashboards</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Pricing Section */}
       <section className="pricing" id="pricing">
         <div className="container">
@@ -740,6 +675,71 @@ const AccountingLandingBing = () => {
               >
                 Get Started
               </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="how-it-works">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-label">ONBOARDING</span>
+            <h2 className="section-title">
+              How It Works <span className="text-orange">(Within 45 Days)</span>
+            </h2>
+            <p className="section-description">
+              A clear roadmap from day one to steady-state finance operations, so you know exactly what happens when.
+            </p>
+          </div>
+          
+          <div className="timeline-table">
+            <div className="timeline-header">
+              <div className="timeline-col">Stage</div>
+              <div className="timeline-col">Timeline</div>
+              <div className="timeline-col">What Happens</div>
+            </div>
+            
+            <div className="timeline-body">
+              <div className="timeline-row">
+                <div className="timeline-cell">Kickoff & Migration</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Day 0–7</span>
+                </div>
+                <div className="timeline-cell">Connect your tools (banks, software), clean historical data</div>
+              </div>
+              
+              <div className="timeline-row">
+                <div className="timeline-cell">Setup & Reporting</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Day 8–20</span>
+                </div>
+                <div className="timeline-cell">Build dashboards, setup cash flow tracking, tax calendars</div>
+              </div>
+              
+              <div className="timeline-row">
+                <div className="timeline-cell">Month-End & Review</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Day 30–45</span>
+                </div>
+                <div className="timeline-cell">Deliver first complete financial pack + review call</div>
+              </div>
+              
+              <div className="timeline-row">
+                <div className="timeline-cell">Steady State</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Day 45–90</span>
+                </div>
+                <div className="timeline-cell">Automated reporting, cash flow forecasting, regular reviews</div>
+              </div>
+              
+              <div className="timeline-row">
+                <div className="timeline-cell">Expansion (Optional)</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Post 90 days</span>
+                </div>
+                <div className="timeline-cell">Add entities, CFO services, or advanced accounting dashboards</div>
+              </div>
             </div>
           </div>
         </div>

@@ -552,6 +552,57 @@ const PayrollAccountingLanding = () => {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section className="pricing" id="pricing">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-label">SIMPLE PRICING</span>
+            <h2 className="section-title">
+              Transparent Plans for Every Business
+            </h2>
+            <p className="section-description">
+              Best prices in the market. No hidden fees. Cancel anytime.
+            </p>
+            <div className="pricing-guarantee">
+              <span className="emoji">🎉</span>
+              <span>Pay Only if Satisfied — No Commitment!</span>
+            </div>
+          </div>
+          
+          <div className="pricing-grid">
+            {pricingPlans.map((plan, index) => (
+              <div key={index} className={`pricing-card ${plan.popular ? 'popular' : ''}`}>
+                {plan.popular && <div className="popular-badge">Most Popular</div>}
+                <h3 className="pricing-name">{plan.name}</h3>
+                <p className="pricing-subtitle">{plan.subtitle}</p>
+                <div className="pricing-amount">
+                  <span className="currency">AED</span>
+                  <span className="price">{plan.price}</span>
+                  <span className="period">/mo</span>
+                </div>
+                <p className="pricing-limit">{plan.limit}</p>
+                
+                <ul className="pricing-features">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li key={featureIndex}><FiCheckCircle /> {feature}</li>
+                  ))}
+                </ul>
+                
+                <a 
+                  href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Payroll+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`btn-pricing ${plan.popular ? 'primary' : ''} data-wa-track`}
+                  onClick={() => trackWhatsAppClick('payroll_pricing_' + plan.name.toLowerCase())}
+                >
+                  Get Started
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* How It Works Section */}
       <section className="how-it-works">
         <div className="container">
@@ -620,57 +671,6 @@ const PayrollAccountingLanding = () => {
                 <p>Add entities, CFO advisory services, or advanced payroll accounting dashboards.</p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section className="pricing" id="pricing">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-label">SIMPLE PRICING</span>
-            <h2 className="section-title">
-              Transparent Plans for Every Business
-            </h2>
-            <p className="section-description">
-              Best prices in the market. No hidden fees. Cancel anytime.
-            </p>
-            <div className="pricing-guarantee">
-              <span className="emoji">🎉</span>
-              <span>Pay Only if Satisfied — No Commitment!</span>
-            </div>
-          </div>
-          
-          <div className="pricing-grid">
-            {pricingPlans.map((plan, index) => (
-              <div key={index} className={`pricing-card ${plan.popular ? 'popular' : ''}`}>
-                {plan.popular && <div className="popular-badge">Most Popular</div>}
-                <h3 className="pricing-name">{plan.name}</h3>
-                <p className="pricing-subtitle">{plan.subtitle}</p>
-                <div className="pricing-amount">
-                  <span className="currency">AED</span>
-                  <span className="price">{plan.price}</span>
-                  <span className="period">/mo</span>
-                </div>
-                <p className="pricing-limit">{plan.limit}</p>
-                
-                <ul className="pricing-features">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex}><FiCheckCircle /> {feature}</li>
-                  ))}
-                </ul>
-                
-                <a 
-                  href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Payroll+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`btn-pricing ${plan.popular ? 'primary' : ''} data-wa-track`}
-                  onClick={() => trackWhatsAppClick('payroll_pricing_' + plan.name.toLowerCase())}
-                >
-                  Get Started
-                </a>
-              </div>
-            ))}
           </div>
         </div>
       </section>

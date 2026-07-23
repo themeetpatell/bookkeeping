@@ -121,6 +121,41 @@
   overflow: hidden;
 }
 
+/* AccountingWhatsApp hero: pull the stats out of the content column into their
+   own grid row so the WhatsApp CTA card sits directly below the feature list
+   (and, on mobile, right after the three value props). Scoped to
+   .accounting-whatsapp-page so other landing pages sharing this stylesheet keep
+   their original hero layout. */
+.accounting-landing.accounting-whatsapp-page .hero-grid {
+  grid-template-areas:
+    "content form"
+    "stats   form";
+  row-gap: 40px;
+}
+
+.accounting-whatsapp-page .hero-content-wrapper {
+  grid-area: content;
+}
+
+.accounting-whatsapp-page .hero-form-wrapper {
+  grid-area: form;
+}
+
+.accounting-whatsapp-page .hero-stats {
+  grid-area: stats;
+}
+
+@media (max-width: 968px) {
+  /* Single column order: value props → WhatsApp CTA card → stats. */
+  .accounting-landing.accounting-whatsapp-page .hero-grid {
+    grid-template-areas:
+      "content"
+      "form"
+      "stats";
+    row-gap: 40px;
+  }
+}
+
 /* Left Column - Content */
 .hero-content-wrapper {
   display: flex;
@@ -289,6 +324,18 @@
   width: 20px;
   height: 20px;
   flex-shrink: 0;
+}
+
+/* WhatsApp CTA uses the WhatsApp brand green instead of the default orange.
+   Scoped under .accounting-landing so it reliably wins over the globally-loaded
+   .btn-primary regardless of CSS order. */
+.accounting-landing .btn-whatsapp {
+  background: #25d366;
+}
+
+.accounting-landing .btn-whatsapp:hover {
+  background: #1da851;
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
 }
 
 /* Right Column - Form */
@@ -1969,13 +2016,14 @@
 }
 
 /* ============================================================
-   ACCOUNTING FORM PAGE — scoped overrides only.
+   ACCOUNTING FORM & WHATSAPP PAGES — scoped overrides only.
    These rules never affect the main landing or other campaign
    pages that share this stylesheet.
    ============================================================ */
 
 /* 1. Tighter vertical rhythm between sections */
-.accounting-form-page .hero {
+.accounting-form-page .hero,
+.accounting-whatsapp-page .hero {
   padding-bottom: 72px;
 }
 
@@ -1986,20 +2034,30 @@
 .accounting-form-page .pricing,
 .accounting-form-page .testimonials,
 .accounting-form-page .faq,
-.accounting-form-page .final-cta {
+.accounting-form-page .final-cta,
+.accounting-whatsapp-page .problem,
+.accounting-whatsapp-page .solution,
+.accounting-whatsapp-page .transformation,
+.accounting-whatsapp-page .how-it-works,
+.accounting-whatsapp-page .pricing,
+.accounting-whatsapp-page .testimonials,
+.accounting-whatsapp-page .faq,
+.accounting-whatsapp-page .final-cta {
   padding-top: 56px;
   padding-bottom: 56px;
 }
 
 /* 2. Auto-scrolling client logos (seamless marquee) */
-.accounting-form-page .accounting-logos-marquee {
+.accounting-form-page .accounting-logos-marquee,
+.accounting-whatsapp-page .accounting-logos-marquee {
   width: 100%;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
-.accounting-form-page .accounting-logos-track {
+.accounting-form-page .accounting-logos-track,
+.accounting-whatsapp-page .accounting-logos-track {
   display: flex;
   align-items: center;
   width: max-content;
@@ -2008,11 +2066,13 @@
 }
 
 /* Two identical halves + uniform trailing margin make -50% seamless */
-.accounting-form-page .accounting-logos-track .accounting-logo-tile {
+.accounting-form-page .accounting-logos-track .accounting-logo-tile,
+.accounting-whatsapp-page .accounting-logos-track .accounting-logo-tile {
   margin-right: 14px;
 }
 
-.accounting-form-page .accounting-logos-marquee:hover .accounting-logos-track {
+.accounting-form-page .accounting-logos-marquee:hover .accounting-logos-track,
+.accounting-whatsapp-page .accounting-logos-marquee:hover .accounting-logos-track {
   animation-play-state: paused;
 }
 
@@ -2026,7 +2086,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .accounting-form-page .accounting-logos-track {
+  .accounting-form-page .accounting-logos-track,
+  .accounting-whatsapp-page .accounting-logos-track {
     animation: none;
     flex-wrap: wrap;
     justify-content: center;
@@ -2034,9 +2095,60 @@
   }
 }
 
-/* 3. Mobile: show the lead form AFTER the hero content
-   (i.e. below the "Real-Time Financial Dashboard" point) */
+/* 3. Compact consultation form: ~15-20% smaller fields to trim overall height. */
+.accounting-form-page .zoho-form {
+  gap: 16px;
+}
+
+.accounting-form-page .form-group {
+  gap: 8px;
+}
+
+.accounting-form-page .form-group label {
+  font-size: 13px;
+}
+
+.accounting-form-page .form-control {
+  padding: 11px 14px;
+  font-size: 14px;
+}
+
+.accounting-form-page .btn-submit-form {
+  padding: 13px 22px;
+  font-size: 15px;
+}
+
+/* Accounting-form hero: 3-part layout so the lead form can sit between the
+   checkmarks and the stats on mobile while keeping the desktop 2-column look.
+   Desktop: content top-left, stats bottom-left, form spanning the right column. */
+.accounting-form-page .hero-content-wrapper {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.accounting-form-page .hero-form-wrapper {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.accounting-form-page .hero-secondary {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Mobile: stack as content → form → stats, so the form sits right below the
+   "Real-Time Financial Dashboard" checkmark (where the CTA button used to be). */
 @media (max-width: 968px) {
+  .accounting-form-page .hero-content-wrapper,
+  .accounting-form-page .hero-form-wrapper,
+  .accounting-form-page .hero-secondary {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
   .accounting-form-page .hero-content-wrapper {
     order: 1;
   }
@@ -2044,11 +2156,16 @@
   .accounting-form-page .hero-form-wrapper {
     order: 2;
   }
+
+  .accounting-form-page .hero-secondary {
+    order: 3;
+  }
 }
 
 /* Even tighter section spacing on phones */
 @media (max-width: 640px) {
-  .accounting-form-page .hero {
+  .accounting-form-page .hero,
+  .accounting-whatsapp-page .hero {
     padding-bottom: 48px;
   }
 
@@ -2059,8 +2176,49 @@
   .accounting-form-page .pricing,
   .accounting-form-page .testimonials,
   .accounting-form-page .faq,
-  .accounting-form-page .final-cta {
+  .accounting-form-page .final-cta,
+  .accounting-whatsapp-page .problem,
+  .accounting-whatsapp-page .solution,
+  .accounting-whatsapp-page .transformation,
+  .accounting-whatsapp-page .how-it-works,
+  .accounting-whatsapp-page .pricing,
+  .accounting-whatsapp-page .testimonials,
+  .accounting-whatsapp-page .faq,
+  .accounting-whatsapp-page .final-cta {
     padding-top: 40px;
     padding-bottom: 40px;
+  }
+
+  /* 3. Keep the consultation form heading + subheading each on ONE line.
+     Scoped to the page root so it wins over the globally-shared, unscoped
+     .form-title / .form-subtitle rules regardless of stylesheet load order. */
+  .accounting-form-page .hero-form-card {
+    padding: 28px 18px;
+  }
+
+  .accounting-form-page .form-title {
+    font-size: 22px;
+    line-height: 1.25;
+  }
+
+  .accounting-form-page .form-subtitle {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+}
+
+/* Small phones: shrink one more step so both lines still fit without wrapping. */
+@media (max-width: 400px) {
+  .accounting-form-page .hero-form-card {
+    padding: 24px 16px;
+  }
+
+  .accounting-form-page .form-title {
+    font-size: 20px;
+  }
+
+  .accounting-form-page .form-subtitle {
+    font-size: 11px;
+    letter-spacing: -0.01em;
   }
 }

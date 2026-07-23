@@ -234,11 +234,27 @@ const AccountingForm = () => {
                   <span>Real-Time Financial Dashboard</span>
                 </div>
               </div>
-              
+            </div>
+
+            {/* Lead Form - sits directly below the checkmarks on mobile */}
+            <div className="hero-form-wrapper">
+              <div className="hero-form-card">
+                <div className="form-intro">
+                  <h2 className="form-title">Get Your Free Consultation</h2>
+                  <p className="form-subtitle">Book a 30-minute call with our experts. No obligation.</p>
+                </div>
+
+                <ZohoConsultationForm formId="hero-form" />
+
+                <p className="form-privacy">
+                  By submitting, you agree to receive communications. Your data is secure and will never be shared.
+                </p>
+              </div>
+            </div>
+
+            {/* Secondary - pricing link + stats (below content on desktop, after form on mobile) */}
+            <div className="hero-secondary">
               <div className="hero-actions">
-                <a href="#consultation" className="hero-btn hero-btn-primary">
-                  Get Free Consultation
-                </a>
                 <a href="#pricing" className="hero-btn hero-btn-secondary">
                   View Pricing
                 </a>
@@ -261,22 +277,6 @@ const AccountingForm = () => {
                   <span className="stat-number">150+</span>
                   <span className="stat-label">Accountants</span>
                 </div>
-              </div>
-            </div>
-            
-            {/* Right Column - Form */}
-            <div className="hero-form-wrapper">
-              <div className="hero-form-card">
-                <div className="form-intro">
-                  <h2 className="form-title">Get Your Free Consultation</h2>
-                  <p className="form-subtitle">Book a 30-minute call with our experts. No obligation.</p>
-                </div>
-                
-                <ZohoConsultationForm formId="hero-form" />
-                
-                <p className="form-privacy">
-                  By submitting, you agree to receive communications. Your data is secure and will never be shared.
-                </p>
               </div>
             </div>
           </div>
@@ -416,7 +416,7 @@ const AccountingForm = () => {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="btn-primary btn-with-icon"
+                className="btn-primary btn-with-icon btn-whatsapp"
               >
                 <FaWhatsapp />
                 WhatsApp Now
@@ -549,71 +549,6 @@ const AccountingForm = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="how-it-works">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-label">ONBOARDING</span>
-            <h2 className="section-title">
-              How It Works <span className="text-orange">(Within 45 Days)</span>
-            </h2>
-            <p className="section-description">
-              A clear roadmap from day one to steady-state finance operations, so you know exactly what happens when.
-            </p>
-          </div>
-          
-          <div className="timeline-table">
-            <div className="timeline-header">
-              <div className="timeline-col">Stage</div>
-              <div className="timeline-col">Timeline</div>
-              <div className="timeline-col">What Happens</div>
-            </div>
-            
-            <div className="timeline-body">
-              <div className="timeline-row">
-                <div className="timeline-cell">Kickoff & Migration</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Day 0–7</span>
-                </div>
-                <div className="timeline-cell">Connect your tools (banks, software), clean historical data</div>
-              </div>
-              
-              <div className="timeline-row">
-                <div className="timeline-cell">Setup & Reporting</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Day 8–20</span>
-                </div>
-                <div className="timeline-cell">Build dashboards, setup cash flow tracking, tax calendars</div>
-              </div>
-              
-              <div className="timeline-row">
-                <div className="timeline-cell">Month-End & Review</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Day 30–45</span>
-                </div>
-                <div className="timeline-cell">Deliver first complete financial pack + review call</div>
-              </div>
-              
-              <div className="timeline-row">
-                <div className="timeline-cell">Steady State</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Day 45–90</span>
-                </div>
-                <div className="timeline-cell">Automated reporting, cash flow forecasting, regular reviews</div>
-              </div>
-              
-              <div className="timeline-row">
-                <div className="timeline-cell">Expansion (Optional)</div>
-                <div className="timeline-cell">
-                  <span className="timeline-badge">Post 90 days</span>
-                </div>
-                <div className="timeline-cell">Add entities, CFO services, or advanced accounting dashboards</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Pricing Section */}
       <section className="pricing" id="pricing">
         <div className="container">
@@ -731,6 +666,71 @@ const AccountingForm = () => {
               <a href="#consultation" className="btn-pricing">
                 Get Started
               </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="how-it-works">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-label">ONBOARDING</span>
+            <h2 className="section-title">
+              How It Works <span className="text-orange">(Within 45 Days)</span>
+            </h2>
+            <p className="section-description">
+              A clear roadmap from day one to steady-state finance operations, so you know exactly what happens when.
+            </p>
+          </div>
+          
+          <div className="timeline-table">
+            <div className="timeline-header">
+              <div className="timeline-col">Stage</div>
+              <div className="timeline-col">Timeline</div>
+              <div className="timeline-col">What Happens</div>
+            </div>
+            
+            <div className="timeline-body">
+              <div className="timeline-row">
+                <div className="timeline-cell">Kickoff & Migration</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Day 0–7</span>
+                </div>
+                <div className="timeline-cell">Connect your tools (banks, software), clean historical data</div>
+              </div>
+              
+              <div className="timeline-row">
+                <div className="timeline-cell">Setup & Reporting</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Day 8–20</span>
+                </div>
+                <div className="timeline-cell">Build dashboards, setup cash flow tracking, tax calendars</div>
+              </div>
+              
+              <div className="timeline-row">
+                <div className="timeline-cell">Month-End & Review</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Day 30–45</span>
+                </div>
+                <div className="timeline-cell">Deliver first complete financial pack + review call</div>
+              </div>
+              
+              <div className="timeline-row">
+                <div className="timeline-cell">Steady State</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Day 45–90</span>
+                </div>
+                <div className="timeline-cell">Automated reporting, cash flow forecasting, regular reviews</div>
+              </div>
+              
+              <div className="timeline-row">
+                <div className="timeline-cell">Expansion (Optional)</div>
+                <div className="timeline-cell">
+                  <span className="timeline-badge">Post 90 days</span>
+                </div>
+                <div className="timeline-cell">Add entities, CFO services, or advanced accounting dashboards</div>
+              </div>
             </div>
           </div>
         </div>

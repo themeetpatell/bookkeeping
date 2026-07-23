@@ -1,0 +1,525 @@
+- generic [ref=e3]:
+  - region "Limited time offer" [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e7]:
+        - text: Get
+        - strong [ref=e8]: 3 Months FREE Accounting
+        - text: with Annual Plans — Switch Easily in
+        - strong [ref=e9]: 48 Hrs
+        - text: .
+      - link "WhatsApp Now" [ref=e10] [cursor=pointer]:
+        - /url: https://api.whatsapp.com/send/?phone=971521549572&text=Hi%2C%20I'd%20like%20to%20claim%20the%203%20months%20FREE%20Accounting%20offer%20on%20your%20Annual%20Plans.&type=phone_number&app_absent=0
+        - img [ref=e11]
+        - text: WhatsApp Now
+  - banner [ref=e13]:
+    - generic [ref=e14]:
+      - link "Finanshels" [ref=e15] [cursor=pointer]:
+        - /url: /
+        - img "Finanshels" [ref=e16]
+      - link "Book a Free Call" [ref=e17] [cursor=pointer]:
+        - /url: https://contact-finanshels.zohobookings.com/#/accounting-consultation
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - generic [ref=e22]:
+        - generic [ref=e23]:
+          - generic [ref=e26]: Trusted by 7,000+ Businesses in UAE
+          - heading "UAE's Top Accountants Handle Your Books" [level=1] [ref=e27]
+          - paragraph [ref=e28]: Expert outsourced accounting & bookkeeping services for growing businesses in Dubai, Abu Dhabi, Sharjah & across the UAE. From profit and loss statements to tax compliance — we streamline your finance and accounting operations so you can focus on growth.
+          - generic [ref=e29]:
+            - generic [ref=e30]:
+              - img [ref=e31]
+              - generic [ref=e34]: Pay Only if Satisfied
+            - generic [ref=e35]:
+              - img [ref=e36]
+              - generic [ref=e39]: Dedicated Account Manager
+            - generic [ref=e40]:
+              - img [ref=e41]
+              - generic [ref=e44]: Real-Time Financial Dashboard
+          - generic [ref=e45]:
+            - link "Get Free Consultation" [ref=e46] [cursor=pointer]:
+              - /url: "#consultation"
+            - link "View Pricing" [ref=e47] [cursor=pointer]:
+              - /url: "#pricing"
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - generic [ref=e50]: 7,000+
+              - generic [ref=e51]: UAE Businesses Served
+            - generic [ref=e52]:
+              - generic [ref=e53]: "4.9"
+              - generic [ref=e54]: Trustpilot Rating
+            - generic [ref=e55]:
+              - generic [ref=e56]: 10×
+              - generic [ref=e57]: Faster Than Manual
+            - generic [ref=e58]:
+              - generic [ref=e59]: 150+
+              - generic [ref=e60]: Accountants
+        - generic [ref=e62]:
+          - generic [ref=e63]:
+            - heading "Get Your Free Consultation" [level=2] [ref=e64]
+            - paragraph [ref=e65]: Book a 30-minute call with our experts. No obligation.
+          - generic [ref=e66]:
+            - generic [ref=e67]:
+              - generic [ref=e68]:
+                - generic [ref=e69]: First Name
+                - textbox "John" [ref=e70]
+              - generic [ref=e71]:
+                - generic [ref=e72]: Last Name
+                - textbox "Smith" [ref=e73]
+            - generic [ref=e74]:
+              - generic [ref=e75]: Email *
+              - textbox "john@company.com" [ref=e76]
+            - generic [ref=e77]:
+              - generic [ref=e78]: Phone Number
+              - textbox "+971 00 000 0000" [ref=e79]
+            - generic [ref=e80]:
+              - generic [ref=e81]: Company Name *
+              - textbox "Your Company LLC" [ref=e82]
+            - generic [ref=e83]:
+              - generic [ref=e84]: Job Title
+              - textbox "CEO" [ref=e85]
+            - button "Submit" [ref=e86] [cursor=pointer]
+          - paragraph [ref=e87]: By submitting, you agree to receive communications. Your data is secure and will never be shared.
+      - region "Client logos" [ref=e88]:
+        - generic [ref=e89]:
+          - paragraph [ref=e90]: Trusted by leading UAE businesses
+          - generic [ref=e91]:
+            - img "Binary logo" [ref=e93]
+            - img "Actualize logo" [ref=e95]
+            - img "CarbonSirf logo" [ref=e97]
+            - img "COTU Ventures logo" [ref=e99]
+            - img "Fuze logo" [ref=e101]
+            - img "Growdash logo" [ref=e103]
+            - img "Humlog logo" [ref=e105]
+            - img "Veehive logo" [ref=e107]
+            - img "Zywa logo" [ref=e109]
+      - generic [ref=e111]:
+        - generic [ref=e112]:
+          - generic [ref=e113]: THE PROBLEM
+          - heading "Managing Business Accounting is Taxing" [level=2] [ref=e114]
+          - paragraph [ref=e115]: You started your business to pursue your passion — not to wrestle with spreadsheets and tax filings. Yet here you are, spending hours on tasks that drain your energy.
+        - generic [ref=e116]:
+          - generic [ref=e117]:
+            - img [ref=e119]
+            - heading "Spreadsheet Chaos" [level=3] [ref=e122]
+            - paragraph [ref=e123]: Excel files flying back and forth. Manual data entry. Human errors. Sound familiar?
+          - generic [ref=e124]:
+            - img [ref=e126]
+            - heading "Month-End Scrambles" [level=3] [ref=e129]
+            - paragraph [ref=e130]: Bookkeeping only happens at month end. No real-time visibility into your finances.
+          - generic [ref=e131]:
+            - img [ref=e133]
+            - heading "Flying Blind" [level=3] [ref=e136]
+            - paragraph [ref=e137]: Making business decisions without accurate financial data. Risking costly mistakes.
+          - generic [ref=e138]:
+            - img [ref=e140]
+            - heading "Tax Compliance Stress" [level=3] [ref=e142]
+            - paragraph [ref=e143]: Tax deadlines looming. Worried about penalties and mistakes with auditing services.
+      - generic [ref=e146]:
+        - generic [ref=e147]:
+          - generic [ref=e148]: THE SOLUTION
+          - heading "One Platform. One Team. 10× Faster." [level=2] [ref=e149]
+          - paragraph [ref=e150]: In one platform, one dedicated team manages all your finance and accounting functions. From bookkeeping to tax filing — we handle it so you can focus on what you do best.
+          - generic [ref=e151]:
+            - generic [ref=e152]:
+              - img [ref=e154]
+              - generic [ref=e159]:
+                - heading "Dedicated Finance Team" [level=3] [ref=e160]
+                - paragraph [ref=e161]: Your own expert accountant who knows your business inside out. One team manages everything.
+            - generic [ref=e162]:
+              - img [ref=e164]
+              - generic [ref=e166]:
+                - heading "Accounting Automation" [level=3] [ref=e167]
+                - paragraph [ref=e168]: Built with APIs and machine learning. Human oversight ensures accuracy while saving you 10× the time.
+            - generic [ref=e169]:
+              - img [ref=e171]
+              - generic [ref=e172]:
+                - heading "Real-Time Insights" [level=3] [ref=e173]
+                - paragraph [ref=e174]: No more month-end surprises. Get live dashboards and reports to make informed decisions daily.
+            - generic [ref=e175]:
+              - img [ref=e177]
+              - generic [ref=e179]:
+                - heading "Full Tax Compliance" [level=3] [ref=e180]
+                - paragraph [ref=e181]: Corporate tax, VAT registration, and quarterly filings handled. Stay compliant without the stress.
+          - link "Talk to an Expert" [ref=e182] [cursor=pointer]:
+            - /url: https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+bing+ads+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0
+        - generic [ref=e184]:
+          - generic [ref=e185]:
+            - generic [ref=e186]:
+              - img [ref=e187]
+              - generic [ref=e190]: Invoice Processed
+              - generic [ref=e191]: Just now
+            - generic [ref=e194]: Live
+          - heading "Financial Dashboard" [level=3] [ref=e195]
+          - generic [ref=e196]:
+            - generic [ref=e197]:
+              - generic [ref=e198]: Monthly Revenue
+              - generic [ref=e199]: $245K
+              - generic [ref=e200]: ↑ 12% vs last month
+            - generic [ref=e201]:
+              - generic [ref=e202]: Expenses
+              - generic [ref=e203]: $89K
+              - generic [ref=e204]: On budget
+          - generic [ref=e205]:
+            - generic [ref=e206]: All filings up to date
+            - generic [ref=e207]:
+              - generic [ref=e208]: Tax Filed
+              - generic [ref=e209]: Audit Ready
+      - generic [ref=e211]:
+        - generic [ref=e212]:
+          - generic [ref=e213]: TRANSFORMATION
+          - heading "Before vs After Our Accounting Solutions" [level=2] [ref=e214]
+          - paragraph [ref=e215]: See the shift when automation and a dedicated finance team take over — less time firefighting, more time growing your business.
+        - generic [ref=e216]:
+          - generic [ref=e217]:
+            - heading "Business Reality (Before)" [level=3] [ref=e219]
+            - heading "With Our Services (After)" [level=3] [ref=e221]
+          - generic [ref=e222]:
+            - generic [ref=e223]:
+              - generic [ref=e224]:
+                - img [ref=e225]
+                - generic [ref=e228]: 15–20 hrs/month spent chasing accountants
+              - generic [ref=e229]:
+                - img [ref=e230]
+                - generic [ref=e233]: 2 hrs/month reviewing dashboards
+            - generic [ref=e234]:
+              - generic [ref=e235]:
+                - img [ref=e236]
+                - generic [ref=e239]: No cash flow visibility
+              - generic [ref=e240]:
+                - img [ref=e241]
+                - generic [ref=e244]: Weekly automated forecasts
+            - generic [ref=e245]:
+              - generic [ref=e246]:
+                - img [ref=e247]
+                - generic [ref=e250]: Late tax filings & penalties
+              - generic [ref=e251]:
+                - img [ref=e252]
+                - generic [ref=e255]: 100% on-time, audit-ready
+            - generic [ref=e256]:
+              - generic [ref=e257]:
+                - img [ref=e258]
+                - generic [ref=e261]: Disconnected tools & spreadsheets
+              - generic [ref=e262]:
+                - img [ref=e263]
+                - generic [ref=e266]: One streamlined accounting platform
+            - generic [ref=e267]:
+              - generic [ref=e268]:
+                - img [ref=e269]
+                - generic [ref=e272]: Costly in-house finance team
+              - generic [ref=e273]:
+                - img [ref=e274]
+                - generic [ref=e277]: 70% cost reduction with predictable outcomes
+      - generic [ref=e279]:
+        - generic [ref=e280]:
+          - generic [ref=e281]: SIMPLE PRICING
+          - heading "Transparent Plans for Every Business" [level=2] [ref=e282]
+          - paragraph [ref=e283]: Best prices in the market. No hidden fees. Cancel anytime.
+          - generic [ref=e284]:
+            - generic [ref=e285]: 🎉
+            - generic [ref=e286]: Pay Only if Satisfied — No Commitment!
+        - generic [ref=e287]:
+          - generic [ref=e288]:
+            - heading "Starter" [level=3] [ref=e289]
+            - paragraph [ref=e290]: Perfect for freelancers and solopreneurs
+            - generic [ref=e291]:
+              - generic [ref=e292]: AED
+              - generic [ref=e293]: "499"
+              - generic [ref=e294]: /mo
+            - paragraph [ref=e295]: Up to 50 transactions/year
+            - list [ref=e296]:
+              - listitem [ref=e297]:
+                - img [ref=e298]
+                - text: Annual Tax Filing
+              - listitem [ref=e301]:
+                - img [ref=e302]
+                - text: Tax Registration
+              - listitem [ref=e305]:
+                - img [ref=e306]
+                - text: Basic Financial Statements
+              - listitem [ref=e309]:
+                - img [ref=e310]
+                - text: Dedicated Support Manager
+              - listitem [ref=e313]:
+                - img [ref=e314]
+                - text: 30 Min Free Consultation
+            - link "Get Started" [ref=e317] [cursor=pointer]:
+              - /url: https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+bing+ads+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0
+          - generic [ref=e318]:
+            - heading "Essential" [level=3] [ref=e319]
+            - paragraph [ref=e320]: Ideal for growing small businesses
+            - generic [ref=e321]:
+              - generic [ref=e322]: AED
+              - generic [ref=e323]: "799"
+              - generic [ref=e324]: /mo
+            - paragraph [ref=e325]: Up to 200 transactions/year
+            - list [ref=e326]:
+              - listitem [ref=e327]:
+                - img [ref=e328]
+                - text: "Everything in Starter, plus:"
+              - listitem [ref=e331]:
+                - img [ref=e332]
+                - text: Monthly Account Reconciliation
+              - listitem [ref=e335]:
+                - img [ref=e336]
+                - text: Quarterly Accounting Reports
+              - listitem [ref=e339]:
+                - img [ref=e340]
+                - text: Priority Support
+              - listitem [ref=e343]:
+                - img [ref=e344]
+                - text: Expense Categorization
+              - listitem [ref=e347]:
+                - img [ref=e348]
+                - text: Financial Health Check-up
+            - link "Get Started" [ref=e351] [cursor=pointer]:
+              - /url: https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+bing+ads+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0
+          - generic [ref=e352]:
+            - generic [ref=e353]: Most Popular
+            - heading "Growth" [level=3] [ref=e354]
+            - paragraph [ref=e355]: For businesses with higher volume
+            - generic [ref=e356]:
+              - generic [ref=e357]: AED
+              - generic [ref=e358]: "999"
+              - generic [ref=e359]: /mo
+            - paragraph [ref=e360]: Up to 2,000 transactions/year
+            - list [ref=e361]:
+              - listitem [ref=e362]:
+                - img [ref=e363]
+                - text: "Everything in Essential, plus:"
+              - listitem [ref=e366]:
+                - img [ref=e367]
+                - text: Quarterly Bookkeeping
+              - listitem [ref=e370]:
+                - img [ref=e371]
+                - text: Cash Flow Analysis
+              - listitem [ref=e374]:
+                - img [ref=e375]
+                - text: Profit & Loss Statements
+              - listitem [ref=e378]:
+                - img [ref=e379]
+                - text: Multi-currency Support
+              - listitem [ref=e382]:
+                - img [ref=e383]
+                - text: Dedicated Account Manager
+            - link "Get Started" [ref=e386] [cursor=pointer]:
+              - /url: https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+bing+ads+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0
+          - generic [ref=e387]:
+            - heading "Scale" [level=3] [ref=e388]
+            - paragraph [ref=e389]: Enterprise-grade financial management
+            - generic [ref=e390]:
+              - generic [ref=e391]: AED
+              - generic [ref=e392]: 1,999
+              - generic [ref=e393]: /mo
+            - paragraph [ref=e394]: Up to 3,600 transactions/year
+            - list [ref=e395]:
+              - listitem [ref=e396]:
+                - img [ref=e397]
+                - text: "Everything in Growth, plus:"
+              - listitem [ref=e400]:
+                - img [ref=e401]
+                - text: Monthly Bookkeeping
+              - listitem [ref=e404]:
+                - img [ref=e405]
+                - text: Advanced Reporting Suite
+              - listitem [ref=e408]:
+                - img [ref=e409]
+                - text: Custom Dashboard
+              - listitem [ref=e412]:
+                - img [ref=e413]
+                - text: API Integrations
+              - listitem [ref=e416]:
+                - img [ref=e417]
+                - text: CFO Advisory Services
+            - link "Get Started" [ref=e420] [cursor=pointer]:
+              - /url: https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+bing+ads+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0
+      - generic [ref=e422]:
+        - generic [ref=e423]:
+          - generic [ref=e424]: ONBOARDING
+          - heading "How It Works (Within 45 Days)" [level=2] [ref=e425]
+          - paragraph [ref=e426]: A clear roadmap from day one to steady-state finance operations, so you know exactly what happens when.
+        - generic [ref=e428]:
+          - generic [ref=e429]:
+            - generic [ref=e430]: Kickoff & Migration
+            - generic [ref=e431]: Day 0–7
+            - generic [ref=e432]: Connect your tools (banks, software), clean historical data
+          - generic [ref=e433]:
+            - generic [ref=e434]: Setup & Reporting
+            - generic [ref=e435]: Day 8–20
+            - generic [ref=e436]: Build dashboards, setup cash flow tracking, tax calendars
+          - generic [ref=e437]:
+            - generic [ref=e438]: Month-End & Review
+            - generic [ref=e439]: Day 30–45
+            - generic [ref=e440]: Deliver first complete financial pack + review call
+          - generic [ref=e441]:
+            - generic [ref=e442]: Steady State
+            - generic [ref=e443]: Day 45–90
+            - generic [ref=e444]: Automated reporting, cash flow forecasting, regular reviews
+          - generic [ref=e445]:
+            - generic [ref=e446]: Expansion (Optional)
+            - generic [ref=e447]: Post 90 days
+            - generic [ref=e448]: Add entities, CFO services, or advanced accounting dashboards
+      - generic [ref=e450]:
+        - generic [ref=e451]:
+          - generic [ref=e452]: CLIENT SUCCESS STORIES
+          - heading "Trusted by 7,000+ Businesses" [level=2] [ref=e453]
+          - paragraph [ref=e454]: Hear what founders say about working with our accounting company.
+        - generic [ref=e455]:
+          - generic [ref=e456]:
+            - generic [ref=e457]: "\""
+            - paragraph [ref=e458]: Fast, friendly, and very professional. I love how communicative they were handling our Corporate tax registration.
+            - generic [ref=e459]:
+              - generic [ref=e460]: AA
+              - generic [ref=e461]:
+                - heading "Abdulla Al-Ogail" [level=4] [ref=e462]
+                - paragraph [ref=e463]: Co-founder & CEO, Olymon
+          - generic [ref=e464]:
+            - generic [ref=e465]: "\""
+            - paragraph [ref=e466]: Always very responsive, supportive, having a business mindset, providing visuals and on top of all that, open for feedback so they can keep improving. Very happy that I took the decision to work with them.
+            - generic [ref=e467]:
+              - generic [ref=e468]: SV
+              - generic [ref=e469]:
+                - heading "Szilvia Vitos" [level=4] [ref=e470]
+                - paragraph [ref=e471]: Founder, Livvity
+          - generic [ref=e472]:
+            - generic [ref=e473]: "\""
+            - paragraph [ref=e474]: They designed an accounting system tailor made to our needs & completely automated our finance operations just like they promised. They've been super helpful for us to scale.
+            - generic [ref=e475]:
+              - generic [ref=e476]: JK
+              - generic [ref=e477]:
+                - heading "Jeremy Khatar" [level=4] [ref=e478]
+                - paragraph [ref=e479]: CEO, Ronin Global LLC
+          - generic [ref=e480]:
+            - generic [ref=e481]: "\""
+            - paragraph [ref=e482]: If you ever do any financial modeling/forecasting, I seriously can't recommend Finanshels enough. They are a dependable team of professionals who work hard to deliver results.
+            - generic [ref=e483]:
+              - generic [ref=e484]: BA
+              - generic [ref=e485]:
+                - heading "Bader Al Kazimi" [level=4] [ref=e486]
+                - paragraph [ref=e487]: Founder, Optimize App
+          - generic [ref=e488]:
+            - generic [ref=e489]: "\""
+            - paragraph [ref=e490]: Bookkeeping, a piece of cake with Finanshels! Sahal has been extremely helpful in managing the books! He makes sure its up-to-date and super clean! Sometimes, for advice, I refer to him as well and again, he has been super supportive and helpful to my needs!
+            - generic [ref=e491]:
+              - generic [ref=e492]: SM
+              - generic [ref=e493]:
+                - heading "Sapna Mulani" [level=4] [ref=e494]
+                - paragraph [ref=e495]: Sr Accountant, Growdash
+          - generic [ref=e496]:
+            - generic [ref=e497]: "\""
+            - paragraph [ref=e498]: They thoroughly understood our business processes and streamlined our accounting processes perfectly where our both in-house and outsourced accountants failed multiple times to streamline and structure our complex financial ops.
+            - generic [ref=e499]:
+              - generic [ref=e500]: MP
+              - generic [ref=e501]:
+                - heading "Meet Patel" [level=4] [ref=e502]
+                - paragraph [ref=e503]: Former COO, StudentHub & BAWES
+        - generic [ref=e504]:
+          - generic [ref=e505]: ★★★★★
+          - generic [ref=e506]:
+            - strong [ref=e507]: 4.9/5 on Trustpilot
+            - generic [ref=e508]: Based on 239 reviews
+      - generic [ref=e510]:
+        - generic [ref=e511]:
+          - generic [ref=e512]: FAQ
+          - heading "Common Questions" [level=2] [ref=e513]
+          - paragraph [ref=e514]: Everything you need to know about our finance accounting service and how we help your business grow.
+        - generic [ref=e515]:
+          - button "What accounting and bookkeeping services do you offer?" [ref=e517] [cursor=pointer]:
+            - generic [ref=e518]: What accounting and bookkeeping services do you offer?
+            - img [ref=e519]
+          - button "How does your accounting automation work?" [ref=e522] [cursor=pointer]:
+            - generic [ref=e523]: How does your accounting automation work?
+            - img [ref=e524]
+          - button "What accounting software do you support for integration?" [ref=e527] [cursor=pointer]:
+            - generic [ref=e528]: What accounting software do you support for integration?
+            - img [ref=e529]
+          - button "How quickly can I get started with your accounting outsourcing?" [ref=e532] [cursor=pointer]:
+            - generic [ref=e533]: How quickly can I get started with your accounting outsourcing?
+            - img [ref=e534]
+          - button "Is my financial data secure with your accounting company?" [ref=e537] [cursor=pointer]:
+            - generic [ref=e538]: Is my financial data secure with your accounting company?
+            - img [ref=e539]
+          - button "Do you provide accounting for business decisions support?" [ref=e542] [cursor=pointer]:
+            - generic [ref=e543]: Do you provide accounting for business decisions support?
+            - img [ref=e544]
+      - generic [ref=e548]:
+        - generic [ref=e549]:
+          - generic [ref=e550]: GET STARTED TODAY
+          - heading "Ready to Stop Stressing About Your Books?" [level=2] [ref=e551]
+          - paragraph [ref=e552]: Join 7,000+ businesses across Dubai, Abu Dhabi, Sharjah & UAE who've transformed their financial operations with our accounting services. Get your free consultation and see the difference expert bookkeeping can make.
+          - generic [ref=e553]:
+            - generic [ref=e554]:
+              - generic [ref=e555]: "1"
+              - generic [ref=e556]: Book your free 30-minute consultation
+            - generic [ref=e557]:
+              - generic [ref=e558]: "2"
+              - generic [ref=e559]: Get a customized financial health assessment
+            - generic [ref=e560]:
+              - generic [ref=e561]: "3"
+              - generic [ref=e562]: Pay Only if Satisfied — no commitment
+        - generic [ref=e564]:
+          - heading "Get Your Free Accounting Consultation" [level=3] [ref=e565]
+          - paragraph [ref=e566]: Book a 30-minute call with our finance experts. No obligation.
+          - generic [ref=e567]:
+            - generic [ref=e568]:
+              - generic [ref=e569]:
+                - generic [ref=e570]: First Name
+                - textbox "John" [ref=e571]
+              - generic [ref=e572]:
+                - generic [ref=e573]: Last Name
+                - textbox "Smith" [ref=e574]
+            - generic [ref=e575]:
+              - generic [ref=e576]: Email *
+              - textbox "john@company.com" [ref=e577]
+            - generic [ref=e578]:
+              - generic [ref=e579]: Phone Number
+              - textbox "+971 00 000 0000" [ref=e580]
+            - generic [ref=e581]:
+              - generic [ref=e582]: Company Name *
+              - textbox "Your Company LLC" [ref=e583]
+            - generic [ref=e584]:
+              - generic [ref=e585]: Job Title
+              - textbox "CEO" [ref=e586]
+            - button "Submit" [ref=e587] [cursor=pointer]
+          - generic [ref=e588]:
+            - generic [ref=e589]:
+              - img [ref=e590]
+              - generic [ref=e593]: Pay Only if Satisfied
+            - generic [ref=e594]:
+              - img [ref=e595]
+              - generic [ref=e598]: No Commitment
+            - generic [ref=e599]:
+              - img [ref=e600]
+              - generic [ref=e603]: 24h Response
+  - generic "Contact options" [ref=e604]:
+    - link "Chat on WhatsApp" [ref=e605] [cursor=pointer]:
+      - /url: https://api.whatsapp.com/send/?phone=971521549572&text=Hi%20I%20saw%20your%20ad%20for%20Accounting%20Services.%20I%E2%80%99d%20like%20to%20know%20more.&type=phone_number&app_absent=0
+      - img [ref=e606]
+    - link "Call us" [ref=e608] [cursor=pointer]:
+      - /url: tel:+97145457841
+      - img [ref=e609]
+  - contentinfo [ref=e611]:
+    - generic [ref=e612]:
+      - generic [ref=e613]:
+        - generic [ref=e614]:
+          - img "Finanshels" [ref=e616]
+          - paragraph [ref=e617]: Fractional CFO support, fundraising prep, and investor-grade reporting.
+          - link "contact@finanshels.com" [ref=e618] [cursor=pointer]:
+            - /url: mailto:contact@finanshels.com
+            - img [ref=e619]
+            - generic [ref=e622]: contact@finanshels.com
+        - generic [ref=e623]:
+          - generic [ref=e624]:
+            - heading "Services" [level=4] [ref=e625]
+            - link "Services" [ref=e626] [cursor=pointer]:
+              - /url: "#services"
+            - link "Reviews" [ref=e627] [cursor=pointer]:
+              - /url: "#testimonials"
+            - link "Book a Call" [ref=e628] [cursor=pointer]:
+              - /url: "#consultation"
+          - generic [ref=e629]:
+            - heading "Company" [level=4] [ref=e630]
+            - link "Contact Us" [ref=e631] [cursor=pointer]:
+              - /url: mailto:contact@finanshels.com
+      - generic [ref=e633]:
+        - paragraph [ref=e634]: © 2026 Finanshels. Built for modern finance teams.
+        - paragraph [ref=e635]: Financial operations without the busywork.

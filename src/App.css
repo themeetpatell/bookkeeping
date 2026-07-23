@@ -31,7 +31,9 @@ body {
 }
 
 main {
-  padding-top: calc(80px + var(--offer-bar-h));
+  /* Offset the fixed offer bar + nav (nav ≈ 75px here). Keep in sync with
+     the nav height at each breakpoint so no white gap appears below the nav. */
+  padding-top: calc(75px + var(--offer-bar-h));
 }
 
 @media (max-width: 1024px) {
@@ -46,7 +48,7 @@ main {
   }
 
   main {
-    padding-top: calc(90px + var(--offer-bar-h));
+    padding-top: calc(73px + var(--offer-bar-h));
   }
 }
 
@@ -56,7 +58,7 @@ main {
   }
 
   main {
-    padding-top: calc(100px + var(--offer-bar-h));
+    padding-top: calc(65px + var(--offer-bar-h));
   }
 }
 
@@ -228,7 +230,8 @@ main {
   }
 
   .offer-bar-text {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+    line-height: 1.2;
   }
 
   .offer-cd-unit b {
@@ -242,8 +245,16 @@ main {
 }
 
 @media (max-width: 480px) {
+  .offer-bar-inner {
+    padding: 0.28rem 0.6rem;
+    gap: 0.4rem;
+  }
+
+  /* Keep the full copy to a tidy two lines: give the message the width and
+     drop the font a step so it never spills onto a third line. */
   .offer-bar-text {
-    font-size: 0.74rem;
+    font-size: 0.72rem;
+    line-height: 1.2;
   }
 
   .offer-cd-label {
@@ -255,14 +266,14 @@ main {
   }
 
   .offer-bar-cta {
-    font-size: 0.78rem;
-    padding: 0.4rem 0.7rem;
-    gap: 0.35rem;
+    font-size: 0.72rem;
+    padding: 0.36rem 0.58rem;
+    gap: 0.3rem;
   }
 
   .offer-bar-cta-icon {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
   }
 }
 
