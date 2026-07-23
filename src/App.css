@@ -36,13 +36,13 @@ main {
 
 @media (max-width: 1024px) {
   :root {
-    --offer-bar-h: 72px;
+    --offer-bar-h: 44px;
   }
 }
 
 @media (max-width: 768px) {
   :root {
-    --offer-bar-h: 72px;
+    --offer-bar-h: 50px;
   }
 
   main {
@@ -52,7 +52,7 @@ main {
 
 @media (max-width: 480px) {
   :root {
-    --offer-bar-h: 96px;
+    --offer-bar-h: 54px;
   }
 
   main {
@@ -91,6 +91,7 @@ main {
   display: flex;
   align-items: center;
   gap: 0.7rem;
+  min-width: 0;
 }
 
 .offer-bar-badge {
@@ -108,9 +109,9 @@ main {
 
 .offer-bar-text {
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.25;
-  color: #e2e8f0;
+  color: #f8fafc;
   margin: 0;
 }
 
@@ -202,34 +203,32 @@ main {
   flex-shrink: 0;
 }
 
-/* TABLET: message on its own row, countdown + CTA share the second row */
+/* TABLET: stay on a single row, message left / countdown + CTA right */
 @media (max-width: 1024px) {
   .offer-bar-inner {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
-    gap: 0.35rem 0.8rem;
+    gap: 0.6rem;
     padding: 0.4rem 1.25rem;
-  }
-
-  .offer-bar-message {
-    flex-basis: 100%;
-    justify-content: center;
   }
 }
 
 @media (max-width: 768px) {
   .offer-bar-inner {
-    padding: 0.4rem 0.9rem;
+    padding: 0.3rem 0.9rem;
   }
 
   .offer-bar-badge {
     display: none;
   }
 
+  /* Full offer copy stays; it wraps to a compact two lines on phones */
+  .offer-bar-message {
+    flex: 1 1 auto;
+  }
+
   .offer-bar-text {
-    font-size: 0.78rem;
-    line-height: 1.2;
-    text-align: center;
+    font-size: 0.8rem;
   }
 
   .offer-cd-unit b {
@@ -237,14 +236,14 @@ main {
   }
 
   .offer-bar-cta {
-    font-size: 0.78rem;
-    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .offer-bar-text {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
   }
 
   .offer-cd-label {
@@ -256,8 +255,8 @@ main {
   }
 
   .offer-bar-cta {
-    font-size: 0.72rem;
-    padding: 0.38rem 0.65rem;
+    font-size: 0.78rem;
+    padding: 0.4rem 0.7rem;
     gap: 0.35rem;
   }
 
@@ -365,6 +364,7 @@ main {
   text-decoration: none;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(241, 102, 16, 0.2);
+  white-space: nowrap;
 }
 
 .btn-nav-primary:hover {

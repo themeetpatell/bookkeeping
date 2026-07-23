@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield, FiX } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
 import './AccountingLanding.css';
+
+const WHATSAPP_MESSAGE = 'Hi I saw your ad for Accounting Services. I’d like to know more.';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
@@ -115,6 +119,8 @@ const AccountingForm = () => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
+  const whatsappUrl = buildWhatsAppUrl(WHATSAPP_MESSAGE);
+
   const testimonials = [
     {
       text: "Fast, friendly, and very professional. I love how communicative they were handling our Corporate tax registration.",
@@ -194,7 +200,7 @@ const AccountingForm = () => {
   ];
 
   return (
-    <div className="accounting-landing">
+    <div className="accounting-landing accounting-form-page">
       {/* Hero Section - Complete Redesign */}
       <section className="hero">
         <div className="hero-container">
@@ -280,18 +286,24 @@ const AccountingForm = () => {
       <section className="accounting-client-logos-section" aria-label="Client logos">
         <div className="container">
           <p className="accounting-logos-label">Trusted by leading UAE businesses</p>
-          <div className="accounting-logos-grid">
-            {clientLogos.map((logo) => (
-              <div key={logo.alt} className="accounting-logo-tile">
-                <img
-                  src={logo.src}
-                  alt={`${logo.alt} logo`}
-                  className="accounting-logo-image"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            ))}
+          <div className="accounting-logos-marquee">
+            <div className="accounting-logos-track">
+              {[...clientLogos, ...clientLogos].map((logo, index) => (
+                <div
+                  key={`${logo.alt}-${index}`}
+                  className="accounting-logo-tile"
+                  aria-hidden={index >= clientLogos.length}
+                >
+                  <img
+                    src={logo.src}
+                    alt={`${logo.alt} logo`}
+                    className="accounting-logo-image"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -400,8 +412,14 @@ const AccountingForm = () => {
                 </div>
               </div>
               
-              <a href="#consultation" className="btn-primary">
-                Get Free Consultation
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary btn-with-icon"
+              >
+                <FaWhatsapp />
+                WhatsApp Now
               </a>
             </div>
             

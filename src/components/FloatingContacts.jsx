@@ -7,9 +7,18 @@ import { buildWhatsAppUrl, getAdKeyword, isBingRoute } from '../utils/whatsapp';
 
 const DEFAULT_MESSAGE = 'Hi I saw your ad for Accounting Services. I’d like to know more.';
 
+// The accounting-form page has its own inline lead form, so the floating
+// WhatsApp/Call widgets are hidden there to keep the layout focused.
+const HIDDEN_ON_PATHS = ['/accounting-form'];
+
 const FloatingContacts = () => {
   const { pathname, search } = useLocation();
   const posthog = usePostHog();
+
+  if (HIDDEN_ON_PATHS.includes(pathname)) {
+    return null;
+  }
+
   const phoneHref = brand.phone.replace(/\s+/g, '');
   const keyword = getAdKeyword(search);
   const message =
