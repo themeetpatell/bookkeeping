@@ -11,6 +11,7 @@ import AccountingSoftwareLandingBing from './pages/AccountingSoftwareLandingBing
 import PayrollAccountingLanding from './pages/PayrollAccountingLanding';
 import PayrollAccountingLandingBing from './pages/PayrollAccountingLandingBing';
 import AccountingWhatsApp from './pages/AccountingWhatsApp';
+import AIAccountingLanding from './pages/AIAccountingLanding';
 import AccountingForm from './pages/AccountingForm';
 import ThankYou from './pages/ThankYou';
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/payroll-accounting" element={<PayrollAccountingLanding />} />
         <Route path="/payroll-accounting-bing" element={<PayrollAccountingLandingBing />} />
         <Route path="/accounting-whatsapp" element={<AccountingWhatsApp />} />
+        <Route path="/ai-accounting" element={<AIAccountingLanding />} />
         <Route path="/accounting-form" element={<AccountingForm />} />
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/thank-you-from-finanshels" element={<ThankYou />} />
