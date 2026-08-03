@@ -36,7 +36,7 @@ const Nav = () => {
         </nav>
         
         <a
-          href="https://contact-finanshels.zohobookings.com/#/accounting-consultation"
+          href="https://contact-finanshels.zohobookings.com/accounting"
           className="btn-nav-primary"
           target="_blank"
           rel="noreferrer"

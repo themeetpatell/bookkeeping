@@ -90,7 +90,7 @@ const Footer = () => {
               Contact Us
             </a>
             <a
-              href="https://contact-finanshels.zohobookings.com/#/accounting-consultation"
+              href="https://contact-finanshels.zohobookings.com/accounting"
               target="_blank"
               rel="noopener noreferrer"
               className="footer-link"

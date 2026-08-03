@@ -10,7 +10,7 @@ Marketing site for Finanshels’ UAE bookkeeping, tax, and consultation offering
 
 ## Environment & Integrations
 - Zoho consultation form lives in `src/pages/NewHomePage.jsx` (`ZohoConsultationForm`). Do not change Zoho field `name` attributes or the form action URL.
-- Booking CTA targets: `https://contact-finanshels.zohobookings.com/#/accounting-consultation`.
+- Booking CTA targets: `https://contact-finanshels.zohobookings.com/accounting`.
 - Floating contacts: WhatsApp + phone links configured in `src/components/FloatingContacts.jsx`.
 
 ## Project Structure
