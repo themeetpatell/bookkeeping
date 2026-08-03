@@ -14,6 +14,7 @@ import AccountingWhatsApp from './pages/AccountingWhatsApp';
 import AIAccountingLanding from './pages/AIAccountingLanding';
 import AccountingForm from './pages/AccountingForm';
 import ThankYou from './pages/ThankYou';
+import BookingConfirmed from './pages/BookingConfirmed';
 
 function App() {
   const { pathname } = useLocation();
@@ -42,6 +43,7 @@ function App() {
         <Route path="/accounting-form" element={<AccountingForm />} />
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/thank-you-from-finanshels" element={<ThankYou />} />
+        <Route path="/booking-confirmed" element={<BookingConfirmed />} />
       </Routes>
     </Layout>
   );
