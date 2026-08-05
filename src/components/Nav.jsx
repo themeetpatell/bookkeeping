@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { usePostHog } from '@posthog/react';
 import finanshelsLogo from '../assets/finanshelslogo.svg';
-import { BOOKING_URL } from '../utils/booking';
+import { BOOKING_PATH } from '../utils/booking';
 
 const Nav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,15 +37,13 @@ const Nav = () => {
           <button onClick={() => scrollToSection('faq')} className="nav-link">FAQ</button>
         </nav>
         
-        <a
-          href={BOOKING_URL}
+        <Link
+          to={BOOKING_PATH}
           className="btn-nav-primary"
-          target="_blank"
-          rel="noreferrer"
           onClick={() => posthog?.capture('book_call_clicked', { location: 'nav' })}
         >
           Book a Free Call
-        </a>
+        </Link>
       </div>
     </header>
   );

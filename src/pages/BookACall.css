@@ -1,0 +1,147 @@
+/* Standalone booking route: no nav, offer bar, footer or floating buttons, so
+   the scheduler is the only thing competing for attention (and nothing overlaps
+   the widget on mobile). */
+
+.booking-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b243a 0%, #1a3a52 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* The only Finanshels logo asset is dark-on-transparent, so the header keeps a
+   light bar rather than washing the mark out against the dark page. */
+.booking-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e7e3d8;
+}
+
+.booking-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.booking-logo img {
+  height: 30px;
+  width: auto;
+  display: block;
+}
+
+.booking-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.booking-back:hover {
+  color: #f16610;
+}
+
+.booking-main {
+  flex: 1;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px 56px;
+}
+
+.booking-title {
+  font-size: 34px;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 10px;
+}
+
+.booking-subtitle {
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+  text-align: center;
+  margin: 0 auto 32px;
+  max-width: 520px;
+}
+
+.booking-widget-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+/* The vendor script injects its iframe in here and sets the height inline. */
+.booking-widget iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+}
+
+.booking-status {
+  padding: 56px 24px;
+  text-align: center;
+  font-size: 16px;
+  color: #64748b;
+}
+
+.booking-status-error p {
+  margin: 0 0 16px;
+  color: #475569;
+}
+
+.booking-status-alt {
+  font-size: 15px;
+}
+
+.booking-fallback-link {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: #f16610;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.booking-fallback-link:hover {
+  background: #d4570b;
+}
+
+.booking-status-error a[href^='tel:'] {
+  color: #f16610;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .booking-main {
+    padding: 8px 12px 40px;
+  }
+
+  .booking-title {
+    font-size: 26px;
+  }
+
+  .booking-subtitle {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .booking-widget-card {
+    padding: 8px;
+    border-radius: 16px;
+  }
+}

@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { usePostHog } from '@posthog/react';
 import { FiCheckCircle, FiArrowLeft } from 'react-icons/fi';
+import { readBookedEmail } from '../utils/booking';
 import './ThankYou.css';
 
 // Landing page for the Zoho Bookings post-booking redirect. Configure the
@@ -30,12 +31,37 @@ const markAsFired = () => {
   }
 };
 
+/**
+ * The scheduler runs in an iframe on /book-a-call, so Zoho's post-booking
+ * redirect lands this page INSIDE that frame — squeezed into the widget box,
+ * with the conversion firing in a nested context. Escape to the top window so
+ * the confirmation renders full page and the tags fire where GTM expects.
+ * @returns {boolean} true when a breakout was started and rendering should stop
+ */
+const breakOutOfBookingFrame = () => {
+  try {
+    if (window.top === window.self) return false;
+    window.top.location.replace(window.location.href);
+    return true;
+  } catch {
+    // Framed by a different origin, so the top window is off limits. Render in
+    // place rather than showing nothing.
+    return false;
+  }
+};
+
 const BookingConfirmed = () => {
   const posthog = usePostHog();
+  // Read once on mount so the confirmed email is in the first paint rather than
+  // swapping in after a flash of the generic copy.
+  const [customerEmail] = useState(readBookedEmail);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (typeof window === 'undefined') return;
+    // Must run before the conversion push so it fires once, at top level.
+    if (breakOutOfBookingFrame()) return;
+
+    window.scrollTo(0, 0);
     if (hasAlreadyFired()) return;
 
     window.dataLayer = window.dataLayer || [];
@@ -58,8 +84,15 @@ const BookingConfirmed = () => {
           <h1 className="thank-you-title">Your Call Is Booked!</h1>
 
           <p className="thank-you-message">
-            Your consultation is confirmed. A calendar invite and meeting link are on
-            their way to your inbox — please check spam if you don't see it shortly.
+            {customerEmail ? (
+              <>
+                Your consultation is confirmed. A calendar invite and meeting link are
+                on their way to <strong>{customerEmail}</strong> — please check spam if
+                you don't see it shortly.
+              </>
+            ) : (
+              "Your consultation is confirmed. A calendar invite and meeting link are on their way to your inbox — please check spam if you don't see it shortly."
+            )}
           </p>
 
           <div className="next-steps">

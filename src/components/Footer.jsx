@@ -8,8 +8,9 @@ import {
   FaYoutube,
 } from 'react-icons/fa6';
 import finanshelsLogo from '../assets/finanshelslogo.svg';
+import { Link } from 'react-router-dom';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
-import { BOOKING_URL } from '../utils/booking';
+import { BOOKING_PATH } from '../utils/booking';
 
 const SOCIAL_LINKS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/finanshels', Icon: FaLinkedinIn },
@@ -90,14 +91,9 @@ const Footer = () => {
             <a href="mailto:contact@finanshels.com" className="footer-link">
               Contact Us
             </a>
-            <a
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-link"
-            >
+            <Link to={BOOKING_PATH} className="footer-link">
               Book a Free Call
-            </a>
+            </Link>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="footer-link">
               Chat on WhatsApp
             </a>

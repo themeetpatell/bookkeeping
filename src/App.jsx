@@ -15,6 +15,7 @@ import AIAccountingLanding from './pages/AIAccountingLanding';
 import AccountingForm from './pages/AccountingForm';
 import ThankYou from './pages/ThankYou';
 import BookingConfirmed from './pages/BookingConfirmed';
+import BookACall from './pages/BookACall';
 
 function App() {
   const { pathname } = useLocation();
@@ -28,8 +29,12 @@ function App() {
   }, [pathname]);
 
   return (
-    <Layout>
-      <Routes>
+    <Routes>
+      {/* Standalone: the booking page renders the scheduler on its own, with no
+          nav, offer bar or floating buttons to distract from or overlap it. */}
+      <Route path="/book-a-call" element={<BookACall />} />
+
+      <Route element={<Layout />}>
         <Route path="/" element={<AccountingLanding />} />
         <Route path="/accounting-bing" element={<AccountingLandingBing />} />
         <Route path="/bookkeeping" element={<BookkeepingLanding />} />
@@ -44,8 +49,8 @@ function App() {
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/thank-you-from-finanshels" element={<ThankYou />} />
         <Route path="/booking-confirmed" element={<BookingConfirmed />} />
-      </Routes>
-    </Layout>
+      </Route>
+    </Routes>
   );
 }
 

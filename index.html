@@ -1,6 +1,41 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Strip the customer details Zoho Bookings appends to the post-booking
+         redirect URL. MUST run before the GTM snippets below so analytics never
+         sees raw PII in the page URL or referrer. Values move to sessionStorage
+         (tab-local) for the confirmation page to read back. -->
+    <script>
+      (function () {
+        var PII_PARAMS = [
+          'customer_email',
+          'customer_name',
+          'customer_first_name',
+          'customer_last_name',
+          'customer_contact_no'
+        ];
+        try {
+          var url = new URL(window.location.href);
+          var hasPii = false;
+          PII_PARAMS.forEach(function (key) {
+            var value = url.searchParams.get(key);
+            if (value === null) return;
+            hasPii = true;
+            if (value) sessionStorage.setItem('booking_' + key, value);
+            url.searchParams.delete(key);
+          });
+          if (hasPii) {
+            window.history.replaceState(
+              window.history.state,
+              '',
+              url.pathname + url.search + url.hash
+            );
+          }
+        } catch (e) {
+          /* very old browser: leave the URL untouched rather than break the page */
+        }
+      })();
+    </script>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

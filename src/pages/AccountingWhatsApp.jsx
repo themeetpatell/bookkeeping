@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield, FiX, FiMessageCircle, FiCalendar } from 'react-icons/fi';
 import './AccountingLanding.css';
-import { BOOKING_URL } from '../utils/booking';
+import { BOOKING_PATH } from '../utils/booking';
 
 const WHATSAPP_URL =
   'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0';
@@ -18,15 +19,10 @@ const CtaButtons = ({ onWhatsAppClick, source }) => (
       <FiMessageCircle className="cta-button-icon" />
       <span>Chat with Us on WhatsApp</span>
     </a>
-    <a
-      href={BOOKING_URL}
-      target="_blank"
-      rel="noreferrer"
-      className="cta-button cta-button-calendar"
-    >
+    <Link to={BOOKING_PATH} className="cta-button cta-button-calendar">
       <FiCalendar className="cta-button-icon" />
       <span>Book a Free Call</span>
-    </a>
+    </Link>
   </div>
 );
 
