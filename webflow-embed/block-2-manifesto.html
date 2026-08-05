@@ -1,0 +1,418 @@
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 2 of 7: WHY AI-NATIVE + COMPARISON
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     ========================================================================== -->
+
+<style>
+/* ============================================================
+   MANIFESTO
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-manifesto {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-manifesto-headline {
+  margin: 0 0 26px;
+  max-width: 16em;
+  font-size: clamp(2.4rem, 5.2vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.042em;
+  line-height: 1.04;
+}
+
+
+.fsai-root:not(#_) .fsai-manifesto-headline em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-manifesto-sub {
+  margin: 0 0 72px;
+  max-width: 42rem;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--fsai-muted);
+}
+
+
+/* Bento: cards share one framed grid, divided by hairlines. */
+.fsai-root:not(#_) .fsai-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-pillar {
+  padding: 38px 34px;
+  transition: background-color 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-pillar + .fsai-pillar {
+  border-left: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-pillar:hover {
+  background: var(--fsai-surface-raised);
+}
+
+
+.fsai-root:not(#_) .fsai-pillar-number {
+  display: block;
+  margin-bottom: 22px;
+  font-size: 0.78rem;
+  font-weight: 680;
+  letter-spacing: 0.1em;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-pillar h3 {
+  margin: 0 0 12px;
+  font-size: 1.18rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+
+.fsai-root:not(#_) .fsai-pillar p {
+  margin: 0;
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--fsai-muted);
+}
+
+/* ============================================================
+   COMPARISON
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-compare {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-table {
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-row {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 1.15fr;
+  align-items: stretch;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-row + .fsai-compare-row {
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-row > span {
+  display: flex;
+  align-items: center;
+  padding: 20px 28px;
+  font-size: 0.93rem;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-head {
+  background: var(--fsai-canvas);
+  font-size: 0.7rem;
+  font-weight: 680;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-head > span {
+  font-size: 0.7rem;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-now-head {
+  gap: 8px;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-spark {
+  width: 11px;
+  height: 11px;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-label {
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-old {
+  color: var(--fsai-dim);
+  text-decoration-line: line-through;
+  text-decoration-color: rgba(255, 255, 255, 0.3);
+  text-decoration-thickness: 1px;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-now {
+  gap: 11px;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+  background: var(--fsai-accent-soft);
+  border-left: 2px solid var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-now svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--fsai-accent);
+}
+
+
+/* Mobile-only two-panel comparison (hidden on desktop) */
+.fsai-root:not(#_) .fsai-compare-mobile {
+  display: none;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel {
+  border-radius: var(--fsai-radius);
+  padding: 28px 24px;
+  border: 1px solid var(--fsai-line);
+  background: var(--fsai-surface);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-spark {
+  width: 12px;
+  height: 12px;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 0.91rem;
+  line-height: 1.55;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel li svg {
+  width: 15px;
+  height: 15px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel strong {
+  font-weight: 650;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-old h3 {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-old li {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-old li svg {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-old strong {
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-new {
+  border-color: var(--fsai-accent-line);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-new h3 {
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-new li {
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-new li svg {
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-new strong {
+  color: var(--fsai-text);
+}
+</style>
+<div class="fsai-root">
+  <section class="fsai-manifesto">
+    <div class="fsai-container">
+      <p class="fsai-eyebrow fsai-eyebrow-light">
+        <svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Why AI-native
+      </p>
+      <h2 class="fsai-manifesto-headline" data-reveal>
+        Most firms <em>added</em> AI.
+        <br />
+        We were <span class="fsai-accent">built on it.</span>
+      </h2>
+      <p class="fsai-manifesto-sub" data-reveal>
+        When the workflow is designed around AI from day one, everything changes: what used to
+        take a team a month now happens overnight &mdash; and your accountants finally have
+        time to think about your business, not your data entry.
+      </p>
+
+      <div class="fsai-pillars" data-reveal-stagger>
+        <article class="fsai-pillar">
+          <span class="fsai-pillar-number">01</span>
+          <h3>AI does the repetitive work</h3>
+          <p>Categorization, reconciliation, data capture and deadline tracking run continuously — not once a month. Your books are current every morning.</p>
+        </article>
+        <article class="fsai-pillar">
+          <span class="fsai-pillar-number">02</span>
+          <h3>Accountants own the outcome</h3>
+          <p>Every number the AI produces is reviewed by a qualified accountant before it reaches you or the FTA. AI drafts. Humans sign.</p>
+        </article>
+        <article class="fsai-pillar">
+          <span class="fsai-pillar-number">03</span>
+          <h3>You see everything, live</h3>
+          <p>No more waiting for month-end PDFs. A real-time dashboard shows cash, runway, VAT position and P&amp;L the moment anything changes.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="fsai-compare">
+    <div class="fsai-container">
+      <div class="fsai-section-head" data-reveal>
+        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> The difference</p>
+        <h2>Traditional firm vs. <span class="fsai-accent">AI-native</span></h2>
+      </div>
+
+      <div class="fsai-compare-table" data-reveal role="table" aria-label="Traditional firm versus AI-native comparison">
+        <div class="fsai-compare-row fsai-compare-head" role="row">
+          <span role="columnheader"></span>
+          <span role="columnheader">The old way</span>
+          <span role="columnheader" class="fsai-compare-now-head">
+            <svg class="fsai-compare-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Finanshels
+          </span>
+        </div>
+        <div class="fsai-compare-row" role="row">
+          <span class="fsai-compare-label" role="cell">Monthly close</span>
+          <span class="fsai-compare-old" role="cell">Weeks after month-end</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Days — AI reconciles continuously</span>
+        </div>
+        <div class="fsai-compare-row" role="row">
+          <span class="fsai-compare-label" role="cell">Data entry</span>
+          <span class="fsai-compare-old" role="cell">Manual keying, human error</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Automated capture, accountant-verified</span>
+        </div>
+        <div class="fsai-compare-row" role="row">
+          <span class="fsai-compare-label" role="cell">Visibility</span>
+          <span class="fsai-compare-old" role="cell">Static PDFs, once a month</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Live dashboard, always current</span>
+        </div>
+        <div class="fsai-compare-row" role="row">
+          <span class="fsai-compare-label" role="cell">Tax deadlines</span>
+          <span class="fsai-compare-old" role="cell">Last-minute scrambles</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Tracked by AI, filed early</span>
+        </div>
+        <div class="fsai-compare-row" role="row">
+          <span class="fsai-compare-label" role="cell">Errors</span>
+          <span class="fsai-compare-old" role="cell">Discovered at audit</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Flagged the moment they happen</span>
+        </div>
+        <div class="fsai-compare-row" role="row">
+          <span class="fsai-compare-label" role="cell">Cost</span>
+          <span class="fsai-compare-old" role="cell">Grows with headcount</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Grows with software — not people</span>
+        </div>
+      </div>
+
+      <!-- Mobile-only: two stacked panels instead of the table -->
+      <div class="fsai-compare-mobile" data-reveal>
+        <div class="fsai-compare-panel fsai-compare-panel-old">
+          <h3>The old way</h3>
+          <ul>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Monthly close.</strong> Weeks after month-end</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Data entry.</strong> Manual keying, human error</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Visibility.</strong> Static PDFs, once a month</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Tax deadlines.</strong> Last-minute scrambles</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Errors.</strong> Discovered at audit</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Cost.</strong> Grows with headcount</span></li>
+          </ul>
+        </div>
+        <div class="fsai-compare-panel fsai-compare-panel-new">
+          <h3><svg class="fsai-compare-panel-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> With Finanshels</h3>
+          <ul>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Monthly close.</strong> Days — AI reconciles continuously</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Data entry.</strong> Automated capture, accountant-verified</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Visibility.</strong> Live dashboard, always current</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Tax deadlines.</strong> Tracked by AI, filed early</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Errors.</strong> Flagged the moment they happen</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Cost.</strong> Grows with software — not people</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

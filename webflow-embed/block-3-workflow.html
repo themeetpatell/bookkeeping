@@ -1,0 +1,204 @@
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 3 of 7: WHATSAPP STRIP + HOW IT WORKS
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     ========================================================================== -->
+
+<style>
+/* ============================================================
+   LEAD STRIP — the one saturated band on the page
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-lead-strip {
+  padding: 60px 0;
+  background:
+    radial-gradient(40rem 22rem at 90% -20%, rgba(255, 255, 255, 0.18), transparent 60%),
+    var(--fsai-accent);
+  color: #fff;
+}
+
+
+.fsai-root:not(#_) .fsai-lead-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 40px;
+  align-items: center;
+}
+
+
+.fsai-root:not(#_) .fsai-lead-copy h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 680;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+
+.fsai-root:not(#_) .fsai-lead-copy p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+
+.fsai-root:not(#_) .fsai-lead-whatsapp {
+  justify-self: end;
+  padding: 17px 34px;
+  background: #fff;
+  color: var(--fsai-accent-deep);
+  border: none;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+
+.fsai-root:not(#_) .fsai-lead-whatsapp svg {
+  width: 21px;
+  height: 21px;
+}
+
+
+.fsai-root:not(#_) .fsai-lead-whatsapp:hover {
+  background: var(--fsai-paper-sunk);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   WORKFLOW
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-workflow {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-step {
+  position: relative;
+  padding: 38px 30px;
+  transition: background-color 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-step + .fsai-step {
+  border-left: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-step:hover {
+  background: var(--fsai-surface-raised);
+}
+
+
+.fsai-root:not(#_) .fsai-step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 2px;
+  background: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-step-number {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 0.78rem;
+  font-weight: 680;
+  letter-spacing: 0.1em;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-step h3 {
+  margin: 0 0 10px;
+  font-size: 1.12rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+
+.fsai-root:not(#_) .fsai-step p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--fsai-muted);
+}
+</style>
+<div class="fsai-root">
+  <section class="fsai-lead-strip" aria-label="Get a free quote">
+    <div class="fsai-container">
+      <div class="fsai-lead-inner" data-reveal>
+        <div class="fsai-lead-copy">
+          <h2>See what AI-native accounting costs for your business</h2>
+          <p>Message us on WhatsApp — a real accountant replies in minutes.</p>
+        </div>
+        <a
+          href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20to%20learn%20more%20about%20your%20AI-native%20accounting%20services.&amp;type=phone_number&amp;app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fsai-btn fsai-lead-whatsapp"
+          data-fsai-wa="ai_landing_strip"
+        >
+          <svg aria-hidden="true" focusable="false"><use href="#fsai-i-whatsapp"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="fsai-workflow">
+    <div class="fsai-container">
+      <div class="fsai-section-head" data-reveal>
+        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> How it works</p>
+        <h2>From your bank feed to <span class="fsai-accent">board-ready</span></h2>
+      </div>
+
+      <ol class="fsai-steps" data-reveal-stagger>
+        <li class="fsai-step">
+          <span class="fsai-step-number">01</span>
+          <h3>Connect</h3>
+          <p>We link your banks, invoicing tools and accounting software — QuickBooks, Xero, Zoho Books or ours. Migration handled for you.</p>
+        </li>
+        <li class="fsai-step">
+          <span class="fsai-step-number">02</span>
+          <h3>AI agents process</h3>
+          <p>Transactions are captured, categorized and reconciled daily. Anomalies, duplicates and missing documents get flagged automatically.</p>
+        </li>
+        <li class="fsai-step">
+          <span class="fsai-step-number">03</span>
+          <h3>Accountants review</h3>
+          <p>Your dedicated accountant checks every output, resolves exceptions and signs off on filings. Nothing ships on AI confidence alone.</p>
+        </li>
+        <li class="fsai-step">
+          <span class="fsai-step-number">04</span>
+          <h3>You decide</h3>
+          <p>Clean books, live dashboards and on-time VAT &amp; Corporate Tax filings — plus a team on WhatsApp when you need an answer.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+</div>

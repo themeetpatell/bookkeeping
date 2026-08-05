@@ -9,6 +9,7 @@ import {
 } from 'react-icons/fa6';
 import finanshelsLogo from '../assets/finanshelslogo.svg';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
+import { BOOKING_URL } from '../utils/booking';
 
 const SOCIAL_LINKS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/finanshels', Icon: FaLinkedinIn },
@@ -90,7 +91,7 @@ const Footer = () => {
               Contact Us
             </a>
             <a
-              href="https://contact-finanshels.zohobookings.com/accounting"
+              href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="footer-link"

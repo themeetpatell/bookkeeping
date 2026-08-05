@@ -1,0 +1,880 @@
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 1 of 7: HERO + CLIENT LOGOS
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     Also defines the icon sprite every later block references — this one
+     must be on the page.
+     ========================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+<style>
+/* --------------------------------------------------------------------------
+   CASCADE FENCE — see webflow-embed/README.md
+   `all: revert` discards every author-origin declaration the host page
+   contributed, falling back to the browser's own defaults. At (1,1,0) it
+   outranks Webflow's tag and class styles; the component rules that follow
+   sit higher still, so they win against the reset.
+   -------------------------------------------------------------------------- */
+
+/* SVG subtrees are deliberately excluded. Presentation attributes (fill,
+   stroke, stroke-width, d) cascade at author origin, so reverting them erases
+   the icon geometry outright — verified: `d` computes to `none`. */
+.fsai-root:not(#_),
+.fsai-root:not(#_) :where(*:not(svg, svg *)),
+.fsai-root:not(#_) :where(*:not(svg, svg *))::before,
+.fsai-root:not(#_) :where(*:not(svg, svg *))::after {
+  all: revert;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Baseline the source stylesheet was authored against (src/App.css applies a
+   global `* { margin: 0; padding: 0 }`, src/index.css the link/button rules). */
+.fsai-root:not(#_) :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fsai-root:not(#_) :where(button) {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fsai-root:not(#_) :where(ul, ol) {
+  list-style: none;
+}
+
+/* SVGs sit outside the `all: revert` sweep, so a host rule like Webflow's
+   `img, svg { max-width: 100%; vertical-align: middle }` would still reach
+   them. Neutralise box-model and decoration properties only — every paint and
+   geometry property is left alone. `baseline` is the UA default and matches
+   the React page. */
+.fsai-root:not(#_) :where(svg, svg *) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  vertical-align: baseline;
+  float: none;
+}
+
+.fsai-root:not(#_) :where(img) {
+  max-width: none;
+}
+
+/* Icon sprite host — never rendered. */
+.fsai-root:not(#_) :where(.fsai-sprite) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Optional full-bleed escape hatch — add `fsai-fullbleed` to a wrapper that
+   sits inside a padded Webflow container. Needs body { overflow-x: hidden }
+   when a vertical scrollbar is present. */
+.fsai-root:not(#_).fsai-fullbleed {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+}
+
+/* ============================================================
+   AI-Native Accounting Landing
+   Single dark canvas, one accent, hairline bento grids.
+   Palette: warm near-black, Finanshels orange
+   Type: Inter only — heavy weights, tight tracking
+   ============================================================ */
+
+.fsai-root:not(#_) {
+  /* Three colours only: black, white, orange. The whole page sits on one
+     black canvas — depth comes from hairline borders and neutral surface
+     lifts, never from a hue shift. */
+  --fsai-canvas: #000000;
+  --fsai-surface: #0b0b0b;
+  --fsai-surface-raised: #141414;
+  --fsai-line: rgba(255, 255, 255, 0.12);
+  --fsai-line-strong: rgba(255, 255, 255, 0.22);
+
+  /* The two inverted moments — hero feed card and the CTA form. */
+  --fsai-paper: #ffffff;
+  --fsai-paper-sunk: #f4f4f4;
+  --fsai-paper-line: #e4e4e4;
+  --fsai-paper-ink: #000000;
+  --fsai-paper-muted: #6b6b6b;
+
+  --fsai-accent: #f16610;
+  --fsai-accent-deep: #d45a0e;
+  --fsai-accent-soft: rgba(241, 102, 16, 0.14);
+  --fsai-accent-line: rgba(241, 102, 16, 0.35);
+
+  --fsai-text: #ffffff;
+  --fsai-muted: #a3a3a3;
+  --fsai-dim: #737373;
+
+  /* Financial direction reads through emphasis, not hue — orange marks the
+     figure worth looking at, neutral grey carries everything else. */
+  --fsai-up: var(--fsai-accent);
+  --fsai-down: var(--fsai-dim);
+
+  --fsai-radius: 12px;
+  --fsai-radius-lg: 16px;
+  --fsai-pill: 999px;
+  --fsai-pad: 120px;
+
+  /* CrossVal's motion tokens: ease-out for entrances, ease-in-out for state. */
+  --fsai-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --fsai-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: dark;
+  background: var(--fsai-canvas);
+  color: var(--fsai-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+
+.fsai-root:not(#_) *,
+.fsai-root:not(#_) *::before,
+.fsai-root:not(#_) *::after {
+  box-sizing: border-box;
+}
+
+
+.fsai-root:not(#_) .fsai-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+
+.fsai-root:not(#_) .fsai-accent {
+  color: var(--fsai-accent);
+}
+
+
+/* ---------- Scroll reveal ----------
+   The hidden state is gated behind `.is-ready`, which JS adds on mount, so
+   the page still renders fully if the observer never runs. */
+
+/* Whole element fades up as one. */
+.fsai-root:not(#_).is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--fsai-ease-out),
+    transform 0.65s var(--fsai-ease-out);
+}
+
+
+/* Children fade up one after another — used on the bento grids, where the
+   cards reading in sequence is the point. The container itself stays put. */
+.fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > * {
+  animation: fsai-rise 0.6s var(--fsai-ease-out) both;
+  animation-delay: var(--fsai-stagger, 0s);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --fsai-stagger: 0.07s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --fsai-stagger: 0.14s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --fsai-stagger: 0.21s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(5) { --fsai-stagger: 0.28s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(6) { --fsai-stagger: 0.35s; }
+
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.fsai-root:not(#_) .fsai-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+/* Kept so existing markup that still passes the light modifier renders sanely
+   now that every section shares one canvas. */
+.fsai-root:not(#_) .fsai-eyebrow-light {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-eyebrow-spark {
+  width: 12px;
+  height: 12px;
+  color: var(--fsai-accent);
+  flex-shrink: 0;
+}
+
+
+.fsai-root:not(#_) .fsai-section-head {
+  max-width: 780px;
+  margin-bottom: 64px;
+}
+
+
+.fsai-root:not(#_) .fsai-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 680;
+  letter-spacing: -0.038em;
+  line-height: 1.06;
+}
+
+
+/* Uppercase micro-caption pinned under card copy */
+.fsai-root:not(#_) .fsai-microcap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-microcap::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  margin-top: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+
+/* ---------- Buttons ---------- */
+
+.fsai-root:not(#_) .fsai-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 30px;
+  border-radius: var(--fsai-pill);
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--fsai-ease),
+    border-color 0.3s var(--fsai-ease),
+    color 0.3s var(--fsai-ease),
+    transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary {
+  background: var(--fsai-accent);
+  color: #fff;
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover {
+  background: var(--fsai-accent-deep);
+  transform: translateY(-2px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost {
+  background: transparent;
+  color: var(--fsai-text);
+  border-color: var(--fsai-line-strong);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost:hover {
+  border-color: var(--fsai-text);
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-hero {
+  position: relative;
+  padding: 120px 0 104px;
+  background:
+    radial-gradient(46rem 32rem at 88% -12%, rgba(241, 102, 16, 0.16), transparent 62%),
+    radial-gradient(38rem 26rem at -8% 110%, rgba(241, 102, 16, 0.06), transparent 60%),
+    var(--fsai-canvas);
+}
+
+
+.fsai-root:not(#_) .fsai-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 72px;
+  align-items: center;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-copy > * {
+  animation: fsai-rise 0.75s var(--fsai-ease-out) both;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-copy > *:nth-child(2) { animation-delay: 0.08s; }
+
+.fsai-root:not(#_) .fsai-hero-copy > *:nth-child(3) { animation-delay: 0.16s; }
+
+.fsai-root:not(#_) .fsai-hero-copy > *:nth-child(4) { animation-delay: 0.24s; }
+
+.fsai-root:not(#_) .fsai-hero-copy > *:nth-child(5) { animation-delay: 0.32s; }
+
+
+.fsai-root:not(#_) .fsai-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 18px;
+  margin-bottom: 30px;
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-pill);
+  background: var(--fsai-surface);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-badge-spark {
+  width: 13px;
+  height: 13px;
+  color: var(--fsai-accent);
+  animation: fsai-spin 14s linear infinite;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-headline {
+  margin: 0 0 26px;
+  /* Sized against the copy column, not the viewport — at 5.9vw this ran to
+     four lines and pushed the feed card below the fold. */
+  font-size: clamp(2.4rem, 4.3vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.042em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-sub {
+  margin: 0 0 38px;
+  max-width: 34rem;
+  font-size: 1.12rem;
+  line-height: 1.65;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 56px;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: start;
+  gap: 48px;
+  margin: 0;
+  padding-top: 34px;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-stat dt {
+  font-size: 1.7rem;
+  font-weight: 680;
+  letter-spacing: -0.03em;
+}
+
+
+.fsai-root:not(#_) .fsai-stat dd {
+  margin: 3px 0 0;
+  font-size: 0.78rem;
+  color: var(--fsai-dim);
+}
+
+
+/* ---------- Hero visual: live agent feed ----------
+   The one light card on the page — CrossVal floats light product surfaces on
+   dark to pull the eye. This is that focal moment. */
+
+.fsai-root:not(#_) .fsai-hero-visual {
+  position: relative;
+  animation: fsai-rise 0.85s 0.25s var(--fsai-ease-out) both;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-card {
+  position: relative;
+  z-index: 1;
+  background: var(--fsai-paper);
+  color: var(--fsai-paper-ink);
+  border-radius: var(--fsai-radius-lg);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 32px 72px -28px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 22px;
+  border-bottom: 1px solid var(--fsai-paper-line);
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-date {
+  font-weight: 500;
+  color: var(--fsai-paper-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.fsai-root:not(#_) .fsai-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--fsai-accent);
+  animation: fsai-pulse 1.8s ease-in-out infinite;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 13px 22px;
+  opacity: 0;
+  animation: fsai-rise 0.55s var(--fsai-ease-out) forwards;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-item + .fsai-feed-item {
+  border-top: 1px solid var(--fsai-paper-line);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--fsai-accent-soft);
+  color: var(--fsai-accent-deep);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-flag .fsai-feed-icon {
+  background: var(--fsai-paper-sunk);
+  border: 1px solid var(--fsai-paper-line);
+  color: var(--fsai-paper-ink);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-human .fsai-feed-icon {
+  background: var(--fsai-paper-ink);
+  color: var(--fsai-paper);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.88rem;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-meta {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--fsai-paper-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-typing {
+  align-items: center;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-typing .fsai-feed-text {
+  font-weight: 500;
+  color: var(--fsai-paper-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-typing-dots {
+  display: inline-flex;
+  gap: 4px;
+  padding: 0 6px;
+}
+
+
+.fsai-root:not(#_) .fsai-typing-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--fsai-accent);
+  animation: fsai-bounce 1.2s ease-in-out infinite;
+}
+
+
+.fsai-root:not(#_) .fsai-typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+
+.fsai-root:not(#_) .fsai-typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+
+.fsai-root:not(#_) .fsai-feed-footer {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 15px 22px;
+  border-top: 1px solid var(--fsai-paper-line);
+  background: var(--fsai-paper-sunk);
+  font-size: 0.78rem;
+  font-weight: 620;
+  color: var(--fsai-paper-ink);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-footer svg {
+  width: 15px;
+  height: 15px;
+  color: var(--fsai-accent-deep);
+  flex-shrink: 0;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-spark {
+  position: absolute;
+  color: var(--fsai-accent);
+  opacity: 0.8;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-spark-1 {
+  width: 34px;
+  height: 34px;
+  top: -22px;
+  right: -14px;
+  animation: fsai-spin 22s linear infinite;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-spark-2 {
+  width: 20px;
+  height: 20px;
+  bottom: -10px;
+  left: -24px;
+  opacity: 0.5;
+  animation: fsai-spin 18s linear infinite reverse;
+}
+
+/* ============================================================
+   LOGOS
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-logos {
+  padding: 52px 0 60px;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-logos-label {
+  margin: 0 0 30px;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-logos-track {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 22px 52px;
+}
+
+
+/* Client marks are dark artwork — knock them out to white for the dark canvas. */
+.fsai-root:not(#_) .fsai-logo-tile img {
+  height: 32px;
+  width: auto;
+  max-width: 132px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.5;
+  transition: opacity 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-logo-tile:hover img {
+  opacity: 0.95;
+}
+</style>
+<div class="fsai-root">
+
+  <!-- Icon sprite: defined once, referenced by every <use> on the page. -->
+  <svg class="fsai-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="fsai-i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="fsai-i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></symbol>
+    <symbol id="fsai-i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></symbol>
+    <symbol id="fsai-i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="fsai-i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="fsai-i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="fsai-i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="fsai-i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="fsai-i-percent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+    <symbol id="fsai-i-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="fsai-i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="fsai-i-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+    <symbol id="fsai-i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+    <symbol id="fsai-i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="fsai-i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 1v22M1 12h22M4.2 4.2l15.6 15.6M19.8 4.2L4.2 19.8"/></symbol>
+    <symbol id="fsai-i-whatsapp" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></symbol>
+  </svg>
+
+  <section class="fsai-hero">
+    <div class="fsai-container">
+      <div class="fsai-hero-grid">
+        <div class="fsai-hero-copy">
+          <div class="fsai-hero-badge">
+            <svg class="fsai-badge-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+            <span>First AI-native accounting firm &middot; UAE</span>
+          </div>
+
+          <h1 class="fsai-hero-headline">
+            Books that close themselves.
+            <br />
+            <span class="fsai-accent">Accountants</span> who stand behind them.
+          </h1>
+
+          <p class="fsai-hero-sub">
+            Finanshels pairs AI agents that categorize, reconcile and draft your filings with
+            qualified accountants who review every number. 10&times; faster closes,
+            audit-ready always &mdash; for 7,000+ UAE businesses.
+          </p>
+
+          <div class="fsai-hero-actions">
+            <a href="#fsai-consultation" class="fsai-btn fsai-btn-primary">
+              Get a Free Consultation
+              <svg aria-hidden="true" focusable="false"><use href="#fsai-i-arrow"/></svg>
+            </a>
+            <a
+          href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20to%20learn%20more%20about%20your%20AI-native%20accounting%20services.&amp;type=phone_number&amp;app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fsai-btn fsai-btn-ghost"
+          data-fsai-wa="ai_landing_hero"
+        >Talk on WhatsApp</a>
+          </div>
+
+          <dl class="fsai-hero-stats">
+            <div class="fsai-stat"><dt>7,000+</dt><dd>UAE businesses</dd></div>
+            <div class="fsai-stat"><dt>10&times;</dt><dd>Faster than manual</dd></div>
+            <div class="fsai-stat"><dt>4.9</dt><dd>Trustpilot rating</dd></div>
+            <div class="fsai-stat"><dt>150+</dt><dd>Accountants in the loop</dd></div>
+          </dl>
+        </div>
+
+        <!-- Live agent feed card — the page's one inverted surface -->
+        <div class="fsai-hero-visual">
+          <div class="fsai-feed-card">
+            <div class="fsai-feed-header">
+              <span class="fsai-feed-live">
+                <span class="fsai-live-dot"></span>
+                Finanshels AI &middot; working now
+              </span>
+              <span class="fsai-feed-date">Today, 6:04 AM</span>
+            </div>
+
+            <ul class="fsai-feed-list">
+              <li class="fsai-feed-item fsai-feed-check" style="animation-delay: 0.50s">
+                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
+                <span class="fsai-feed-text">
+                  214 transactions categorized
+                  <span class="fsai-feed-meta">Emirates NBD · Mashreq</span>
+                </span>
+              </li>
+              <li class="fsai-feed-item fsai-feed-check" style="animation-delay: 0.85s">
+                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
+                <span class="fsai-feed-text">
+                  Bank reconciliation complete
+                  <span class="fsai-feed-meta">0 discrepancies</span>
+                </span>
+              </li>
+              <li class="fsai-feed-item fsai-feed-flag" style="animation-delay: 1.20s">
+                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-flag"/></svg></span>
+                <span class="fsai-feed-text">
+                  3 invoices flagged for review
+                  <span class="fsai-feed-meta">Routed to your accountant</span>
+                </span>
+              </li>
+              <li class="fsai-feed-item fsai-feed-check" style="animation-delay: 1.55s">
+                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
+                <span class="fsai-feed-text">
+                  VAT return drafted
+                  <span class="fsai-feed-meta">Due 28 Aug · ready early</span>
+                </span>
+              </li>
+              <li class="fsai-feed-item fsai-feed-human" style="animation-delay: 1.90s">
+                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-eye"/></svg></span>
+                <span class="fsai-feed-text">
+                  Reviewed &amp; approved
+                  <span class="fsai-feed-meta">Senior accountant sign-off</span>
+                </span>
+              </li>
+              <li class="fsai-feed-item fsai-feed-typing" style="animation-delay: 2.4s">
+                <span class="fsai-typing-dots"><span></span><span></span><span></span></span>
+                <span class="fsai-feed-text">Preparing your July P&amp;L&hellip;</span>
+              </li>
+            </ul>
+
+            <div class="fsai-feed-footer">
+              <svg aria-hidden="true" focusable="false"><use href="#fsai-i-shield"/></svg>
+              Every action reviewed by a qualified accountant
+            </div>
+          </div>
+          <svg class="fsai-hero-spark fsai-hero-spark-1" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+          <svg class="fsai-hero-spark fsai-hero-spark-2" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fsai-logos" aria-label="Client logos">
+    <div class="fsai-container">
+      <p class="fsai-logos-label">Trusted by leading UAE businesses</p>
+      <div class="fsai-logos-track" data-reveal>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/Binary.png" alt="Binary logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/actualize.png" alt="Actualize logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/carbonsirf.png" alt="CarbonSirf logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/cotu.avif" alt="COTU Ventures logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/fuze.png" alt="Fuze logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/growdash.png" alt="Growdash logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/humlog.png" alt="Humlog logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/veehive.png" alt="Veehive logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/zywa.png" alt="Zywa logo" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

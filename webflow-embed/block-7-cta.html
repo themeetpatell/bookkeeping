@@ -1,0 +1,743 @@
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 7 of 7: FINAL CTA + FORM
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     Also carries the script (FAQ accordion, scroll reveals, WhatsApp tracking).
+     ========================================================================== -->
+
+<style>
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-cta {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+  background:
+    radial-gradient(46rem 28rem at 88% 0%, rgba(241, 102, 16, 0.16), transparent 60%),
+    var(--fsai-canvas);
+  scroll-margin-top: 80px;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+  gap: 80px;
+  align-items: center;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-spark {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 28px;
+  color: var(--fsai-accent);
+  animation: fsai-spin 20s linear infinite;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-copy h2 {
+  margin: 0 0 22px;
+  font-size: clamp(2.3rem, 4.6vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.042em;
+  line-height: 1.04;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-copy > p {
+  margin: 0 0 32px;
+  max-width: 30rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-cta-points {
+  list-style: none;
+  margin: 0 0 38px;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-points li {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 0.93rem;
+  font-weight: 600;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-points svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-cta-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.93rem;
+  font-weight: 620;
+  color: var(--fsai-accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--fsai-accent-line);
+  padding-bottom: 3px;
+  transition: color 0.3s var(--fsai-ease), border-color 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-cta-whatsapp:hover {
+  color: var(--fsai-text);
+  border-color: var(--fsai-text);
+}
+
+
+.fsai-root:not(#_) .fsai-cta-whatsapp svg {
+  width: 15px;
+  height: 15px;
+}
+
+
+/* ---------- CTA form card — the second light moment ---------- */
+
+.fsai-root:not(#_) .fsai-cta-form-card {
+  padding: 40px 38px;
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-paper);
+  color: var(--fsai-paper-ink);
+  box-shadow: 0 32px 72px -28px rgba(0, 0, 0, 0.75);
+}
+
+
+.fsai-root:not(#_) .fsai-cta-form-card h3 {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+  font-weight: 680;
+  letter-spacing: -0.03em;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-form-card > p {
+  margin: 0 0 28px;
+  font-size: 0.88rem;
+  color: var(--fsai-paper-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-zoho-form {
+  display: grid;
+  gap: 16px;
+}
+
+
+.fsai-root:not(#_) .fsai-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+
+.fsai-root:not(#_) .fsai-form-group {
+  display: grid;
+  gap: 7px;
+}
+
+
+.fsai-root:not(#_) .fsai-form-group label {
+  font-size: 0.68rem;
+  font-weight: 680;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fsai-paper-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--fsai-paper-line);
+  border-radius: 10px;
+  background: var(--fsai-paper-sunk);
+  font-family: inherit;
+  font-size: 0.94rem;
+  color: var(--fsai-paper-ink);
+  transition: border-color 0.3s var(--fsai-ease), box-shadow 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-form-group input::placeholder {
+  color: rgba(0, 0, 0, 0.38);
+}
+
+
+.fsai-root:not(#_) .fsai-form-group input:focus {
+  outline: none;
+  border-color: var(--fsai-accent);
+  box-shadow: 0 0 0 3px rgba(241, 102, 16, 0.18);
+}
+
+
+.fsai-root:not(#_) .fsai-form-submit {
+  width: 100%;
+  margin-top: 6px;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+
+.fsai-root:not(#_) .fsai-form-privacy {
+  margin: 18px 0 0;
+  font-size: 0.73rem;
+  text-align: center;
+  color: var(--fsai-paper-muted);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fsai-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fsai-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(241, 102, 16, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(241, 102, 16, 0);
+  }
+}
+
+
+@keyframes fsai-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+
+@keyframes fsai-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .fsai-root:not(#_) *,
+  .fsai-root:not(#_) *::before,
+  .fsai-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-feed-item {
+    opacity: 1;
+  }
+
+
+  .fsai-root:not(#_).is-ready [data-reveal],
+  .fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1024px) {
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 88px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 24px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero {
+    padding: 84px 0 72px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero-visual {
+    max-width: 560px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero-stats {
+    gap: 32px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-pillars,
+  .fsai-root:not(#_) .fsai-services-grid,
+  .fsai-root:not(#_) .fsai-testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-pillar:nth-child(odd),
+  .fsai-root:not(#_) .fsai-testimonial-card:nth-child(odd) {
+    border-left: none;
+  }
+
+
+  .fsai-root:not(#_) .fsai-pillar:not(:nth-last-child(-n + 1)),
+  .fsai-root:not(#_) .fsai-testimonial-card:not(:nth-last-child(-n + 1)) {
+    border-bottom: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-service-card:nth-child(3n) {
+    border-right: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-service-card:nth-child(2n) {
+    border-right: none;
+  }
+
+
+  .fsai-root:not(#_) .fsai-service-card:nth-last-child(-n + 3) {
+    border-bottom: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-service-card:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+
+
+  .fsai-root:not(#_) .fsai-steps {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-step:nth-child(odd) {
+    border-left: none;
+  }
+
+
+  .fsai-root:not(#_) .fsai-step:nth-child(n + 3) {
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-cta-grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-cta-form-card {
+    max-width: 560px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-lead-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-lead-whatsapp {
+    justify-self: start;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-kpis {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-kpi:nth-child(3) {
+    border-left: none;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-kpi:nth-child(n + 3) {
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-body {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-panel + .fsai-dash-panel {
+    border-left: none;
+    border-top: 1px solid var(--fsai-line);
+  }
+
+}
+
+
+@media (max-width: 680px) {
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 72px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 20px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero {
+    padding: 64px 0 56px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 26px 32px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero-actions .fsai-btn {
+    width: 100%;
+  }
+
+
+  .fsai-root:not(#_) .fsai-lead-strip {
+    padding: 52px 0;
+  }
+
+
+  .fsai-root:not(#_) .fsai-lead-whatsapp {
+    justify-self: stretch;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-topbar {
+    flex-wrap: wrap;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-kpis {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-kpi + .fsai-dash-kpi {
+    border-left: none;
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-row {
+    grid-template-columns: 1.3fr 1fr 0.8fr;
+    gap: 8px;
+  }
+
+
+  /* Bento collapses to a single column — reset every shared divider and
+     rebuild it as a simple horizontal rule between rows. */
+  .fsai-root:not(#_) .fsai-pillars,
+  .fsai-root:not(#_) .fsai-services-grid,
+  .fsai-root:not(#_) .fsai-testimonials-grid,
+  .fsai-root:not(#_) .fsai-split-grid,
+  .fsai-root:not(#_) .fsai-steps {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-pillar + .fsai-pillar,
+  .fsai-root:not(#_) .fsai-step + .fsai-step,
+  .fsai-root:not(#_) .fsai-testimonial-card + .fsai-testimonial-card,
+  .fsai-root:not(#_) .fsai-split-card + .fsai-split-card {
+    border-left: none;
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-pillar,
+  .fsai-root:not(#_) .fsai-testimonial-card,
+  .fsai-root:not(#_) .fsai-step {
+    border-bottom: none !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-service-card {
+    border-right: none !important;
+    border-bottom: 1px solid var(--fsai-line) !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-service-card:last-child {
+    border-bottom: none !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-section-head {
+    margin-bottom: 44px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-pillar,
+  .fsai-root:not(#_) .fsai-step,
+  .fsai-root:not(#_) .fsai-service-card,
+  .fsai-root:not(#_) .fsai-testimonial-card {
+    padding: 30px 24px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-split-card {
+    padding: 32px 24px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-compare-table {
+    display: none;
+  }
+
+
+  .fsai-root:not(#_) .fsai-compare-mobile {
+    display: grid;
+    gap: 16px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-form-row {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-cta-form-card {
+    padding: 32px 24px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero-spark-1,
+  .fsai-root:not(#_) .fsai-hero-spark-2 {
+    display: none;
+  }
+
+}
+</style>
+<div class="fsai-root">
+  <span id="fsai-pricing"></span>
+  <section class="fsai-cta" id="fsai-consultation">
+    <div class="fsai-container">
+      <div class="fsai-cta-grid">
+        <div class="fsai-cta-copy" data-reveal>
+          <svg class="fsai-cta-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+          <h2>
+            See your books run
+            <br />
+            the <span class="fsai-accent">AI-native</span> way.
+          </h2>
+          <p>
+            A 30-minute call with our team. We&rsquo;ll look at your current setup, show you
+            the live dashboard, and quote against what you pay today. No obligation.
+          </p>
+          <ul class="fsai-cta-points">
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg> Pay only if satisfied</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg> Dedicated accountant + AI agents</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg> Onboarded within 45 days</li>
+          </ul>
+          <a
+          href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20to%20learn%20more%20about%20your%20AI-native%20accounting%20services.&amp;type=phone_number&amp;app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fsai-cta-whatsapp"
+          data-fsai-wa="ai_landing_footer"
+        >
+            Prefer chat? Message us on WhatsApp <svg aria-hidden="true" focusable="false"><use href="#fsai-i-arrow"/></svg>
+          </a>
+        </div>
+
+        <div class="fsai-cta-form-card" data-reveal>
+          <h3>Get your free consultation</h3>
+          <p>Tell us where your books stand — we&rsquo;ll take it from there.</p>
+          <form
+            action="https://forms.zohopublic.com/finanshelsllc/form/GetYourFreeAuditConsultation/formperma/EikNR5Pwn-Ak9PHJxB-cTO47ehdcxhrZeW_itd-c-I0/htmlRecords/submit"
+            name="form"
+            id="fsai-consultation-form"
+            method="POST"
+            accept-charset="UTF-8"
+            enctype="multipart/form-data"
+            class="fsai-zoho-form"
+          >
+            <input type="hidden" name="zf_referrer_name" value="" />
+            <input type="hidden" name="zf_redirect_url" value="" />
+            <input type="hidden" name="zc_gad" value="" />
+            <input type="hidden" name="utm_source" value="" />
+            <input type="hidden" name="utm_medium" value="" />
+            <input type="hidden" name="utm_campaign" value="" />
+            <input type="hidden" name="utm_term" value="" />
+            <input type="hidden" name="utm_content" value="" />
+            <input type="hidden" name="gclid" value="" />
+            <input type="hidden" name="referrername" value="" />
+
+            <div class="fsai-form-row">
+              <div class="fsai-form-group">
+                <label for="fsai-first">First Name</label>
+                <input id="fsai-first" type="text" maxlength="255" name="Name_First" placeholder="John" />
+              </div>
+              <div class="fsai-form-group">
+                <label for="fsai-last">Last Name</label>
+                <input id="fsai-last" type="text" maxlength="255" name="Name_Last" placeholder="Smith" />
+              </div>
+            </div>
+
+            <div class="fsai-form-group">
+              <label for="fsai-email">Email *</label>
+              <input id="fsai-email" type="text" maxlength="255" name="Email" placeholder="john@company.com" required />
+            </div>
+
+            <div class="fsai-form-group">
+              <label for="international_PhoneNumber_countrycode">Phone Number *</label>
+              <input
+                type="text"
+                name="PhoneNumber_countrycode"
+                maxlength="20"
+                id="international_PhoneNumber_countrycode"
+                placeholder="+971 00 000 0000"
+                required
+              />
+            </div>
+
+            <div class="fsai-form-group">
+              <label for="fsai-company">Company Name *</label>
+              <input id="fsai-company" type="text" name="SingleLine1" maxlength="255" placeholder="Your Company LLC" required />
+            </div>
+
+            <button type="submit" class="fsai-btn fsai-btn-primary fsai-form-submit">
+              Book My Free Consultation
+              <svg aria-hidden="true" focusable="false"><use href="#fsai-i-arrow"/></svg>
+            </button>
+          </form>
+          <p class="fsai-form-privacy">Your data is secure and will never be shared.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  (function () {
+    'use strict';
+
+    function init() {
+      var roots = document.querySelectorAll('.fsai-root');
+      if (!roots.length) return;
+
+      /* ---------- scroll reveal ----------
+         The hidden state is gated behind `is-ready`, added here, so the page
+         renders fully visible if this script never runs. */
+      var targets = document.querySelectorAll('.fsai-root [data-reveal], .fsai-root [data-reveal-stagger]');
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      Array.prototype.forEach.call(roots, function (root) {
+        root.classList.add('is-ready');
+      });
+
+      if (reduced || !('IntersectionObserver' in window)) {
+        Array.prototype.forEach.call(targets, function (el) { el.classList.add('is-in'); });
+      } else {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-in');
+            observer.unobserve(entry.target);
+          });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+
+        Array.prototype.forEach.call(targets, function (el) { observer.observe(el); });
+      }
+
+      /* ---------- FAQ accordion (single-open) ---------- */
+      var items = document.querySelectorAll('.fsai-root .fsai-faq-item');
+      Array.prototype.forEach.call(items, function (item) {
+        var button = item.querySelector('.fsai-faq-question');
+        if (!button) return;
+
+        button.addEventListener('click', function () {
+          var willOpen = !item.classList.contains('is-open');
+
+          Array.prototype.forEach.call(items, function (other) {
+            other.classList.remove('is-open');
+            var otherButton = other.querySelector('.fsai-faq-question');
+            if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
+          });
+
+          if (willOpen) {
+            item.classList.add('is-open');
+            button.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      /* ---------- WhatsApp click tracking (GTM dataLayer) ---------- */
+      document.addEventListener('click', function (event) {
+        if (!event.target.closest) return;
+        var link = event.target.closest('.fsai-root [data-fsai-wa]');
+        if (!link) return;
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'whatsapp_click',
+          source: link.getAttribute('data-fsai-wa')
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+</div>

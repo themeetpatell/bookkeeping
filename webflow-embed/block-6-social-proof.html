@@ -1,0 +1,307 @@
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 6 of 7: TESTIMONIALS + FAQ
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     ========================================================================== -->
+
+<style>
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-testimonials {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 38px 34px;
+  transition: background-color 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card + .fsai-testimonial-card {
+  border-left: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card:hover {
+  background: var(--fsai-surface-raised);
+}
+
+
+.fsai-root:not(#_) .fsai-quote-spark {
+  width: 18px;
+  height: 18px;
+  margin-bottom: 22px;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card blockquote {
+  flex: 1;
+  margin: 0 0 26px;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card figcaption {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--fsai-line-strong);
+  color: var(--fsai-text);
+  font-size: 0.76rem;
+  font-weight: 680;
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card figcaption strong {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 680;
+  letter-spacing: -0.01em;
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card figcaption em {
+  display: block;
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--fsai-dim);
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-faq {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-container {
+  max-width: 880px;
+}
+
+
+.fsai-root:not(#_) .fsai-faq .fsai-section-head {
+  margin-bottom: 48px;
+}
+
+
+.fsai-root:not(#_) .fsai-faq-item {
+  border-bottom: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 26px 0;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 620;
+  letter-spacing: -0.02em;
+  color: var(--fsai-text);
+  transition: color 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-question:hover {
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-question svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--fsai-accent);
+  transition: transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-item.is-open .fsai-faq-question svg {
+  transform: rotate(180deg);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s var(--fsai-ease-out);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-answer p {
+  overflow: hidden;
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-item.is-open .fsai-faq-answer {
+  grid-template-rows: 1fr;
+}
+
+
+.fsai-root:not(#_) .fsai-faq-item.is-open .fsai-faq-answer p {
+  padding-bottom: 26px;
+}
+</style>
+<div class="fsai-root">
+  <section class="fsai-testimonials" id="fsai-testimonials">
+    <div class="fsai-container">
+      <div class="fsai-section-head" data-reveal>
+        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> In their words</p>
+        <h2>Founders who made the <span class="fsai-accent">switch</span></h2>
+      </div>
+
+      <div class="fsai-testimonials-grid" data-reveal-stagger>
+        <figure class="fsai-testimonial-card">
+          <svg class="fsai-quote-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+          <blockquote>They designed an accounting system tailor made to our needs &amp; completely automated our finance operations just like they promised. They’ve been super helpful for us to scale.</blockquote>
+          <figcaption>
+            <span class="fsai-testimonial-avatar">JK</span>
+            <span>
+              <strong>Jeremy Khatar</strong>
+              <em>CEO, Ronin Global LLC</em>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="fsai-testimonial-card">
+          <svg class="fsai-quote-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+          <blockquote>Always very responsive, supportive, having a business mindset, providing visuals and on top of all that, open for feedback so they can keep improving. Very happy that I took the decision to work with them.</blockquote>
+          <figcaption>
+            <span class="fsai-testimonial-avatar">SV</span>
+            <span>
+              <strong>Szilvia Vitos</strong>
+              <em>Founder, Livvity</em>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="fsai-testimonial-card">
+          <svg class="fsai-quote-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+          <blockquote>They thoroughly understood our business processes and streamlined our accounting processes perfectly where our both in-house and outsourced accountants failed multiple times.</blockquote>
+          <figcaption>
+            <span class="fsai-testimonial-avatar">MP</span>
+            <span>
+              <strong>Meet Patel</strong>
+              <em>Former COO, StudentHub &amp; BAWES</em>
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="fsai-faq" id="fsai-faq">
+    <div class="fsai-container fsai-faq-container">
+      <div class="fsai-section-head" data-reveal>
+        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Questions</p>
+        <h2>Fair questions about <span class="fsai-accent">AI accounting</span></h2>
+      </div>
+
+      <div class="fsai-faq-list" data-reveal>
+        <div class="fsai-faq-item">
+          <button type="button" class="fsai-faq-question" aria-expanded="false" aria-controls="fsai-faq-panel-0">
+            What does &quot;AI-native&quot; actually mean?
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-chevron"/></svg>
+          </button>
+          <div class="fsai-faq-answer" id="fsai-faq-panel-0">
+            <p>Most firms bolt AI tools onto a manual workflow. We built our workflow around AI from day one: agents handle categorization, reconciliation, document capture and deadline tracking continuously, and our accountants spend their time on review, exceptions and advice — not data entry. The result is books that are 10× faster to close and current every day.</p>
+          </div>
+        </div>
+        <div class="fsai-faq-item">
+          <button type="button" class="fsai-faq-question" aria-expanded="false" aria-controls="fsai-faq-panel-1">
+            Is AI doing my accounting on its own?
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-chevron"/></svg>
+          </button>
+          <div class="fsai-faq-answer" id="fsai-faq-panel-1">
+            <p>No. AI drafts, humans sign. Every categorization, reconciliation and filing is reviewed by a qualified accountant before it reaches you or the FTA. You get the speed of automation with the accountability of a licensed firm.</p>
+          </div>
+        </div>
+        <div class="fsai-faq-item">
+          <button type="button" class="fsai-faq-question" aria-expanded="false" aria-controls="fsai-faq-panel-2">
+            Which tools do you integrate with?
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-chevron"/></svg>
+          </button>
+          <div class="fsai-faq-answer" id="fsai-faq-panel-2">
+            <p>QuickBooks, Xero, Zoho Books, major UAE bank feeds and custom stacks. If you’re on spreadsheets today, we handle the migration as part of onboarding.</p>
+          </div>
+        </div>
+        <div class="fsai-faq-item">
+          <button type="button" class="fsai-faq-question" aria-expanded="false" aria-controls="fsai-faq-panel-3">
+            Is my financial data safe?
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-chevron"/></svg>
+          </button>
+          <div class="fsai-faq-answer" id="fsai-faq-panel-3">
+            <p>Yes. Data is encrypted in transit and at rest, access is role-restricted, and your data is never used to train third-party AI models. We follow industry-standard security protocols across our entire stack.</p>
+          </div>
+        </div>
+        <div class="fsai-faq-item">
+          <button type="button" class="fsai-faq-question" aria-expanded="false" aria-controls="fsai-faq-panel-4">
+            How fast can we start?
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-chevron"/></svg>
+          </button>
+          <div class="fsai-faq-answer" id="fsai-faq-panel-4">
+            <p>Onboarding is structured and typically completes within 45 days — from connecting your tools and migrating history to delivering your first complete financial pack. Most clients see their live dashboard in the first two weeks.</p>
+          </div>
+        </div>
+        <div class="fsai-faq-item">
+          <button type="button" class="fsai-faq-question" aria-expanded="false" aria-controls="fsai-faq-panel-5">
+            Does AI-native mean cheaper?
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-chevron"/></svg>
+          </button>
+          <div class="fsai-faq-answer" id="fsai-faq-panel-5">
+            <p>Usually, yes. Because software does the repetitive work, our pricing scales with your transaction volume — not with billable hours. Book a free consultation and we’ll quote against what you pay today.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

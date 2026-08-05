@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   FiCheckCircle,
   FiChevronDown,
@@ -40,6 +40,59 @@ const Spark = ({ className }) => (
     />
   </svg>
 );
+
+const REVEAL_SELECTOR = '[data-reveal], [data-reveal-stagger]';
+
+/**
+ * Fades sections up as they scroll into view.
+ *
+ * The hidden state lives behind an `is-ready` class that only gets added once
+ * the observer is wired, so if this effect never runs — no JS, old browser,
+ * hydration failure — the page still renders fully visible instead of blank.
+ *
+ * @returns {import('react').RefObject<HTMLDivElement>} ref for the page root
+ */
+const useScrollReveal = () => {
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) {
+      return undefined;
+    }
+
+    const targets = root.querySelectorAll(REVEAL_SELECTOR);
+    if (!targets.length) {
+      return undefined;
+    }
+
+    root.classList.add('is-ready');
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      targets.forEach((target) => target.classList.add('is-in'));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          entry.target.classList.add('is-in');
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.12 },
+    );
+
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, []);
+
+  return rootRef;
+};
 
 const ZOHO_FORM_ACTION =
   'https://forms.zohopublic.com/finanshelsllc/form/GetYourFreeAuditConsultation/formperma/EikNR5Pwn-Ak9PHJxB-cTO47ehdcxhrZeW_itd-c-I0/htmlRecords/submit';
@@ -343,6 +396,7 @@ const seoJsonLd = {
 
 const AIAccountingLanding = () => {
   const [openFaq, setOpenFaq] = useState(null);
+  const rootRef = useScrollReveal();
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -361,7 +415,7 @@ const AIAccountingLanding = () => {
   };
 
   return (
-    <div className="ai-landing">
+    <div className="ai-landing" ref={rootRef}>
       <Seo
         title="First AI-Native Accounting Firm in UAE | Finanshels"
         description="AI agents reconcile your books daily. Qualified accountants review and file. Bookkeeping, VAT, Corporate Tax and payroll for 7,000+ UAE businesses — 10× faster."
@@ -478,7 +532,7 @@ const AIAccountingLanding = () => {
       <section className="ai-logos" aria-label="Client logos">
         <div className="ai-container">
           <p className="ai-logos-label">Trusted by leading UAE businesses</p>
-          <div className="ai-logos-track">
+          <div className="ai-logos-track" data-reveal>
             {clientLogos.map((logo) => (
               <div key={logo.alt} className="ai-logo-tile">
                 <img src={logo.src} alt={`${logo.alt} logo`} loading="lazy" decoding="async" />
@@ -494,18 +548,18 @@ const AIAccountingLanding = () => {
           <p className="ai-eyebrow ai-eyebrow-light">
             <Spark className="ai-eyebrow-spark" /> Why AI-native
           </p>
-          <h2 className="ai-manifesto-headline">
+          <h2 className="ai-manifesto-headline" data-reveal>
             Most firms <em>added</em> AI.
             <br />
             We were <span className="ai-accent">built on it.</span>
           </h2>
-          <p className="ai-manifesto-sub">
+          <p className="ai-manifesto-sub" data-reveal>
             When the workflow is designed around AI from day one, everything changes: what used to
             take a team a month now happens overnight &mdash; and your accountants finally have
             time to think about your business, not your data entry.
           </p>
 
-          <div className="ai-pillars">
+          <div className="ai-pillars" data-reveal-stagger>
             {pillars.map((pillar) => (
               <article key={pillar.number} className="ai-pillar">
                 <span className="ai-pillar-number">{pillar.number}</span>
@@ -520,7 +574,7 @@ const AIAccountingLanding = () => {
       {/* ============ COMPARISON ============ */}
       <section className="ai-compare">
         <div className="ai-container">
-          <div className="ai-section-head">
+          <div className="ai-section-head" data-reveal>
             <p className="ai-eyebrow">
               <Spark className="ai-eyebrow-spark" /> The difference
             </p>
@@ -529,7 +583,7 @@ const AIAccountingLanding = () => {
             </h2>
           </div>
 
-          <div className="ai-compare-table" role="table" aria-label="Traditional firm versus AI-native comparison">
+          <div className="ai-compare-table" data-reveal role="table" aria-label="Traditional firm versus AI-native comparison">
             <div className="ai-compare-row ai-compare-head" role="row">
               <span role="columnheader" />
               <span role="columnheader">The old way</span>
@@ -554,7 +608,7 @@ const AIAccountingLanding = () => {
           </div>
 
           {/* Mobile-only: two stacked panels instead of the table */}
-          <div className="ai-compare-mobile">
+          <div className="ai-compare-mobile" data-reveal>
             <div className="ai-compare-panel ai-compare-panel-old">
               <h3>The old way</h3>
               <ul>
@@ -590,7 +644,7 @@ const AIAccountingLanding = () => {
       {/* ============ LEAD STRIP ============ */}
       <section className="ai-lead-strip" aria-label="Get a free quote">
         <div className="ai-container">
-          <div className="ai-lead-inner">
+          <div className="ai-lead-inner" data-reveal>
             <div className="ai-lead-copy">
               <h2>See what AI-native accounting costs for your business</h2>
               <p>Message us on WhatsApp — a real accountant replies in minutes.</p>
@@ -612,7 +666,7 @@ const AIAccountingLanding = () => {
       {/* ============ HOW IT WORKS ============ */}
       <section className="ai-workflow">
         <div className="ai-container">
-          <div className="ai-section-head">
+          <div className="ai-section-head" data-reveal>
             <p className="ai-eyebrow">
               <Spark className="ai-eyebrow-spark" /> How it works
             </p>
@@ -621,7 +675,7 @@ const AIAccountingLanding = () => {
             </h2>
           </div>
 
-          <ol className="ai-steps">
+          <ol className="ai-steps" data-reveal-stagger>
             {workflowSteps.map((item) => (
               <li key={item.step} className="ai-step">
                 <span className="ai-step-number">{item.step}</span>
@@ -636,7 +690,7 @@ const AIAccountingLanding = () => {
       {/* ============ FINDELIVERY DASHBOARD ============ */}
       <section className="ai-dashboard">
         <div className="ai-container">
-          <div className="ai-section-head ai-dash-head">
+          <div className="ai-section-head ai-dash-head" data-reveal>
             <p className="ai-eyebrow ai-eyebrow-light">
               <Spark className="ai-eyebrow-spark" /> The product
             </p>
@@ -650,7 +704,7 @@ const AIAccountingLanding = () => {
             </p>
           </div>
 
-          <div className="ai-dash-frame" aria-label="Preview of the Findelivery AI CFO dashboard">
+          <div className="ai-dash-frame" data-reveal aria-label="Preview of the Findelivery AI CFO dashboard">
             <div className="ai-dash-topbar">
               <span className="ai-dash-brand">
                 <Spark className="ai-dash-brand-spark" />
@@ -721,7 +775,7 @@ const AIAccountingLanding = () => {
       {/* ============ AI + HUMAN SPLIT ============ */}
       <section className="ai-split">
         <div className="ai-container">
-          <div className="ai-section-head">
+          <div className="ai-section-head" data-reveal>
             <p className="ai-eyebrow">
               <Spark className="ai-eyebrow-spark" /> Division of labor
             </p>
@@ -730,7 +784,7 @@ const AIAccountingLanding = () => {
             </h2>
           </div>
 
-          <div className="ai-split-grid">
+          <div className="ai-split-grid" data-reveal-stagger>
             <div className="ai-split-card ai-split-machine">
               <div className="ai-split-card-head">
                 <FiZap aria-hidden="true" />
@@ -767,7 +821,7 @@ const AIAccountingLanding = () => {
       {/* ============ SERVICES ============ */}
       <section className="ai-services" id="services">
         <div className="ai-container">
-          <div className="ai-section-head">
+          <div className="ai-section-head" data-reveal>
             <p className="ai-eyebrow">
               <Spark className="ai-eyebrow-spark" /> Everything covered
             </p>
@@ -776,7 +830,7 @@ const AIAccountingLanding = () => {
             </h2>
           </div>
 
-          <div className="ai-services-grid">
+          <div className="ai-services-grid" data-reveal-stagger>
             {services.map((service) => {
               const Icon = service.icon;
               return (
@@ -796,7 +850,7 @@ const AIAccountingLanding = () => {
       {/* ============ TESTIMONIALS ============ */}
       <section className="ai-testimonials" id="testimonials">
         <div className="ai-container">
-          <div className="ai-section-head">
+          <div className="ai-section-head" data-reveal>
             <p className="ai-eyebrow">
               <Spark className="ai-eyebrow-spark" /> In their words
             </p>
@@ -805,7 +859,7 @@ const AIAccountingLanding = () => {
             </h2>
           </div>
 
-          <div className="ai-testimonials-grid">
+          <div className="ai-testimonials-grid" data-reveal-stagger>
             {testimonials.map((testimonial) => (
               <figure key={testimonial.name} className="ai-testimonial-card">
                 <Spark className="ai-quote-spark" />
@@ -826,7 +880,7 @@ const AIAccountingLanding = () => {
       {/* ============ FAQ ============ */}
       <section className="ai-faq" id="faq">
         <div className="ai-container ai-faq-container">
-          <div className="ai-section-head">
+          <div className="ai-section-head" data-reveal>
             <p className="ai-eyebrow">
               <Spark className="ai-eyebrow-spark" /> Questions
             </p>
@@ -835,7 +889,7 @@ const AIAccountingLanding = () => {
             </h2>
           </div>
 
-          <div className="ai-faq-list">
+          <div className="ai-faq-list" data-reveal>
             {faqs.map((faq, index) => (
               <div key={faq.question} className={`ai-faq-item ${openFaq === index ? 'is-open' : ''}`}>
                 <button
@@ -862,7 +916,7 @@ const AIAccountingLanding = () => {
       <section className="ai-cta" id="consultation">
         <div className="ai-container">
           <div className="ai-cta-grid">
-            <div className="ai-cta-copy">
+            <div className="ai-cta-copy" data-reveal>
               <Spark className="ai-cta-spark" />
               <h2>
                 See your books run
@@ -895,7 +949,7 @@ const AIAccountingLanding = () => {
               </a>
             </div>
 
-            <div className="ai-cta-form-card">
+            <div className="ai-cta-form-card" data-reveal>
               <h3>Get your free consultation</h3>
               <p>Tell us where your books stand — we&rsquo;ll take it from there.</p>
               <ZohoConsultationForm formId="ai-consultation-form" />

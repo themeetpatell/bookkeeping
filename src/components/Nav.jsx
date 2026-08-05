@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { usePostHog } from '@posthog/react';
 import finanshelsLogo from '../assets/finanshelslogo.svg';
+import { BOOKING_URL } from '../utils/booking';
 
 const Nav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,7 +37,7 @@ const Nav = () => {
         </nav>
         
         <a
-          href="https://contact-finanshels.zohobookings.com/accounting"
+          href={BOOKING_URL}
           className="btn-nav-primary"
           target="_blank"
           rel="noreferrer"

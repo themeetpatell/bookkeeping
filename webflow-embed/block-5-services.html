@@ -1,0 +1,266 @@
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 5 of 7: AI/HUMAN SPLIT + SERVICES
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     ========================================================================== -->
+
+<style>
+/* ============================================================
+   AI + HUMAN SPLIT
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-split {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-split-card {
+  padding: 44px 40px;
+}
+
+
+.fsai-root:not(#_) .fsai-split-card + .fsai-split-card {
+  border-left: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-split-machine {
+  background: var(--fsai-surface-raised);
+}
+
+
+.fsai-root:not(#_) .fsai-split-card-head {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 30px;
+}
+
+
+.fsai-root:not(#_) .fsai-split-card-head svg {
+  width: 20px;
+  height: 20px;
+  color: var(--fsai-accent);
+  flex-shrink: 0;
+}
+
+
+.fsai-root:not(#_) .fsai-split-card-head h3 {
+  margin: 0;
+  font-size: 1.22rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+
+.fsai-root:not(#_) .fsai-split-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 15px;
+}
+
+
+.fsai-root:not(#_) .fsai-split-card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.93rem;
+  line-height: 1.5;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-split-card li svg {
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  color: var(--fsai-accent);
+}
+
+/* ============================================================
+   SERVICES — the signature bento
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-services {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-services,
+.fsai-root:not(#_) .fsai-testimonials,
+.fsai-root:not(#_) .fsai-faq {
+  scroll-margin-top: 90px;
+}
+
+
+.fsai-root:not(#_) .fsai-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-service-card {
+  display: flex;
+  flex-direction: column;
+  padding: 38px 34px;
+  border-right: 1px solid var(--fsai-line);
+  border-bottom: 1px solid var(--fsai-line);
+  transition: background-color 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-service-card:nth-child(3n) {
+  border-right: none;
+}
+
+
+.fsai-root:not(#_) .fsai-service-card:nth-last-child(-n + 3) {
+  border-bottom: none;
+}
+
+
+.fsai-root:not(#_) .fsai-service-card:hover {
+  background: var(--fsai-surface-raised);
+}
+
+
+/* Outline icon, no filled chip — CrossVal keeps icons quiet. */
+.fsai-root:not(#_) .fsai-service-icon {
+  display: block;
+  margin-bottom: 24px;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-service-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+
+.fsai-root:not(#_) .fsai-service-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.12rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+
+.fsai-root:not(#_) .fsai-service-card p {
+  margin: 0;
+  font-size: 0.91rem;
+  line-height: 1.6;
+  color: var(--fsai-muted);
+}
+</style>
+<div class="fsai-root">
+  <section class="fsai-split">
+    <div class="fsai-container">
+      <div class="fsai-section-head" data-reveal>
+        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Division of labor</p>
+        <h2>AI drafts. <span class="fsai-accent">Humans sign.</span></h2>
+      </div>
+
+      <div class="fsai-split-grid" data-reveal-stagger>
+        <div class="fsai-split-card fsai-split-machine">
+          <div class="fsai-split-card-head">
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-zap"/></svg>
+            <h3>What the AI does</h3>
+          </div>
+          <ul>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Categorizes every transaction, daily</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Reconciles bank feeds continuously</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Extracts data from invoices &amp; receipts</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Tracks VAT and Corporate Tax deadlines</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Drafts returns and monthly reports</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Flags anomalies and duplicates instantly</li>
+          </ul>
+        </div>
+
+        <div class="fsai-split-card fsai-split-human">
+          <div class="fsai-split-card-head">
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-eye"/></svg>
+            <h3>Where humans stay in the loop</h3>
+          </div>
+          <ul>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Reviews and approves every AI output</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Resolves flagged exceptions with context</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Signs off on VAT &amp; Corporate Tax filings</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Advises on structure, cash and runway</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Answers you on WhatsApp — a person, fast</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Owns the numbers at audit time</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fsai-services" id="fsai-services">
+    <div class="fsai-container">
+      <div class="fsai-section-head" data-reveal>
+        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Everything covered</p>
+        <h2>One firm for your entire <span class="fsai-accent">finance stack</span></h2>
+      </div>
+
+      <div class="fsai-services-grid" data-reveal-stagger>
+        <article class="fsai-service-card">
+          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-book"/></svg></span>
+          <h3>Bookkeeping</h3>
+          <p>Daily, AI-reconciled books reviewed by your dedicated accountant. Always audit-ready.</p>
+        </article>
+        <article class="fsai-service-card">
+          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-percent"/></svg></span>
+          <h3>VAT Compliance</h3>
+          <p>Registration, quarterly returns and FTA correspondence — drafted by AI, filed by humans.</p>
+        </article>
+        <article class="fsai-service-card">
+          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-briefcase"/></svg></span>
+          <h3>Corporate Tax</h3>
+          <p>9% Corporate Tax registration, planning and filing with deadlines tracked automatically.</p>
+        </article>
+        <article class="fsai-service-card">
+          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-users"/></svg></span>
+          <h3>Payroll &amp; WPS</h3>
+          <p>Salaries processed, WPS files generated and gratuity accruals kept current every month.</p>
+        </article>
+        <article class="fsai-service-card">
+          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-trending"/></svg></span>
+          <h3>CFO Insights</h3>
+          <p>Cash-flow forecasts, budgets and board-ready reporting from live data — not stale exports.</p>
+        </article>
+        <article class="fsai-service-card">
+          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-file"/></svg></span>
+          <h3>Audit Support</h3>
+          <p>Clean trails and organized documents mean audits close faster and cost less.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,3242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Finanshels AI Accounting — Webflow embed preview</title>
+
+<!-- Simulates hostile Webflow-style globals to prove the cascade fence holds. -->
+<style>
+  body { font-family: Georgia, serif; font-size: 14px; line-height: 20px; color: #333; margin: 0; background: #fff; }
+  h1, h2, h3 { font-family: "Comic Sans MS", cursive; color: hotpink; margin: 40px; }
+  p, li, span, dt, dd { color: teal; letter-spacing: 3px; }
+  a { color: red; text-decoration: underline; }
+  img, svg { max-width: 100%; border: 4px dotted lime; vertical-align: middle; }
+  ul, ol { padding-left: 60px; list-style: square; }
+  button, input { font-family: monospace; background: yellow; border: 3px solid blue; }
+  section, article, figure { outline: 1px solid rgba(255,0,0,.15); }
+</style>
+</head>
+<body>
+<div style="padding:24px;font:14px/1.5 system-ui">
+  ↑ Hostile CSS above is OUTSIDE the embeds. Nothing below should inherit
+  Comic Sans, hotpink, teal, lime borders or the yellow inputs.
+</div>
+
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 1 of 7: HERO + CLIENT LOGOS
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     Also defines the icon sprite every later block references — this one
+     must be on the page.
+     ========================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+<style>
+/* --------------------------------------------------------------------------
+   CASCADE FENCE — see webflow-embed/README.md
+   `all: revert` discards every author-origin declaration the host page
+   contributed, falling back to the browser's own defaults. At (1,1,0) it
+   outranks Webflow's tag and class styles; the component rules that follow
+   sit higher still, so they win against the reset.
+   -------------------------------------------------------------------------- */
+
+/* SVG subtrees are deliberately excluded. Presentation attributes (fill,
+   stroke, stroke-width, d) cascade at author origin, so reverting them erases
+   the icon geometry outright — verified: `d` computes to `none`. */
+.fsai-root:not(#_),
+.fsai-root:not(#_) :where(*:not(svg, svg *)),
+.fsai-root:not(#_) :where(*:not(svg, svg *))::before,
+.fsai-root:not(#_) :where(*:not(svg, svg *))::after {
+  all: revert;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Baseline the source stylesheet was authored against (src/App.css applies a
+   global `* { margin: 0; padding: 0 }`, src/index.css the link/button rules). */
+.fsai-root:not(#_) :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fsai-root:not(#_) :where(button) {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fsai-root:not(#_) :where(ul, ol) {
+  list-style: none;
+}
+
+/* SVGs sit outside the `all: revert` sweep, so a host rule like Webflow's
+   `img, svg { max-width: 100%; vertical-align: middle }` would still reach
+   them. Neutralise box-model and decoration properties only — every paint and
+   geometry property is left alone. `baseline` is the UA default and matches
+   the React page. */
+.fsai-root:not(#_) :where(svg, svg *) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  vertical-align: baseline;
+  float: none;
+}
+
+.fsai-root:not(#_) :where(img) {
+  max-width: none;
+}
+
+/* Icon sprite host — never rendered. */
+.fsai-root:not(#_) :where(.fsai-sprite) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Optional full-bleed escape hatch — add `fsai-fullbleed` to a wrapper that
+   sits inside a padded Webflow container. Needs body { overflow-x: hidden }
+   when a vertical scrollbar is present. */
+.fsai-root:not(#_).fsai-fullbleed {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+}
+
+/* ============================================================
+   AI-Native Accounting Landing
+   Single dark canvas, one accent, hairline bento grids.
+   Palette: warm near-black, Finanshels orange
+   Type: Inter only — heavy weights, tight tracking
+   ============================================================ */
+
+.fsai-root:not(#_) {
+  /* Three colours only: black, white, orange. The whole page sits on one
+     black canvas — depth comes from hairline borders and neutral surface
+     lifts, never from a hue shift. */
+  --fsai-canvas: #000000;
+  --fsai-surface: #0b0b0b;
+  --fsai-surface-raised: #141414;
+  --fsai-line: rgba(255, 255, 255, 0.12);
+  --fsai-line-strong: rgba(255, 255, 255, 0.22);
+
+  /* The two inverted moments — hero feed card and the CTA form. */
+  --fsai-paper: #ffffff;
+  --fsai-paper-sunk: #f4f4f4;
+  --fsai-paper-line: #e4e4e4;
+  --fsai-paper-ink: #000000;
+  --fsai-paper-muted: #6b6b6b;
+
+  --fsai-accent: #f16610;
+  --fsai-accent-deep: #d45a0e;
+  --fsai-accent-soft: rgba(241, 102, 16, 0.14);
+  --fsai-accent-line: rgba(241, 102, 16, 0.35);
+
+  --fsai-text: #ffffff;
+  --fsai-muted: #a3a3a3;
+  --fsai-dim: #737373;
+
+  /* Financial direction reads through emphasis, not hue — orange marks the
+     figure worth looking at, neutral grey carries everything else. */
+  --fsai-up: var(--fsai-accent);
+  --fsai-down: var(--fsai-dim);
+
+  --fsai-radius: 12px;
+  --fsai-radius-lg: 16px;
+  --fsai-pill: 999px;
+  --fsai-pad: 120px;
+
+  /* CrossVal's motion tokens: ease-out for entrances, ease-in-out for state. */
+  --fsai-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --fsai-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: dark;
+  background: var(--fsai-canvas);
+  color: var(--fsai-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+
+.fsai-root:not(#_) *,
+.fsai-root:not(#_) *::before,
+.fsai-root:not(#_) *::after {
+  box-sizing: border-box;
+}
+
+
+.fsai-root:not(#_) .fsai-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+
+.fsai-root:not(#_) .fsai-accent {
+  color: var(--fsai-accent);
+}
+
+
+/* ---------- Scroll reveal ----------
+   The hidden state is gated behind `.is-ready`, which JS adds on mount, so
+   the page still renders fully if the observer never runs. */
+
+/* Whole element fades up as one. */
+.fsai-root:not(#_).is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--fsai-ease-out),
+    transform 0.65s var(--fsai-ease-out);
+}
+
+
+/* Children fade up one after another — used on the bento grids, where the
+   cards reading in sequence is the point. The container itself stays put. */
+.fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > * {
+  animation: fsai-rise 0.6s var(--fsai-ease-out) both;
+  animation-delay: var(--fsai-stagger, 0s);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --fsai-stagger: 0.07s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --fsai-stagger: 0.14s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --fsai-stagger: 0.21s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(5) { --fsai-stagger: 0.28s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(6) { --fsai-stagger: 0.35s; }
+
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.fsai-root:not(#_) .fsai-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+/* Kept so existing markup that still passes the light modifier renders sanely
+   now that every section shares one canvas. */
+.fsai-root:not(#_) .fsai-eyebrow-light {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-eyebrow-spark {
+  width: 12px;
+  height: 12px;
+  color: var(--fsai-accent);
+  flex-shrink: 0;
+}
+
+
+.fsai-root:not(#_) .fsai-section-head {
+  max-width: 780px;
+  margin-bottom: 64px;
+}
+
+
+.fsai-root:not(#_) .fsai-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 680;
+  letter-spacing: -0.038em;
+  line-height: 1.06;
+}
+
+
+/* Uppercase micro-caption pinned under card copy */
+.fsai-root:not(#_) .fsai-microcap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-microcap::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  margin-top: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+
+/* ---------- Buttons ---------- */
+
+.fsai-root:not(#_) .fsai-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 30px;
+  border-radius: var(--fsai-pill);
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--fsai-ease),
+    border-color 0.3s var(--fsai-ease),
+    color 0.3s var(--fsai-ease),
+    transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary {
+  background: var(--fsai-accent);
+  color: #fff;
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover {
+  background: var(--fsai-accent-deep);
+  transform: translateY(-2px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost {
+  background: transparent;
+  color: var(--fsai-text);
+  border-color: var(--fsai-line-strong);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost:hover {
+  border-color: var(--fsai-text);
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-hero {
+  position: relative;
+  padding: 120px 0 104px;
+  background:
+    radial-gradient(46rem 32rem at 88% -12%, rgba(241, 102, 16, 0.16), transparent 62%),
+    radial-gradient(38rem 26rem at -8% 110%, rgba(241, 102, 16, 0.06), transparent 60%),
+    var(--fsai-canvas);
+}
+
+
+.fsai-root:not(#_) .fsai-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 72px;
+  align-items: center;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-copy > * {
+  animation: fsai-rise 0.75s var(--fsai-ease-out) both;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-copy > *:nth-child(2) { animation-delay: 0.08s; }
+
+.fsai-root:not(#_) .fsai-hero-copy > *:nth-child(3) { animation-delay: 0.16s; }
+
+.fsai-root:not(#_) .fsai-hero-copy > *:nth-child(4) { animation-delay: 0.24s; }
+
+.fsai-root:not(#_) .fsai-hero-copy > *:nth-child(5) { animation-delay: 0.32s; }
+
+
+.fsai-root:not(#_) .fsai-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 18px;
+  margin-bottom: 30px;
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-pill);
+  background: var(--fsai-surface);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-badge-spark {
+  width: 13px;
+  height: 13px;
+  color: var(--fsai-accent);
+  animation: fsai-spin 14s linear infinite;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-headline {
+  margin: 0 0 26px;
+  /* Sized against the copy column, not the viewport — at 5.9vw this ran to
+     four lines and pushed the feed card below the fold. */
+  font-size: clamp(2.4rem, 4.3vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.042em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-sub {
+  margin: 0 0 38px;
+  max-width: 34rem;
+  font-size: 1.12rem;
+  line-height: 1.65;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 56px;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: start;
+  gap: 48px;
+  margin: 0;
+  padding-top: 34px;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-stat dt {
+  font-size: 1.7rem;
+  font-weight: 680;
+  letter-spacing: -0.03em;
+}
+
+
+.fsai-root:not(#_) .fsai-stat dd {
+  margin: 3px 0 0;
+  font-size: 0.78rem;
+  color: var(--fsai-dim);
+}
+
+
+/* ---------- Hero visual: live agent feed ----------
+   The one light card on the page — CrossVal floats light product surfaces on
+   dark to pull the eye. This is that focal moment. */
+
+.fsai-root:not(#_) .fsai-hero-visual {
+  position: relative;
+  animation: fsai-rise 0.85s 0.25s var(--fsai-ease-out) both;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-card {
+  position: relative;
+  z-index: 1;
+  background: var(--fsai-paper);
+  color: var(--fsai-paper-ink);
+  border-radius: var(--fsai-radius-lg);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 32px 72px -28px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 22px;
+  border-bottom: 1px solid var(--fsai-paper-line);
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-date {
+  font-weight: 500;
+  color: var(--fsai-paper-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.fsai-root:not(#_) .fsai-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--fsai-accent);
+  animation: fsai-pulse 1.8s ease-in-out infinite;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 13px 22px;
+  opacity: 0;
+  animation: fsai-rise 0.55s var(--fsai-ease-out) forwards;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-item + .fsai-feed-item {
+  border-top: 1px solid var(--fsai-paper-line);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--fsai-accent-soft);
+  color: var(--fsai-accent-deep);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-flag .fsai-feed-icon {
+  background: var(--fsai-paper-sunk);
+  border: 1px solid var(--fsai-paper-line);
+  color: var(--fsai-paper-ink);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-human .fsai-feed-icon {
+  background: var(--fsai-paper-ink);
+  color: var(--fsai-paper);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.88rem;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-meta {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--fsai-paper-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-typing {
+  align-items: center;
+}
+
+
+.fsai-root:not(#_) .fsai-feed-typing .fsai-feed-text {
+  font-weight: 500;
+  color: var(--fsai-paper-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-typing-dots {
+  display: inline-flex;
+  gap: 4px;
+  padding: 0 6px;
+}
+
+
+.fsai-root:not(#_) .fsai-typing-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--fsai-accent);
+  animation: fsai-bounce 1.2s ease-in-out infinite;
+}
+
+
+.fsai-root:not(#_) .fsai-typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+
+.fsai-root:not(#_) .fsai-typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+
+.fsai-root:not(#_) .fsai-feed-footer {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 15px 22px;
+  border-top: 1px solid var(--fsai-paper-line);
+  background: var(--fsai-paper-sunk);
+  font-size: 0.78rem;
+  font-weight: 620;
+  color: var(--fsai-paper-ink);
+}
+
+
+.fsai-root:not(#_) .fsai-feed-footer svg {
+  width: 15px;
+  height: 15px;
+  color: var(--fsai-accent-deep);
+  flex-shrink: 0;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-spark {
+  position: absolute;
+  color: var(--fsai-accent);
+  opacity: 0.8;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-spark-1 {
+  width: 34px;
+  height: 34px;
+  top: -22px;
+  right: -14px;
+  animation: fsai-spin 22s linear infinite;
+}
+
+
+.fsai-root:not(#_) .fsai-hero-spark-2 {
+  width: 20px;
+  height: 20px;
+  bottom: -10px;
+  left: -24px;
+  opacity: 0.5;
+  animation: fsai-spin 18s linear infinite reverse;
+}
+
+/* ============================================================
+   LOGOS
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-logos {
+  padding: 52px 0 60px;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-logos-label {
+  margin: 0 0 30px;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-logos-track {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 22px 52px;
+}
+
+
+/* Client marks are dark artwork — knock them out to white for the dark canvas. */
+.fsai-root:not(#_) .fsai-logo-tile img {
+  height: 32px;
+  width: auto;
+  max-width: 132px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.5;
+  transition: opacity 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-logo-tile:hover img {
+  opacity: 0.95;
+}
+</style>
+<div class="fsai-root">
+
+  <!-- Icon sprite: defined once, referenced by every <use> on the page. -->
+  <svg class="fsai-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="fsai-i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="fsai-i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></symbol>
+    <symbol id="fsai-i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></symbol>
+    <symbol id="fsai-i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="fsai-i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="fsai-i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="fsai-i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="fsai-i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="fsai-i-percent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+    <symbol id="fsai-i-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="fsai-i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="fsai-i-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+    <symbol id="fsai-i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+    <symbol id="fsai-i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="fsai-i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 1v22M1 12h22M4.2 4.2l15.6 15.6M19.8 4.2L4.2 19.8"/></symbol>
+    <symbol id="fsai-i-whatsapp" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></symbol>
+  </svg>
+
+  <section class="fsai-hero">
+    <div class="fsai-container">
+      <div class="fsai-hero-grid">
+        <div class="fsai-hero-copy">
+          <div class="fsai-hero-badge">
+            <svg class="fsai-badge-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+            <span>First AI-native accounting firm &middot; UAE</span>
+          </div>
+
+          <h1 class="fsai-hero-headline">
+            Books that close themselves.
+            <br />
+            <span class="fsai-accent">Accountants</span> who stand behind them.
+          </h1>
+
+          <p class="fsai-hero-sub">
+            Finanshels pairs AI agents that categorize, reconcile and draft your filings with
+            qualified accountants who review every number. 10&times; faster closes,
+            audit-ready always &mdash; for 7,000+ UAE businesses.
+          </p>
+
+          <div class="fsai-hero-actions">
+            <a href="#fsai-consultation" class="fsai-btn fsai-btn-primary">
+              Get a Free Consultation
+              <svg aria-hidden="true" focusable="false"><use href="#fsai-i-arrow"/></svg>
+            </a>
+            <a
+          href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20to%20learn%20more%20about%20your%20AI-native%20accounting%20services.&amp;type=phone_number&amp;app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fsai-btn fsai-btn-ghost"
+          data-fsai-wa="ai_landing_hero"
+        >Talk on WhatsApp</a>
+          </div>
+
+          <dl class="fsai-hero-stats">
+            <div class="fsai-stat"><dt>7,000+</dt><dd>UAE businesses</dd></div>
+            <div class="fsai-stat"><dt>10&times;</dt><dd>Faster than manual</dd></div>
+            <div class="fsai-stat"><dt>4.9</dt><dd>Trustpilot rating</dd></div>
+            <div class="fsai-stat"><dt>150+</dt><dd>Accountants in the loop</dd></div>
+          </dl>
+        </div>
+
+        <!-- Live agent feed card — the page's one inverted surface -->
+        <div class="fsai-hero-visual">
+          <div class="fsai-feed-card">
+            <div class="fsai-feed-header">
+              <span class="fsai-feed-live">
+                <span class="fsai-live-dot"></span>
+                Finanshels AI &middot; working now
+              </span>
+              <span class="fsai-feed-date">Today, 6:04 AM</span>
+            </div>
+
+            <ul class="fsai-feed-list">
+              <li class="fsai-feed-item fsai-feed-check" style="animation-delay: 0.50s">
+                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
+                <span class="fsai-feed-text">
+                  214 transactions categorized
+                  <span class="fsai-feed-meta">Emirates NBD · Mashreq</span>
+                </span>
+              </li>
+              <li class="fsai-feed-item fsai-feed-check" style="animation-delay: 0.85s">
+                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
+                <span class="fsai-feed-text">
+                  Bank reconciliation complete
+                  <span class="fsai-feed-meta">0 discrepancies</span>
+                </span>
+              </li>
+              <li class="fsai-feed-item fsai-feed-flag" style="animation-delay: 1.20s">
+                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-flag"/></svg></span>
+                <span class="fsai-feed-text">
+                  3 invoices flagged for review
+                  <span class="fsai-feed-meta">Routed to your accountant</span>
+                </span>
+              </li>
+              <li class="fsai-feed-item fsai-feed-check" style="animation-delay: 1.55s">
+                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
+                <span class="fsai-feed-text">
+                  VAT return drafted
+                  <span class="fsai-feed-meta">Due 28 Aug · ready early</span>
+                </span>
+              </li>
+              <li class="fsai-feed-item fsai-feed-human" style="animation-delay: 1.90s">
+                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-eye"/></svg></span>
+                <span class="fsai-feed-text">
+                  Reviewed &amp; approved
+                  <span class="fsai-feed-meta">Senior accountant sign-off</span>
+                </span>
+              </li>
+              <li class="fsai-feed-item fsai-feed-typing" style="animation-delay: 2.4s">
+                <span class="fsai-typing-dots"><span></span><span></span><span></span></span>
+                <span class="fsai-feed-text">Preparing your July P&amp;L&hellip;</span>
+              </li>
+            </ul>
+
+            <div class="fsai-feed-footer">
+              <svg aria-hidden="true" focusable="false"><use href="#fsai-i-shield"/></svg>
+              Every action reviewed by a qualified accountant
+            </div>
+          </div>
+          <svg class="fsai-hero-spark fsai-hero-spark-1" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+          <svg class="fsai-hero-spark fsai-hero-spark-2" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fsai-logos" aria-label="Client logos">
+    <div class="fsai-container">
+      <p class="fsai-logos-label">Trusted by leading UAE businesses</p>
+      <div class="fsai-logos-track" data-reveal>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/Binary.png" alt="Binary logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/actualize.png" alt="Actualize logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/carbonsirf.png" alt="CarbonSirf logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/cotu.avif" alt="COTU Ventures logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/fuze.png" alt="Fuze logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/growdash.png" alt="Growdash logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/humlog.png" alt="Humlog logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/veehive.png" alt="Veehive logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fsai-logo-tile">
+          <img src="https://accounting.finanshels.com/clients/zywa.png" alt="Zywa logo" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 2 of 7: WHY AI-NATIVE + COMPARISON
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     ========================================================================== -->
+
+<style>
+/* ============================================================
+   MANIFESTO
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-manifesto {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-manifesto-headline {
+  margin: 0 0 26px;
+  max-width: 16em;
+  font-size: clamp(2.4rem, 5.2vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.042em;
+  line-height: 1.04;
+}
+
+
+.fsai-root:not(#_) .fsai-manifesto-headline em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-manifesto-sub {
+  margin: 0 0 72px;
+  max-width: 42rem;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--fsai-muted);
+}
+
+
+/* Bento: cards share one framed grid, divided by hairlines. */
+.fsai-root:not(#_) .fsai-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-pillar {
+  padding: 38px 34px;
+  transition: background-color 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-pillar + .fsai-pillar {
+  border-left: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-pillar:hover {
+  background: var(--fsai-surface-raised);
+}
+
+
+.fsai-root:not(#_) .fsai-pillar-number {
+  display: block;
+  margin-bottom: 22px;
+  font-size: 0.78rem;
+  font-weight: 680;
+  letter-spacing: 0.1em;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-pillar h3 {
+  margin: 0 0 12px;
+  font-size: 1.18rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+
+.fsai-root:not(#_) .fsai-pillar p {
+  margin: 0;
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--fsai-muted);
+}
+
+/* ============================================================
+   COMPARISON
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-compare {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-table {
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-row {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 1.15fr;
+  align-items: stretch;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-row + .fsai-compare-row {
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-row > span {
+  display: flex;
+  align-items: center;
+  padding: 20px 28px;
+  font-size: 0.93rem;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-head {
+  background: var(--fsai-canvas);
+  font-size: 0.7rem;
+  font-weight: 680;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-head > span {
+  font-size: 0.7rem;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-now-head {
+  gap: 8px;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-spark {
+  width: 11px;
+  height: 11px;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-label {
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-old {
+  color: var(--fsai-dim);
+  text-decoration-line: line-through;
+  text-decoration-color: rgba(255, 255, 255, 0.3);
+  text-decoration-thickness: 1px;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-now {
+  gap: 11px;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+  background: var(--fsai-accent-soft);
+  border-left: 2px solid var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-now svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--fsai-accent);
+}
+
+
+/* Mobile-only two-panel comparison (hidden on desktop) */
+.fsai-root:not(#_) .fsai-compare-mobile {
+  display: none;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel {
+  border-radius: var(--fsai-radius);
+  padding: 28px 24px;
+  border: 1px solid var(--fsai-line);
+  background: var(--fsai-surface);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-spark {
+  width: 12px;
+  height: 12px;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 0.91rem;
+  line-height: 1.55;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel li svg {
+  width: 15px;
+  height: 15px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel strong {
+  font-weight: 650;
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-old h3 {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-old li {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-old li svg {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-old strong {
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-new {
+  border-color: var(--fsai-accent-line);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-new h3 {
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-new li {
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-new li svg {
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-compare-panel-new strong {
+  color: var(--fsai-text);
+}
+</style>
+<div class="fsai-root">
+  <section class="fsai-manifesto">
+    <div class="fsai-container">
+      <p class="fsai-eyebrow fsai-eyebrow-light">
+        <svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Why AI-native
+      </p>
+      <h2 class="fsai-manifesto-headline" data-reveal>
+        Most firms <em>added</em> AI.
+        <br />
+        We were <span class="fsai-accent">built on it.</span>
+      </h2>
+      <p class="fsai-manifesto-sub" data-reveal>
+        When the workflow is designed around AI from day one, everything changes: what used to
+        take a team a month now happens overnight &mdash; and your accountants finally have
+        time to think about your business, not your data entry.
+      </p>
+
+      <div class="fsai-pillars" data-reveal-stagger>
+        <article class="fsai-pillar">
+          <span class="fsai-pillar-number">01</span>
+          <h3>AI does the repetitive work</h3>
+          <p>Categorization, reconciliation, data capture and deadline tracking run continuously — not once a month. Your books are current every morning.</p>
+        </article>
+        <article class="fsai-pillar">
+          <span class="fsai-pillar-number">02</span>
+          <h3>Accountants own the outcome</h3>
+          <p>Every number the AI produces is reviewed by a qualified accountant before it reaches you or the FTA. AI drafts. Humans sign.</p>
+        </article>
+        <article class="fsai-pillar">
+          <span class="fsai-pillar-number">03</span>
+          <h3>You see everything, live</h3>
+          <p>No more waiting for month-end PDFs. A real-time dashboard shows cash, runway, VAT position and P&amp;L the moment anything changes.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="fsai-compare">
+    <div class="fsai-container">
+      <div class="fsai-section-head" data-reveal>
+        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> The difference</p>
+        <h2>Traditional firm vs. <span class="fsai-accent">AI-native</span></h2>
+      </div>
+
+      <div class="fsai-compare-table" data-reveal role="table" aria-label="Traditional firm versus AI-native comparison">
+        <div class="fsai-compare-row fsai-compare-head" role="row">
+          <span role="columnheader"></span>
+          <span role="columnheader">The old way</span>
+          <span role="columnheader" class="fsai-compare-now-head">
+            <svg class="fsai-compare-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Finanshels
+          </span>
+        </div>
+        <div class="fsai-compare-row" role="row">
+          <span class="fsai-compare-label" role="cell">Monthly close</span>
+          <span class="fsai-compare-old" role="cell">Weeks after month-end</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Days — AI reconciles continuously</span>
+        </div>
+        <div class="fsai-compare-row" role="row">
+          <span class="fsai-compare-label" role="cell">Data entry</span>
+          <span class="fsai-compare-old" role="cell">Manual keying, human error</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Automated capture, accountant-verified</span>
+        </div>
+        <div class="fsai-compare-row" role="row">
+          <span class="fsai-compare-label" role="cell">Visibility</span>
+          <span class="fsai-compare-old" role="cell">Static PDFs, once a month</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Live dashboard, always current</span>
+        </div>
+        <div class="fsai-compare-row" role="row">
+          <span class="fsai-compare-label" role="cell">Tax deadlines</span>
+          <span class="fsai-compare-old" role="cell">Last-minute scrambles</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Tracked by AI, filed early</span>
+        </div>
+        <div class="fsai-compare-row" role="row">
+          <span class="fsai-compare-label" role="cell">Errors</span>
+          <span class="fsai-compare-old" role="cell">Discovered at audit</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Flagged the moment they happen</span>
+        </div>
+        <div class="fsai-compare-row" role="row">
+          <span class="fsai-compare-label" role="cell">Cost</span>
+          <span class="fsai-compare-old" role="cell">Grows with headcount</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Grows with software — not people</span>
+        </div>
+      </div>
+
+      <!-- Mobile-only: two stacked panels instead of the table -->
+      <div class="fsai-compare-mobile" data-reveal>
+        <div class="fsai-compare-panel fsai-compare-panel-old">
+          <h3>The old way</h3>
+          <ul>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Monthly close.</strong> Weeks after month-end</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Data entry.</strong> Manual keying, human error</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Visibility.</strong> Static PDFs, once a month</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Tax deadlines.</strong> Last-minute scrambles</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Errors.</strong> Discovered at audit</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Cost.</strong> Grows with headcount</span></li>
+          </ul>
+        </div>
+        <div class="fsai-compare-panel fsai-compare-panel-new">
+          <h3><svg class="fsai-compare-panel-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> With Finanshels</h3>
+          <ul>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Monthly close.</strong> Days — AI reconciles continuously</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Data entry.</strong> Automated capture, accountant-verified</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Visibility.</strong> Live dashboard, always current</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Tax deadlines.</strong> Tracked by AI, filed early</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Errors.</strong> Flagged the moment they happen</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Cost.</strong> Grows with software — not people</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 3 of 7: WHATSAPP STRIP + HOW IT WORKS
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     ========================================================================== -->
+
+<style>
+/* ============================================================
+   LEAD STRIP — the one saturated band on the page
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-lead-strip {
+  padding: 60px 0;
+  background:
+    radial-gradient(40rem 22rem at 90% -20%, rgba(255, 255, 255, 0.18), transparent 60%),
+    var(--fsai-accent);
+  color: #fff;
+}
+
+
+.fsai-root:not(#_) .fsai-lead-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 40px;
+  align-items: center;
+}
+
+
+.fsai-root:not(#_) .fsai-lead-copy h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 680;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+
+.fsai-root:not(#_) .fsai-lead-copy p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+
+.fsai-root:not(#_) .fsai-lead-whatsapp {
+  justify-self: end;
+  padding: 17px 34px;
+  background: #fff;
+  color: var(--fsai-accent-deep);
+  border: none;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+
+.fsai-root:not(#_) .fsai-lead-whatsapp svg {
+  width: 21px;
+  height: 21px;
+}
+
+
+.fsai-root:not(#_) .fsai-lead-whatsapp:hover {
+  background: var(--fsai-paper-sunk);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   WORKFLOW
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-workflow {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-step {
+  position: relative;
+  padding: 38px 30px;
+  transition: background-color 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-step + .fsai-step {
+  border-left: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-step:hover {
+  background: var(--fsai-surface-raised);
+}
+
+
+.fsai-root:not(#_) .fsai-step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 2px;
+  background: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-step-number {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 0.78rem;
+  font-weight: 680;
+  letter-spacing: 0.1em;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-step h3 {
+  margin: 0 0 10px;
+  font-size: 1.12rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+
+.fsai-root:not(#_) .fsai-step p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--fsai-muted);
+}
+</style>
+<div class="fsai-root">
+  <section class="fsai-lead-strip" aria-label="Get a free quote">
+    <div class="fsai-container">
+      <div class="fsai-lead-inner" data-reveal>
+        <div class="fsai-lead-copy">
+          <h2>See what AI-native accounting costs for your business</h2>
+          <p>Message us on WhatsApp — a real accountant replies in minutes.</p>
+        </div>
+        <a
+          href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20to%20learn%20more%20about%20your%20AI-native%20accounting%20services.&amp;type=phone_number&amp;app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fsai-btn fsai-lead-whatsapp"
+          data-fsai-wa="ai_landing_strip"
+        >
+          <svg aria-hidden="true" focusable="false"><use href="#fsai-i-whatsapp"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="fsai-workflow">
+    <div class="fsai-container">
+      <div class="fsai-section-head" data-reveal>
+        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> How it works</p>
+        <h2>From your bank feed to <span class="fsai-accent">board-ready</span></h2>
+      </div>
+
+      <ol class="fsai-steps" data-reveal-stagger>
+        <li class="fsai-step">
+          <span class="fsai-step-number">01</span>
+          <h3>Connect</h3>
+          <p>We link your banks, invoicing tools and accounting software — QuickBooks, Xero, Zoho Books or ours. Migration handled for you.</p>
+        </li>
+        <li class="fsai-step">
+          <span class="fsai-step-number">02</span>
+          <h3>AI agents process</h3>
+          <p>Transactions are captured, categorized and reconciled daily. Anomalies, duplicates and missing documents get flagged automatically.</p>
+        </li>
+        <li class="fsai-step">
+          <span class="fsai-step-number">03</span>
+          <h3>Accountants review</h3>
+          <p>Your dedicated accountant checks every output, resolves exceptions and signs off on filings. Nothing ships on AI confidence alone.</p>
+        </li>
+        <li class="fsai-step">
+          <span class="fsai-step-number">04</span>
+          <h3>You decide</h3>
+          <p>Clean books, live dashboards and on-time VAT &amp; Corporate Tax filings — plus a team on WhatsApp when you need an answer.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+</div>
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 4 of 7: FINDELIVERY DASHBOARD
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     ========================================================================== -->
+
+<style>
+/* ============================================================
+   FINDELIVERY DASHBOARD
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-dashboard {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+  background:
+    radial-gradient(50rem 30rem at 12% -10%, rgba(241, 102, 16, 0.1), transparent 60%),
+    var(--fsai-canvas);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-head {
+  max-width: 780px;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-sub {
+  margin: 20px 0 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-frame {
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  box-shadow: 0 32px 80px -32px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--fsai-line);
+  font-size: 0.8rem;
+  font-weight: 620;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-brand-spark {
+  width: 13px;
+  height: 13px;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-period {
+  padding: 6px 14px;
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-pill);
+  font-weight: 500;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-ask {
+  padding: 7px 18px;
+  border-radius: var(--fsai-pill);
+  background: var(--fsai-accent);
+  color: #fff;
+  font-weight: 650;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 22px 24px;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-kpi + .fsai-dash-kpi {
+  border-left: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-kpi-label {
+  font-size: 0.66rem;
+  font-weight: 680;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-kpi-value {
+  font-size: 1.55rem;
+  font-weight: 680;
+  letter-spacing: -0.03em;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-kpi-meta {
+  font-size: 0.76rem;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-tone-up { color: var(--fsai-up); }
+
+.fsai-root:not(#_) .fsai-tone-down { color: var(--fsai-down); }
+
+
+.fsai-root:not(#_) .fsai-dash-body {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-panel {
+  padding: 24px;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-panel + .fsai-dash-panel {
+  border-left: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  font-size: 0.93rem;
+  font-weight: 680;
+  letter-spacing: -0.015em;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-panel-tag {
+  font-size: 0.66rem;
+  font-weight: 680;
+  letter-spacing: 0.14em;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.7fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--fsai-line);
+  font-size: 0.86rem;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-row-strong {
+  font-weight: 680;
+  color: var(--fsai-text);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-row-value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-row-delta {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-explain {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 18px;
+  font-size: 0.8rem;
+  font-weight: 680;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-explain svg {
+  width: 13px;
+  height: 13px;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-cash {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 18px;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-cash-label {
+  font-size: 0.66rem;
+  font-weight: 680;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-cash-value {
+  font-size: 1.75rem;
+  font-weight: 680;
+  letter-spacing: -0.03em;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-guardrail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  margin-top: 10px;
+  border: 1px solid var(--fsai-line);
+  border-radius: 10px;
+  background: var(--fsai-surface-raised);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-guardrail strong {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 680;
+  letter-spacing: -0.01em;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-guardrail em {
+  display: block;
+  font-style: normal;
+  font-size: 0.7rem;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-guardrail-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.84rem;
+  font-weight: 680;
+  color: var(--fsai-up);
+  white-space: nowrap;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-guardrail-value svg {
+  width: 14px;
+  height: 14px;
+}
+</style>
+<div class="fsai-root">
+  <section class="fsai-dashboard">
+    <div class="fsai-container">
+      <div class="fsai-section-head fsai-dash-head" data-reveal>
+        <p class="fsai-eyebrow fsai-eyebrow-light"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> The product</p>
+        <h2>Your numbers, live in <span class="fsai-accent">Findelivery</span></h2>
+        <p class="fsai-dash-sub">
+          Every Finanshels client gets Findelivery — our AI CFO dashboard. P&amp;L, cash,
+          runway and tax positions update as your books do, and you can ask the CFO anything
+          in plain English.
+        </p>
+      </div>
+
+      <div class="fsai-dash-frame" data-reveal aria-label="Preview of the Findelivery AI CFO dashboard">
+        <div class="fsai-dash-topbar">
+          <span class="fsai-dash-brand">
+            <svg class="fsai-dash-brand-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+            Findelivery &middot; AI CFO
+          </span>
+          <span class="fsai-dash-period">June 2026</span>
+          <span class="fsai-dash-ask">Ask CFO</span>
+        </div>
+
+        <div class="fsai-dash-kpis">
+          <div class="fsai-dash-kpi">
+            <span class="fsai-dash-kpi-label">Revenue Growth MoM</span>
+            <span class="fsai-dash-kpi-value fsai-tone-up">+18.4%</span>
+            <span class="fsai-dash-kpi-meta">AED 412K this month</span>
+          </div>
+          <div class="fsai-dash-kpi">
+            <span class="fsai-dash-kpi-label">GP Margin</span>
+            <span class="fsai-dash-kpi-value fsai-tone-up">62.3%</span>
+            <span class="fsai-dash-kpi-meta">+8.1pp vs industry</span>
+          </div>
+          <div class="fsai-dash-kpi">
+            <span class="fsai-dash-kpi-label">Burn Rate (Monthly)</span>
+            <span class="fsai-dash-kpi-value fsai-tone-neutral">AED 96K</span>
+            <span class="fsai-dash-kpi-meta">21.4% of revenue</span>
+          </div>
+          <div class="fsai-dash-kpi">
+            <span class="fsai-dash-kpi-label">Runway</span>
+            <span class="fsai-dash-kpi-value fsai-tone-up">18.2 mo</span>
+            <span class="fsai-dash-kpi-meta">Above 6-month target</span>
+          </div>
+        </div>
+
+        <div class="fsai-dash-body">
+          <div class="fsai-dash-panel">
+            <div class="fsai-dash-panel-head">
+              <span>P&amp;L Snapshot</span>
+              <span class="fsai-dash-panel-tag">MTD</span>
+            </div>
+            <div class="fsai-dash-row">
+              <span class="fsai-dash-row-item">Revenue</span>
+              <span class="fsai-dash-row-value">412,090</span>
+              <span class="fsai-dash-row-delta fsai-tone-up">+18.4%</span>
+            </div>
+            <div class="fsai-dash-row">
+              <span class="fsai-dash-row-item">Cost of Revenue</span>
+              <span class="fsai-dash-row-value">(155,301)</span>
+              <span class="fsai-dash-row-delta fsai-tone-neutral"></span>
+            </div>
+            <div class="fsai-dash-row fsai-dash-row-strong">
+              <span class="fsai-dash-row-item">Gross Profit</span>
+              <span class="fsai-dash-row-value">256,789</span>
+              <span class="fsai-dash-row-delta fsai-tone-up">62.3%</span>
+            </div>
+            <div class="fsai-dash-row">
+              <span class="fsai-dash-row-item">Operating Expenses</span>
+              <span class="fsai-dash-row-value">(149,204)</span>
+              <span class="fsai-dash-row-delta fsai-tone-down">+4.2%</span>
+            </div>
+            <div class="fsai-dash-row fsai-dash-row-strong">
+              <span class="fsai-dash-row-item">Net Profit</span>
+              <span class="fsai-dash-row-value">107,585</span>
+              <span class="fsai-dash-row-delta fsai-tone-up">+26.1%</span>
+            </div>
+            <span class="fsai-dash-explain">Explain this P&amp;L <svg aria-hidden="true" focusable="false"><use href="#fsai-i-arrow"/></svg></span>
+          </div>
+
+          <div class="fsai-dash-panel">
+            <div class="fsai-dash-panel-head"><span>Cash &amp; Guardrails</span></div>
+            <div class="fsai-dash-cash">
+              <span class="fsai-dash-cash-label">Cash on hand</span>
+              <span class="fsai-dash-cash-value">AED 1.2M</span>
+            </div>
+            <div class="fsai-dash-guardrail">
+              <span><strong>Min Cash Reserve</strong><em>Target: AED 250K</em></span>
+              <span class="fsai-dash-guardrail-value"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>AED 1.2M</span>
+            </div>
+            <div class="fsai-dash-guardrail">
+              <span><strong>Cash Runway</strong><em>Target: ≥ 6 months</em></span>
+              <span class="fsai-dash-guardrail-value"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>18.2 mo</span>
+            </div>
+            <div class="fsai-dash-guardrail">
+              <span><strong>AR Days (DSO)</strong><em>Target: ≤ 45 days</em></span>
+              <span class="fsai-dash-guardrail-value"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>32 days</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 5 of 7: AI/HUMAN SPLIT + SERVICES
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     ========================================================================== -->
+
+<style>
+/* ============================================================
+   AI + HUMAN SPLIT
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-split {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-split-card {
+  padding: 44px 40px;
+}
+
+
+.fsai-root:not(#_) .fsai-split-card + .fsai-split-card {
+  border-left: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-split-machine {
+  background: var(--fsai-surface-raised);
+}
+
+
+.fsai-root:not(#_) .fsai-split-card-head {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 30px;
+}
+
+
+.fsai-root:not(#_) .fsai-split-card-head svg {
+  width: 20px;
+  height: 20px;
+  color: var(--fsai-accent);
+  flex-shrink: 0;
+}
+
+
+.fsai-root:not(#_) .fsai-split-card-head h3 {
+  margin: 0;
+  font-size: 1.22rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+
+.fsai-root:not(#_) .fsai-split-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 15px;
+}
+
+
+.fsai-root:not(#_) .fsai-split-card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.93rem;
+  line-height: 1.5;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-split-card li svg {
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  color: var(--fsai-accent);
+}
+
+/* ============================================================
+   SERVICES — the signature bento
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-services {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-services,
+.fsai-root:not(#_) .fsai-testimonials,
+.fsai-root:not(#_) .fsai-faq {
+  scroll-margin-top: 90px;
+}
+
+
+.fsai-root:not(#_) .fsai-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-service-card {
+  display: flex;
+  flex-direction: column;
+  padding: 38px 34px;
+  border-right: 1px solid var(--fsai-line);
+  border-bottom: 1px solid var(--fsai-line);
+  transition: background-color 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-service-card:nth-child(3n) {
+  border-right: none;
+}
+
+
+.fsai-root:not(#_) .fsai-service-card:nth-last-child(-n + 3) {
+  border-bottom: none;
+}
+
+
+.fsai-root:not(#_) .fsai-service-card:hover {
+  background: var(--fsai-surface-raised);
+}
+
+
+/* Outline icon, no filled chip — CrossVal keeps icons quiet. */
+.fsai-root:not(#_) .fsai-service-icon {
+  display: block;
+  margin-bottom: 24px;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-service-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+
+.fsai-root:not(#_) .fsai-service-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.12rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+
+.fsai-root:not(#_) .fsai-service-card p {
+  margin: 0;
+  font-size: 0.91rem;
+  line-height: 1.6;
+  color: var(--fsai-muted);
+}
+</style>
+<div class="fsai-root">
+  <section class="fsai-split">
+    <div class="fsai-container">
+      <div class="fsai-section-head" data-reveal>
+        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Division of labor</p>
+        <h2>AI drafts. <span class="fsai-accent">Humans sign.</span></h2>
+      </div>
+
+      <div class="fsai-split-grid" data-reveal-stagger>
+        <div class="fsai-split-card fsai-split-machine">
+          <div class="fsai-split-card-head">
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-zap"/></svg>
+            <h3>What the AI does</h3>
+          </div>
+          <ul>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Categorizes every transaction, daily</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Reconciles bank feeds continuously</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Extracts data from invoices &amp; receipts</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Tracks VAT and Corporate Tax deadlines</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Drafts returns and monthly reports</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Flags anomalies and duplicates instantly</li>
+          </ul>
+        </div>
+
+        <div class="fsai-split-card fsai-split-human">
+          <div class="fsai-split-card-head">
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-eye"/></svg>
+            <h3>Where humans stay in the loop</h3>
+          </div>
+          <ul>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Reviews and approves every AI output</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Resolves flagged exceptions with context</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Signs off on VAT &amp; Corporate Tax filings</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Advises on structure, cash and runway</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Answers you on WhatsApp — a person, fast</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Owns the numbers at audit time</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fsai-services" id="fsai-services">
+    <div class="fsai-container">
+      <div class="fsai-section-head" data-reveal>
+        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Everything covered</p>
+        <h2>One firm for your entire <span class="fsai-accent">finance stack</span></h2>
+      </div>
+
+      <div class="fsai-services-grid" data-reveal-stagger>
+        <article class="fsai-service-card">
+          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-book"/></svg></span>
+          <h3>Bookkeeping</h3>
+          <p>Daily, AI-reconciled books reviewed by your dedicated accountant. Always audit-ready.</p>
+        </article>
+        <article class="fsai-service-card">
+          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-percent"/></svg></span>
+          <h3>VAT Compliance</h3>
+          <p>Registration, quarterly returns and FTA correspondence — drafted by AI, filed by humans.</p>
+        </article>
+        <article class="fsai-service-card">
+          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-briefcase"/></svg></span>
+          <h3>Corporate Tax</h3>
+          <p>9% Corporate Tax registration, planning and filing with deadlines tracked automatically.</p>
+        </article>
+        <article class="fsai-service-card">
+          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-users"/></svg></span>
+          <h3>Payroll &amp; WPS</h3>
+          <p>Salaries processed, WPS files generated and gratuity accruals kept current every month.</p>
+        </article>
+        <article class="fsai-service-card">
+          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-trending"/></svg></span>
+          <h3>CFO Insights</h3>
+          <p>Cash-flow forecasts, budgets and board-ready reporting from live data — not stale exports.</p>
+        </article>
+        <article class="fsai-service-card">
+          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-file"/></svg></span>
+          <h3>Audit Support</h3>
+          <p>Clean trails and organized documents mean audits close faster and cost less.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 6 of 7: TESTIMONIALS + FAQ
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     ========================================================================== -->
+
+<style>
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-testimonials {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 38px 34px;
+  transition: background-color 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card + .fsai-testimonial-card {
+  border-left: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card:hover {
+  background: var(--fsai-surface-raised);
+}
+
+
+.fsai-root:not(#_) .fsai-quote-spark {
+  width: 18px;
+  height: 18px;
+  margin-bottom: 22px;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card blockquote {
+  flex: 1;
+  margin: 0 0 26px;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card figcaption {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--fsai-line-strong);
+  color: var(--fsai-text);
+  font-size: 0.76rem;
+  font-weight: 680;
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card figcaption strong {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 680;
+  letter-spacing: -0.01em;
+}
+
+
+.fsai-root:not(#_) .fsai-testimonial-card figcaption em {
+  display: block;
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--fsai-dim);
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-faq {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-container {
+  max-width: 880px;
+}
+
+
+.fsai-root:not(#_) .fsai-faq .fsai-section-head {
+  margin-bottom: 48px;
+}
+
+
+.fsai-root:not(#_) .fsai-faq-item {
+  border-bottom: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 26px 0;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 620;
+  letter-spacing: -0.02em;
+  color: var(--fsai-text);
+  transition: color 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-question:hover {
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-question svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--fsai-accent);
+  transition: transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-item.is-open .fsai-faq-question svg {
+  transform: rotate(180deg);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s var(--fsai-ease-out);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-answer p {
+  overflow: hidden;
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-faq-item.is-open .fsai-faq-answer {
+  grid-template-rows: 1fr;
+}
+
+
+.fsai-root:not(#_) .fsai-faq-item.is-open .fsai-faq-answer p {
+  padding-bottom: 26px;
+}
+</style>
+<div class="fsai-root">
+  <section class="fsai-testimonials" id="fsai-testimonials">
+    <div class="fsai-container">
+      <div class="fsai-section-head" data-reveal>
+        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> In their words</p>
+        <h2>Founders who made the <span class="fsai-accent">switch</span></h2>
+      </div>
+
+      <div class="fsai-testimonials-grid" data-reveal-stagger>
+        <figure class="fsai-testimonial-card">
+          <svg class="fsai-quote-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+          <blockquote>They designed an accounting system tailor made to our needs &amp; completely automated our finance operations just like they promised. They’ve been super helpful for us to scale.</blockquote>
+          <figcaption>
+            <span class="fsai-testimonial-avatar">JK</span>
+            <span>
+              <strong>Jeremy Khatar</strong>
+              <em>CEO, Ronin Global LLC</em>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="fsai-testimonial-card">
+          <svg class="fsai-quote-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+          <blockquote>Always very responsive, supportive, having a business mindset, providing visuals and on top of all that, open for feedback so they can keep improving. Very happy that I took the decision to work with them.</blockquote>
+          <figcaption>
+            <span class="fsai-testimonial-avatar">SV</span>
+            <span>
+              <strong>Szilvia Vitos</strong>
+              <em>Founder, Livvity</em>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="fsai-testimonial-card">
+          <svg class="fsai-quote-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+          <blockquote>They thoroughly understood our business processes and streamlined our accounting processes perfectly where our both in-house and outsourced accountants failed multiple times.</blockquote>
+          <figcaption>
+            <span class="fsai-testimonial-avatar">MP</span>
+            <span>
+              <strong>Meet Patel</strong>
+              <em>Former COO, StudentHub &amp; BAWES</em>
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="fsai-faq" id="fsai-faq">
+    <div class="fsai-container fsai-faq-container">
+      <div class="fsai-section-head" data-reveal>
+        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Questions</p>
+        <h2>Fair questions about <span class="fsai-accent">AI accounting</span></h2>
+      </div>
+
+      <div class="fsai-faq-list" data-reveal>
+        <div class="fsai-faq-item">
+          <button type="button" class="fsai-faq-question" aria-expanded="false" aria-controls="fsai-faq-panel-0">
+            What does &quot;AI-native&quot; actually mean?
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-chevron"/></svg>
+          </button>
+          <div class="fsai-faq-answer" id="fsai-faq-panel-0">
+            <p>Most firms bolt AI tools onto a manual workflow. We built our workflow around AI from day one: agents handle categorization, reconciliation, document capture and deadline tracking continuously, and our accountants spend their time on review, exceptions and advice — not data entry. The result is books that are 10× faster to close and current every day.</p>
+          </div>
+        </div>
+        <div class="fsai-faq-item">
+          <button type="button" class="fsai-faq-question" aria-expanded="false" aria-controls="fsai-faq-panel-1">
+            Is AI doing my accounting on its own?
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-chevron"/></svg>
+          </button>
+          <div class="fsai-faq-answer" id="fsai-faq-panel-1">
+            <p>No. AI drafts, humans sign. Every categorization, reconciliation and filing is reviewed by a qualified accountant before it reaches you or the FTA. You get the speed of automation with the accountability of a licensed firm.</p>
+          </div>
+        </div>
+        <div class="fsai-faq-item">
+          <button type="button" class="fsai-faq-question" aria-expanded="false" aria-controls="fsai-faq-panel-2">
+            Which tools do you integrate with?
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-chevron"/></svg>
+          </button>
+          <div class="fsai-faq-answer" id="fsai-faq-panel-2">
+            <p>QuickBooks, Xero, Zoho Books, major UAE bank feeds and custom stacks. If you’re on spreadsheets today, we handle the migration as part of onboarding.</p>
+          </div>
+        </div>
+        <div class="fsai-faq-item">
+          <button type="button" class="fsai-faq-question" aria-expanded="false" aria-controls="fsai-faq-panel-3">
+            Is my financial data safe?
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-chevron"/></svg>
+          </button>
+          <div class="fsai-faq-answer" id="fsai-faq-panel-3">
+            <p>Yes. Data is encrypted in transit and at rest, access is role-restricted, and your data is never used to train third-party AI models. We follow industry-standard security protocols across our entire stack.</p>
+          </div>
+        </div>
+        <div class="fsai-faq-item">
+          <button type="button" class="fsai-faq-question" aria-expanded="false" aria-controls="fsai-faq-panel-4">
+            How fast can we start?
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-chevron"/></svg>
+          </button>
+          <div class="fsai-faq-answer" id="fsai-faq-panel-4">
+            <p>Onboarding is structured and typically completes within 45 days — from connecting your tools and migrating history to delivering your first complete financial pack. Most clients see their live dashboard in the first two weeks.</p>
+          </div>
+        </div>
+        <div class="fsai-faq-item">
+          <button type="button" class="fsai-faq-question" aria-expanded="false" aria-controls="fsai-faq-panel-5">
+            Does AI-native mean cheaper?
+            <svg aria-hidden="true" focusable="false"><use href="#fsai-i-chevron"/></svg>
+          </button>
+          <div class="fsai-faq-answer" id="fsai-faq-panel-5">
+            <p>Usually, yes. Because software does the repetitive work, our pricing scales with your transaction volume — not with billable hours. Book a free consultation and we’ll quote against what you pay today.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 7 of 7: FINAL CTA + FORM
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     Also carries the script (FAQ accordion, scroll reveals, WhatsApp tracking).
+     ========================================================================== -->
+
+<style>
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-cta {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+  background:
+    radial-gradient(46rem 28rem at 88% 0%, rgba(241, 102, 16, 0.16), transparent 60%),
+    var(--fsai-canvas);
+  scroll-margin-top: 80px;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+  gap: 80px;
+  align-items: center;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-spark {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 28px;
+  color: var(--fsai-accent);
+  animation: fsai-spin 20s linear infinite;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-copy h2 {
+  margin: 0 0 22px;
+  font-size: clamp(2.3rem, 4.6vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.042em;
+  line-height: 1.04;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-copy > p {
+  margin: 0 0 32px;
+  max-width: 30rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-cta-points {
+  list-style: none;
+  margin: 0 0 38px;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-points li {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 0.93rem;
+  font-weight: 600;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-points svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-cta-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.93rem;
+  font-weight: 620;
+  color: var(--fsai-accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--fsai-accent-line);
+  padding-bottom: 3px;
+  transition: color 0.3s var(--fsai-ease), border-color 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-cta-whatsapp:hover {
+  color: var(--fsai-text);
+  border-color: var(--fsai-text);
+}
+
+
+.fsai-root:not(#_) .fsai-cta-whatsapp svg {
+  width: 15px;
+  height: 15px;
+}
+
+
+/* ---------- CTA form card — the second light moment ---------- */
+
+.fsai-root:not(#_) .fsai-cta-form-card {
+  padding: 40px 38px;
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-paper);
+  color: var(--fsai-paper-ink);
+  box-shadow: 0 32px 72px -28px rgba(0, 0, 0, 0.75);
+}
+
+
+.fsai-root:not(#_) .fsai-cta-form-card h3 {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+  font-weight: 680;
+  letter-spacing: -0.03em;
+}
+
+
+.fsai-root:not(#_) .fsai-cta-form-card > p {
+  margin: 0 0 28px;
+  font-size: 0.88rem;
+  color: var(--fsai-paper-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-zoho-form {
+  display: grid;
+  gap: 16px;
+}
+
+
+.fsai-root:not(#_) .fsai-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+
+.fsai-root:not(#_) .fsai-form-group {
+  display: grid;
+  gap: 7px;
+}
+
+
+.fsai-root:not(#_) .fsai-form-group label {
+  font-size: 0.68rem;
+  font-weight: 680;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fsai-paper-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--fsai-paper-line);
+  border-radius: 10px;
+  background: var(--fsai-paper-sunk);
+  font-family: inherit;
+  font-size: 0.94rem;
+  color: var(--fsai-paper-ink);
+  transition: border-color 0.3s var(--fsai-ease), box-shadow 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-form-group input::placeholder {
+  color: rgba(0, 0, 0, 0.38);
+}
+
+
+.fsai-root:not(#_) .fsai-form-group input:focus {
+  outline: none;
+  border-color: var(--fsai-accent);
+  box-shadow: 0 0 0 3px rgba(241, 102, 16, 0.18);
+}
+
+
+.fsai-root:not(#_) .fsai-form-submit {
+  width: 100%;
+  margin-top: 6px;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+
+.fsai-root:not(#_) .fsai-form-privacy {
+  margin: 18px 0 0;
+  font-size: 0.73rem;
+  text-align: center;
+  color: var(--fsai-paper-muted);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fsai-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fsai-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(241, 102, 16, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(241, 102, 16, 0);
+  }
+}
+
+
+@keyframes fsai-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+
+@keyframes fsai-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .fsai-root:not(#_) *,
+  .fsai-root:not(#_) *::before,
+  .fsai-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-feed-item {
+    opacity: 1;
+  }
+
+
+  .fsai-root:not(#_).is-ready [data-reveal],
+  .fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1024px) {
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 88px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 24px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero {
+    padding: 84px 0 72px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero-visual {
+    max-width: 560px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero-stats {
+    gap: 32px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-pillars,
+  .fsai-root:not(#_) .fsai-services-grid,
+  .fsai-root:not(#_) .fsai-testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-pillar:nth-child(odd),
+  .fsai-root:not(#_) .fsai-testimonial-card:nth-child(odd) {
+    border-left: none;
+  }
+
+
+  .fsai-root:not(#_) .fsai-pillar:not(:nth-last-child(-n + 1)),
+  .fsai-root:not(#_) .fsai-testimonial-card:not(:nth-last-child(-n + 1)) {
+    border-bottom: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-service-card:nth-child(3n) {
+    border-right: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-service-card:nth-child(2n) {
+    border-right: none;
+  }
+
+
+  .fsai-root:not(#_) .fsai-service-card:nth-last-child(-n + 3) {
+    border-bottom: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-service-card:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+
+
+  .fsai-root:not(#_) .fsai-steps {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-step:nth-child(odd) {
+    border-left: none;
+  }
+
+
+  .fsai-root:not(#_) .fsai-step:nth-child(n + 3) {
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-cta-grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-cta-form-card {
+    max-width: 560px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-lead-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-lead-whatsapp {
+    justify-self: start;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-kpis {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-kpi:nth-child(3) {
+    border-left: none;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-kpi:nth-child(n + 3) {
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-body {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-panel + .fsai-dash-panel {
+    border-left: none;
+    border-top: 1px solid var(--fsai-line);
+  }
+
+}
+
+
+@media (max-width: 680px) {
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 72px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 20px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero {
+    padding: 64px 0 56px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 26px 32px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero-actions .fsai-btn {
+    width: 100%;
+  }
+
+
+  .fsai-root:not(#_) .fsai-lead-strip {
+    padding: 52px 0;
+  }
+
+
+  .fsai-root:not(#_) .fsai-lead-whatsapp {
+    justify-self: stretch;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-topbar {
+    flex-wrap: wrap;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-kpis {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-kpi + .fsai-dash-kpi {
+    border-left: none;
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-dash-row {
+    grid-template-columns: 1.3fr 1fr 0.8fr;
+    gap: 8px;
+  }
+
+
+  /* Bento collapses to a single column — reset every shared divider and
+     rebuild it as a simple horizontal rule between rows. */
+  .fsai-root:not(#_) .fsai-pillars,
+  .fsai-root:not(#_) .fsai-services-grid,
+  .fsai-root:not(#_) .fsai-testimonials-grid,
+  .fsai-root:not(#_) .fsai-split-grid,
+  .fsai-root:not(#_) .fsai-steps {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-pillar + .fsai-pillar,
+  .fsai-root:not(#_) .fsai-step + .fsai-step,
+  .fsai-root:not(#_) .fsai-testimonial-card + .fsai-testimonial-card,
+  .fsai-root:not(#_) .fsai-split-card + .fsai-split-card {
+    border-left: none;
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+  .fsai-root:not(#_) .fsai-pillar,
+  .fsai-root:not(#_) .fsai-testimonial-card,
+  .fsai-root:not(#_) .fsai-step {
+    border-bottom: none !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-service-card {
+    border-right: none !important;
+    border-bottom: 1px solid var(--fsai-line) !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-service-card:last-child {
+    border-bottom: none !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-section-head {
+    margin-bottom: 44px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-pillar,
+  .fsai-root:not(#_) .fsai-step,
+  .fsai-root:not(#_) .fsai-service-card,
+  .fsai-root:not(#_) .fsai-testimonial-card {
+    padding: 30px 24px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-split-card {
+    padding: 32px 24px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-compare-table {
+    display: none;
+  }
+
+
+  .fsai-root:not(#_) .fsai-compare-mobile {
+    display: grid;
+    gap: 16px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-form-row {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fsai-root:not(#_) .fsai-cta-form-card {
+    padding: 32px 24px;
+  }
+
+
+  .fsai-root:not(#_) .fsai-hero-spark-1,
+  .fsai-root:not(#_) .fsai-hero-spark-2 {
+    display: none;
+  }
+
+}
+</style>
+<div class="fsai-root">
+  <span id="fsai-pricing"></span>
+  <section class="fsai-cta" id="fsai-consultation">
+    <div class="fsai-container">
+      <div class="fsai-cta-grid">
+        <div class="fsai-cta-copy" data-reveal>
+          <svg class="fsai-cta-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+          <h2>
+            See your books run
+            <br />
+            the <span class="fsai-accent">AI-native</span> way.
+          </h2>
+          <p>
+            A 30-minute call with our team. We&rsquo;ll look at your current setup, show you
+            the live dashboard, and quote against what you pay today. No obligation.
+          </p>
+          <ul class="fsai-cta-points">
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg> Pay only if satisfied</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg> Dedicated accountant + AI agents</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg> Onboarded within 45 days</li>
+          </ul>
+          <a
+          href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20to%20learn%20more%20about%20your%20AI-native%20accounting%20services.&amp;type=phone_number&amp;app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fsai-cta-whatsapp"
+          data-fsai-wa="ai_landing_footer"
+        >
+            Prefer chat? Message us on WhatsApp <svg aria-hidden="true" focusable="false"><use href="#fsai-i-arrow"/></svg>
+          </a>
+        </div>
+
+        <div class="fsai-cta-form-card" data-reveal>
+          <h3>Get your free consultation</h3>
+          <p>Tell us where your books stand — we&rsquo;ll take it from there.</p>
+          <form
+            action="https://forms.zohopublic.com/finanshelsllc/form/GetYourFreeAuditConsultation/formperma/EikNR5Pwn-Ak9PHJxB-cTO47ehdcxhrZeW_itd-c-I0/htmlRecords/submit"
+            name="form"
+            id="fsai-consultation-form"
+            method="POST"
+            accept-charset="UTF-8"
+            enctype="multipart/form-data"
+            class="fsai-zoho-form"
+          >
+            <input type="hidden" name="zf_referrer_name" value="" />
+            <input type="hidden" name="zf_redirect_url" value="" />
+            <input type="hidden" name="zc_gad" value="" />
+            <input type="hidden" name="utm_source" value="" />
+            <input type="hidden" name="utm_medium" value="" />
+            <input type="hidden" name="utm_campaign" value="" />
+            <input type="hidden" name="utm_term" value="" />
+            <input type="hidden" name="utm_content" value="" />
+            <input type="hidden" name="gclid" value="" />
+            <input type="hidden" name="referrername" value="" />
+
+            <div class="fsai-form-row">
+              <div class="fsai-form-group">
+                <label for="fsai-first">First Name</label>
+                <input id="fsai-first" type="text" maxlength="255" name="Name_First" placeholder="John" />
+              </div>
+              <div class="fsai-form-group">
+                <label for="fsai-last">Last Name</label>
+                <input id="fsai-last" type="text" maxlength="255" name="Name_Last" placeholder="Smith" />
+              </div>
+            </div>
+
+            <div class="fsai-form-group">
+              <label for="fsai-email">Email *</label>
+              <input id="fsai-email" type="text" maxlength="255" name="Email" placeholder="john@company.com" required />
+            </div>
+
+            <div class="fsai-form-group">
+              <label for="international_PhoneNumber_countrycode">Phone Number *</label>
+              <input
+                type="text"
+                name="PhoneNumber_countrycode"
+                maxlength="20"
+                id="international_PhoneNumber_countrycode"
+                placeholder="+971 00 000 0000"
+                required
+              />
+            </div>
+
+            <div class="fsai-form-group">
+              <label for="fsai-company">Company Name *</label>
+              <input id="fsai-company" type="text" name="SingleLine1" maxlength="255" placeholder="Your Company LLC" required />
+            </div>
+
+            <button type="submit" class="fsai-btn fsai-btn-primary fsai-form-submit">
+              Book My Free Consultation
+              <svg aria-hidden="true" focusable="false"><use href="#fsai-i-arrow"/></svg>
+            </button>
+          </form>
+          <p class="fsai-form-privacy">Your data is secure and will never be shared.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  (function () {
+    'use strict';
+
+    function init() {
+      var roots = document.querySelectorAll('.fsai-root');
+      if (!roots.length) return;
+
+      /* ---------- scroll reveal ----------
+         The hidden state is gated behind `is-ready`, added here, so the page
+         renders fully visible if this script never runs. */
+      var targets = document.querySelectorAll('.fsai-root [data-reveal], .fsai-root [data-reveal-stagger]');
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      Array.prototype.forEach.call(roots, function (root) {
+        root.classList.add('is-ready');
+      });
+
+      if (reduced || !('IntersectionObserver' in window)) {
+        Array.prototype.forEach.call(targets, function (el) { el.classList.add('is-in'); });
+      } else {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-in');
+            observer.unobserve(entry.target);
+          });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+
+        Array.prototype.forEach.call(targets, function (el) { observer.observe(el); });
+      }
+
+      /* ---------- FAQ accordion (single-open) ---------- */
+      var items = document.querySelectorAll('.fsai-root .fsai-faq-item');
+      Array.prototype.forEach.call(items, function (item) {
+        var button = item.querySelector('.fsai-faq-question');
+        if (!button) return;
+
+        button.addEventListener('click', function () {
+          var willOpen = !item.classList.contains('is-open');
+
+          Array.prototype.forEach.call(items, function (other) {
+            other.classList.remove('is-open');
+            var otherButton = other.querySelector('.fsai-faq-question');
+            if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
+          });
+
+          if (willOpen) {
+            item.classList.add('is-open');
+            button.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      /* ---------- WhatsApp click tracking (GTM dataLayer) ---------- */
+      document.addEventListener('click', function (event) {
+        if (!event.target.closest) return;
+        var link = event.target.closest('.fsai-root [data-fsai-wa]');
+        if (!link) return;
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'whatsapp_click',
+          source: link.getAttribute('data-fsai-wa')
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!-- ==========================================================================
+     FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 4 of 7: FINDELIVERY DASHBOARD
+
+     Paste into its own Webflow HTML Embed element, in order.
+     Self-contained: this block carries the CSS for its own sections.
+
+     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
+     7 holds the animations and all media queries, so every block must be
+     present and in sequence or the responsive rules won't apply.
+
+     Place each embed in a Section with no padding. Do NOT put a block inside a
+     Webflow Form Block — block 7 contains its own <form>.
+     ========================================================================== -->
+
+<style>
+/* ============================================================
+   FINDELIVERY DASHBOARD
+   ============================================================ */
+
+.fsai-root:not(#_) .fsai-dashboard {
+  padding: var(--fsai-pad) 0;
+  border-top: 1px solid var(--fsai-line);
+  background:
+    radial-gradient(50rem 30rem at 12% -10%, rgba(241, 102, 16, 0.1), transparent 60%),
+    var(--fsai-canvas);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-head {
+  max-width: 780px;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-sub {
+  margin: 20px 0 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-frame {
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-radius-lg);
+  background: var(--fsai-surface);
+  box-shadow: 0 32px 80px -32px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--fsai-line);
+  font-size: 0.8rem;
+  font-weight: 620;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-brand-spark {
+  width: 13px;
+  height: 13px;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-period {
+  padding: 6px 14px;
+  border: 1px solid var(--fsai-line);
+  border-radius: var(--fsai-pill);
+  font-weight: 500;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-ask {
+  padding: 7px 18px;
+  border-radius: var(--fsai-pill);
+  background: var(--fsai-accent);
+  color: #fff;
+  font-weight: 650;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 22px 24px;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-kpi + .fsai-dash-kpi {
+  border-left: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-kpi-label {
+  font-size: 0.66rem;
+  font-weight: 680;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-kpi-value {
+  font-size: 1.55rem;
+  font-weight: 680;
+  letter-spacing: -0.03em;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-kpi-meta {
+  font-size: 0.76rem;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-tone-up { color: var(--fsai-up); }
+
+.fsai-root:not(#_) .fsai-tone-down { color: var(--fsai-down); }
+
+
+.fsai-root:not(#_) .fsai-dash-body {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-panel {
+  padding: 24px;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-panel + .fsai-dash-panel {
+  border-left: 1px solid var(--fsai-line);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  font-size: 0.93rem;
+  font-weight: 680;
+  letter-spacing: -0.015em;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-panel-tag {
+  font-size: 0.66rem;
+  font-weight: 680;
+  letter-spacing: 0.14em;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.7fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--fsai-line);
+  font-size: 0.86rem;
+  color: var(--fsai-muted);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-row-strong {
+  font-weight: 680;
+  color: var(--fsai-text);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-row-value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-row-delta {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-explain {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 18px;
+  font-size: 0.8rem;
+  font-weight: 680;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-explain svg {
+  width: 13px;
+  height: 13px;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-cash {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 18px;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-cash-label {
+  font-size: 0.66rem;
+  font-weight: 680;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-cash-value {
+  font-size: 1.75rem;
+  font-weight: 680;
+  letter-spacing: -0.03em;
+  color: var(--fsai-accent);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-guardrail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  margin-top: 10px;
+  border: 1px solid var(--fsai-line);
+  border-radius: 10px;
+  background: var(--fsai-surface-raised);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-guardrail strong {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 680;
+  letter-spacing: -0.01em;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-guardrail em {
+  display: block;
+  font-style: normal;
+  font-size: 0.7rem;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-dash-guardrail-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.84rem;
+  font-weight: 680;
+  color: var(--fsai-up);
+  white-space: nowrap;
+}
+
+
+.fsai-root:not(#_) .fsai-dash-guardrail-value svg {
+  width: 14px;
+  height: 14px;
+}
+</style>
+<div class="fsai-root">
+  <section class="fsai-dashboard">
+    <div class="fsai-container">
+      <div class="fsai-section-head fsai-dash-head" data-reveal>
+        <p class="fsai-eyebrow fsai-eyebrow-light"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> The product</p>
+        <h2>Your numbers, live in <span class="fsai-accent">Findelivery</span></h2>
+        <p class="fsai-dash-sub">
+          Every Finanshels client gets Findelivery — our AI CFO dashboard. P&amp;L, cash,
+          runway and tax positions update as your books do, and you can ask the CFO anything
+          in plain English.
+        </p>
+      </div>
+
+      <div class="fsai-dash-frame" data-reveal aria-label="Preview of the Findelivery AI CFO dashboard">
+        <div class="fsai-dash-topbar">
+          <span class="fsai-dash-brand">
+            <svg class="fsai-dash-brand-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
+            Findelivery &middot; AI CFO
+          </span>
+          <span class="fsai-dash-period">June 2026</span>
+          <span class="fsai-dash-ask">Ask CFO</span>
+        </div>
+
+        <div class="fsai-dash-kpis">
+          <div class="fsai-dash-kpi">
+            <span class="fsai-dash-kpi-label">Revenue Growth MoM</span>
+            <span class="fsai-dash-kpi-value fsai-tone-up">+18.4%</span>
+            <span class="fsai-dash-kpi-meta">AED 412K this month</span>
+          </div>
+          <div class="fsai-dash-kpi">
+            <span class="fsai-dash-kpi-label">GP Margin</span>
+            <span class="fsai-dash-kpi-value fsai-tone-up">62.3%</span>
+            <span class="fsai-dash-kpi-meta">+8.1pp vs industry</span>
+          </div>
+          <div class="fsai-dash-kpi">
+            <span class="fsai-dash-kpi-label">Burn Rate (Monthly)</span>
+            <span class="fsai-dash-kpi-value fsai-tone-neutral">AED 96K</span>
+            <span class="fsai-dash-kpi-meta">21.4% of revenue</span>
+          </div>
+          <div class="fsai-dash-kpi">
+            <span class="fsai-dash-kpi-label">Runway</span>
+            <span class="fsai-dash-kpi-value fsai-tone-up">18.2 mo</span>
+            <span class="fsai-dash-kpi-meta">Above 6-month target</span>
+          </div>
+        </div>
+
+        <div class="fsai-dash-body">
+          <div class="fsai-dash-panel">
+            <div class="fsai-dash-panel-head">
+              <span>P&amp;L Snapshot</span>
+              <span class="fsai-dash-panel-tag">MTD</span>
+            </div>
+            <div class="fsai-dash-row">
+              <span class="fsai-dash-row-item">Revenue</span>
+              <span class="fsai-dash-row-value">412,090</span>
+              <span class="fsai-dash-row-delta fsai-tone-up">+18.4%</span>
+            </div>
+            <div class="fsai-dash-row">
+              <span class="fsai-dash-row-item">Cost of Revenue</span>
+              <span class="fsai-dash-row-value">(155,301)</span>
+              <span class="fsai-dash-row-delta fsai-tone-neutral"></span>
+            </div>
+            <div class="fsai-dash-row fsai-dash-row-strong">
+              <span class="fsai-dash-row-item">Gross Profit</span>
+              <span class="fsai-dash-row-value">256,789</span>
+              <span class="fsai-dash-row-delta fsai-tone-up">62.3%</span>
+            </div>
+            <div class="fsai-dash-row">
+              <span class="fsai-dash-row-item">Operating Expenses</span>
+              <span class="fsai-dash-row-value">(149,204)</span>
+              <span class="fsai-dash-row-delta fsai-tone-down">+4.2%</span>
+            </div>
+            <div class="fsai-dash-row fsai-dash-row-strong">
+              <span class="fsai-dash-row-item">Net Profit</span>
+              <span class="fsai-dash-row-value">107,585</span>
+              <span class="fsai-dash-row-delta fsai-tone-up">+26.1%</span>
+            </div>
+            <span class="fsai-dash-explain">Explain this P&amp;L <svg aria-hidden="true" focusable="false"><use href="#fsai-i-arrow"/></svg></span>
+          </div>
+
+          <div class="fsai-dash-panel">
+            <div class="fsai-dash-panel-head"><span>Cash &amp; Guardrails</span></div>
+            <div class="fsai-dash-cash">
+              <span class="fsai-dash-cash-label">Cash on hand</span>
+              <span class="fsai-dash-cash-value">AED 1.2M</span>
+            </div>
+            <div class="fsai-dash-guardrail">
+              <span><strong>Min Cash Reserve</strong><em>Target: AED 250K</em></span>
+              <span class="fsai-dash-guardrail-value"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>AED 1.2M</span>
+            </div>
+            <div class="fsai-dash-guardrail">
+              <span><strong>Cash Runway</strong><em>Target: ≥ 6 months</em></span>
+              <span class="fsai-dash-guardrail-value"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>18.2 mo</span>
+            </div>
+            <div class="fsai-dash-guardrail">
+              <span><strong>AR Days (DSO)</strong><em>Target: ≤ 45 days</em></span>
+              <span class="fsai-dash-guardrail-value"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>32 days</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

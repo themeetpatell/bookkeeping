@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield, FiX, FiMessageCircle, FiCalendar } from 'react-icons/fi';
 import './AccountingLanding.css';
+import { BOOKING_URL } from '../utils/booking';
 
 const WHATSAPP_URL =
   'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0';
-const BOOKING_URL = 'https://contact-finanshels.zohobookings.com/accounting';
 
 const CtaButtons = ({ onWhatsAppClick, source }) => (
   <div className="cta-buttons">
