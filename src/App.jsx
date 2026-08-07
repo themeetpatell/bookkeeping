@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
+import SalesIQAttribution from './components/SalesIQAttribution';
 import AccountingLanding from './pages/AccountingLanding';
 import AccountingLandingBing from './pages/AccountingLandingBing';
 import BookkeepingLanding from './pages/BookkeepingLanding';
@@ -29,28 +30,35 @@ function App() {
   }, [pathname]);
 
   return (
-    <Routes>
-      {/* Standalone: the booking page renders the scheduler on its own, with no
-          nav, offer bar or floating buttons to distract from or overlap it. */}
-      <Route path="/book-a-call" element={<BookACall />} />
+    <>
+      {/* Mounted once, outside the routes: attribution capture, the WhatsApp
+          ref tagger and the SalesIQ widget + CRM bridge must survive client-side
+          navigation, so they are deliberately not tied to any single route. */}
+      <SalesIQAttribution />
 
-      <Route element={<Layout />}>
-        <Route path="/" element={<AccountingLanding />} />
-        <Route path="/accounting-bing" element={<AccountingLandingBing />} />
-        <Route path="/bookkeeping" element={<BookkeepingLanding />} />
-        <Route path="/bookkeeping-bing" element={<BookkeepingLandingBing />} />
-        <Route path="/accounting-software" element={<AccountingSoftwareLanding />} />
-        <Route path="/accounting-software-bing" element={<AccountingSoftwareLandingBing />} />
-        <Route path="/payroll-accounting" element={<PayrollAccountingLanding />} />
-        <Route path="/payroll-accounting-bing" element={<PayrollAccountingLandingBing />} />
-        <Route path="/accounting-whatsapp" element={<AccountingWhatsApp />} />
-        <Route path="/ai-accounting" element={<AIAccountingLanding />} />
-        <Route path="/accounting-form" element={<AccountingForm />} />
-        <Route path="/thank-you" element={<ThankYou />} />
-        <Route path="/thank-you-from-finanshels" element={<ThankYou />} />
-        <Route path="/booking-confirmed" element={<BookingConfirmed />} />
-      </Route>
-    </Routes>
+      <Routes>
+        {/* Standalone: the booking page renders the scheduler on its own, with no
+            nav, offer bar or floating buttons to distract from or overlap it. */}
+        <Route path="/book-a-call" element={<BookACall />} />
+
+        <Route element={<Layout />}>
+          <Route path="/" element={<AccountingLanding />} />
+          <Route path="/accounting-bing" element={<AccountingLandingBing />} />
+          <Route path="/bookkeeping" element={<BookkeepingLanding />} />
+          <Route path="/bookkeeping-bing" element={<BookkeepingLandingBing />} />
+          <Route path="/accounting-software" element={<AccountingSoftwareLanding />} />
+          <Route path="/accounting-software-bing" element={<AccountingSoftwareLandingBing />} />
+          <Route path="/payroll-accounting" element={<PayrollAccountingLanding />} />
+          <Route path="/payroll-accounting-bing" element={<PayrollAccountingLandingBing />} />
+          <Route path="/accounting-whatsapp" element={<AccountingWhatsApp />} />
+          <Route path="/ai-accounting" element={<AIAccountingLanding />} />
+          <Route path="/accounting-form" element={<AccountingForm />} />
+          <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/thank-you-from-finanshels" element={<ThankYou />} />
+          <Route path="/booking-confirmed" element={<BookingConfirmed />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 
