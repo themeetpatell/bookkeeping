@@ -4,13 +4,6 @@ import { FiStar, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 const testimonials = [
   {
     quote:
-      'Fast, friendly, and very professional. I love how communicative they were handling our Corporate tax registration.',
-    name: 'Abdulla Al-Ogail',
-    title: 'Co-founder & CEO, Olymon',
-    avatar: '/Founders/abdulla.jpeg',
-  },
-  {
-    quote:
       'Always very responsive, supportive, having a business mindset, providing visuals and on top of all that, open for feedback so they can keep improving. Very happy that I took the decision to work with them.',
     name: 'Szilvia Vitos',
     title: 'Founder, Livvity',
@@ -52,12 +45,6 @@ const testimonials = [
     name: 'Meet Patel',
     title: 'Former COO, StudentHub & BAWES',
     avatar: '/Founders/themeetpatel.png',
-  },
-  {
-    quote: 'Excellent service. Finanshels has made the tax registration process fast and easy. Their communication is super prompt and clear. 5 stars!!',
-    name: 'Tina Chugani',
-    title: 'Managing Director, Proxis LLC',
-    avatar: '/Founders/tina.jpeg',
   },
 
   {

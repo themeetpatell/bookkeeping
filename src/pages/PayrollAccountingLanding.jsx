@@ -177,7 +177,7 @@ const PayrollAccountingLanding = () => {
     },
     {
       question: "Do you handle WPS compliance?",
-      answer: "Yes, WPS (Wages Protection System) compliance is a core part of our service. We handle registration, monthly salary file generation, and ensure timely submissions to meet Ministry of Labour requirements."
+      answer: "Yes, WPS (Wages Protection System) compliance is a core part of our service. We handle setup, monthly salary file generation, and ensure timely submissions to meet Ministry of Labour requirements."
     },
     {
       question: "Can you handle multi-entity payroll?",
@@ -197,7 +197,7 @@ const PayrollAccountingLanding = () => {
       limit: "Up to 50 transactions/year",
       features: [
         "Annual Tax Filing",
-        "Tax Registration",
+        "Tax Compliance Support",
         "Basic Financial Statements",
         "Dedicated Support Manager",
         "30 Min Free Consultation"
@@ -448,7 +448,7 @@ const PayrollAccountingLanding = () => {
                   </div>
                   <div className="feature-content">
                     <h3>Full Tax & WPS Compliance</h3>
-                    <p>WPS filing, tax registration, and corporate tax compliance handled. Stay audit-ready without stress.</p>
+                    <p>WPS filing and corporate tax compliance handled. Stay audit-ready without stress.</p>
                   </div>
                 </div>
               </div>

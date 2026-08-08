@@ -207,7 +207,7 @@ const AccountingSoftwareLandingBing = () => {
       finanshels: true
     },
     {
-      feature: 'VAT Registration & Filing',
+      feature: 'VAT Filing & Compliance',
       software: false,
       finanshels: true
     },
@@ -298,7 +298,7 @@ const AccountingSoftwareLandingBing = () => {
     },
     {
       question: "How does Finanshels handle UAE Corporate Tax compliance?",
-      answer: "We manage your complete Corporate Tax lifecycle — from FTA registration to quarterly filings and annual returns. Our team stays updated with the latest UAE tax regulations to ensure 100% compliance and help you avoid penalties."
+      answer: "We manage your complete Corporate Tax lifecycle — from quarterly filings to annual returns. Our team stays updated with the latest UAE tax regulations to ensure 100% compliance and help you avoid penalties."
     },
     {
       question: "Is my financial data secure?",
@@ -594,7 +594,7 @@ const AccountingSoftwareLandingBing = () => {
             <div className="software-solution-card">
               <div className="software-solution-icon">🛡️</div>
               <h3>UAE Tax Compliance</h3>
-              <p>Corporate tax, VAT registration, and quarterly filings handled. Stay compliant without the stress of managing software yourself.</p>
+              <p>Corporate tax and VAT filings handled. Stay compliant without the stress of managing software yourself.</p>
             </div>
           </div>
           
@@ -729,8 +729,8 @@ const AccountingSoftwareLandingBing = () => {
               
               <ul className="software-pricing-features">
                 <li><FiCheckCircle /> Corporate Tax Filing (Annual)</li>
-                <li><FiCheckCircle /> CT Registration</li>
-                <li><FiCheckCircle /> VAT Registration & Quarterly Filing</li>
+                <li><FiCheckCircle /> CT Filing</li>
+                <li><FiCheckCircle /> VAT Quarterly Filing</li>
                 <li><FiCheckCircle /> Quarterly Financial Statements</li>
                 <li><FiCheckCircle /> Dedicated Support Manager</li>
                 <li><FiCheckCircle /> 30 Min Free Tax Consultation</li>

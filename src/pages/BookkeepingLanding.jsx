@@ -130,7 +130,7 @@ const BookkeepingLanding = () => {
     serviceType: [
       'Bookkeeping',
       'Corporate Tax Filing',
-      'VAT Registration & Filing',
+      'VAT Filing & Compliance',
       'Financial Reporting',
       'Cash Flow Forecasting'
     ],
@@ -195,7 +195,7 @@ const BookkeepingLanding = () => {
     {
       icon: <FiShield />,
       title: 'UAE Tax Compliance',
-      description: 'Corporate tax, VAT registration, and quarterly filings handled. Stay compliant without the stress.'
+      description: 'Corporate tax and VAT filings handled. Stay compliant without the stress.'
     }
   ];
 
@@ -259,8 +259,8 @@ const BookkeepingLanding = () => {
       transactions: 'Up to 50 transactions/year',
       features: [
         'Corporate Tax Filing (Annual)',
-        'CT Registration',
-        'VAT Registration & Quarterly Filing',
+        'CT Filing',
+        'VAT Quarterly Filing',
         'Quarterly Financial Statements',
         'Dedicated Support Manager',
         '30 Min Free Tax Consultation'
@@ -317,7 +317,7 @@ const BookkeepingLanding = () => {
   const faqs = [
     {
       question: 'How does Finanshels handle UAE Corporate Tax compliance?',
-      answer: 'We manage your complete Corporate Tax lifecycle - from registration with the FTA to quarterly filings and annual returns. Our team stays updated with the latest UAE tax regulations to ensure 100% compliance and help you avoid penalties.'
+      answer: 'We manage your complete Corporate Tax lifecycle - from quarterly filings to annual returns. Our team stays updated with the latest UAE tax regulations to ensure 100% compliance and help you avoid penalties.'
     },
     {
       question: 'What accounting software do you support?',

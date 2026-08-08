@@ -16,7 +16,7 @@ const PricingSection = () => {
       transactions: "Up to 50 transactions/year",
       features: [
         "Annual Tax Filing",
-        "Tax Registration",
+        "Tax Compliance Support",
         "Basic Financial Statements",
         "Dedicated Support Manager",
         "30 Min Free Consultation",

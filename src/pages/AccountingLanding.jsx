@@ -123,12 +123,6 @@ const AccountingLanding = () => {
 
   const testimonials = [
     {
-      text: "Fast, friendly, and very professional. I love how communicative they were handling our Corporate tax registration.",
-      name: "Abdulla Al-Ogail",
-      title: "Co-founder & CEO, Olymon",
-      initials: "AA"
-    },
-    {
       text: "Always very responsive, supportive, having a business mindset, providing visuals and on top of all that, open for feedback so they can keep improving. Very happy that I took the decision to work with them.",
       name: "Szilvia Vitos",
       title: "Founder, Livvity",
@@ -401,7 +395,7 @@ const AccountingLanding = () => {
                   </div>
                   <div className="feature-content">
                     <h3>Full Tax Compliance</h3>
-                    <p>Corporate tax, VAT registration, and quarterly filings handled. Stay compliant without the stress.</p>
+                    <p>Corporate tax and VAT filings handled. Stay compliant without the stress.</p>
                   </div>
                 </div>
               </div>
@@ -577,8 +571,8 @@ const AccountingLanding = () => {
               
               <ul className="pricing-features">
                 <li><FiCheckCircle /> <strong>Free Corporate Tax (CT) Filing</strong></li>
-                <li><FiCheckCircle /> CT Registration</li>
-                <li><FiCheckCircle /> <strong>Free VAT Registration &amp; Filing</strong></li>
+                <li><FiCheckCircle /> CT Filing</li>
+                <li><FiCheckCircle /> <strong>Free VAT Filing &amp; Compliance</strong></li>
                 <li><FiCheckCircle /> Quarterly Financial Statements</li>
                 <li><FiCheckCircle /> Dedicated Support Manager</li>
                 <li><FiCheckCircle /> 30 Min Free Tax Consultation</li>
