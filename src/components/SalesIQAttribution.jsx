@@ -6,9 +6,10 @@
    Finanshels site it is dropped into. */
 /* ============================================================
    SalesIQAttribution.jsx — Finanshels drop-in for React sites
-   v1.0 (2026-08-07)
+   v1.1 (2026-08-08)
 
-   One component = the full stack that runs on finanshels.com:
+   One component = the full stack that runs on every Finanshels
+   property (see COOKIE_DOMAINS below):
    1. Attribution capture (UTMs + gclid/gbraid/wbraid/fbclid/
       msclkid/li_fat_id/ttclid → fs_first / fs_last cookies)
    2. Zoho Forms iframe patcher (formperma + zfrmz embeds)
@@ -34,17 +35,36 @@ const PARAMS = [
   "gclid", "gbraid", "wbraid", "fbclid", "msclkid", "li_fat_id", "ttclid",
 ];
 
+/* Registrable domains this component may be served from. Attribution cookies
+   are widened to `.<domain>` so they survive navigation between that domain's
+   subdomains. Cookies cannot be shared ACROSS these entries — finanshels.co and
+   finanshels.com are separate registrable domains, so each keeps its own
+   fs_first / fs_last. */
+const COOKIE_DOMAINS = ["finanshels.co", "finanshels.com"];
+
 /* ---------- cookies ---------- */
 function getCookie(n) {
   const m = document.cookie.match("(?:^|; )" + n + "=([^;]*)");
   return m ? decodeURIComponent(m[1]) : null;
 }
+/* Exact suffix match, never `indexOf`: "accounting.finanshels.com" contains the
+   substring "finanshels.co", so a substring test would set an unsettable
+   domain=.finanshels.co cookie on the .com host and silently drop it. */
+function cookieDomain() {
+  const host = location.hostname;
+  for (let i = 0; i < COOKIE_DOMAINS.length; i++) {
+    const d = COOKIE_DOMAINS[i];
+    if (host === d || host.slice(-(d.length + 1)) === "." + d) return d;
+  }
+  return null;
+}
 function setCookie(n, v, days) {
   const e = new Date();
   e.setDate(e.getDate() + days);
   let c = n + "=" + encodeURIComponent(v) + "; expires=" + e.toUTCString() + "; path=/; SameSite=Lax";
-  // Share attribution across *.finanshels.com; host-only cookie elsewhere
-  if (location.hostname.indexOf("finanshels.com") > -1) c += "; domain=.finanshels.com";
+  // Share attribution across subdomains of a known domain; host-only elsewhere
+  const d = cookieDomain();
+  if (d) c += "; domain=." + d;
   document.cookie = c;
 }
 

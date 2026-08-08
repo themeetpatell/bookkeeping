@@ -391,7 +391,7 @@ const seoJsonLd = {
   description:
     'UAE’s First AI-native accounting firm. AI agents reconcile and draft; qualified accountants review and file. Bookkeeping, VAT, Corporate Tax, payroll and CFO insights.',
   areaServed: 'AE',
-  url: 'https://www.finanshels.com/ai-accounting',
+  url: 'https://accounting.finanshels.co/ai-accounting',
 };
 
 const AIAccountingLanding = () => {

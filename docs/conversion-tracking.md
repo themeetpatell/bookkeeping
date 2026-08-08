@@ -1,6 +1,6 @@
 # Conversion Tracking — How It Should Work
 
-GTM container: **GTM-MXFJ6CGB** • Site: `accounting.finanshels.com`
+GTM container: **GTM-MXFJ6CGB** • Site: `accounting.finanshels.co`
 
 ## The rule
 

@@ -11,7 +11,7 @@ Marketing site for Finanshels’ UAE bookkeeping, tax, and consultation offering
 ## Environment & Integrations
 - Zoho consultation form lives in `src/pages/NewHomePage.jsx` (`ZohoConsultationForm`). Do not change Zoho field `name` attributes or the form action URL.
 - Booking CTA targets: `https://contact-finanshels.zohobookings.com/accounting`.
-- Zoho Bookings must redirect after a confirmed booking to `https://accounting.finanshels.com/booking-confirmed`
+- Zoho Bookings must redirect after a confirmed booking to `https://accounting.finanshels.co/booking-confirmed`
   (`src/pages/BookingConfirmed.jsx`), which pushes the `zoho_booking_completed` dataLayer event. The GTM
   "Book a meeting Zoho" Google Ads conversion fires on that event — not on booking-link clicks.
 - Floating contacts: WhatsApp + phone links configured in `src/components/FloatingContacts.jsx`.

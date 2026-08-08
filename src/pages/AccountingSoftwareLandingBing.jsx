@@ -130,7 +130,7 @@ const ZohoConsultationForm = ({ formId }) => (
 const AccountingSoftwareLandingBing = () => {
   const [openFaq, setOpenFaq] = useState(null);
   const { pathname } = useLocation();
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://finanshels.com';
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://accounting.finanshels.co';
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);

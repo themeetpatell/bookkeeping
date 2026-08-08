@@ -121,8 +121,8 @@ const BookkeepingLandingBing = () => {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'Finanshels Bookkeeping & Tax (UAE)',
-    url: 'https://finanshels.com/bookkeeping',
-    image: 'https://finanshels.com/Dubai.png',
+    url: 'https://accounting.finanshels.co/bookkeeping',
+    image: 'https://accounting.finanshels.co/Dubai.png',
     description:
       'UAE bookkeeping, corporate tax, and VAT filing with real-time dashboards. Free consultation and pay only if satisfied.',
     areaServed: 'AE',
