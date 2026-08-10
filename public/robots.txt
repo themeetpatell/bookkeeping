@@ -1,0 +1,11 @@
+# accounting.finanshels.co — standalone Google/Bing Ads site.
+# Every ad landing page must stay crawlable so AdsBot can reach it; only the
+# post-conversion pages are held back from organic indexing.
+
+User-agent: *
+Allow: /
+Disallow: /thank-you
+Disallow: /thank-you-from-finanshels
+Disallow: /booking-confirmed
+
+Sitemap: https://accounting.finanshels.co/sitemap.xml
