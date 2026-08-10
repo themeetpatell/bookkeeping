@@ -14,6 +14,7 @@ import PayrollAccountingLandingBing from './pages/PayrollAccountingLandingBing';
 import AccountingWhatsApp from './pages/AccountingWhatsApp';
 import AIAccountingLanding from './pages/AIAccountingLanding';
 import AccountingForm from './pages/AccountingForm';
+import AccountingFormReddit from './pages/AccountingFormReddit';
 import ThankYou from './pages/ThankYou';
 import BookingConfirmed from './pages/BookingConfirmed';
 import BookACall from './pages/BookACall';
@@ -53,6 +54,7 @@ function App() {
           <Route path="/accounting-whatsapp" element={<AccountingWhatsApp />} />
           <Route path="/ai-accounting" element={<AIAccountingLanding />} />
           <Route path="/accounting-form" element={<AccountingForm />} />
+          <Route path="/accounting-form-reddit" element={<AccountingFormReddit />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/thank-you-from-finanshels" element={<ThankYou />} />
           <Route path="/booking-confirmed" element={<BookingConfirmed />} />
