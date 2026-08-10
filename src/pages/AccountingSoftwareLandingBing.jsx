@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiX } from 'react-icons/fi';
 import Seo from '../components/Seo';
-import './AccountingSoftwareLandingBing.css';
+// Shares the Google-ads stylesheet: the Bing variant is visually identical and
+// only differs in the prefilled WhatsApp copy below.
+import './AccountingSoftwareLanding.css';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
@@ -311,7 +313,7 @@ const AccountingSoftwareLandingBing = () => {
     '@type': 'ProfessionalService',
     name: 'Finanshels Accounting Experts (UAE)',
     url: `${baseUrl}${pathname}`,
-    image: `${baseUrl}/Dubai.png`,
+    image: `${baseUrl}/Dubai.jpg`,
     description:
       "Stop paying for accounting software that can't think. Get expert accountants + a client portal + real-time insights.",
     areaServed: 'AE',
@@ -332,7 +334,7 @@ const AccountingSoftwareLandingBing = () => {
         title="Stop Paying for Accounting Software That Can't Think | Finanshels"
         description="QuickBooks, Xero, Zoho Books — they're tools. Get expert accountants + a client portal + real-time financial insights."
         canonicalPath={pathname}
-        image="/Dubai.png"
+        image="/Dubai.jpg"
         jsonLd={seoJsonLd}
       />
       

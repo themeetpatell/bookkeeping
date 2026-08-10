@@ -165,7 +165,7 @@ const PayrollAccountingLanding = () => {
   const faqs = [
     {
       question: "What is included in your payroll services?",
-      answer: "Our payroll services include salary processing, WPS compliance and filing, gratuity calculations, leave management, end-of-service benefits, payslip generation, and real-time reporting dashboards. We handle everything from employee onboarding to final settlements."
+      answer: "Our payroll services include salary processing, WPS compliance, gratuity calculations, leave management, end-of-service benefits, payslip generation, and real-time reporting dashboards. We handle everything from employee onboarding to final settlements."
     },
     {
       question: "How long does it take to set up?",
@@ -196,7 +196,7 @@ const PayrollAccountingLanding = () => {
       price: "499",
       limit: "Up to 50 transactions/year",
       features: [
-        "Annual Tax Filing",
+        "Annual Tax Compliance",
         "Tax Compliance Support",
         "Basic Financial Statements",
         "Dedicated Support Manager",
@@ -358,7 +358,7 @@ const PayrollAccountingLanding = () => {
               Managing Payroll Accounting is Taxing
             </h2>
             <p className="section-description">
-              You started your business to pursue your passion — not to wrestle with payroll spreadsheets and tax filings. Yet here you are, spending hours on tasks that drain your energy.
+              You started your business to pursue your passion — not to wrestle with payroll spreadsheets and tax compliance. Yet here you are, spending hours on tasks that drain your energy.
             </p>
           </div>
           
@@ -392,7 +392,7 @@ const PayrollAccountingLanding = () => {
                 <FiAlertTriangle />
               </div>
               <h3>Compliance Anxiety</h3>
-              <p>WPS deadlines, tax filings, and Ministry of Labour requirements keeping you up at night.</p>
+              <p>WPS deadlines, tax compliance, and Ministry of Labour requirements keeping you up at night.</p>
             </div>
           </div>
         </div>
@@ -448,7 +448,7 @@ const PayrollAccountingLanding = () => {
                   </div>
                   <div className="feature-content">
                     <h3>Full Tax & WPS Compliance</h3>
-                    <p>WPS filing and corporate tax compliance handled. Stay audit-ready without stress.</p>
+                    <p>WPS and corporate tax compliance handled. Stay audit-ready without stress.</p>
                   </div>
                 </div>
               </div>
@@ -481,7 +481,7 @@ const PayrollAccountingLanding = () => {
                 <div className="dashboard-items">
                   <div className="dashboard-item">
                     <FiCheckCircle className="item-icon green" />
-                    <span>WPS Filed</span>
+                    <span>WPS Compliant</span>
                     <span className="item-status">Today</span>
                   </div>
                   <div className="dashboard-item">
@@ -523,7 +523,7 @@ const PayrollAccountingLanding = () => {
               <ul className="comparison-list">
                 <li><FiX className="list-icon" /> 15–20 hrs/month chasing accountants</li>
                 <li><FiX className="list-icon" /> No cash flow visibility</li>
-                <li><FiX className="list-icon" /> Late tax filings & penalties</li>
+                <li><FiX className="list-icon" /> Late tax compliance & penalties</li>
                 <li><FiX className="list-icon" /> Disconnected tools & spreadsheets</li>
                 <li><FiX className="list-icon" /> Costly in-house finance team</li>
               </ul>

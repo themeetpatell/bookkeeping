@@ -164,12 +164,15 @@ const ZohoConsultationForm = ({ formId }) => (
   </form>
 );
 
+/* Written as a plain log of what happened this morning — verbs a business
+   owner would use, not pipeline vocabulary. Timestamps carry the "it runs
+   while you sleep" point without a single sentence of explanation. */
 const heroFeedItems = [
-  { icon: 'check', text: '214 transactions categorized', meta: 'Emirates NBD · Mashreq' },
-  { icon: 'check', text: 'Bank reconciliation complete', meta: '0 discrepancies' },
-  { icon: 'flag', text: '3 invoices flagged for review', meta: 'Routed to your accountant' },
-  { icon: 'check', text: 'VAT return drafted', meta: 'Due 28 Aug · ready early' },
-  { icon: 'human', text: 'Reviewed & approved', meta: 'Senior accountant sign-off' },
+  { icon: 'check', time: '06:04:12', text: 'Sorted 214 transactions', meta: 'Emirates NBD, Mashreq' },
+  { icon: 'check', time: '06:04:38', text: 'Matched every bank line', meta: 'nothing left over' },
+  { icon: 'flag', time: '06:05:07', text: 'Set 3 invoices aside', meta: 'your accountant is on it' },
+  { icon: 'check', time: '06:05:41', text: 'Drafted your quarterly VAT compliance', meta: 'due 28 Aug, ready now' },
+  { icon: 'human', time: '06:06:02', text: 'Your accountant signed it off', meta: 'checked line by line' },
 ];
 
 const clientLogos = [
@@ -187,18 +190,18 @@ const clientLogos = [
 const pillars = [
   {
     number: '01',
-    title: 'AI does the repetitive work',
-    text: 'Categorization, reconciliation, data capture and deadline tracking run continuously — not once a month. Your books are current every morning.',
+    title: 'The boring work runs itself',
+    text: 'Sorting transactions, matching bank lines, chasing receipts, watching deadlines — it happens every day instead of once a month. You wake up to books that are already current.',
   },
   {
     number: '02',
-    title: 'Accountants own the outcome',
-    text: 'Every number the AI produces is reviewed by a qualified accountant before it reaches you or the FTA. AI drafts. Humans sign.',
+    title: 'A real accountant owns your numbers',
+    text: 'Nothing reaches you or the FTA until a qualified accountant has been through it. The software does the typing. A person takes responsibility.',
   },
   {
     number: '03',
-    title: 'You see everything, live',
-    text: 'No more waiting for month-end PDFs. A real-time dashboard shows cash, runway, VAT position and P&L the moment anything changes.',
+    title: 'You can look any time',
+    text: 'No waiting for a PDF at month-end. Open the dashboard and see your cash, your runway, what you owe in VAT and how the month is going — as of this morning.',
   },
 ];
 
@@ -206,32 +209,32 @@ const comparisonRows = [
   {
     label: 'Monthly close',
     old: 'Weeks after month-end',
-    now: 'Days — AI reconciles continuously',
+    now: 'Days — the matching never stops',
   },
   {
     label: 'Data entry',
     old: 'Manual keying, human error',
-    now: 'Automated capture, accountant-verified',
+    now: 'Captured for you, checked by a person',
   },
   {
     label: 'Visibility',
     old: 'Static PDFs, once a month',
-    now: 'Live dashboard, always current',
+    now: 'A dashboard that is always current',
   },
   {
     label: 'Tax deadlines',
     old: 'Last-minute scrambles',
-    now: 'Tracked by AI, filed early',
+    now: 'Watched all year, ready early',
   },
   {
     label: 'Errors',
     old: 'Discovered at audit',
-    now: 'Flagged the moment they happen',
+    now: 'Caught the day they happen',
   },
   {
     label: 'Cost',
     old: 'Grows with headcount',
-    now: 'Grows with software — not people',
+    now: 'Grows with software, not headcount',
   },
 ];
 
@@ -243,36 +246,36 @@ const workflowSteps = [
   },
   {
     step: '02',
-    title: 'AI agents process',
-    text: 'Transactions are captured, categorized and reconciled daily. Anomalies, duplicates and missing documents get flagged automatically.',
+    title: 'We do the daily work',
+    text: 'Every transaction is captured, sorted and matched against your bank — daily. Anything odd, duplicated or missing a receipt gets pulled out for a person to look at.',
   },
   {
     step: '03',
-    title: 'Accountants review',
-    text: 'Your dedicated accountant checks every output, resolves exceptions and signs off on filings. Nothing ships on AI confidence alone.',
+    title: 'Your accountant checks it',
+    text: 'A dedicated accountant goes through the work, sorts out anything that was set aside, and signs off on the compliance work. Nothing goes out on the software’s say-so alone.',
   },
   {
     step: '04',
     title: 'You decide',
-    text: 'Clean books, live dashboards and on-time VAT & Corporate Tax filings — plus a team on WhatsApp when you need an answer.',
+    text: 'Clean books, live dashboards and on-time VAT & Corporate Tax compliance — plus a team on WhatsApp when you need an answer.',
   },
 ];
 
 const aiDuties = [
-  'Categorizes every transaction, daily',
-  'Reconciles bank feeds continuously',
-  'Extracts data from invoices & receipts',
-  'Tracks VAT and Corporate Tax deadlines',
-  'Drafts returns and monthly reports',
-  'Flags anomalies and duplicates instantly',
+  'Sorts every transaction, every day',
+  'Matches your bank lines as they land',
+  'Reads your invoices and receipts',
+  'Keeps an eye on every tax deadline',
+  'Drafts your compliance work and monthly reports',
+  'Spots duplicates and odd entries',
 ];
 
 const humanDuties = [
-  'Reviews and approves every AI output',
-  'Resolves flagged exceptions with context',
-  'Signs off on VAT & Corporate Tax filings',
-  'Advises on structure, cash and runway',
-  'Answers you on WhatsApp — a person, fast',
+  'Checks and approves the work',
+  'Sorts out anything that looks wrong',
+  'Signs off on VAT & Corporate Tax compliance',
+  'Talks through cash, runway and structure',
+  'Answers on WhatsApp — quickly, and as a person',
   'Owns the numbers at audit time',
 ];
 
@@ -280,17 +283,17 @@ const services = [
   {
     icon: FiBookOpen,
     title: 'Bookkeeping',
-    text: 'Daily, AI-reconciled books reviewed by your dedicated accountant. Always audit-ready.',
+    text: 'Books matched daily and checked by your own accountant. Ready whenever an auditor, a bank or an investor asks.',
   },
   {
     icon: FiPercent,
     title: 'VAT Compliance',
-    text: 'Registration, quarterly returns and FTA correspondence — drafted by AI, filed by humans.',
+    text: 'Quarterly VAT compliance and FTA letters — drafted for you, checked by a person.',
   },
   {
     icon: FiBriefcase,
     title: 'Corporate Tax',
-    text: '9% Corporate Tax registration, planning and filing with deadlines tracked automatically.',
+    text: '9% Corporate Tax planning and compliance, with the deadlines watched for you.',
   },
   {
     icon: FiUsers,
@@ -360,7 +363,7 @@ const faqs = [
   {
     question: 'Is AI doing my accounting on its own?',
     answer:
-      'No. AI drafts, humans sign. Every categorization, reconciliation and filing is reviewed by a qualified accountant before it reaches you or the FTA. You get the speed of automation with the accountability of a licensed firm.',
+      'No. AI drafts, humans sign. Every categorization, reconciliation and compliance check is reviewed by a qualified accountant before it reaches you or the FTA. You get the speed of automation with the accountability of a licensed firm.',
   },
   {
     question: 'Which tools do you integrate with?',
@@ -389,7 +392,7 @@ const seoJsonLd = {
   '@type': 'AccountingService',
   name: 'Finanshels — First AI-Native Accounting Firm',
   description:
-    'UAE’s First AI-native accounting firm. AI agents reconcile and draft; qualified accountants review and file. Bookkeeping, VAT, Corporate Tax, payroll and CFO insights.',
+    'UAE’s First AI-native accounting firm. AI agents reconcile and draft; qualified accountants review and sign off. Bookkeeping, VAT, Corporate Tax, payroll and CFO insights.',
   areaServed: 'AE',
   url: 'https://accounting.finanshels.co/ai-accounting',
 };
@@ -418,7 +421,7 @@ const AIAccountingLanding = () => {
     <div className="ai-landing" ref={rootRef}>
       <Seo
         title="First AI-Native Accounting Firm in UAE | Finanshels"
-        description="AI agents reconcile your books daily. Qualified accountants review and file. Bookkeeping, VAT, Corporate Tax and payroll for 7,000+ UAE businesses — 10× faster."
+        description="AI agents reconcile your books daily. Qualified accountants review and sign off. Bookkeeping, VAT, Corporate Tax and payroll for 7,000+ UAE businesses — 10× faster."
         canonicalPath="/ai-accounting"
         jsonLd={seoJsonLd}
       />
@@ -440,9 +443,9 @@ const AIAccountingLanding = () => {
               </h1>
 
               <p className="ai-hero-sub">
-                Finanshels pairs AI agents that categorize, reconcile and draft your filings with
-                qualified accountants who review every number. 10&times; faster closes,
-                audit-ready always &mdash; for 7,000+ UAE businesses.
+                Software does the sorting, the matching and the first draft overnight. A qualified
+                accountant checks every number before it goes anywhere. That&rsquo;s how 7,000+ UAE
+                businesses close 10&times; faster and stay ready for an audit.
               </p>
 
               <div className="ai-hero-actions">
@@ -481,44 +484,50 @@ const AIAccountingLanding = () => {
               </dl>
             </div>
 
-            {/* Live agent feed card */}
+            {/* This morning's activity log */}
             <div className="ai-hero-visual">
-              <div className="ai-feed-card">
-                <div className="ai-feed-header">
-                  <span className="ai-feed-live">
-                    <span className="ai-live-dot" />
-                    Finanshels AI &middot; working now
+              <div className="ai-term">
+                <div className="ai-term-bar">
+                  <span className="ai-term-name">
+                    <b>finanshels</b> &middot; today 6:04 AM
                   </span>
-                  <span className="ai-feed-date">Today, 6:04 AM</span>
+                  <span className="ai-term-live">
+                    <span className="ai-live-dot" />
+                    live
+                  </span>
                 </div>
 
-                <ul className="ai-feed-list">
+                <ul className="ai-term-log">
                   {heroFeedItems.map((item, index) => (
                     <li
                       key={item.text}
-                      className={`ai-feed-item ai-feed-${item.icon}`}
+                      className={`ai-term-row ai-term-${item.icon}`}
                       style={{ animationDelay: `${0.5 + index * 0.35}s` }}
                     >
-                      <span className="ai-feed-icon">{feedIcon(item.icon)}</span>
-                      <span className="ai-feed-text">
+                      <span className="ai-term-time">{item.time}</span>
+                      <span className="ai-term-glyph">{feedIcon(item.icon)}</span>
+                      <span className="ai-term-msg">
                         {item.text}
-                        <span className="ai-feed-meta">{item.meta}</span>
+                        <span className="ai-term-meta">{item.meta}</span>
                       </span>
                     </li>
                   ))}
-                  <li className="ai-feed-item ai-feed-typing" style={{ animationDelay: '2.4s' }}>
-                    <span className="ai-typing-dots">
-                      <span />
-                      <span />
-                      <span />
+                  <li className="ai-term-row ai-term-run" style={{ animationDelay: '2.4s' }}>
+                    <span className="ai-term-time">06:06:&mdash;</span>
+                    <span className="ai-term-glyph">
+                      <span className="ai-typing-dots">
+                        <span />
+                        <span />
+                        <span />
+                      </span>
                     </span>
-                    <span className="ai-feed-text">Preparing your July P&amp;L&hellip;</span>
+                    <span className="ai-term-msg">Writing up your July P&amp;L</span>
                   </li>
                 </ul>
 
-                <div className="ai-feed-footer">
+                <div className="ai-term-foot">
                   <FiShield aria-hidden="true" />
-                  Every action reviewed by a qualified accountant
+                  A qualified accountant checks every line before it goes out
                 </div>
               </div>
               <Spark className="ai-hero-spark ai-hero-spark-1" />
@@ -531,7 +540,7 @@ const AIAccountingLanding = () => {
       {/* ============ LOGOS ============ */}
       <section className="ai-logos" aria-label="Client logos">
         <div className="ai-container">
-          <p className="ai-logos-label">Trusted by leading UAE businesses</p>
+          <p className="ai-logos-label">Trusted by 7,000+ leading UAE businesses</p>
           <div className="ai-logos-track" data-reveal>
             {clientLogos.map((logo) => (
               <div key={logo.alt} className="ai-logo-tile">

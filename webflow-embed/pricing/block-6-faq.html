@@ -1,0 +1,1084 @@
+<!-- ==========================================================================
+     FINANSHELS · ACCOUNTING PACKAGES / PRICING — BLOCK 6 of 7: FAQS
+
+     Paste into its own Webflow HTML Embed element.
+
+     SELF-CONTAINED — this block carries the design tokens, the reset, the icons
+     it references and its own media queries. Paste the blocks in any order, or
+     paste one on its own: it renders correctly either way. Page order is still
+     6 of 7 if you want the full page reading top to bottom.
+
+     Place each embed in a Section with no padding. Do NOT put block 7 inside
+     a Webflow Form Block — it contains its own form element.
+     ========================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+<style>
+/* --------------------------------------------------------------------------
+   CASCADE FENCE — see webflow-embed/README.md
+   `all: revert` discards every author-origin declaration the host page
+   contributed, falling back to the browser's own defaults. At (1,1,0) it
+   outranks Webflow's tag and class styles; the component rules that follow
+   sit higher still, so they win against the reset.
+   -------------------------------------------------------------------------- */
+
+/* SVG subtrees are deliberately excluded. Presentation attributes (fill,
+   stroke, stroke-width, d) cascade at author origin, so reverting them erases
+   the icon geometry outright — verified: `d` computes to `none`. */
+.fspr-root:not(#_),
+.fspr-root:not(#_) :where(*:not(svg, svg *)),
+.fspr-root:not(#_) :where(*:not(svg, svg *))::before,
+.fspr-root:not(#_) :where(*:not(svg, svg *))::after {
+  all: revert;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Baseline the source stylesheet was authored against (src/App.css applies a
+   global `* { margin: 0; padding: 0 }`, src/index.css the link/button rules). */
+.fspr-root:not(#_) :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fspr-root:not(#_) :where(button) {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fspr-root:not(#_) :where(ul, ol) {
+  list-style: none;
+}
+
+/* SVGs sit outside the `all: revert` sweep, so a host rule like Webflow's
+   `img, svg { max-width: 100%; vertical-align: middle }` would still reach
+   them. Neutralise box-model and decoration properties only — every paint and
+   geometry property is left alone. `baseline` is the UA default and matches
+   the React page. */
+.fspr-root:not(#_) :where(svg, svg *) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  vertical-align: baseline;
+  float: none;
+}
+
+.fspr-root:not(#_) :where(img) {
+  max-width: none;
+}
+
+/* Icon sprite host — never rendered. */
+.fspr-root:not(#_) :where(.fspr-sprite) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Optional full-bleed escape hatch — add `fspr-fullbleed` to a wrapper that
+   sits inside a padded Webflow container. Needs body { overflow-x: hidden }
+   when a vertical scrollbar is present. */
+.fspr-root:not(#_).fspr-fullbleed {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+}
+
+/* ============================================================
+   Pricing — Webflow embed source
+   Same design system as AIAccountingLanding.css: warm paper canvas,
+   one accent, hairline bento grids, Inter at light display weights.
+   Authored with a `.fspr-` prefix so the build can namespace it to
+   `.fspr-` and the two pages can never collide on a class name.
+   ============================================================ */
+
+.fspr-root:not(#_) {
+  --fspr-canvas: #faf9f5;
+  --fspr-surface: #ffffff;
+  --fspr-line: #e7e3d8;
+  --fspr-line-strong: #d6cfbe;
+  --fspr-seam: #eeeae0;
+
+  --fspr-paper: #ffffff;
+  --fspr-paper-sunk: #faf9f5;
+  --fspr-paper-line: #e7e3d8;
+  --fspr-paper-ink: #191919;
+  --fspr-paper-muted: #6b6b6b;
+
+  /* Orange ramp measured against the cream canvas — fill with accent,
+     write with ink. See AIAccountingLanding.css for the full ratios. */
+  --fspr-accent: #f16610;
+  --fspr-accent-deep: #d45a0e;
+  --fspr-accent-ink: #b0500a;
+  --fspr-accent-band: #c25309;
+  --fspr-accent-soft: rgba(241, 102, 16, 0.10);
+  --fspr-accent-line: rgba(241, 102, 16, 0.30);
+
+  --fspr-text: #191919;
+  --fspr-muted: #57534a;
+  --fspr-dim: #746e64;
+
+  --fspr-radius: 12px;
+  --fspr-radius-lg: 16px;
+  --fspr-pill: 999px;
+  --fspr-pad: 112px;
+  /* Container side padding as a token, so the testimonial rail can cancel it
+     with a negative margin and let cards scroll to the screen edge without
+     re-deriving the number at every breakpoint. */
+  --fspr-gutter: 32px;
+
+  --fspr-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --fspr-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+  background: var(--fspr-canvas);
+  color: var(--fspr-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+
+.fspr-root:not(#_) *,
+.fspr-root:not(#_) *::before,
+.fspr-root:not(#_) *::after {
+  box-sizing: border-box;
+}
+
+
+.fspr-root:not(#_) .fspr-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--fspr-gutter);
+}
+
+
+.fspr-root:not(#_) .fspr-accent {
+  color: var(--fspr-accent-deep);
+}
+
+
+/* Visible to screen readers only — icon-only controls still need a name. */
+.fspr-root:not(#_) .fspr-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* ---------- Scroll reveal ----------
+   Hidden state is gated behind `.is-ready`, added by the script, so the page
+   renders fully visible if JS never runs. */
+
+.fspr-root:not(#_).is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--fspr-ease-out),
+    transform 0.65s var(--fspr-ease-out);
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > * {
+  animation: fspr-rise 0.6s var(--fspr-ease-out) both;
+  animation-delay: var(--fspr-stagger, 0s);
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --fspr-stagger: 0.08s; }
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --fspr-stagger: 0.16s; }
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --fspr-stagger: 0.24s; }
+
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.fspr-root:not(#_) .fspr-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fspr-dim);
+}
+
+
+.fspr-root:not(#_) .fspr-section-head {
+  max-width: 760px;
+  margin-bottom: 60px;
+}
+
+
+.fspr-root:not(#_) .fspr-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+
+.fspr-root:not(#_) .fspr-section-head p {
+  margin: 18px 0 0;
+  max-width: 40rem;
+  font-size: 1.03rem;
+  line-height: 1.7;
+  color: var(--fspr-muted);
+}
+
+
+/* ---------- Buttons ---------- */
+
+.fspr-root:not(#_) .fspr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border-radius: var(--fspr-pill);
+  border: 1px solid transparent;
+  font-size: 0.93rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--fspr-ease),
+    border-color 0.3s var(--fspr-ease),
+    color 0.3s var(--fspr-ease),
+    transform 0.3s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-primary {
+  background: var(--fspr-accent);
+  color: #fff;
+}
+
+
+.fspr-root:not(#_) .fspr-btn-primary:hover {
+  background: var(--fspr-accent-deep);
+  transform: translateY(-2px);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-ghost {
+  background: transparent;
+  color: var(--fspr-text);
+  border-color: var(--fspr-line-strong);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-ghost:hover {
+  border-color: var(--fspr-text);
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+
+/* ---------- Conversion rail ----------
+   The page exists to produce quote requests, so each proof block ends with
+   the ask rather than saving it all for the footer. One shared component,
+   repeated after the comparison, the alternatives and the FAQs. */
+
+.fspr-root:not(#_) .fspr-rail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 40px;
+  padding: 26px 30px;
+  border: 1px solid var(--fspr-line);
+  border-radius: var(--fspr-radius-lg);
+  background:
+    radial-gradient(30rem 14rem at 100% 0%, rgba(241, 102, 16, 0.09), transparent 62%),
+    var(--fspr-surface);
+}
+
+
+.fspr-root:not(#_) .fspr-rail-copy b {
+  display: block;
+  font-size: 1.06rem;
+  font-weight: 600;
+  letter-spacing: -0.016em;
+}
+
+
+.fspr-root:not(#_) .fspr-rail-copy span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--fspr-muted);
+}
+
+
+.fspr-root:not(#_) .fspr-rail-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+
+.fspr-root:not(#_) .fspr-rail-actions .fspr-btn {
+  padding: 13px 24px;
+  font-size: 0.89rem;
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fspr-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fspr-nudge {
+  0%, 60%, 100% { transform: translateX(0); }
+  30% { transform: translateX(4px); }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+
+  .fspr-root:not(#_) *,
+  .fspr-root:not(#_) *::before,
+  .fspr-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fspr-root:not(#_).is-ready [data-reveal],
+  .fspr-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+
+.fspr-root:not(#_) .fspr-faq {
+  padding: var(--fspr-pad) 0;
+  border-top: 1px solid var(--fspr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--fspr-seam) 22%, var(--fspr-seam) 78%, transparent) 1;
+  scroll-margin-top: 90px;
+}
+
+
+/* Split rail: the heading holds still while the answers scroll past it, so
+   there is never a screen of accordion rows with no context above them. */
+.fspr-root:not(#_) .fspr-faq-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+}
+
+
+.fspr-root:not(#_) .fspr-faq-aside {
+  position: sticky;
+  top: 96px;
+}
+
+
+.fspr-root:not(#_) .fspr-faq-aside h2 {
+  margin: 0 0 18px;
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.12;
+}
+
+
+.fspr-root:not(#_) .fspr-faq-aside-sub {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: var(--fspr-muted);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-facts {
+  margin: 30px 0 0;
+  border-top: 1px solid var(--fspr-line);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-facts > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--fspr-line);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-facts dt {
+  font-size: 0.82rem;
+  color: var(--fspr-dim);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-facts dd {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--fspr-text);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-group + .fspr-faq-group {
+  margin-top: 38px;
+}
+
+
+.fspr-root:not(#_) .fspr-faq-group-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  padding-left: 2px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fspr-dim);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-group-label span {
+  font-variant-numeric: tabular-nums;
+  color: var(--fspr-accent);
+}
+
+
+/* Cards rather than a ruled list: at ten questions the rules ran together,
+   and a closed card reads as a thing you can press. */
+.fspr-root:not(#_) .fspr-faq-item {
+  border: 1px solid var(--fspr-line);
+  border-radius: var(--fspr-radius);
+  background: rgba(255, 255, 255, 0.45);
+  transition:
+    background 0.3s var(--fspr-ease),
+    border-color 0.3s var(--fspr-ease),
+    box-shadow 0.3s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-item + .fspr-faq-item {
+  margin-top: 8px;
+}
+
+
+.fspr-root:not(#_) .fspr-faq-item:hover {
+  background: var(--fspr-surface);
+  border-color: var(--fspr-line-strong);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-item.is-open {
+  background: var(--fspr-surface);
+  border-color: var(--fspr-accent-line);
+  box-shadow: 0 10px 30px -22px rgba(25, 25, 25, 0.4);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 19px 22px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.45;
+  color: var(--fspr-text);
+  cursor: pointer;
+  transition: color 0.3s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-question:hover {
+  color: var(--fspr-accent-ink);
+}
+
+
+/* One plus glyph, rotated 45deg into a close icon — no second asset, and the
+   rotation reads as the row opening rather than a state swap. */
+.fspr-root:not(#_) .fspr-faq-toggle {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--fspr-line);
+  background: var(--fspr-paper-sunk);
+  color: var(--fspr-accent-ink);
+  transition:
+    transform 0.35s var(--fspr-ease),
+    background 0.3s var(--fspr-ease),
+    border-color 0.3s var(--fspr-ease),
+    color 0.3s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-toggle svg {
+  width: 14px;
+  height: 14px;
+}
+
+
+.fspr-root:not(#_) .fspr-faq-item.is-open .fspr-faq-toggle {
+  transform: rotate(45deg);
+  background: var(--fspr-accent);
+  border-color: var(--fspr-accent);
+  color: #ffffff;
+}
+
+
+/* Grid-rows animation keeps the accordion smooth without a fixed max-height.
+   The collapsed state is gated behind `is-ready` — the class the script adds —
+   so if the script never runs every answer renders open instead of being
+   permanently unreachable behind a button nothing is listening to. */
+.fspr-root:not(#_) .fspr-faq-answer {
+  display: grid;
+  transition: grid-template-rows 0.35s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_).is-ready .fspr-faq-answer {
+  grid-template-rows: 0fr;
+}
+
+
+.fspr-root:not(#_) .fspr-faq-item.is-open .fspr-faq-answer {
+  grid-template-rows: 1fr;
+}
+
+
+.fspr-root:not(#_) .fspr-faq-answer > div {
+  overflow: hidden;
+}
+
+
+.fspr-root:not(#_) .fspr-faq-answer p {
+  margin: 0;
+  /* Right padding clears the toggle column so the answer sits under the
+     question text, not under the button. */
+  padding: 0 62px 22px 22px;
+  max-width: 68ch;
+  font-size: 0.94rem;
+  line-height: 1.75;
+  color: var(--fspr-muted);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 34px;
+  padding: 24px 26px;
+  background: linear-gradient(120deg, var(--fspr-accent-soft), transparent 60%), var(--fspr-surface);
+  border: 1px solid var(--fspr-accent-line);
+  border-radius: var(--fspr-radius-lg);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-cta-copy b {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+
+
+.fspr-root:not(#_) .fspr-faq-cta-copy span {
+  display: block;
+  max-width: 46ch;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--fspr-muted);
+}
+
+
+.fspr-root:not(#_) .fspr-faq-cta-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Most grids reflow on their own via auto-fit, so these breakpoints handle
+   only what intrinsic sizing can't: the wide data tables, the mobile plan
+   switcher, and the density of a page that has to convert on a phone. */
+
+@media (max-width: 1080px) {
+
+
+
+  .fspr-root:not(#_) {
+    --fspr-pad: 88px;
+    --fspr-gutter: 24px;
+  }
+}
+
+
+
+
+
+/* Both wide tables change behaviour here rather than at 680px. A 4-column
+   matrix squeezed into 700px leaves prose cells under 170px wide —
+   technically not overflowing, but nobody can read it. */
+@media (max-width: 940px) {
+
+
+
+  /* Below this the sticky rail leaves the answers under ~330px of column, so
+     the heading unpins and becomes a normal section head above the list. */
+  .fspr-root:not(#_) .fspr-faq-shell {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-faq-aside {
+    position: static;
+    max-width: 640px;
+  }
+}
+
+
+
+
+
+@media (max-width: 760px) {
+
+
+
+  /* ---- FAQ closer stacks, both exits stay full width ---- */
+  .fspr-root:not(#_) .fspr-faq-cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    padding: 22px 20px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-faq-cta-actions {
+    flex-direction: column;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-faq-cta-actions .fspr-btn {
+    width: 100%;
+  }
+
+
+
+  /* ---- Conversion rail stacks ---- */
+  .fspr-root:not(#_) .fspr-rail {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    margin-top: 28px;
+    padding: 22px 20px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-rail-actions {
+    flex-direction: column;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-rail-actions .fspr-btn {
+    width: 100%;
+  }
+}
+
+
+
+
+
+@media (max-width: 680px) {
+
+
+
+  .fspr-root:not(#_) {
+    --fspr-pad: 60px;
+    --fspr-gutter: 18px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-hero-actions .fspr-btn {
+    width: 100%;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-section-head {
+    margin-bottom: 32px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-section-head p {
+    font-size: 0.96rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-faq-aside h2 {
+    margin-bottom: 14px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-faq-aside-sub {
+    font-size: 0.94rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-faq-facts {
+    margin-top: 24px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-faq-group + .fspr-faq-group {
+    margin-top: 28px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-faq-question {
+    gap: 14px;
+    padding: 16px 16px;
+    font-size: 0.94rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-faq-toggle {
+    width: 25px;
+    height: 25px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-faq-toggle svg {
+    width: 12px;
+    height: 12px;
+  }
+
+
+
+  /* The toggle no longer needs its own gutter once the card is this narrow —
+     reclaiming it buys the answer about six characters a line. */
+  .fspr-root:not(#_) .fspr-faq-answer p {
+    padding: 0 18px 19px 16px;
+    font-size: 0.9rem;
+    line-height: 1.72;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-btn {
+    padding: 15px 24px;
+  }
+}
+
+
+
+
+
+@media (max-width: 400px) {
+
+
+
+  .fspr-root:not(#_) {
+    --fspr-gutter: 15px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-sticky-cta .fspr-btn {
+    padding: 13px 16px;
+    font-size: 0.84rem;
+  }
+}
+</style>
+<div class="fspr-root">
+
+  <!-- Icons this block uses. Self-contained on purpose. -->
+  <svg class="fspr-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="fspr-i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+    <symbol id="fspr-i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  </svg>
+
+  <section class="fspr-faq" id="fspr-faq">
+    <div class="fspr-container">
+      <div class="fspr-faq-shell">
+        <!-- Sticky on desktop so the heading stays with whichever answer is
+             open; a plain stacked header below 940px. -->
+        <aside class="fspr-faq-aside" data-reveal>
+          <p class="fspr-eyebrow">Questions</p>
+          <h2>Answers before you book the call.</h2>
+          <p class="fspr-faq-aside-sub">
+            Everything founders ask us about the fee, the handover and who is
+            actually doing the work.
+          </p>
+
+          <dl class="fspr-faq-facts">
+            <div>
+              <dt>Quote turnaround</dt>
+              <dd>Within 24 hours</dd>
+            </div>
+            <div>
+              <dt>Fully onboarded</dt>
+              <dd>7 days, typically</dd>
+            </div>
+            <div>
+              <dt>Businesses served</dt>
+              <dd>7,000+ in the UAE</dd>
+            </div>
+          </dl>
+        </aside>
+
+        <div class="fspr-faq-main">
+          <div class="fspr-faq-group" data-reveal>
+            <p class="fspr-faq-group-label">
+              <span>01</span>
+              Pricing &amp; quoting
+            </p>
+
+            <div class="fspr-faq-item">
+              <button class="fspr-faq-question" type="button" aria-expanded="false" aria-controls="fspr-faq-a-0">
+                <span>Why don&rsquo;t you show prices on this page?</span>
+                <span class="fspr-faq-toggle" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-plus"/></svg></span>
+              </button>
+              <div class="fspr-faq-answer" id="fspr-faq-a-0">
+                <div><p>Because the honest answer depends on your transaction volume, how many entities you run and how much historical clean-up is needed. We quote a fixed monthly fee against your actual numbers rather than publishing a figure you would have to renegotiate later. Most quotes come back within 24 hours of the call.</p></div>
+              </div>
+            </div>
+            <div class="fspr-faq-item">
+              <button class="fspr-faq-question" type="button" aria-expanded="false" aria-controls="fspr-faq-a-1">
+                <span>Is there a setup fee?</span>
+                <span class="fspr-faq-toggle" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-plus"/></svg></span>
+              </button>
+              <div class="fspr-faq-answer" id="fspr-faq-a-1">
+                <div><p>Setup is included on annual plans. On quarterly or monthly billing we charge a one-time onboarding fee based on how much historical clean-up is involved &mdash; quoted upfront, never a surprise.</p></div>
+              </div>
+            </div>
+            <div class="fspr-faq-item">
+              <button class="fspr-faq-question" type="button" aria-expanded="false" aria-controls="fspr-faq-a-2">
+                <span>Can I change plans later?</span>
+                <span class="fspr-faq-toggle" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-plus"/></svg></span>
+              </button>
+              <div class="fspr-faq-answer" id="fspr-faq-a-2">
+                <div><p>Yes, up or down, whenever your volume changes. Most clients start on Growth and move to Scale as their transaction count climbs.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fspr-faq-group" data-reveal>
+            <p class="fspr-faq-group-label">
+              <span>02</span>
+              Getting started
+            </p>
+
+            <div class="fspr-faq-item">
+              <button class="fspr-faq-question" type="button" aria-expanded="false" aria-controls="fspr-faq-a-3">
+                <span>What happens during onboarding?</span>
+                <span class="fspr-faq-toggle" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-plus"/></svg></span>
+              </button>
+              <div class="fspr-faq-answer" id="fspr-faq-a-3">
+                <div><p>Days 0&ndash;7 are digitisation &mdash; books, banking and reconciliations. Days 8&ndash;21 bring the reporting and compliance trackers online. From day 22 you are on a steady monthly cadence with investor-ready reporting.</p></div>
+              </div>
+            </div>
+            <div class="fspr-faq-item">
+              <button class="fspr-faq-question" type="button" aria-expanded="false" aria-controls="fspr-faq-a-4">
+                <span>I&rsquo;m switching from another firm &mdash; how painful is it?</span>
+                <span class="fspr-faq-toggle" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-plus"/></svg></span>
+              </button>
+              <div class="fspr-faq-answer" id="fspr-faq-a-4">
+                <div><p>Not painful. Historical clean-up, data migration and reconciling gaps from your previous setup are all part of onboarding. No downtime, no lost records, and no missed filing deadlines during the handover.</p></div>
+              </div>
+            </div>
+            <div class="fspr-faq-item">
+              <button class="fspr-faq-question" type="button" aria-expanded="false" aria-controls="fspr-faq-a-5">
+                <span>Do I have to change accounting software?</span>
+                <span class="fspr-faq-toggle" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-plus"/></svg></span>
+              </button>
+              <div class="fspr-faq-answer" id="fspr-faq-a-5">
+                <div><p>No. We plug into the ERPs and banks you already use &mdash; QuickBooks, Xero, Zoho Books, major UAE bank feeds and custom stacks. If a migration genuinely makes sense we scope it as a separate project and run it for you.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fspr-faq-group" data-reveal>
+            <p class="fspr-faq-group-label">
+              <span>03</span>
+              AI &amp; your data
+            </p>
+
+            <div class="fspr-faq-item">
+              <button class="fspr-faq-question" type="button" aria-expanded="false" aria-controls="fspr-faq-a-6">
+                <span>Is AI doing my accounting on its own?</span>
+                <span class="fspr-faq-toggle" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-plus"/></svg></span>
+              </button>
+              <div class="fspr-faq-answer" id="fspr-faq-a-6">
+                <div><p>No. AI drafts, a qualified accountant signs. Every categorisation, reconciliation and filing is reviewed by a person before it reaches you or the FTA. You get the speed of automation with the accountability of a licensed firm &mdash; that is what the fixed fee buys you.</p></div>
+              </div>
+            </div>
+            <div class="fspr-faq-item">
+              <button class="fspr-faq-question" type="button" aria-expanded="false" aria-controls="fspr-faq-a-7">
+                <span>What does &ldquo;AI-native&rdquo; actually change for me?</span>
+                <span class="fspr-faq-toggle" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-plus"/></svg></span>
+              </button>
+              <div class="fspr-faq-answer" id="fspr-faq-a-7">
+                <div><p>Most firms bolt AI onto a manual month-end. Our workflow was built around it, so sorting, matching, document capture and deadline tracking run continuously instead of in a scramble at close. That is why the price scales with your transaction volume rather than with billable hours.</p></div>
+              </div>
+            </div>
+            <div class="fspr-faq-item">
+              <button class="fspr-faq-question" type="button" aria-expanded="false" aria-controls="fspr-faq-a-8">
+                <span>Is my financial data safe?</span>
+                <span class="fspr-faq-toggle" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-plus"/></svg></span>
+              </button>
+              <div class="fspr-faq-answer" id="fspr-faq-a-8">
+                <div><p>Yes. Data is encrypted in transit and at rest, access is role-restricted to the team on your account, and your financials are never handed to third-party AI providers for model training.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fspr-faq-group" data-reveal>
+            <p class="fspr-faq-group-label">
+              <span>04</span>
+              Working together
+            </p>
+
+            <div class="fspr-faq-item">
+              <button class="fspr-faq-question" type="button" aria-expanded="false" aria-controls="fspr-faq-a-9">
+                <span>How do we actually communicate?</span>
+                <span class="fspr-faq-toggle" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-plus"/></svg></span>
+              </button>
+              <div class="fspr-faq-answer" id="fspr-faq-a-9">
+                <div><p>WhatsApp or Slack for quick questions, a regular finance review, and a monthly reporting pack. You get a named team, not a ticket queue.</p></div>
+              </div>
+            </div>
+            <div class="fspr-faq-item">
+              <button class="fspr-faq-question" type="button" aria-expanded="false" aria-controls="fspr-faq-a-10">
+                <span>Can you support multi-entity or multi-country companies?</span>
+                <span class="fspr-faq-toggle" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-plus"/></svg></span>
+              </button>
+              <div class="fspr-faq-answer" id="fspr-faq-a-10">
+                <div><p>Yes. We handle consolidations, inter-company billing, and cross-border tax and AML requirements for the whole group. Multi-entity work is scoped on the call and priced into the quote.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fspr-faq-cta" data-reveal>
+            <div class="fspr-faq-cta-copy">
+              <b>Still not answered?</b>
+              <span>Ask it on the call &mdash; or message us now and get an answer before you book anything.</span>
+            </div>
+            <div class="fspr-faq-cta-actions">
+              <a href="#fspr-quote" class="fspr-btn fspr-btn-primary">
+                Request a quote
+                <svg aria-hidden="true" focusable="false"><use href="#fspr-i-arrow"/></svg>
+              </a>
+              <a
+          href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20a%20quote%20for%20your%20accounting%20packages.&amp;type=phone_number&amp;app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fspr-btn fspr-btn-ghost data-wa-track"
+          data-wa-track
+          data-fspr-wa="pricing_faq"
+        >WhatsApp us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

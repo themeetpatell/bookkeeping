@@ -1,8 +1,9 @@
 /**
- * Transforms src/pages/AIAccountingLanding.css into Webflow-safe CSS chunks.
+ * Transforms a page stylesheet into Webflow-safe CSS chunks.
  *
- *   1. Namespace  `.ai-*` -> `.fsai-*`, `--ai-*` -> `--fsai-*`, keyframes too.
- *   2. Cascade fence — every selector is prefixed with `.fsai-root:not(#_)`.
+ *   1. Namespace  `.ai-* / .pr-*` -> `.fsai-* / .fspr-*`, custom props and
+ *      keyframes too.
+ *   2. Cascade fence — every selector is prefixed with `.fsXX-root:not(#_)`.
  *
  * Why `:not(#_)` instead of an id: each Webflow embed carries its own wrapper,
  * and repeating `id="fsai-root"` across embeds would be invalid HTML. `:not(#_)`
@@ -16,17 +17,50 @@
  *
  * The output is split into labelled chunks so the assembler can ship each
  * section's CSS in the same embed as its markup.
+ *
+ * Each page gets its OWN namespace so two embeds can never collide on a class
+ * name or a custom property, even if both land on the same Webflow page.
  */
 import { readFileSync } from 'node:fs';
 
-const SRC = new URL('../../src/pages/AIAccountingLanding.css', import.meta.url).pathname;
-export const ROOT = '.fsai-root:not(#_)';
+/**
+ * @typedef {object} PageNamespace
+ * @property {string} src        stylesheet path, relative to this file
+ * @property {string} short      prefix as authored, e.g. 'ai'
+ * @property {string} long       namespaced prefix, e.g. 'fsai'
+ * @property {string} sourceRoot the authored wrapper selector, e.g. '.fsai-landing'
+ */
 
-const KEYFRAME_NAMES = ['ai-rise', 'ai-pulse', 'ai-bounce', 'ai-spin'];
+/** @type {PageNamespace} */
+export const AI_PAGE = {
+  src: '../../src/pages/AIAccountingLanding.css',
+  short: 'ai',
+  long: 'fsai',
+  sourceRoot: '.fsai-landing',
+};
 
-const namespace = (css) => {
-  let out = css.replace(/\.ai-/g, '.fsai-').replace(/--ai-/g, '--fsai-');
-  for (const name of KEYFRAME_NAMES) {
+/** @type {PageNamespace} */
+export const PRICING_PAGE = {
+  src: '../../src/pages/PricingLanding.css',
+  short: 'pr',
+  long: 'fspr',
+  sourceRoot: '.fspr-page',
+};
+
+/** @param {PageNamespace} ns */
+export const rootSelector = (ns) => `.${ns.long}-root:not(#_)`;
+
+/**
+ * Keyframe names are read out of the sheet rather than hardcoded, so adding an
+ * animation can't silently ship an un-namespaced `@keyframes` that collides
+ * with one the host page already defines.
+ */
+const namespace = (css, ns) => {
+  const names = [...css.matchAll(/@keyframes\s+([\w-]+)/g)].map((m) => m[1]);
+  let out = css
+    .replace(new RegExp(`\\.${ns.short}-`, 'g'), `.${ns.long}-`)
+    .replace(new RegExp(`--${ns.short}-`, 'g'), `--${ns.long}-`);
+  for (const name of names) {
     out = out.replace(new RegExp(`\\b${name}\\b`, 'g'), `fs${name}`);
   }
   return out;
@@ -54,23 +88,24 @@ const splitSelectors = (list) => {
   return parts;
 };
 
-const prefixSelector = (selector) => {
+const prefixSelector = (selector, ns) => {
+  const root = rootSelector(ns);
   const trimmed = selector.trim();
   if (!trimmed) return trimmed;
-  // `.fsai-landing` IS the wrapper — swap it rather than nesting under it.
-  if (trimmed === '.fsai-landing') return ROOT;
-  if (trimmed.startsWith('.fsai-landing')) return `${ROOT}${trimmed.slice('.fsai-landing'.length)}`;
-  return `${ROOT} ${trimmed}`;
+  // The authored wrapper IS the root — swap it rather than nesting under it.
+  if (trimmed === ns.sourceRoot) return root;
+  if (trimmed.startsWith(ns.sourceRoot)) return `${root}${trimmed.slice(ns.sourceRoot.length)}`;
+  return `${root} ${trimmed}`;
 };
 
-const prefixSelectorList = (list, indent) =>
+const prefixSelectorList = (list, indent, ns) =>
   splitSelectors(list)
-    .map(prefixSelector)
+    .map((selector) => prefixSelector(selector, ns))
     .filter(Boolean)
     .join(`,\n${indent}`);
 
 /** Walks the stylesheet block by block, prefixing every selector. */
-const transformBlocks = (css, indent = '') => {
+const transformBlocks = (css, ns, indent = '') => {
   let out = '';
   let i = 0;
 
@@ -101,9 +136,9 @@ const transformBlocks = (css, indent = '') => {
       // Keyframe stops (`from`, `50%`) must never be prefixed.
       out += `${carried}${selector} {${body}}\n`;
     } else if (selector.startsWith('@media') || selector.startsWith('@supports')) {
-      out += `${carried}${selector} {\n${transformBlocks(body, '  ')}}\n`;
+      out += `${carried}${selector} {\n${transformBlocks(body, ns, '  ')}}\n`;
     } else {
-      out += `${carried}${prefixSelectorList(selector, indent)} {${body}}\n`;
+      out += `${carried}${prefixSelectorList(selector, indent, ns)} {${body}}\n`;
     }
 
     i = j;
@@ -112,7 +147,9 @@ const transformBlocks = (css, indent = '') => {
   return out;
 };
 
-const RESET = `/* --------------------------------------------------------------------------
+const buildReset = (ns) => {
+  const ROOT = rootSelector(ns);
+  return `/* --------------------------------------------------------------------------
    CASCADE FENCE — see webflow-embed/README.md
    \`all: revert\` discards every author-origin declaration the host page
    contributed, falling back to the browser's own defaults. At (1,1,0) it
@@ -174,17 +211,17 @@ ${ROOT} :where(img) {
 }
 
 /* Icon sprite host — never rendered. */
-${ROOT} :where(.fsai-sprite) {
+${ROOT} :where(.${ns.long}-sprite) {
   position: absolute;
   width: 0;
   height: 0;
   overflow: hidden;
 }
 
-/* Optional full-bleed escape hatch — add \`fsai-fullbleed\` to a wrapper that
+/* Optional full-bleed escape hatch — add \`${ns.long}-fullbleed\` to a wrapper that
    sits inside a padded Webflow container. Needs body { overflow-x: hidden }
    when a vertical scrollbar is present. */
-${ROOT}.fsai-fullbleed {
+${ROOT}.${ns.long}-fullbleed {
   position: relative;
   left: 50%;
   width: 100vw;
@@ -192,19 +229,125 @@ ${ROOT}.fsai-fullbleed {
   margin-left: -50vw;
 }
 `;
+};
 
 /** Banner comments in the source stylesheet delimit the section chunks. */
 const BANNER = /\/\* =+\n\s+([^\n]+?)\n\s+=+ \*\//g;
 
+const stripComments = (css) => css.replace(/\/\*[\s\S]*?\*\//g, '');
+
 /**
+ * Every `.fsXX-*` class a chunk's SELECTORS mention. Comments are stripped
+ * first — several of them name a class while explaining a decision, and those
+ * mentions must not look like declarations.
+ *
+ * @returns {Set<string>}
+ */
+export const collectClasses = (css, ns) => {
+  const found = new Set();
+  const source = stripComments(css);
+  let i = 0;
+
+  while (i < source.length) {
+    const brace = source.indexOf('{', i);
+    if (brace === -1) break;
+
+    const prelude = source.slice(i, brace).trim();
+    // Skip at-rule preludes; their bodies are walked on the next pass.
+    if (!prelude.startsWith('@')) {
+      for (const m of prelude.matchAll(new RegExp(`\\.${ns.long}-[a-z0-9-]+`, 'g'))) {
+        found.add(m[0].slice(1));
+      }
+    }
+
+    // Descend into at-rules, skip past ordinary declaration bodies.
+    if (prelude.startsWith('@media') || prelude.startsWith('@supports')) {
+      i = brace + 1;
+      continue;
+    }
+
+    let depth = 1;
+    let j = brace + 1;
+    while (j < source.length && depth > 0) {
+      if (source[j] === '{') depth += 1;
+      else if (source[j] === '}') depth -= 1;
+      j += 1;
+    }
+    i = j;
+  }
+
+  return found;
+};
+
+/**
+ * Rebuilds a stylesheet keeping only the rules whose selector list satisfies
+ * `keep`. Media queries are preserved around their surviving rules and dropped
+ * entirely when nothing inside them survives.
+ *
+ * Used to give each embed just the media queries that act on the sections it
+ * actually ships, so a block renders correctly on its own.
+ *
+ * @param {(selector: string) => boolean} keep
+ * @returns {{css: string, kept: Set<string>}} `kept` is every selector emitted,
+ *   so the caller can prove no rule was silently dropped by every block.
+ */
+export const filterRules = (css, keep) => {
+  const kept = new Set();
+
+  const walk = (body, indent) => {
+    let out = '';
+    let i = 0;
+
+    while (i < body.length) {
+      const brace = body.indexOf('{', i);
+      if (brace === -1) break;
+
+      const prelude = body.slice(i, brace);
+      let head = prelude;
+      let carried = '';
+      const comment = head.match(/^((?:\s*\/\*[\s\S]*?\*\/)*\s*)/);
+      if (comment) { carried = comment[1]; head = head.slice(carried.length); }
+      const selector = head.trim();
+
+      let depth = 1;
+      let j = brace + 1;
+      while (j < body.length && depth > 0) {
+        if (body[j] === '{') depth += 1;
+        else if (body[j] === '}') depth -= 1;
+        j += 1;
+      }
+      const inner = body.slice(brace + 1, j - 1);
+
+      if (selector.startsWith('@media') || selector.startsWith('@supports')) {
+        const nested = walk(inner, indent + '  ');
+        if (nested.trim()) out += `${carried}${selector} {\n${nested}${indent}}\n\n`;
+      } else if (selector.startsWith('@keyframes')) {
+        out += `${carried}${selector} {${inner}}\n`;
+      } else if (keep(selector)) {
+        kept.add(selector);
+        out += `${carried}${selector} {${inner}}\n`;
+      }
+
+      i = j;
+    }
+
+    return out;
+  };
+
+  return { css: walk(css, ''), kept };
+};
+
+/**
+ * @param {PageNamespace} [ns]
  * @returns {Map<string, string>} chunk label -> CSS. Insertion order is source
  * order, which the cascade depends on — later chunks override earlier ones.
  */
-export const buildCssChunks = () => {
-  const transformed = transformBlocks(namespace(readFileSync(SRC, 'utf8')));
+export const buildCssChunks = (ns = AI_PAGE) => {
+  const src = new URL(ns.src, import.meta.url).pathname;
+  const transformed = transformBlocks(namespace(readFileSync(src, 'utf8'), ns), ns);
 
   const chunks = new Map();
-  chunks.set('BASE', RESET);
+  chunks.set('BASE', buildReset(ns));
 
   const marks = [...transformed.matchAll(BANNER)];
   // Anything before the first banner belongs to BASE (root vars, buttons, …).

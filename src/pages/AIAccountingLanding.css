@@ -1,39 +1,62 @@
 /* ============================================================
    AI-Native Accounting Landing
-   Single dark canvas, one accent, hairline bento grids.
-   Palette: warm near-black, Finanshels orange
-   Type: Inter only — heavy weights, tight tracking
+   Single warm-paper canvas, one accent, hairline bento grids.
+   Palette: warm cream, Finanshels orange
+   Type: Inter only — light display weights, relaxed tracking.
+   Google Fonts serves Inter as static weights, so only 300/400/500/
+   600/700 exist: anything in between silently snaps up a step.
    ============================================================ */
 
 .ai-landing {
-  /* Three colours only: black, white, orange. The whole page sits on one
-     black canvas — depth comes from hairline borders and neutral surface
-     lifts, never from a hue shift. */
-  --ai-canvas: #000000;
-  --ai-surface: #0b0b0b;
-  --ai-surface-raised: #141414;
-  --ai-line: rgba(255, 255, 255, 0.12);
-  --ai-line-strong: rgba(255, 255, 255, 0.22);
+  /* Three colours only: cream, white, orange. The whole page sits on one
+     warm paper canvas — depth comes from hairline borders and white surface
+     lifts, never from a hue shift. The cream matches the site footer so the
+     section seams into the rest of the page. */
+  --ai-canvas: #faf9f5;
+  --ai-surface: #ffffff;
+  --ai-surface-raised: #ffffff;
+  --ai-line: #e7e3d8;
+  --ai-line-strong: #d6cfbe;
+  /* Section seams only. On black the hairlines were near-invisible; on
+     cream, ten stacked full-bleed rules read as ten hard cuts, so the
+     seam is lighter than the structural line and fades at both ends. */
+  --ai-seam: #eeeae0;
 
-  /* The two inverted moments — hero feed card and the CTA form. */
+  /* Cards that need to lift off the canvas — the terminal and the CTA form. */
   --ai-paper: #ffffff;
-  --ai-paper-sunk: #f4f4f4;
-  --ai-paper-line: #e4e4e4;
-  --ai-paper-ink: #000000;
+  --ai-paper-sunk: #faf9f5;
+  --ai-paper-line: #e7e3d8;
+  --ai-paper-ink: #191919;
   --ai-paper-muted: #6b6b6b;
 
+  /* Orange ramp, picked by contrast against the cream canvas rather than by
+     eye — brand orange is only 3.0:1 on #faf9f5, which is fine for a fill or
+     an icon but fails AA the moment it carries a sentence. Each step below is
+     measured, so the rule is simply: fill with accent, write with ink.
+       accent      #f16610  3.0:1   fills, icons, dots (non-text, needs 3:1)
+       accent-deep #d45a0e  3.8:1   display-size accent text, hovers
+       accent-ink  #b0500a  5.0:1   any accent text under 24px
+       accent-band #c25309  4.6:1   band behind white copy */
   --ai-accent: #f16610;
   --ai-accent-deep: #d45a0e;
-  --ai-accent-soft: rgba(241, 102, 16, 0.14);
-  --ai-accent-line: rgba(241, 102, 16, 0.35);
+  --ai-accent-ink: #b0500a;
+  --ai-accent-band: #c25309;
+  /* Tints sit on cream rather than black, so they need less alpha to read. */
+  --ai-accent-soft: rgba(241, 102, 16, 0.10);
+  --ai-accent-line: rgba(241, 102, 16, 0.30);
 
-  --ai-text: #ffffff;
-  --ai-muted: #a3a3a3;
-  --ai-dim: #737373;
+  /* Neutral ramp, also measured: 15.9:1 / 7.3:1 / 4.8:1. Three clearly
+     separated steps so hierarchy survives without any of them dropping
+     below AA — the previous dim grey sat at 3.2:1 and was the single
+     biggest readability problem on the light canvas. */
+  --ai-text: #191919;
+  --ai-muted: #57534a;
+  --ai-dim: #746e64;
 
   /* Financial direction reads through emphasis, not hue — orange marks the
-     figure worth looking at, neutral grey carries everything else. */
-  --ai-up: var(--ai-accent);
+     figure worth looking at, neutral grey carries everything else. Both are
+     always rendered as small text, so both take the AA-safe steps. */
+  --ai-up: var(--ai-accent-ink);
   --ai-down: var(--ai-dim);
 
   --ai-radius: 12px;
@@ -45,7 +68,7 @@
   --ai-ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ai-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
-  color-scheme: dark;
+  color-scheme: light;
   background: var(--ai-canvas);
   color: var(--ai-text);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -66,7 +89,7 @@
 }
 
 .ai-accent {
-  color: var(--ai-accent);
+  color: var(--ai-accent-deep);
 }
 
 /* ---------- Scroll reveal ----------
@@ -112,7 +135,7 @@
   gap: 9px;
   margin: 0 0 20px;
   font-size: 0.72rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ai-dim);
@@ -124,13 +147,6 @@
   color: var(--ai-dim);
 }
 
-.ai-eyebrow-spark {
-  width: 12px;
-  height: 12px;
-  color: var(--ai-accent);
-  flex-shrink: 0;
-}
-
 .ai-section-head {
   max-width: 780px;
   margin-bottom: 64px;
@@ -139,9 +155,9 @@
 .ai-section-head h2 {
   margin: 0;
   font-size: clamp(2.2rem, 4.6vw, 3.6rem);
-  font-weight: 680;
-  letter-spacing: -0.038em;
-  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
 }
 
 /* Uppercase micro-caption pinned under card copy */
@@ -152,11 +168,11 @@
   margin-top: auto;
   padding-top: 22px;
   font-size: 0.66rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: 0.09em;
   line-height: 1.5;
   text-transform: uppercase;
-  color: var(--ai-accent);
+  color: var(--ai-accent-ink);
 }
 
 .ai-microcap::before {
@@ -180,7 +196,7 @@
   border-radius: var(--ai-pill);
   border: 1px solid transparent;
   font-size: 0.95rem;
-  font-weight: 620;
+  font-weight: 600;
   letter-spacing: -0.01em;
   text-decoration: none;
   transition:
@@ -218,7 +234,7 @@
 
 .ai-btn-ghost:hover {
   border-color: var(--ai-text);
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(0, 0, 0, 0.04);
   transform: translateY(-2px);
 }
 
@@ -230,8 +246,8 @@
   position: relative;
   padding: 120px 0 104px;
   background:
-    radial-gradient(46rem 32rem at 88% -12%, rgba(241, 102, 16, 0.16), transparent 62%),
-    radial-gradient(38rem 26rem at -8% 110%, rgba(241, 102, 16, 0.06), transparent 60%),
+    radial-gradient(46rem 32rem at 88% -12%, rgba(241, 102, 16, 0.09), transparent 62%),
+    radial-gradient(38rem 26rem at -8% 110%, rgba(241, 102, 16, 0.05), transparent 60%),
     var(--ai-canvas);
 }
 
@@ -266,21 +282,14 @@
   color: var(--ai-muted);
 }
 
-.ai-badge-spark {
-  width: 13px;
-  height: 13px;
-  color: var(--ai-accent);
-  animation: ai-spin 14s linear infinite;
-}
-
 .ai-hero-headline {
   margin: 0 0 26px;
   /* Sized against the copy column, not the viewport — at 5.9vw this ran to
      four lines and pushed the feed card below the fold. */
   font-size: clamp(2.4rem, 4.3vw, 3.6rem);
-  font-weight: 700;
-  letter-spacing: -0.042em;
-  line-height: 1.04;
+  font-weight: 500;
+  letter-spacing: -0.024em;
+  line-height: 1.1;
   text-wrap: balance;
 }
 
@@ -311,8 +320,8 @@
 
 .ai-stat dt {
   font-size: 1.7rem;
-  font-weight: 680;
-  letter-spacing: -0.03em;
+  font-weight: 500;
+  letter-spacing: -0.018em;
 }
 
 .ai-stat dd {
@@ -321,135 +330,144 @@
   color: var(--ai-dim);
 }
 
-/* ---------- Hero visual: live agent feed ----------
-   The one light card on the page — CrossVal floats light product surfaces on
-   dark to pull the eye. This is that focal moment. */
+/* ---------- Hero visual: agent activity log ----------
+   Reads as a system log rather than a chat feed — monospace timestamps, one
+   line per event, hairline rules, no icon chips. Narrower and about 40%
+   shorter than the card it replaces, so it stops competing with the headline. */
 
 .ai-hero-visual {
   position: relative;
   animation: ai-rise 0.85s 0.25s var(--ai-ease-out) both;
 }
 
-.ai-feed-card {
+.ai-term {
+  /* One mono stack for every fixed-width element in the log. */
+  --ai-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
   position: relative;
   z-index: 1;
+  max-width: 430px;
+  margin-left: auto;
   background: var(--ai-paper);
   color: var(--ai-paper-ink);
-  border-radius: var(--ai-radius-lg);
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.3),
-    0 32px 72px -28px rgba(0, 0, 0, 0.75);
+  border: 1px solid var(--ai-paper-line);
+  border-radius: var(--ai-radius);
+  box-shadow: 0 24px 56px -32px rgba(60, 45, 25, 0.3);
   overflow: hidden;
 }
 
-.ai-feed-header {
+.ai-term-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 17px 22px;
+  gap: 12px;
+  padding: 10px 14px;
   border-bottom: 1px solid var(--ai-paper-line);
-  font-size: 0.78rem;
-  font-weight: 650;
-}
-
-.ai-feed-date {
-  font-weight: 500;
+  background: var(--ai-paper-sunk);
+  font-family: var(--ai-mono);
+  font-size: 0.72rem;
+  letter-spacing: -0.01em;
   color: var(--ai-paper-muted);
 }
 
-.ai-feed-live {
+.ai-term-name b {
+  font-weight: 600;
+  color: var(--ai-paper-ink);
+}
+
+.ai-term-live {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
+  color: var(--ai-accent-ink);
 }
 
 .ai-live-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--ai-accent);
   animation: ai-pulse 1.8s ease-in-out infinite;
 }
 
-.ai-feed-list {
+.ai-term-log {
   list-style: none;
   margin: 0;
-  padding: 8px 0;
+  padding: 0;
 }
 
-.ai-feed-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 13px;
-  padding: 13px 22px;
+.ai-term-row {
+  display: grid;
+  grid-template-columns: auto 14px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 10px;
+  padding: 9px 14px;
   opacity: 0;
-  animation: ai-rise 0.55s var(--ai-ease-out) forwards;
+  animation: ai-rise 0.5s var(--ai-ease-out) forwards;
 }
 
-.ai-feed-item + .ai-feed-item {
+.ai-term-row + .ai-term-row {
   border-top: 1px solid var(--ai-paper-line);
 }
 
-.ai-feed-icon {
-  display: grid;
+.ai-term-time {
+  font-family: var(--ai-mono);
+  font-size: 0.7rem;
+  /* Tabular figures keep the timestamp column from shifting row to row. */
+  font-variant-numeric: tabular-nums;
+  color: var(--ai-dim);
+}
+
+.ai-term-glyph {
+  display: inline-grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  background: var(--ai-accent-soft);
   color: var(--ai-accent-deep);
+  /* Nudged off the text baseline so the glyph optically centres on the line. */
+  transform: translateY(2px);
 }
 
-.ai-feed-icon svg {
-  width: 15px;
-  height: 15px;
+.ai-term-glyph svg {
+  width: 13px;
+  height: 13px;
+  display: block;
 }
 
-.ai-feed-flag .ai-feed-icon {
-  background: var(--ai-paper-sunk);
-  border: 1px solid var(--ai-paper-line);
+/* The two events a human touches read in ink, not accent — that contrast is
+   the whole point of the section. */
+.ai-term-flag .ai-term-glyph,
+.ai-term-human .ai-term-glyph {
   color: var(--ai-paper-ink);
 }
 
-.ai-feed-human .ai-feed-icon {
-  background: var(--ai-paper-ink);
-  color: var(--ai-paper);
-}
-
-.ai-feed-text {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.88rem;
-  font-weight: 620;
+.ai-term-msg {
+  font-size: 0.83rem;
+  font-weight: 600;
   letter-spacing: -0.01em;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
-.ai-feed-meta {
-  font-size: 0.76rem;
-  font-weight: 500;
+.ai-term-meta {
+  font-weight: 400;
   color: var(--ai-paper-muted);
 }
 
-.ai-feed-typing {
-  align-items: center;
+.ai-term-meta::before {
+  content: ' · ';
 }
 
-.ai-feed-typing .ai-feed-text {
+.ai-term-run .ai-term-msg {
   font-weight: 500;
   color: var(--ai-paper-muted);
 }
 
 .ai-typing-dots {
   display: inline-flex;
-  gap: 4px;
-  padding: 0 6px;
+  gap: 3px;
 }
 
 .ai-typing-dots span {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--ai-accent);
   animation: ai-bounce 1.2s ease-in-out infinite;
@@ -458,46 +476,23 @@
 .ai-typing-dots span:nth-child(2) { animation-delay: 0.15s; }
 .ai-typing-dots span:nth-child(3) { animation-delay: 0.3s; }
 
-.ai-feed-footer {
+.ai-term-foot {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 15px 22px;
+  gap: 8px;
+  padding: 10px 14px;
   border-top: 1px solid var(--ai-paper-line);
   background: var(--ai-paper-sunk);
-  font-size: 0.78rem;
-  font-weight: 620;
+  font-size: 0.73rem;
+  font-weight: 600;
   color: var(--ai-paper-ink);
 }
 
-.ai-feed-footer svg {
-  width: 15px;
-  height: 15px;
+.ai-term-foot svg {
+  width: 13px;
+  height: 13px;
   color: var(--ai-accent-deep);
   flex-shrink: 0;
-}
-
-.ai-hero-spark {
-  position: absolute;
-  color: var(--ai-accent);
-  opacity: 0.8;
-}
-
-.ai-hero-spark-1 {
-  width: 34px;
-  height: 34px;
-  top: -22px;
-  right: -14px;
-  animation: ai-spin 22s linear infinite;
-}
-
-.ai-hero-spark-2 {
-  width: 20px;
-  height: 20px;
-  bottom: -10px;
-  left: -24px;
-  opacity: 0.5;
-  animation: ai-spin 18s linear infinite reverse;
 }
 
 /* ============================================================
@@ -506,14 +501,16 @@
 
 .ai-logos {
   padding: 52px 0 60px;
-  border-top: 1px solid var(--ai-line);
+  border-top: 1px solid var(--ai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--ai-seam) 22%, var(--ai-seam) 78%, transparent) 1;
 }
 
 .ai-logos-label {
   margin: 0 0 30px;
   text-align: center;
   font-size: 0.7rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ai-dim);
@@ -527,19 +524,20 @@
   gap: 22px 52px;
 }
 
-/* Client marks are dark artwork — knock them out to white for the dark canvas. */
+/* Client marks render in their own brand colours — the row is social proof,
+   and washing it to grey made it read as decoration rather than evidence. */
 .ai-logo-tile img {
+  /* 32/132 is the largest that still fits all nine marks on one row at
+     1200px — any bigger and the last logo wraps to a lonely second line. */
   height: 32px;
   width: auto;
   max-width: 132px;
   object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.5;
-  transition: opacity 0.3s var(--ai-ease);
+  transition: transform 0.3s var(--ai-ease);
 }
 
 .ai-logo-tile:hover img {
-  opacity: 0.95;
+  transform: translateY(-2px);
 }
 
 /* ============================================================
@@ -548,16 +546,18 @@
 
 .ai-manifesto {
   padding: var(--ai-pad) 0;
-  border-top: 1px solid var(--ai-line);
+  border-top: 1px solid var(--ai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--ai-seam) 22%, var(--ai-seam) 78%, transparent) 1;
 }
 
 .ai-manifesto-headline {
   margin: 0 0 26px;
   max-width: 16em;
   font-size: clamp(2.4rem, 5.2vw, 4rem);
-  font-weight: 700;
-  letter-spacing: -0.042em;
-  line-height: 1.04;
+  font-weight: 500;
+  letter-spacing: -0.024em;
+  line-height: 1.1;
 }
 
 .ai-manifesto-headline em {
@@ -601,15 +601,15 @@
   display: block;
   margin-bottom: 22px;
   font-size: 0.78rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  color: var(--ai-accent);
+  color: var(--ai-accent-ink);
 }
 
 .ai-pillar h3 {
   margin: 0 0 12px;
   font-size: 1.18rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.025em;
 }
 
@@ -626,7 +626,9 @@
 
 .ai-compare {
   padding: var(--ai-pad) 0;
-  border-top: 1px solid var(--ai-line);
+  border-top: 1px solid var(--ai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--ai-seam) 22%, var(--ai-seam) 78%, transparent) 1;
 }
 
 .ai-compare-table {
@@ -656,7 +658,7 @@
 .ai-compare-head {
   background: var(--ai-canvas);
   font-size: 0.7rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ai-dim);
@@ -668,29 +670,24 @@
 
 .ai-compare-now-head {
   gap: 8px;
-  color: var(--ai-accent);
-}
-
-.ai-compare-spark {
-  width: 11px;
-  height: 11px;
+  color: var(--ai-accent-ink);
 }
 
 .ai-compare-label {
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 
 .ai-compare-old {
   color: var(--ai-dim);
   text-decoration-line: line-through;
-  text-decoration-color: rgba(255, 255, 255, 0.3);
+  text-decoration-color: rgba(0, 0, 0, 0.28);
   text-decoration-thickness: 1px;
 }
 
 .ai-compare-now {
   gap: 11px;
-  font-weight: 620;
+  font-weight: 600;
   letter-spacing: -0.01em;
   background: var(--ai-accent-soft);
   border-left: 2px solid var(--ai-accent);
@@ -721,14 +718,9 @@
   gap: 8px;
   margin: 0 0 20px;
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-}
-
-.ai-compare-panel-spark {
-  width: 12px;
-  height: 12px;
 }
 
 .ai-compare-panel ul {
@@ -755,7 +747,7 @@
 }
 
 .ai-compare-panel strong {
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .ai-compare-panel-old h3 {
@@ -779,7 +771,7 @@
 }
 
 .ai-compare-panel-new h3 {
-  color: var(--ai-accent);
+  color: var(--ai-accent-ink);
 }
 
 .ai-compare-panel-new li {
@@ -801,8 +793,8 @@
 .ai-lead-strip {
   padding: 60px 0;
   background:
-    radial-gradient(40rem 22rem at 90% -20%, rgba(255, 255, 255, 0.18), transparent 60%),
-    var(--ai-accent);
+    radial-gradient(40rem 22rem at 90% -20%, rgba(255, 255, 255, 0.16), transparent 60%),
+    var(--ai-accent-band);
   color: #fff;
 }
 
@@ -816,22 +808,22 @@
 .ai-lead-copy h2 {
   margin: 0 0 8px;
   font-size: clamp(1.5rem, 2.6vw, 2rem);
-  font-weight: 680;
-  letter-spacing: -0.03em;
+  font-weight: 500;
+  letter-spacing: -0.018em;
   line-height: 1.15;
 }
 
 .ai-lead-copy p {
   margin: 0;
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255, 0.94);
 }
 
 .ai-lead-whatsapp {
   justify-self: end;
   padding: 17px 34px;
   background: #fff;
-  color: var(--ai-accent-deep);
+  color: var(--ai-accent-ink);
   border: none;
   font-size: 1rem;
   white-space: nowrap;
@@ -853,7 +845,9 @@
 
 .ai-workflow {
   padding: var(--ai-pad) 0;
-  border-top: 1px solid var(--ai-line);
+  border-top: 1px solid var(--ai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--ai-seam) 22%, var(--ai-seam) 78%, transparent) 1;
 }
 
 .ai-steps {
@@ -896,15 +890,15 @@
   display: block;
   margin-bottom: 20px;
   font-size: 0.78rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  color: var(--ai-accent);
+  color: var(--ai-accent-ink);
 }
 
 .ai-step h3 {
   margin: 0 0 10px;
   font-size: 1.12rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.025em;
 }
 
@@ -921,9 +915,11 @@
 
 .ai-dashboard {
   padding: var(--ai-pad) 0;
-  border-top: 1px solid var(--ai-line);
+  border-top: 1px solid var(--ai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--ai-seam) 22%, var(--ai-seam) 78%, transparent) 1;
   background:
-    radial-gradient(50rem 30rem at 12% -10%, rgba(241, 102, 16, 0.1), transparent 60%),
+    radial-gradient(50rem 30rem at 12% -10%, rgba(241, 102, 16, 0.06), transparent 60%),
     var(--ai-canvas);
 }
 
@@ -942,7 +938,8 @@
   border: 1px solid var(--ai-line);
   border-radius: var(--ai-radius-lg);
   background: var(--ai-surface);
-  box-shadow: 0 32px 80px -32px rgba(0, 0, 0, 0.7);
+  /* Warm, shallow lift — a heavy black drop reads as dirt on cream. */
+  box-shadow: 0 24px 56px -32px rgba(60, 45, 25, 0.28);
   overflow: hidden;
 }
 
@@ -954,19 +951,13 @@
   padding: 16px 24px;
   border-bottom: 1px solid var(--ai-line);
   font-size: 0.8rem;
-  font-weight: 620;
+  font-weight: 600;
 }
 
 .ai-dash-brand {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-}
-
-.ai-dash-brand-spark {
-  width: 13px;
-  height: 13px;
-  color: var(--ai-accent);
 }
 
 .ai-dash-period {
@@ -980,9 +971,9 @@
 .ai-dash-ask {
   padding: 7px 18px;
   border-radius: var(--ai-pill);
-  background: var(--ai-accent);
+  background: var(--ai-accent-band);
   color: #fff;
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .ai-dash-kpis {
@@ -1004,7 +995,7 @@
 
 .ai-dash-kpi-label {
   font-size: 0.66rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ai-dim);
@@ -1012,8 +1003,8 @@
 
 .ai-dash-kpi-value {
   font-size: 1.55rem;
-  font-weight: 680;
-  letter-spacing: -0.03em;
+  font-weight: 500;
+  letter-spacing: -0.018em;
 }
 
 .ai-dash-kpi-meta {
@@ -1043,13 +1034,13 @@
   justify-content: space-between;
   margin-bottom: 18px;
   font-size: 0.93rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: -0.015em;
 }
 
 .ai-dash-panel-tag {
   font-size: 0.66rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.14em;
   color: var(--ai-dim);
 }
@@ -1065,7 +1056,7 @@
 }
 
 .ai-dash-row-strong {
-  font-weight: 680;
+  font-weight: 600;
   color: var(--ai-text);
 }
 
@@ -1086,8 +1077,8 @@
   gap: 7px;
   margin-top: 18px;
   font-size: 0.8rem;
-  font-weight: 680;
-  color: var(--ai-accent);
+  font-weight: 600;
+  color: var(--ai-accent-ink);
 }
 
 .ai-dash-explain svg {
@@ -1104,7 +1095,7 @@
 
 .ai-dash-cash-label {
   font-size: 0.66rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ai-dim);
@@ -1112,9 +1103,9 @@
 
 .ai-dash-cash-value {
   font-size: 1.75rem;
-  font-weight: 680;
-  letter-spacing: -0.03em;
-  color: var(--ai-accent);
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  color: var(--ai-accent-ink);
 }
 
 .ai-dash-guardrail {
@@ -1132,7 +1123,7 @@
 .ai-dash-guardrail strong {
   display: block;
   font-size: 0.84rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 
@@ -1148,7 +1139,7 @@
   align-items: center;
   gap: 7px;
   font-size: 0.84rem;
-  font-weight: 680;
+  font-weight: 600;
   color: var(--ai-up);
   white-space: nowrap;
 }
@@ -1164,7 +1155,9 @@
 
 .ai-split {
   padding: var(--ai-pad) 0;
-  border-top: 1px solid var(--ai-line);
+  border-top: 1px solid var(--ai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--ai-seam) 22%, var(--ai-seam) 78%, transparent) 1;
 }
 
 .ai-split-grid {
@@ -1205,7 +1198,7 @@
 .ai-split-card-head h3 {
   margin: 0;
   font-size: 1.22rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.025em;
 }
 
@@ -1240,7 +1233,9 @@
 
 .ai-services {
   padding: var(--ai-pad) 0;
-  border-top: 1px solid var(--ai-line);
+  border-top: 1px solid var(--ai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--ai-seam) 22%, var(--ai-seam) 78%, transparent) 1;
 }
 
 .ai-services,
@@ -1294,7 +1289,7 @@
 .ai-service-card h3 {
   margin: 0 0 10px;
   font-size: 1.12rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.025em;
 }
 
@@ -1311,7 +1306,9 @@
 
 .ai-testimonials {
   padding: var(--ai-pad) 0;
-  border-top: 1px solid var(--ai-line);
+  border-top: 1px solid var(--ai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--ai-seam) 22%, var(--ai-seam) 78%, transparent) 1;
 }
 
 .ai-testimonials-grid {
@@ -1339,13 +1336,6 @@
   background: var(--ai-surface-raised);
 }
 
-.ai-quote-spark {
-  width: 18px;
-  height: 18px;
-  margin-bottom: 22px;
-  color: var(--ai-accent);
-}
-
 .ai-testimonial-card blockquote {
   flex: 1;
   margin: 0 0 26px;
@@ -1370,13 +1360,13 @@
   border: 1px solid var(--ai-line-strong);
   color: var(--ai-text);
   font-size: 0.76rem;
-  font-weight: 680;
+  font-weight: 600;
 }
 
 .ai-testimonial-card figcaption strong {
   display: block;
   font-size: 0.88rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 
@@ -1393,7 +1383,9 @@
 
 .ai-faq {
   padding: var(--ai-pad) 0;
-  border-top: 1px solid var(--ai-line);
+  border-top: 1px solid var(--ai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--ai-seam) 22%, var(--ai-seam) 78%, transparent) 1;
 }
 
 .ai-faq-container {
@@ -1420,14 +1412,14 @@
   text-align: left;
   font-family: inherit;
   font-size: 1.05rem;
-  font-weight: 620;
+  font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--ai-text);
   transition: color 0.3s var(--ai-ease);
 }
 
 .ai-faq-question:hover {
-  color: var(--ai-accent);
+  color: var(--ai-accent-ink);
 }
 
 .ai-faq-question svg {
@@ -1470,9 +1462,11 @@
 
 .ai-cta {
   padding: var(--ai-pad) 0;
-  border-top: 1px solid var(--ai-line);
+  border-top: 1px solid var(--ai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--ai-seam) 22%, var(--ai-seam) 78%, transparent) 1;
   background:
-    radial-gradient(46rem 28rem at 88% 0%, rgba(241, 102, 16, 0.16), transparent 60%),
+    radial-gradient(46rem 28rem at 88% 0%, rgba(241, 102, 16, 0.09), transparent 60%),
     var(--ai-canvas);
   scroll-margin-top: 80px;
 }
@@ -1484,20 +1478,12 @@
   align-items: center;
 }
 
-.ai-cta-spark {
-  width: 30px;
-  height: 30px;
-  margin-bottom: 28px;
-  color: var(--ai-accent);
-  animation: ai-spin 20s linear infinite;
-}
-
 .ai-cta-copy h2 {
   margin: 0 0 22px;
   font-size: clamp(2.3rem, 4.6vw, 3.5rem);
-  font-weight: 700;
-  letter-spacing: -0.042em;
-  line-height: 1.04;
+  font-weight: 500;
+  letter-spacing: -0.024em;
+  line-height: 1.1;
 }
 
 .ai-cta-copy > p {
@@ -1536,8 +1522,8 @@
   align-items: center;
   gap: 9px;
   font-size: 0.93rem;
-  font-weight: 620;
-  color: var(--ai-accent);
+  font-weight: 600;
+  color: var(--ai-accent-ink);
   text-decoration: none;
   border-bottom: 1px solid var(--ai-accent-line);
   padding-bottom: 3px;
@@ -1554,21 +1540,22 @@
   height: 15px;
 }
 
-/* ---------- CTA form card — the second light moment ---------- */
+/* ---------- CTA form card — the page's one raised surface ---------- */
 
 .ai-cta-form-card {
   padding: 40px 38px;
+  border: 1px solid var(--ai-paper-line);
   border-radius: var(--ai-radius-lg);
   background: var(--ai-paper);
   color: var(--ai-paper-ink);
-  box-shadow: 0 32px 72px -28px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 24px 56px -32px rgba(60, 45, 25, 0.28);
 }
 
 .ai-cta-form-card h3 {
   margin: 0 0 6px;
   font-size: 1.35rem;
-  font-weight: 680;
-  letter-spacing: -0.03em;
+  font-weight: 600;
+  letter-spacing: -0.018em;
 }
 
 .ai-cta-form-card > p {
@@ -1595,7 +1582,7 @@
 
 .ai-form-group label {
   font-size: 0.68rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ai-paper-muted);
@@ -1675,12 +1662,6 @@
   }
 }
 
-@keyframes ai-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .ai-landing *,
   .ai-landing *::before,
@@ -1690,7 +1671,7 @@
     transition-duration: 0.01ms !important;
   }
 
-  .ai-feed-item {
+  .ai-term-row {
     opacity: 1;
   }
 
@@ -1928,8 +1909,4 @@
     padding: 32px 24px;
   }
 
-  .ai-hero-spark-1,
-  .ai-hero-spark-2 {
-    display: none;
-  }
 }

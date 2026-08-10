@@ -305,7 +305,7 @@ const AccountingLanding = () => {
               Managing Business Accounting is <span className="text-orange">Taxing</span>
             </h2>
             <p className="section-description">
-              You started your business to pursue your passion — not to wrestle with spreadsheets and tax filings. Yet here you are, spending hours on tasks that drain your energy.
+              You started your business to pursue your passion — not to wrestle with spreadsheets and tax compliance. Yet here you are, spending hours on tasks that drain your energy.
             </p>
           </div>
           
@@ -355,7 +355,7 @@ const AccountingLanding = () => {
                 One Platform. One Team. <span className="text-orange">10× Faster.</span>
               </h2>
               <p className="section-description">
-                In one platform, one dedicated team manages all your finance and accounting functions. From bookkeeping to tax filing — we handle it so you can focus on what you do best.
+                In one platform, one dedicated team manages all your finance and accounting functions. From bookkeeping to tax compliance — we handle it so you can focus on what you do best.
               </p>
               
               <div className="solution-features">
@@ -395,7 +395,7 @@ const AccountingLanding = () => {
                   </div>
                   <div className="feature-content">
                     <h3>Full Tax Compliance</h3>
-                    <p>Corporate tax and VAT filings handled. Stay compliant without the stress.</p>
+                    <p>Corporate tax and VAT Compliance handled. Stay compliant without the stress.</p>
                   </div>
                 </div>
               </div>
@@ -442,9 +442,9 @@ const AccountingLanding = () => {
                 </div>
                 
                 <div className="dashboard-footer">
-                  <span className="footer-text">All filings up to date</span>
+                  <span className="footer-text">All compliances up to date</span>
                   <div className="status-badges">
-                    <span className="status-badge green">Tax Filed</span>
+                    <span className="status-badge green">Tax Compliant</span>
                     <span className="status-badge orange">Audit Ready</span>
                   </div>
                 </div>
@@ -503,7 +503,7 @@ const AccountingLanding = () => {
               <div className="comparison-row">
                 <div className="comparison-cell before">
                   <FiX className="icon-red" />
-                  <span>Late tax filings & penalties</span>
+                  <span>Late tax compliance & penalties</span>
                 </div>
                 <div className="comparison-cell after">
                   <FiCheckCircle className="icon-green" />
@@ -554,7 +554,7 @@ const AccountingLanding = () => {
             </div>
             <div className="pricing-tax-highlight">
               <span className="emoji">✅</span>
-              <span>Every plan includes <strong>FREE VAT &amp; Corporate Tax (CT) Filing</strong></span>
+              <span>Every plan includes <strong>FREE VAT &amp; Corporate Tax (CT) Compliance</strong></span>
             </div>
           </div>
           
@@ -570,9 +570,8 @@ const AccountingLanding = () => {
               <p className="pricing-limit">Up to 50 transactions/year</p>
               
               <ul className="pricing-features">
-                <li><FiCheckCircle /> <strong>Free Corporate Tax (CT) Filing</strong></li>
-                <li><FiCheckCircle /> CT Filing</li>
-                <li><FiCheckCircle /> <strong>Free VAT Filing &amp; Compliance</strong></li>
+                <li><FiCheckCircle /> <strong>Free Corporate Tax (CT) Compliance</strong></li>
+                <li><FiCheckCircle /> <strong>Free VAT Compliance &amp; Compliance</strong></li>
                 <li><FiCheckCircle /> Quarterly Financial Statements</li>
                 <li><FiCheckCircle /> Dedicated Support Manager</li>
                 <li><FiCheckCircle /> 30 Min Free Tax Consultation</li>

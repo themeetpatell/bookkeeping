@@ -8,11 +8,11 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:webflow": "node webflow-embed/build/index.mjs"
+    "build:webflow": "node webflow-embed/build/index.mjs",
+    "build:webflow:pricing": "node webflow-embed/build/pricing-index.mjs"
   },
   "dependencies": {
     "@posthog/react": "^1.10.3",
-    "lucide-react": "^0.562.0",
     "posthog-js": "^1.405.3",
     "posthog-node": "^5.46.0",
     "react": "^19.2.0",

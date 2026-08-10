@@ -202,12 +202,12 @@ const AccountingSoftwareLanding = () => {
       finanshels: true
     },
     {
-      feature: 'UAE Corporate Tax Filing',
+      feature: 'UAE Corporate Tax Compliance',
       software: false,
       finanshels: true
     },
     {
-      feature: 'VAT Filing & Compliance',
+      feature: 'VAT Compliance',
       software: false,
       finanshels: true
     },
@@ -245,7 +245,7 @@ const AccountingSoftwareLanding = () => {
       title: "Founder, Livvity"
     },
     {
-      text: "My old xero setup got messy quickly. Too many errors I didn't catch. Finanshels does our books + shows cashflow forecasts weekly + remembers to file taxes. I can finally focus on revenue.",
+      text: "My old xero setup got messy quickly. Too many errors I didn't catch. Finanshels does our books + shows cashflow forecasts weekly + stays on top of our tax compliance. I can finally focus on revenue.",
       name: "Jeremy Khatar",
       title: "CEO, Ronin Global LLC"
     },
@@ -275,7 +275,7 @@ const AccountingSoftwareLanding = () => {
     },
     {
       before: 'Tax compliance anxiety and deadlines',
-      after: '100% on-time, audit-ready filings'
+      after: '100% on-time, audit-ready compliance'
     }
   ];
 
@@ -286,11 +286,11 @@ const AccountingSoftwareLanding = () => {
     },
     {
       question: "What's included in the client portal?",
-      answer: "Your client portal includes real-time financial dashboards, profit & loss statements, cash flow forecasts, expense categorization, tax filing status, and all your financial records in one place. You can access everything 24/7 from any device."
+      answer: "Your client portal includes real-time financial dashboards, profit & loss statements, cash flow forecasts, expense categorization, tax compliance status, and all your financial records in one place. You can access everything 24/7 from any device."
     },
     {
       question: "How does Finanshels pricing compare to accounting software costs?",
-      answer: "QuickBooks costs AED 80-300/month plus your time to manage it (and potential accountant fees for cleanup and tax filing). Finanshels includes everything — bookkeeping, expert advice, tax compliance, and your client portal — starting at AED 499/month with no hidden costs."
+      answer: "QuickBooks costs AED 80-300/month plus your time to manage it (and potential accountant fees for cleanup and tax compliance). Finanshels includes everything — bookkeeping, expert advice, tax compliance, and your client portal — starting at AED 499/month with no hidden costs."
     },
     {
       question: "Do you replace my current bookkeeping software?",
@@ -298,7 +298,7 @@ const AccountingSoftwareLanding = () => {
     },
     {
       question: "How does Finanshels handle UAE Corporate Tax compliance?",
-      answer: "We manage your complete Corporate Tax lifecycle — from quarterly filings to annual returns. Our team stays updated with the latest UAE tax regulations to ensure 100% compliance and help you avoid penalties."
+      answer: "We manage your complete Corporate Tax lifecycle — from quarterly to annual compliance. Our team stays updated with the latest UAE tax regulations to ensure 100% compliance and help you avoid penalties."
     },
     {
       question: "Is my financial data secure?",
@@ -311,7 +311,7 @@ const AccountingSoftwareLanding = () => {
     '@type': 'ProfessionalService',
     name: 'Finanshels Accounting Experts (UAE)',
     url: `${baseUrl}${pathname}`,
-    image: `${baseUrl}/Dubai.png`,
+    image: `${baseUrl}/Dubai.jpg`,
     description:
       "Stop paying for accounting software that can't think. Get expert accountants + a client portal + real-time insights.",
     areaServed: 'AE',
@@ -332,7 +332,7 @@ const AccountingSoftwareLanding = () => {
         title="Stop Paying for Accounting Software That Can't Think | Finanshels"
         description="QuickBooks, Xero, Zoho Books — they're tools. Get expert accountants + a client portal + real-time financial insights."
         canonicalPath={pathname}
-        image="/Dubai.png"
+        image="/Dubai.jpg"
         jsonLd={seoJsonLd}
       />
       
@@ -479,7 +479,7 @@ const AccountingSoftwareLanding = () => {
             <div className="software-problem-card">
               <div className="software-problem-icon">⚠️</div>
               <h3>Compliance Anxiety</h3>
-              <p>UAE Corporate Tax and VAT deadlines loom. Your bookkeeping software won't remind you — or file for you.</p>
+              <p>UAE Corporate Tax and VAT deadlines loom. Your bookkeeping software won't remind you — or handle compliance for you.</p>
             </div>
           </div>
         </div>
@@ -594,7 +594,7 @@ const AccountingSoftwareLanding = () => {
             <div className="software-solution-card">
               <div className="software-solution-icon">🛡️</div>
               <h3>UAE Tax Compliance</h3>
-              <p>Corporate tax and VAT filings handled. Stay compliant without the stress of managing software yourself.</p>
+              <p>Corporate tax and VAT compliance handled. Stay compliant without the stress of managing software yourself.</p>
             </div>
           </div>
           
@@ -686,9 +686,9 @@ const AccountingSoftwareLanding = () => {
                 </div>
                 
                 <div className="software-dashboard-compliance">
-                  <span className="software-compliance-text">All filings up to date</span>
+                  <span className="software-compliance-text">All compliances up to date</span>
                   <div className="software-compliance-badges">
-                    <span className="software-badge vat">VAT Filed</span>
+                    <span className="software-badge vat">VAT Compliant</span>
                     <span className="software-badge ct">CT Registered</span>
                   </div>
                 </div>
@@ -728,9 +728,9 @@ const AccountingSoftwareLanding = () => {
               <p className="software-pricing-limit">Up to 50 transactions/year</p>
               
               <ul className="software-pricing-features">
-                <li><FiCheckCircle /> Corporate Tax Filing (Annual)</li>
-                <li><FiCheckCircle /> CT Filing</li>
-                <li><FiCheckCircle /> VAT Quarterly Filing</li>
+                <li><FiCheckCircle /> Corporate Tax Compliance (Annual)</li>
+                <li><FiCheckCircle /> CT Compliance</li>
+                <li><FiCheckCircle /> Quarterly VAT Compliance</li>
                 <li><FiCheckCircle /> Quarterly Financial Statements</li>
                 <li><FiCheckCircle /> Dedicated Support Manager</li>
                 <li><FiCheckCircle /> 30 Min Free Tax Consultation</li>

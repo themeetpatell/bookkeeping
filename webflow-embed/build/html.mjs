@@ -16,7 +16,7 @@ export const WA = (
 ).replace(/&/g, '&amp;');
 
 /** Client logos are served from the React app's origin (verified reachable). */
-const ASSETS = 'https://accounting.finanshels.com';
+const ASSETS = 'https://accounting.finanshels.co';
 
 const ZOHO_FORM_ACTION =
   'https://forms.zohopublic.com/finanshelsllc/form/GetYourFreeAuditConsultation/formperma/EikNR5Pwn-Ak9PHJxB-cTO47ehdcxhrZeW_itd-c-I0/htmlRecords/submit';
@@ -25,7 +25,7 @@ const ZOHO_FORM_ACTION =
 const FEATHER =
   'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
 
-const SYMBOLS = {
+export const SYMBOLS = {
   check: [FEATHER, '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'],
   chevron: [FEATHER, '<polyline points="6 9 12 15 18 9"/>'],
   flag: [FEATHER, '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>'],
@@ -40,7 +40,6 @@ const SYMBOLS = {
   trending: [FEATHER, '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>'],
   file: [FEATHER, '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>'],
   arrow: [FEATHER, '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>'],
-  spark: ['viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"', '<path d="M12 1v22M1 12h22M4.2 4.2l15.6 15.6M19.8 4.2L4.2 19.8"/>'],
   whatsapp: ['viewBox="0 0 448 512" fill="currentColor"', '<path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>'],
 };
 
@@ -54,15 +53,14 @@ const icon = (id, cls) =>
   `<svg${cls ? ` class="${cls}"` : ''} aria-hidden="true" focusable="false"><use href="#fsai-i-${id}"/></svg>`;
 
 const I = new Proxy({}, { get: (_, id) => icon(id) });
-const spark = (cls) => icon('spark', cls);
 
 /* ---------- data (mirrors AIAccountingLanding.jsx) ---------- */
 const heroFeedItems = [
-  { icon: 'check', text: '214 transactions categorized', meta: 'Emirates NBD · Mashreq' },
-  { icon: 'check', text: 'Bank reconciliation complete', meta: '0 discrepancies' },
-  { icon: 'flag', text: '3 invoices flagged for review', meta: 'Routed to your accountant' },
-  { icon: 'check', text: 'VAT return drafted', meta: 'Due 28 Aug · ready early' },
-  { icon: 'human', text: 'Reviewed &amp; approved', meta: 'Senior accountant sign-off' },
+  { icon: 'check', time: '06:04:12', text: 'Sorted 214 transactions', meta: 'Emirates NBD, Mashreq' },
+  { icon: 'check', time: '06:04:38', text: 'Matched every bank line', meta: 'nothing left over' },
+  { icon: 'flag', time: '06:05:07', text: 'Set 3 invoices aside', meta: 'your accountant is on it' },
+  { icon: 'check', time: '06:05:41', text: 'Drafted your VAT return', meta: 'due 28 Aug, ready now' },
+  { icon: 'human', time: '06:06:02', text: 'Your accountant signed it off', meta: 'checked line by line' },
 ];
 
 const clientLogos = [
@@ -78,49 +76,49 @@ const clientLogos = [
 ];
 
 const pillars = [
-  ['01', 'AI does the repetitive work', 'Categorization, reconciliation, data capture and deadline tracking run continuously — not once a month. Your books are current every morning.'],
-  ['02', 'Accountants own the outcome', 'Every number the AI produces is reviewed by a qualified accountant before it reaches you or the FTA. AI drafts. Humans sign.'],
-  ['03', 'You see everything, live', 'No more waiting for month-end PDFs. A real-time dashboard shows cash, runway, VAT position and P&amp;L the moment anything changes.'],
+  ['01', 'The boring work runs itself', 'Sorting transactions, matching bank lines, chasing receipts, watching deadlines — it happens every day instead of once a month. You wake up to books that are already current.'],
+  ['02', 'A real accountant owns your numbers', 'Nothing reaches you or the FTA until a qualified accountant has been through it. The software does the typing. A person takes responsibility.'],
+  ['03', 'You can look any time', 'No waiting for a PDF at month-end. Open the dashboard and see your cash, your runway, what you owe in VAT and how the month is going — as of this morning.'],
 ];
 
 const comparisonRows = [
-  ['Monthly close', 'Weeks after month-end', 'Days — AI reconciles continuously'],
-  ['Data entry', 'Manual keying, human error', 'Automated capture, accountant-verified'],
-  ['Visibility', 'Static PDFs, once a month', 'Live dashboard, always current'],
-  ['Tax deadlines', 'Last-minute scrambles', 'Tracked by AI, filed early'],
-  ['Errors', 'Discovered at audit', 'Flagged the moment they happen'],
-  ['Cost', 'Grows with headcount', 'Grows with software — not people'],
+  ['Monthly close', 'Weeks after month-end', 'Days — the matching never stops'],
+  ['Data entry', 'Manual keying, human error', 'Captured for you, checked by a person'],
+  ['Visibility', 'Static PDFs, once a month', 'A dashboard that is always current'],
+  ['Tax deadlines', 'Last-minute scrambles', 'Watched all year, filed early'],
+  ['Errors', 'Discovered at audit', 'Caught the day they happen'],
+  ['Cost', 'Grows with headcount', 'Grows with software, not headcount'],
 ];
 
 const workflowSteps = [
   ['01', 'Connect', 'We link your banks, invoicing tools and accounting software — QuickBooks, Xero, Zoho Books or ours. Migration handled for you.'],
-  ['02', 'AI agents process', 'Transactions are captured, categorized and reconciled daily. Anomalies, duplicates and missing documents get flagged automatically.'],
-  ['03', 'Accountants review', 'Your dedicated accountant checks every output, resolves exceptions and signs off on filings. Nothing ships on AI confidence alone.'],
+  ['02', 'We do the daily work', 'Every transaction is captured, sorted and matched against your bank — daily. Anything odd, duplicated or missing a receipt gets pulled out for a person to look at.'],
+  ['03', 'Your accountant checks it', 'A dedicated accountant goes through the work, sorts out anything that was set aside, and signs the filings. Nothing goes out on the software’s say-so alone.'],
   ['04', 'You decide', 'Clean books, live dashboards and on-time VAT &amp; Corporate Tax filings — plus a team on WhatsApp when you need an answer.'],
 ];
 
 const aiDuties = [
-  'Categorizes every transaction, daily',
-  'Reconciles bank feeds continuously',
-  'Extracts data from invoices &amp; receipts',
-  'Tracks VAT and Corporate Tax deadlines',
-  'Drafts returns and monthly reports',
-  'Flags anomalies and duplicates instantly',
+  'Sorts every transaction, every day',
+  'Matches your bank lines as they land',
+  'Reads your invoices and receipts',
+  'Keeps an eye on every tax deadline',
+  'Drafts your returns and monthly reports',
+  'Spots duplicates and odd entries',
 ];
 
 const humanDuties = [
-  'Reviews and approves every AI output',
-  'Resolves flagged exceptions with context',
+  'Checks and approves the work',
+  'Sorts out anything that looks wrong',
   'Signs off on VAT &amp; Corporate Tax filings',
-  'Advises on structure, cash and runway',
-  'Answers you on WhatsApp — a person, fast',
+  'Talks through cash, runway and structure',
+  'Answers on WhatsApp — quickly, and as a person',
   'Owns the numbers at audit time',
 ];
 
 const services = [
-  ['book', 'Bookkeeping', 'Daily, AI-reconciled books reviewed by your dedicated accountant. Always audit-ready.'],
-  ['percent', 'VAT Compliance', 'Registration, quarterly returns and FTA correspondence — drafted by AI, filed by humans.'],
-  ['briefcase', 'Corporate Tax', '9% Corporate Tax registration, planning and filing with deadlines tracked automatically.'],
+  ['book', 'Bookkeeping', 'Books matched daily and checked by your own accountant. Ready whenever an auditor, a bank or an investor asks.'],
+  ['percent', 'VAT Compliance', 'Registration, quarterly returns and FTA letters — drafted for you, filed by a person.'],
+  ['briefcase', 'Corporate Tax', '9% Corporate Tax registration, planning and filing, with the deadlines watched for you.'],
   ['users', 'Payroll &amp; WPS', 'Salaries processed, WPS files generated and gratuity accruals kept current every month.'],
   ['trending', 'CFO Insights', 'Cash-flow forecasts, budgets and board-ready reporting from live data — not stale exports.'],
   ['file', 'Audit Support', 'Clean trails and organized documents mean audits close faster and cost less.'],
@@ -164,11 +162,28 @@ const faqs = [
 
 const feedIcon = (type) => (type === 'flag' ? I.flag : type === 'human' ? I.eye : I.check);
 
+/**
+ * Tracking hook for the Webflow site's existing WhatsApp analytics.
+ *
+ * On the Webflow side `data-wa-track` is a CSS class (it sits in the Style
+ * selector next to `call-button`), so it is emitted as a class here. It is
+ * also emitted as a bare attribute, because a GTM trigger keyed on
+ * `[data-wa-track]` is just as likely as one keyed on `.data-wa-track`, and
+ * carrying both costs nothing. The cascade fence outranks any host rule that
+ * happens to style `.data-wa-track`, so the class cannot change how these
+ * buttons look.
+ *
+ * The per-source `data-fsai-wa` stays alongside it — that is what feeds the
+ * `whatsapp_click` dataLayer push and keeps the entry points distinguishable.
+ */
+const WA_TRACK = 'data-wa-track';
+
 const waLink = (source, className, inner) => `<a
           href="${WA}"
           target="_blank"
           rel="noopener noreferrer"
-          class="${className}"
+          class="${className} ${WA_TRACK}"
+          ${WA_TRACK}
           data-fsai-wa="${source}"
         >${inner}</a>`;
 
@@ -244,7 +259,6 @@ export const SECTIONS = [
       <div class="fsai-hero-grid">
         <div class="fsai-hero-copy">
           <div class="fsai-hero-badge">
-            ${spark('fsai-badge-spark')}
             <span>First AI-native accounting firm &middot; UAE</span>
           </div>
 
@@ -255,9 +269,9 @@ export const SECTIONS = [
           </h1>
 
           <p class="fsai-hero-sub">
-            Finanshels pairs AI agents that categorize, reconcile and draft your filings with
-            qualified accountants who review every number. 10&times; faster closes,
-            audit-ready always &mdash; for 7,000+ UAE businesses.
+            Software does the sorting, the matching and the first draft overnight. A qualified
+            accountant checks every number before it goes anywhere. That&rsquo;s how 7,000+ UAE
+            businesses close 10&times; faster and stay ready for an audit.
           </p>
 
           <div class="fsai-hero-actions">
@@ -276,42 +290,42 @@ export const SECTIONS = [
           </dl>
         </div>
 
-        <!-- Live agent feed card — the page's one inverted surface -->
+        <!-- This morning's activity log — the page's one raised surface -->
         <div class="fsai-hero-visual">
-          <div class="fsai-feed-card">
-            <div class="fsai-feed-header">
-              <span class="fsai-feed-live">
+          <div class="fsai-term">
+            <div class="fsai-term-bar">
+              <span class="fsai-term-name"><b>finanshels</b> &middot; today 6:04 AM</span>
+              <span class="fsai-term-live">
                 <span class="fsai-live-dot"></span>
-                Finanshels AI &middot; working now
+                live
               </span>
-              <span class="fsai-feed-date">Today, 6:04 AM</span>
             </div>
 
-            <ul class="fsai-feed-list">
+            <ul class="fsai-term-log">
 ${heroFeedItems
   .map(
-    (item, index) => `              <li class="fsai-feed-item fsai-feed-${item.icon}" style="animation-delay: ${(0.5 + index * 0.35).toFixed(2)}s">
-                <span class="fsai-feed-icon">${feedIcon(item.icon)}</span>
-                <span class="fsai-feed-text">
+    (item, index) => `              <li class="fsai-term-row fsai-term-${item.icon}" style="animation-delay: ${(0.5 + index * 0.35).toFixed(2)}s">
+                <span class="fsai-term-time">${item.time}</span>
+                <span class="fsai-term-glyph">${feedIcon(item.icon)}</span>
+                <span class="fsai-term-msg">
                   ${item.text}
-                  <span class="fsai-feed-meta">${item.meta}</span>
+                  <span class="fsai-term-meta">${item.meta}</span>
                 </span>
               </li>`,
   )
   .join('\n')}
-              <li class="fsai-feed-item fsai-feed-typing" style="animation-delay: 2.4s">
-                <span class="fsai-typing-dots"><span></span><span></span><span></span></span>
-                <span class="fsai-feed-text">Preparing your July P&amp;L&hellip;</span>
+              <li class="fsai-term-row fsai-term-run" style="animation-delay: 2.4s">
+                <span class="fsai-term-time">06:06:&mdash;</span>
+                <span class="fsai-term-glyph"><span class="fsai-typing-dots"><span></span><span></span><span></span></span></span>
+                <span class="fsai-term-msg">Writing up your July P&amp;L</span>
               </li>
             </ul>
 
-            <div class="fsai-feed-footer">
+            <div class="fsai-term-foot">
               ${I.shield}
-              Every action reviewed by a qualified accountant
+              A qualified accountant checks every line before it goes out
             </div>
           </div>
-          ${spark('fsai-hero-spark fsai-hero-spark-1')}
-          ${spark('fsai-hero-spark fsai-hero-spark-2')}
         </div>
       </div>
     </div>
@@ -323,7 +337,7 @@ ${heroFeedItems
     css: ['LOGOS'],
     html: `  <section class="fsai-logos" aria-label="Client logos">
     <div class="fsai-container">
-      <p class="fsai-logos-label">Trusted by leading UAE businesses</p>
+      <p class="fsai-logos-label">Trusted by 7,000+ leading UAE businesses</p>
       <div class="fsai-logos-track" data-reveal>
 ${clientLogos
   .map(
@@ -343,7 +357,7 @@ ${clientLogos
     html: `  <section class="fsai-manifesto">
     <div class="fsai-container">
       <p class="fsai-eyebrow fsai-eyebrow-light">
-        ${spark('fsai-eyebrow-spark')} Why AI-native
+        Why AI-native
       </p>
       <h2 class="fsai-manifesto-headline" data-reveal>
         Most firms <em>added</em> AI.
@@ -377,7 +391,7 @@ ${pillars
     html: `  <section class="fsai-compare">
     <div class="fsai-container">
       <div class="fsai-section-head" data-reveal>
-        <p class="fsai-eyebrow">${spark('fsai-eyebrow-spark')} The difference</p>
+        <p class="fsai-eyebrow">The difference</p>
         <h2>Traditional firm vs. <span class="fsai-accent">AI-native</span></h2>
       </div>
 
@@ -386,7 +400,7 @@ ${pillars
           <span role="columnheader"></span>
           <span role="columnheader">The old way</span>
           <span role="columnheader" class="fsai-compare-now-head">
-            ${spark('fsai-compare-spark')} Finanshels
+            Finanshels
           </span>
         </div>
 ${comparisonRows
@@ -411,7 +425,7 @@ ${comparisonRows
           </ul>
         </div>
         <div class="fsai-compare-panel fsai-compare-panel-new">
-          <h3>${spark('fsai-compare-panel-spark')} With Finanshels</h3>
+          <h3>With Finanshels</h3>
           <ul>
 ${comparisonRows
   .map(([label, , now]) => `            <li>${I.check}<span><strong>${label}.</strong> ${now}</span></li>`)
@@ -448,7 +462,7 @@ ${comparisonRows
     html: `  <section class="fsai-workflow">
     <div class="fsai-container">
       <div class="fsai-section-head" data-reveal>
-        <p class="fsai-eyebrow">${spark('fsai-eyebrow-spark')} How it works</p>
+        <p class="fsai-eyebrow">How it works</p>
         <h2>From your bank feed to <span class="fsai-accent">board-ready</span></h2>
       </div>
 
@@ -473,7 +487,7 @@ ${workflowSteps
     html: `  <section class="fsai-dashboard">
     <div class="fsai-container">
       <div class="fsai-section-head fsai-dash-head" data-reveal>
-        <p class="fsai-eyebrow fsai-eyebrow-light">${spark('fsai-eyebrow-spark')} The product</p>
+        <p class="fsai-eyebrow fsai-eyebrow-light">The product</p>
         <h2>Your numbers, live in <span class="fsai-accent">Findelivery</span></h2>
         <p class="fsai-dash-sub">
           Every Finanshels client gets Findelivery — our AI CFO dashboard. P&amp;L, cash,
@@ -485,7 +499,6 @@ ${workflowSteps
       <div class="fsai-dash-frame" data-reveal aria-label="Preview of the Findelivery AI CFO dashboard">
         <div class="fsai-dash-topbar">
           <span class="fsai-dash-brand">
-            ${spark('fsai-dash-brand-spark')}
             Findelivery &middot; AI CFO
           </span>
           <span class="fsai-dash-period">June 2026</span>
@@ -549,7 +562,7 @@ ${dashboardGuardrails
     html: `  <section class="fsai-split">
     <div class="fsai-container">
       <div class="fsai-section-head" data-reveal>
-        <p class="fsai-eyebrow">${spark('fsai-eyebrow-spark')} Division of labor</p>
+        <p class="fsai-eyebrow">Division of labor</p>
         <h2>AI drafts. <span class="fsai-accent">Humans sign.</span></h2>
       </div>
 
@@ -584,7 +597,7 @@ ${humanDuties.map((duty) => `            <li>${I.check}${duty}</li>`).join('\n')
     html: `  <section class="fsai-services" id="fsai-services">
     <div class="fsai-container">
       <div class="fsai-section-head" data-reveal>
-        <p class="fsai-eyebrow">${spark('fsai-eyebrow-spark')} Everything covered</p>
+        <p class="fsai-eyebrow">Everything covered</p>
         <h2>One firm for your entire <span class="fsai-accent">finance stack</span></h2>
       </div>
 
@@ -609,7 +622,7 @@ ${services
     html: `  <section class="fsai-testimonials" id="fsai-testimonials">
     <div class="fsai-container">
       <div class="fsai-section-head" data-reveal>
-        <p class="fsai-eyebrow">${spark('fsai-eyebrow-spark')} In their words</p>
+        <p class="fsai-eyebrow">In their words</p>
         <h2>Founders who made the <span class="fsai-accent">switch</span></h2>
       </div>
 
@@ -617,7 +630,6 @@ ${services
 ${testimonials
   .map(
     ([text, name, title, initials]) => `        <figure class="fsai-testimonial-card">
-          ${spark('fsai-quote-spark')}
           <blockquote>${text}</blockquote>
           <figcaption>
             <span class="fsai-testimonial-avatar">${initials}</span>
@@ -640,7 +652,7 @@ ${testimonials
     html: `  <section class="fsai-faq" id="fsai-faq">
     <div class="fsai-container fsai-faq-container">
       <div class="fsai-section-head" data-reveal>
-        <p class="fsai-eyebrow">${spark('fsai-eyebrow-spark')} Questions</p>
+        <p class="fsai-eyebrow">Questions</p>
         <h2>Fair questions about <span class="fsai-accent">AI accounting</span></h2>
       </div>
 
@@ -665,13 +677,12 @@ ${faqs
 
   {
     key: 'cta',
-    css: ['FINAL CTA', 'Animations', 'Responsive'],
+    css: ['FINAL CTA'],
     html: `  <span id="fsai-pricing"></span>
   <section class="fsai-cta" id="fsai-consultation">
     <div class="fsai-container">
       <div class="fsai-cta-grid">
         <div class="fsai-cta-copy" data-reveal>
-          ${spark('fsai-cta-spark')}
           <h2>
             See your books run
             <br />

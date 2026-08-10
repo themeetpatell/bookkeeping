@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield } from 'react-icons/fi';
 import Testimonials from '../components/Testimonials';
-import './BookkeepingLandingBing.css';
+// Shares the Google-ads stylesheet: the Bing variant is visually identical and
+// only differs in the prefilled WhatsApp copy below.
+import './BookkeepingLanding.css';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
@@ -104,7 +106,7 @@ const ZohoConsultationForm = ({ formId }) => (
       />
     </div>
     <button type="submit" className="form-submit">
-      <em>Submit</em>
+      <em>Book A Slot</em>
     </button>
   </form>
 );
@@ -122,15 +124,15 @@ const BookkeepingLandingBing = () => {
     '@type': 'ProfessionalService',
     name: 'Finanshels Bookkeeping & Tax (UAE)',
     url: 'https://accounting.finanshels.co/bookkeeping',
-    image: 'https://accounting.finanshels.co/Dubai.png',
+    image: 'https://accounting.finanshels.co/Dubai.jpg',
     description:
-      'UAE bookkeeping, corporate tax, and VAT filing with real-time dashboards. Free consultation and pay only if satisfied.',
+      'UAE bookkeeping, corporate tax, and VAT compliance with real-time dashboards. Free consultation and pay only if satisfied.',
     areaServed: 'AE',
     telephone: '+971521549572',
     serviceType: [
       'Bookkeeping',
-      'Corporate Tax Filing',
-      'VAT Filing & Compliance',
+      'Corporate Tax Compliance',
+      'VAT Compliance',
       'Financial Reporting',
       'Cash Flow Forecasting'
     ],
@@ -195,7 +197,7 @@ const BookkeepingLandingBing = () => {
     {
       icon: <FiShield />,
       title: 'UAE Tax Compliance',
-      description: 'Corporate tax and VAT filings handled. Stay compliant without the stress.'
+      description: 'Corporate tax and VAT compliances handled. Stay compliant without the stress.'
     }
   ];
 
@@ -209,7 +211,7 @@ const BookkeepingLandingBing = () => {
       after: 'Weekly automated forecasts'
     },
     {
-      before: 'Late VAT & filings',
+      before: 'Late Corporate Tax and VAT compliances',
       after: '100% on-time, audit-ready'
     },
     {
@@ -258,9 +260,8 @@ const BookkeepingLandingBing = () => {
       period: '/mo',
       transactions: 'Up to 50 transactions/year',
       features: [
-        'Corporate Tax Filing (Annual)',
-        'CT Filing',
-        'VAT Quarterly Filing',
+        'Corporate Tax Compliance (Annual)',
+        'VAT Quarterly Compliance',
         'Quarterly Financial Statements',
         'Dedicated Support Manager',
         '30 Min Free Tax Consultation'
@@ -317,7 +318,7 @@ const BookkeepingLandingBing = () => {
   const faqs = [
     {
       question: 'How does Finanshels handle UAE Corporate Tax compliance?',
-      answer: 'We manage your complete Corporate Tax lifecycle - from quarterly filings to annual returns. Our team stays updated with the latest UAE tax regulations to ensure 100% compliance and help you avoid penalties.'
+      answer: 'We manage your complete Corporate Tax lifecycle - from quarterly compliances to annual returns. Our team stays updated with the latest UAE tax regulations to ensure 100% compliance and help you avoid penalties.'
     },
     {
       question: 'What accounting software do you support?',
@@ -361,7 +362,7 @@ const BookkeepingLandingBing = () => {
             
             <p className="hero-description">
               Expert outsourced accounting & bookkeeping for UAE small businesses.
-              Corporate tax compliance, VAT filing, and real-time financial
+              Corporate tax compliance, VAT compliance, and real-time financial
               insights — all handled by our dedicated team.
             </p>
             
@@ -465,8 +466,7 @@ const BookkeepingLandingBing = () => {
               Accounting is <span className="highlight-green">Taxing</span>
             </h2>
             <p className="section-subtitle">
-              You started your business to pursue your passion — not to wrestle with spreadsheets and
-              tax filings. Yet here you are, spending hours on tasks that drain your energy.
+              You started your business to pursue your passion — not to wrestle with spreadsheets. Yet here you are, spending hours on tasks that drain your energy.
             </p>
           </div>
           
@@ -494,7 +494,7 @@ const BookkeepingLandingBing = () => {
               </h2>
               <p className="solution-description">
                 In one platform, one dedicated team manages all your finance
-                functions. From bookkeeping to tax filing — we handle it so you can
+                functions. From bookkeeping to tax compliance — we handle it so you can
                 focus on what you do best.
               </p>
               
@@ -558,11 +558,11 @@ const BookkeepingLandingBing = () => {
                 <div className="compliance-status">
                   <div className="compliance-header">
                     <FiCheckCircle className="compliance-icon" />
-                    <span className="compliance-title">All filings up to date</span>
+                    <span className="compliance-title">All compliances up to date</span>
                   </div>
                   <div className="compliance-badges">
-                    <span className="compliance-badge">VAT Filed</span>
-                    <span className="compliance-badge">CT Registered</span>
+                    <span className="compliance-badge">VAT Compliant</span>
+                    <span className="compliance-badge">CT Compliant</span>
                   </div>
                 </div>
                 

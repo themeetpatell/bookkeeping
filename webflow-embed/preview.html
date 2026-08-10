@@ -26,17 +26,15 @@
 <!-- ==========================================================================
      FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 1 of 7: HERO + CLIENT LOGOS
 
-     Paste into its own Webflow HTML Embed element, in order.
-     Self-contained: this block carries the CSS for its own sections.
+     Paste into its own Webflow HTML Embed element.
 
-     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
-     7 holds the animations and all media queries, so every block must be
-     present and in sequence or the responsive rules won't apply.
+     SELF-CONTAINED — this block carries the design tokens, the reset, the icons
+     it references and its own media queries. Paste the blocks in any order, or
+     paste one on its own: it renders correctly either way. Page order is still
+     1 of 7 if you want the full page reading top to bottom.
 
-     Place each embed in a Section with no padding. Do NOT put a block inside a
-     Webflow Form Block — block 7 contains its own <form>.
-     Also defines the icon sprite every later block references — this one
-     must be on the page.
+     Place each embed in a Section with no padding. Do NOT put block 7 inside
+     a Webflow Form Block — it contains its own form element.
      ========================================================================== -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -126,40 +124,63 @@
 
 /* ============================================================
    AI-Native Accounting Landing
-   Single dark canvas, one accent, hairline bento grids.
-   Palette: warm near-black, Finanshels orange
-   Type: Inter only — heavy weights, tight tracking
+   Single warm-paper canvas, one accent, hairline bento grids.
+   Palette: warm cream, Finanshels orange
+   Type: Inter only — light display weights, relaxed tracking.
+   Google Fonts serves Inter as static weights, so only 300/400/500/
+   600/700 exist: anything in between silently snaps up a step.
    ============================================================ */
 
 .fsai-root:not(#_) {
-  /* Three colours only: black, white, orange. The whole page sits on one
-     black canvas — depth comes from hairline borders and neutral surface
-     lifts, never from a hue shift. */
-  --fsai-canvas: #000000;
-  --fsai-surface: #0b0b0b;
-  --fsai-surface-raised: #141414;
-  --fsai-line: rgba(255, 255, 255, 0.12);
-  --fsai-line-strong: rgba(255, 255, 255, 0.22);
+  /* Three colours only: cream, white, orange. The whole page sits on one
+     warm paper canvas — depth comes from hairline borders and white surface
+     lifts, never from a hue shift. The cream matches the site footer so the
+     section seams into the rest of the page. */
+  --fsai-canvas: #faf9f5;
+  --fsai-surface: #ffffff;
+  --fsai-surface-raised: #ffffff;
+  --fsai-line: #e7e3d8;
+  --fsai-line-strong: #d6cfbe;
+  /* Section seams only. On black the hairlines were near-invisible; on
+     cream, ten stacked full-bleed rules read as ten hard cuts, so the
+     seam is lighter than the structural line and fades at both ends. */
+  --fsai-seam: #eeeae0;
 
-  /* The two inverted moments — hero feed card and the CTA form. */
+  /* Cards that need to lift off the canvas — the terminal and the CTA form. */
   --fsai-paper: #ffffff;
-  --fsai-paper-sunk: #f4f4f4;
-  --fsai-paper-line: #e4e4e4;
-  --fsai-paper-ink: #000000;
+  --fsai-paper-sunk: #faf9f5;
+  --fsai-paper-line: #e7e3d8;
+  --fsai-paper-ink: #191919;
   --fsai-paper-muted: #6b6b6b;
 
+  /* Orange ramp, picked by contrast against the cream canvas rather than by
+     eye — brand orange is only 3.0:1 on #faf9f5, which is fine for a fill or
+     an icon but fails AA the moment it carries a sentence. Each step below is
+     measured, so the rule is simply: fill with accent, write with ink.
+       accent      #f16610  3.0:1   fills, icons, dots (non-text, needs 3:1)
+       accent-deep #d45a0e  3.8:1   display-size accent text, hovers
+       accent-ink  #b0500a  5.0:1   any accent text under 24px
+       accent-band #c25309  4.6:1   band behind white copy */
   --fsai-accent: #f16610;
   --fsai-accent-deep: #d45a0e;
-  --fsai-accent-soft: rgba(241, 102, 16, 0.14);
-  --fsai-accent-line: rgba(241, 102, 16, 0.35);
+  --fsai-accent-ink: #b0500a;
+  --fsai-accent-band: #c25309;
+  /* Tints sit on cream rather than black, so they need less alpha to read. */
+  --fsai-accent-soft: rgba(241, 102, 16, 0.10);
+  --fsai-accent-line: rgba(241, 102, 16, 0.30);
 
-  --fsai-text: #ffffff;
-  --fsai-muted: #a3a3a3;
-  --fsai-dim: #737373;
+  /* Neutral ramp, also measured: 15.9:1 / 7.3:1 / 4.8:1. Three clearly
+     separated steps so hierarchy survives without any of them dropping
+     below AA — the previous dim grey sat at 3.2:1 and was the single
+     biggest readability problem on the light canvas. */
+  --fsai-text: #191919;
+  --fsai-muted: #57534a;
+  --fsai-dim: #746e64;
 
   /* Financial direction reads through emphasis, not hue — orange marks the
-     figure worth looking at, neutral grey carries everything else. */
-  --fsai-up: var(--fsai-accent);
+     figure worth looking at, neutral grey carries everything else. Both are
+     always rendered as small text, so both take the AA-safe steps. */
+  --fsai-up: var(--fsai-accent-ink);
   --fsai-down: var(--fsai-dim);
 
   --fsai-radius: 12px;
@@ -171,7 +192,7 @@
   --fsai-ease-out: cubic-bezier(0, 0, 0.2, 1);
   --fsai-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
-  color-scheme: dark;
+  color-scheme: light;
   background: var(--fsai-canvas);
   color: var(--fsai-text);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -195,7 +216,7 @@
 
 
 .fsai-root:not(#_) .fsai-accent {
-  color: var(--fsai-accent);
+  color: var(--fsai-accent-deep);
 }
 
 
@@ -251,7 +272,7 @@
   gap: 9px;
   margin: 0 0 20px;
   font-size: 0.72rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--fsai-dim);
@@ -265,14 +286,6 @@
 }
 
 
-.fsai-root:not(#_) .fsai-eyebrow-spark {
-  width: 12px;
-  height: 12px;
-  color: var(--fsai-accent);
-  flex-shrink: 0;
-}
-
-
 .fsai-root:not(#_) .fsai-section-head {
   max-width: 780px;
   margin-bottom: 64px;
@@ -282,9 +295,9 @@
 .fsai-root:not(#_) .fsai-section-head h2 {
   margin: 0;
   font-size: clamp(2.2rem, 4.6vw, 3.6rem);
-  font-weight: 680;
-  letter-spacing: -0.038em;
-  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
 }
 
 
@@ -296,11 +309,11 @@
   margin-top: auto;
   padding-top: 22px;
   font-size: 0.66rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: 0.09em;
   line-height: 1.5;
   text-transform: uppercase;
-  color: var(--fsai-accent);
+  color: var(--fsai-accent-ink);
 }
 
 
@@ -326,7 +339,7 @@
   border-radius: var(--fsai-pill);
   border: 1px solid transparent;
   font-size: 0.95rem;
-  font-weight: 620;
+  font-weight: 600;
   letter-spacing: -0.01em;
   text-decoration: none;
   transition:
@@ -370,8 +383,72 @@
 
 .fsai-root:not(#_) .fsai-btn-ghost:hover {
   border-color: var(--fsai-text);
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(0, 0, 0, 0.04);
   transform: translateY(-2px);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fsai-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fsai-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(241, 102, 16, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(241, 102, 16, 0);
+  }
+}
+
+
+@keyframes fsai-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .fsai-root:not(#_) *,
+  .fsai-root:not(#_) *::before,
+  .fsai-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-term-row {
+    opacity: 1;
+  }
+
+
+  .fsai-root:not(#_).is-ready [data-reveal],
+  .fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
 }
 
 /* ============================================================
@@ -382,8 +459,8 @@
   position: relative;
   padding: 120px 0 104px;
   background:
-    radial-gradient(46rem 32rem at 88% -12%, rgba(241, 102, 16, 0.16), transparent 62%),
-    radial-gradient(38rem 26rem at -8% 110%, rgba(241, 102, 16, 0.06), transparent 60%),
+    radial-gradient(46rem 32rem at 88% -12%, rgba(241, 102, 16, 0.09), transparent 62%),
+    radial-gradient(38rem 26rem at -8% 110%, rgba(241, 102, 16, 0.05), transparent 60%),
     var(--fsai-canvas);
 }
 
@@ -426,22 +503,14 @@
 }
 
 
-.fsai-root:not(#_) .fsai-badge-spark {
-  width: 13px;
-  height: 13px;
-  color: var(--fsai-accent);
-  animation: fsai-spin 14s linear infinite;
-}
-
-
 .fsai-root:not(#_) .fsai-hero-headline {
   margin: 0 0 26px;
   /* Sized against the copy column, not the viewport — at 5.9vw this ran to
      four lines and pushed the feed card below the fold. */
   font-size: clamp(2.4rem, 4.3vw, 3.6rem);
-  font-weight: 700;
-  letter-spacing: -0.042em;
-  line-height: 1.04;
+  font-weight: 500;
+  letter-spacing: -0.024em;
+  line-height: 1.1;
   text-wrap: balance;
 }
 
@@ -476,8 +545,8 @@
 
 .fsai-root:not(#_) .fsai-stat dt {
   font-size: 1.7rem;
-  font-weight: 680;
-  letter-spacing: -0.03em;
+  font-weight: 500;
+  letter-spacing: -0.018em;
 }
 
 
@@ -488,9 +557,10 @@
 }
 
 
-/* ---------- Hero visual: live agent feed ----------
-   The one light card on the page — CrossVal floats light product surfaces on
-   dark to pull the eye. This is that focal moment. */
+/* ---------- Hero visual: agent activity log ----------
+   Reads as a system log rather than a chat feed — monospace timestamps, one
+   line per event, hairline rules, no icon chips. Narrower and about 40%
+   shorter than the card it replaces, so it stops competing with the headline. */
 
 .fsai-root:not(#_) .fsai-hero-visual {
   position: relative;
@@ -498,128 +568,137 @@
 }
 
 
-.fsai-root:not(#_) .fsai-feed-card {
+.fsai-root:not(#_) .fsai-term {
+  /* One mono stack for every fixed-width element in the log. */
+  --fsai-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
   position: relative;
   z-index: 1;
+  max-width: 430px;
+  margin-left: auto;
   background: var(--fsai-paper);
   color: var(--fsai-paper-ink);
-  border-radius: var(--fsai-radius-lg);
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.3),
-    0 32px 72px -28px rgba(0, 0, 0, 0.75);
+  border: 1px solid var(--fsai-paper-line);
+  border-radius: var(--fsai-radius);
+  box-shadow: 0 24px 56px -32px rgba(60, 45, 25, 0.3);
   overflow: hidden;
 }
 
 
-.fsai-root:not(#_) .fsai-feed-header {
+.fsai-root:not(#_) .fsai-term-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 17px 22px;
+  gap: 12px;
+  padding: 10px 14px;
   border-bottom: 1px solid var(--fsai-paper-line);
-  font-size: 0.78rem;
-  font-weight: 650;
-}
-
-
-.fsai-root:not(#_) .fsai-feed-date {
-  font-weight: 500;
+  background: var(--fsai-paper-sunk);
+  font-family: var(--fsai-mono);
+  font-size: 0.72rem;
+  letter-spacing: -0.01em;
   color: var(--fsai-paper-muted);
 }
 
 
-.fsai-root:not(#_) .fsai-feed-live {
+.fsai-root:not(#_) .fsai-term-name b {
+  font-weight: 600;
+  color: var(--fsai-paper-ink);
+}
+
+
+.fsai-root:not(#_) .fsai-term-live {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
+  color: var(--fsai-accent-ink);
 }
 
 
 .fsai-root:not(#_) .fsai-live-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--fsai-accent);
   animation: fsai-pulse 1.8s ease-in-out infinite;
 }
 
 
-.fsai-root:not(#_) .fsai-feed-list {
+.fsai-root:not(#_) .fsai-term-log {
   list-style: none;
   margin: 0;
-  padding: 8px 0;
+  padding: 0;
 }
 
 
-.fsai-root:not(#_) .fsai-feed-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 13px;
-  padding: 13px 22px;
+.fsai-root:not(#_) .fsai-term-row {
+  display: grid;
+  grid-template-columns: auto 14px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 10px;
+  padding: 9px 14px;
   opacity: 0;
-  animation: fsai-rise 0.55s var(--fsai-ease-out) forwards;
+  animation: fsai-rise 0.5s var(--fsai-ease-out) forwards;
 }
 
 
-.fsai-root:not(#_) .fsai-feed-item + .fsai-feed-item {
+.fsai-root:not(#_) .fsai-term-row + .fsai-term-row {
   border-top: 1px solid var(--fsai-paper-line);
 }
 
 
-.fsai-root:not(#_) .fsai-feed-icon {
-  display: grid;
+.fsai-root:not(#_) .fsai-term-time {
+  font-family: var(--fsai-mono);
+  font-size: 0.7rem;
+  /* Tabular figures keep the timestamp column from shifting row to row. */
+  font-variant-numeric: tabular-nums;
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-term-glyph {
+  display: inline-grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  background: var(--fsai-accent-soft);
   color: var(--fsai-accent-deep);
+  /* Nudged off the text baseline so the glyph optically centres on the line. */
+  transform: translateY(2px);
 }
 
 
-.fsai-root:not(#_) .fsai-feed-icon svg {
-  width: 15px;
-  height: 15px;
+.fsai-root:not(#_) .fsai-term-glyph svg {
+  width: 13px;
+  height: 13px;
+  display: block;
 }
 
 
-.fsai-root:not(#_) .fsai-feed-flag .fsai-feed-icon {
-  background: var(--fsai-paper-sunk);
-  border: 1px solid var(--fsai-paper-line);
+/* The two events a human touches read in ink, not accent — that contrast is
+   the whole point of the section. */
+.fsai-root:not(#_) .fsai-term-flag .fsai-term-glyph,
+.fsai-root:not(#_) .fsai-term-human .fsai-term-glyph {
   color: var(--fsai-paper-ink);
 }
 
 
-.fsai-root:not(#_) .fsai-feed-human .fsai-feed-icon {
-  background: var(--fsai-paper-ink);
-  color: var(--fsai-paper);
-}
-
-
-.fsai-root:not(#_) .fsai-feed-text {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.88rem;
-  font-weight: 620;
+.fsai-root:not(#_) .fsai-term-msg {
+  font-size: 0.83rem;
+  font-weight: 600;
   letter-spacing: -0.01em;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 
-.fsai-root:not(#_) .fsai-feed-meta {
-  font-size: 0.76rem;
-  font-weight: 500;
+.fsai-root:not(#_) .fsai-term-meta {
+  font-weight: 400;
   color: var(--fsai-paper-muted);
 }
 
 
-.fsai-root:not(#_) .fsai-feed-typing {
-  align-items: center;
+.fsai-root:not(#_) .fsai-term-meta::before {
+  content: ' · ';
 }
 
 
-.fsai-root:not(#_) .fsai-feed-typing .fsai-feed-text {
+.fsai-root:not(#_) .fsai-term-run .fsai-term-msg {
   font-weight: 500;
   color: var(--fsai-paper-muted);
 }
@@ -627,14 +706,13 @@
 
 .fsai-root:not(#_) .fsai-typing-dots {
   display: inline-flex;
-  gap: 4px;
-  padding: 0 6px;
+  gap: 3px;
 }
 
 
 .fsai-root:not(#_) .fsai-typing-dots span {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--fsai-accent);
   animation: fsai-bounce 1.2s ease-in-out infinite;
@@ -646,50 +724,24 @@
 .fsai-root:not(#_) .fsai-typing-dots span:nth-child(3) { animation-delay: 0.3s; }
 
 
-.fsai-root:not(#_) .fsai-feed-footer {
+.fsai-root:not(#_) .fsai-term-foot {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 15px 22px;
+  gap: 8px;
+  padding: 10px 14px;
   border-top: 1px solid var(--fsai-paper-line);
   background: var(--fsai-paper-sunk);
-  font-size: 0.78rem;
-  font-weight: 620;
+  font-size: 0.73rem;
+  font-weight: 600;
   color: var(--fsai-paper-ink);
 }
 
 
-.fsai-root:not(#_) .fsai-feed-footer svg {
-  width: 15px;
-  height: 15px;
+.fsai-root:not(#_) .fsai-term-foot svg {
+  width: 13px;
+  height: 13px;
   color: var(--fsai-accent-deep);
   flex-shrink: 0;
-}
-
-
-.fsai-root:not(#_) .fsai-hero-spark {
-  position: absolute;
-  color: var(--fsai-accent);
-  opacity: 0.8;
-}
-
-
-.fsai-root:not(#_) .fsai-hero-spark-1 {
-  width: 34px;
-  height: 34px;
-  top: -22px;
-  right: -14px;
-  animation: fsai-spin 22s linear infinite;
-}
-
-
-.fsai-root:not(#_) .fsai-hero-spark-2 {
-  width: 20px;
-  height: 20px;
-  bottom: -10px;
-  left: -24px;
-  opacity: 0.5;
-  animation: fsai-spin 18s linear infinite reverse;
 }
 
 /* ============================================================
@@ -698,7 +750,9 @@
 
 .fsai-root:not(#_) .fsai-logos {
   padding: 52px 0 60px;
-  border-top: 1px solid var(--fsai-line);
+  border-top: 1px solid var(--fsai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--fsai-seam) 22%, var(--fsai-seam) 78%, transparent) 1;
 }
 
 
@@ -706,7 +760,7 @@
   margin: 0 0 30px;
   text-align: center;
   font-size: 0.7rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--fsai-dim);
@@ -722,42 +776,117 @@
 }
 
 
-/* Client marks are dark artwork — knock them out to white for the dark canvas. */
+/* Client marks render in their own brand colours — the row is social proof,
+   and washing it to grey made it read as decoration rather than evidence. */
 .fsai-root:not(#_) .fsai-logo-tile img {
+  /* 32/132 is the largest that still fits all nine marks on one row at
+     1200px — any bigger and the last logo wraps to a lonely second line. */
   height: 32px;
   width: auto;
   max-width: 132px;
   object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.5;
-  transition: opacity 0.3s var(--fsai-ease);
+  transition: transform 0.3s var(--fsai-ease);
 }
 
 
 .fsai-root:not(#_) .fsai-logo-tile:hover img {
-  opacity: 0.95;
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1024px) {
+
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 88px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 24px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-hero {
+    padding: 84px 0 72px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-hero-visual {
+    max-width: 560px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-hero-stats {
+    gap: 32px;
+  }
+}
+
+
+
+
+@media (max-width: 680px) {
+
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 72px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 20px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-hero {
+    padding: 64px 0 56px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-hero-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 26px 32px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-hero-actions .fsai-btn {
+    width: 100%;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-section-head {
+    margin-bottom: 44px;
+  }
 }
 </style>
 <div class="fsai-root">
 
-  <!-- Icon sprite: defined once, referenced by every <use> on the page. -->
+  <!-- Icons this block uses. Self-contained on purpose. -->
   <svg class="fsai-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
     <symbol id="fsai-i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
-    <symbol id="fsai-i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></symbol>
     <symbol id="fsai-i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></symbol>
-    <symbol id="fsai-i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
-    <symbol id="fsai-i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
     <symbol id="fsai-i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
     <symbol id="fsai-i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
-    <symbol id="fsai-i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
-    <symbol id="fsai-i-percent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
-    <symbol id="fsai-i-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
-    <symbol id="fsai-i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-    <symbol id="fsai-i-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
-    <symbol id="fsai-i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
     <symbol id="fsai-i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
-    <symbol id="fsai-i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 1v22M1 12h22M4.2 4.2l15.6 15.6M19.8 4.2L4.2 19.8"/></symbol>
-    <symbol id="fsai-i-whatsapp" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></symbol>
   </svg>
 
   <section class="fsai-hero">
@@ -765,7 +894,6 @@
       <div class="fsai-hero-grid">
         <div class="fsai-hero-copy">
           <div class="fsai-hero-badge">
-            <svg class="fsai-badge-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
             <span>First AI-native accounting firm &middot; UAE</span>
           </div>
 
@@ -776,9 +904,9 @@
           </h1>
 
           <p class="fsai-hero-sub">
-            Finanshels pairs AI agents that categorize, reconcile and draft your filings with
-            qualified accountants who review every number. 10&times; faster closes,
-            audit-ready always &mdash; for 7,000+ UAE businesses.
+            Software does the sorting, the matching and the first draft overnight. A qualified
+            accountant checks every number before it goes anywhere. That&rsquo;s how 7,000+ UAE
+            businesses close 10&times; faster and stay ready for an audit.
           </p>
 
           <div class="fsai-hero-actions">
@@ -790,7 +918,8 @@
           href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20to%20learn%20more%20about%20your%20AI-native%20accounting%20services.&amp;type=phone_number&amp;app_absent=0"
           target="_blank"
           rel="noopener noreferrer"
-          class="fsai-btn fsai-btn-ghost"
+          class="fsai-btn fsai-btn-ghost data-wa-track"
+          data-wa-track
           data-fsai-wa="ai_landing_hero"
         >Talk on WhatsApp</a>
           </div>
@@ -803,66 +932,70 @@
           </dl>
         </div>
 
-        <!-- Live agent feed card — the page's one inverted surface -->
+        <!-- This morning's activity log — the page's one raised surface -->
         <div class="fsai-hero-visual">
-          <div class="fsai-feed-card">
-            <div class="fsai-feed-header">
-              <span class="fsai-feed-live">
+          <div class="fsai-term">
+            <div class="fsai-term-bar">
+              <span class="fsai-term-name"><b>finanshels</b> &middot; today 6:04 AM</span>
+              <span class="fsai-term-live">
                 <span class="fsai-live-dot"></span>
-                Finanshels AI &middot; working now
+                live
               </span>
-              <span class="fsai-feed-date">Today, 6:04 AM</span>
             </div>
 
-            <ul class="fsai-feed-list">
-              <li class="fsai-feed-item fsai-feed-check" style="animation-delay: 0.50s">
-                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
-                <span class="fsai-feed-text">
-                  214 transactions categorized
-                  <span class="fsai-feed-meta">Emirates NBD · Mashreq</span>
+            <ul class="fsai-term-log">
+              <li class="fsai-term-row fsai-term-check" style="animation-delay: 0.50s">
+                <span class="fsai-term-time">06:04:12</span>
+                <span class="fsai-term-glyph"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
+                <span class="fsai-term-msg">
+                  Sorted 214 transactions
+                  <span class="fsai-term-meta">Emirates NBD, Mashreq</span>
                 </span>
               </li>
-              <li class="fsai-feed-item fsai-feed-check" style="animation-delay: 0.85s">
-                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
-                <span class="fsai-feed-text">
-                  Bank reconciliation complete
-                  <span class="fsai-feed-meta">0 discrepancies</span>
+              <li class="fsai-term-row fsai-term-check" style="animation-delay: 0.85s">
+                <span class="fsai-term-time">06:04:38</span>
+                <span class="fsai-term-glyph"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
+                <span class="fsai-term-msg">
+                  Matched every bank line
+                  <span class="fsai-term-meta">nothing left over</span>
                 </span>
               </li>
-              <li class="fsai-feed-item fsai-feed-flag" style="animation-delay: 1.20s">
-                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-flag"/></svg></span>
-                <span class="fsai-feed-text">
-                  3 invoices flagged for review
-                  <span class="fsai-feed-meta">Routed to your accountant</span>
+              <li class="fsai-term-row fsai-term-flag" style="animation-delay: 1.20s">
+                <span class="fsai-term-time">06:05:07</span>
+                <span class="fsai-term-glyph"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-flag"/></svg></span>
+                <span class="fsai-term-msg">
+                  Set 3 invoices aside
+                  <span class="fsai-term-meta">your accountant is on it</span>
                 </span>
               </li>
-              <li class="fsai-feed-item fsai-feed-check" style="animation-delay: 1.55s">
-                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
-                <span class="fsai-feed-text">
-                  VAT return drafted
-                  <span class="fsai-feed-meta">Due 28 Aug · ready early</span>
+              <li class="fsai-term-row fsai-term-check" style="animation-delay: 1.55s">
+                <span class="fsai-term-time">06:05:41</span>
+                <span class="fsai-term-glyph"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
+                <span class="fsai-term-msg">
+                  Drafted your VAT return
+                  <span class="fsai-term-meta">due 28 Aug, ready now</span>
                 </span>
               </li>
-              <li class="fsai-feed-item fsai-feed-human" style="animation-delay: 1.90s">
-                <span class="fsai-feed-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-eye"/></svg></span>
-                <span class="fsai-feed-text">
-                  Reviewed &amp; approved
-                  <span class="fsai-feed-meta">Senior accountant sign-off</span>
+              <li class="fsai-term-row fsai-term-human" style="animation-delay: 1.90s">
+                <span class="fsai-term-time">06:06:02</span>
+                <span class="fsai-term-glyph"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-eye"/></svg></span>
+                <span class="fsai-term-msg">
+                  Your accountant signed it off
+                  <span class="fsai-term-meta">checked line by line</span>
                 </span>
               </li>
-              <li class="fsai-feed-item fsai-feed-typing" style="animation-delay: 2.4s">
-                <span class="fsai-typing-dots"><span></span><span></span><span></span></span>
-                <span class="fsai-feed-text">Preparing your July P&amp;L&hellip;</span>
+              <li class="fsai-term-row fsai-term-run" style="animation-delay: 2.4s">
+                <span class="fsai-term-time">06:06:&mdash;</span>
+                <span class="fsai-term-glyph"><span class="fsai-typing-dots"><span></span><span></span><span></span></span></span>
+                <span class="fsai-term-msg">Writing up your July P&amp;L</span>
               </li>
             </ul>
 
-            <div class="fsai-feed-footer">
+            <div class="fsai-term-foot">
               <svg aria-hidden="true" focusable="false"><use href="#fsai-i-shield"/></svg>
-              Every action reviewed by a qualified accountant
+              A qualified accountant checks every line before it goes out
             </div>
           </div>
-          <svg class="fsai-hero-spark fsai-hero-spark-1" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
-          <svg class="fsai-hero-spark fsai-hero-spark-2" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
         </div>
       </div>
     </div>
@@ -870,34 +1003,34 @@
 
   <section class="fsai-logos" aria-label="Client logos">
     <div class="fsai-container">
-      <p class="fsai-logos-label">Trusted by leading UAE businesses</p>
+      <p class="fsai-logos-label">Trusted by 7,000+ leading UAE businesses</p>
       <div class="fsai-logos-track" data-reveal>
         <div class="fsai-logo-tile">
-          <img src="https://accounting.finanshels.com/clients/Binary.png" alt="Binary logo" loading="lazy" decoding="async" />
+          <img src="https://accounting.finanshels.co/clients/Binary.png" alt="Binary logo" loading="lazy" decoding="async" />
         </div>
         <div class="fsai-logo-tile">
-          <img src="https://accounting.finanshels.com/clients/actualize.png" alt="Actualize logo" loading="lazy" decoding="async" />
+          <img src="https://accounting.finanshels.co/clients/actualize.png" alt="Actualize logo" loading="lazy" decoding="async" />
         </div>
         <div class="fsai-logo-tile">
-          <img src="https://accounting.finanshels.com/clients/carbonsirf.png" alt="CarbonSirf logo" loading="lazy" decoding="async" />
+          <img src="https://accounting.finanshels.co/clients/carbonsirf.png" alt="CarbonSirf logo" loading="lazy" decoding="async" />
         </div>
         <div class="fsai-logo-tile">
-          <img src="https://accounting.finanshels.com/clients/cotu.avif" alt="COTU Ventures logo" loading="lazy" decoding="async" />
+          <img src="https://accounting.finanshels.co/clients/cotu.avif" alt="COTU Ventures logo" loading="lazy" decoding="async" />
         </div>
         <div class="fsai-logo-tile">
-          <img src="https://accounting.finanshels.com/clients/fuze.png" alt="Fuze logo" loading="lazy" decoding="async" />
+          <img src="https://accounting.finanshels.co/clients/fuze.png" alt="Fuze logo" loading="lazy" decoding="async" />
         </div>
         <div class="fsai-logo-tile">
-          <img src="https://accounting.finanshels.com/clients/growdash.png" alt="Growdash logo" loading="lazy" decoding="async" />
+          <img src="https://accounting.finanshels.co/clients/growdash.png" alt="Growdash logo" loading="lazy" decoding="async" />
         </div>
         <div class="fsai-logo-tile">
-          <img src="https://accounting.finanshels.com/clients/humlog.png" alt="Humlog logo" loading="lazy" decoding="async" />
+          <img src="https://accounting.finanshels.co/clients/humlog.png" alt="Humlog logo" loading="lazy" decoding="async" />
         </div>
         <div class="fsai-logo-tile">
-          <img src="https://accounting.finanshels.com/clients/veehive.png" alt="Veehive logo" loading="lazy" decoding="async" />
+          <img src="https://accounting.finanshels.co/clients/veehive.png" alt="Veehive logo" loading="lazy" decoding="async" />
         </div>
         <div class="fsai-logo-tile">
-          <img src="https://accounting.finanshels.com/clients/zywa.png" alt="Zywa logo" loading="lazy" decoding="async" />
+          <img src="https://accounting.finanshels.co/clients/zywa.png" alt="Zywa logo" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
@@ -906,25 +1039,440 @@
 <!-- ==========================================================================
      FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 2 of 7: WHY AI-NATIVE + COMPARISON
 
-     Paste into its own Webflow HTML Embed element, in order.
-     Self-contained: this block carries the CSS for its own sections.
+     Paste into its own Webflow HTML Embed element.
 
-     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
-     7 holds the animations and all media queries, so every block must be
-     present and in sequence or the responsive rules won't apply.
+     SELF-CONTAINED — this block carries the design tokens, the reset, the icons
+     it references and its own media queries. Paste the blocks in any order, or
+     paste one on its own: it renders correctly either way. Page order is still
+     2 of 7 if you want the full page reading top to bottom.
 
-     Place each embed in a Section with no padding. Do NOT put a block inside a
-     Webflow Form Block — block 7 contains its own <form>.
+     Place each embed in a Section with no padding. Do NOT put block 7 inside
+     a Webflow Form Block — it contains its own form element.
      ========================================================================== -->
 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
 <style>
+/* --------------------------------------------------------------------------
+   CASCADE FENCE — see webflow-embed/README.md
+   `all: revert` discards every author-origin declaration the host page
+   contributed, falling back to the browser's own defaults. At (1,1,0) it
+   outranks Webflow's tag and class styles; the component rules that follow
+   sit higher still, so they win against the reset.
+   -------------------------------------------------------------------------- */
+
+/* SVG subtrees are deliberately excluded. Presentation attributes (fill,
+   stroke, stroke-width, d) cascade at author origin, so reverting them erases
+   the icon geometry outright — verified: `d` computes to `none`. */
+.fsai-root:not(#_),
+.fsai-root:not(#_) :where(*:not(svg, svg *)),
+.fsai-root:not(#_) :where(*:not(svg, svg *))::before,
+.fsai-root:not(#_) :where(*:not(svg, svg *))::after {
+  all: revert;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Baseline the source stylesheet was authored against (src/App.css applies a
+   global `* { margin: 0; padding: 0 }`, src/index.css the link/button rules). */
+.fsai-root:not(#_) :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fsai-root:not(#_) :where(button) {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fsai-root:not(#_) :where(ul, ol) {
+  list-style: none;
+}
+
+/* SVGs sit outside the `all: revert` sweep, so a host rule like Webflow's
+   `img, svg { max-width: 100%; vertical-align: middle }` would still reach
+   them. Neutralise box-model and decoration properties only — every paint and
+   geometry property is left alone. `baseline` is the UA default and matches
+   the React page. */
+.fsai-root:not(#_) :where(svg, svg *) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  vertical-align: baseline;
+  float: none;
+}
+
+.fsai-root:not(#_) :where(img) {
+  max-width: none;
+}
+
+/* Icon sprite host — never rendered. */
+.fsai-root:not(#_) :where(.fsai-sprite) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Optional full-bleed escape hatch — add `fsai-fullbleed` to a wrapper that
+   sits inside a padded Webflow container. Needs body { overflow-x: hidden }
+   when a vertical scrollbar is present. */
+.fsai-root:not(#_).fsai-fullbleed {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+}
+
+/* ============================================================
+   AI-Native Accounting Landing
+   Single warm-paper canvas, one accent, hairline bento grids.
+   Palette: warm cream, Finanshels orange
+   Type: Inter only — light display weights, relaxed tracking.
+   Google Fonts serves Inter as static weights, so only 300/400/500/
+   600/700 exist: anything in between silently snaps up a step.
+   ============================================================ */
+
+.fsai-root:not(#_) {
+  /* Three colours only: cream, white, orange. The whole page sits on one
+     warm paper canvas — depth comes from hairline borders and white surface
+     lifts, never from a hue shift. The cream matches the site footer so the
+     section seams into the rest of the page. */
+  --fsai-canvas: #faf9f5;
+  --fsai-surface: #ffffff;
+  --fsai-surface-raised: #ffffff;
+  --fsai-line: #e7e3d8;
+  --fsai-line-strong: #d6cfbe;
+  /* Section seams only. On black the hairlines were near-invisible; on
+     cream, ten stacked full-bleed rules read as ten hard cuts, so the
+     seam is lighter than the structural line and fades at both ends. */
+  --fsai-seam: #eeeae0;
+
+  /* Cards that need to lift off the canvas — the terminal and the CTA form. */
+  --fsai-paper: #ffffff;
+  --fsai-paper-sunk: #faf9f5;
+  --fsai-paper-line: #e7e3d8;
+  --fsai-paper-ink: #191919;
+  --fsai-paper-muted: #6b6b6b;
+
+  /* Orange ramp, picked by contrast against the cream canvas rather than by
+     eye — brand orange is only 3.0:1 on #faf9f5, which is fine for a fill or
+     an icon but fails AA the moment it carries a sentence. Each step below is
+     measured, so the rule is simply: fill with accent, write with ink.
+       accent      #f16610  3.0:1   fills, icons, dots (non-text, needs 3:1)
+       accent-deep #d45a0e  3.8:1   display-size accent text, hovers
+       accent-ink  #b0500a  5.0:1   any accent text under 24px
+       accent-band #c25309  4.6:1   band behind white copy */
+  --fsai-accent: #f16610;
+  --fsai-accent-deep: #d45a0e;
+  --fsai-accent-ink: #b0500a;
+  --fsai-accent-band: #c25309;
+  /* Tints sit on cream rather than black, so they need less alpha to read. */
+  --fsai-accent-soft: rgba(241, 102, 16, 0.10);
+  --fsai-accent-line: rgba(241, 102, 16, 0.30);
+
+  /* Neutral ramp, also measured: 15.9:1 / 7.3:1 / 4.8:1. Three clearly
+     separated steps so hierarchy survives without any of them dropping
+     below AA — the previous dim grey sat at 3.2:1 and was the single
+     biggest readability problem on the light canvas. */
+  --fsai-text: #191919;
+  --fsai-muted: #57534a;
+  --fsai-dim: #746e64;
+
+  /* Financial direction reads through emphasis, not hue — orange marks the
+     figure worth looking at, neutral grey carries everything else. Both are
+     always rendered as small text, so both take the AA-safe steps. */
+  --fsai-up: var(--fsai-accent-ink);
+  --fsai-down: var(--fsai-dim);
+
+  --fsai-radius: 12px;
+  --fsai-radius-lg: 16px;
+  --fsai-pill: 999px;
+  --fsai-pad: 120px;
+
+  /* CrossVal's motion tokens: ease-out for entrances, ease-in-out for state. */
+  --fsai-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --fsai-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+  background: var(--fsai-canvas);
+  color: var(--fsai-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+
+.fsai-root:not(#_) *,
+.fsai-root:not(#_) *::before,
+.fsai-root:not(#_) *::after {
+  box-sizing: border-box;
+}
+
+
+.fsai-root:not(#_) .fsai-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+
+.fsai-root:not(#_) .fsai-accent {
+  color: var(--fsai-accent-deep);
+}
+
+
+/* ---------- Scroll reveal ----------
+   The hidden state is gated behind `.is-ready`, which JS adds on mount, so
+   the page still renders fully if the observer never runs. */
+
+/* Whole element fades up as one. */
+.fsai-root:not(#_).is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--fsai-ease-out),
+    transform 0.65s var(--fsai-ease-out);
+}
+
+
+/* Children fade up one after another — used on the bento grids, where the
+   cards reading in sequence is the point. The container itself stays put. */
+.fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > * {
+  animation: fsai-rise 0.6s var(--fsai-ease-out) both;
+  animation-delay: var(--fsai-stagger, 0s);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --fsai-stagger: 0.07s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --fsai-stagger: 0.14s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --fsai-stagger: 0.21s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(5) { --fsai-stagger: 0.28s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(6) { --fsai-stagger: 0.35s; }
+
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.fsai-root:not(#_) .fsai-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+/* Kept so existing markup that still passes the light modifier renders sanely
+   now that every section shares one canvas. */
+.fsai-root:not(#_) .fsai-eyebrow-light {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-section-head {
+  max-width: 780px;
+  margin-bottom: 64px;
+}
+
+
+.fsai-root:not(#_) .fsai-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+
+/* Uppercase micro-caption pinned under card copy */
+.fsai-root:not(#_) .fsai-microcap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--fsai-accent-ink);
+}
+
+
+.fsai-root:not(#_) .fsai-microcap::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  margin-top: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+
+/* ---------- Buttons ---------- */
+
+.fsai-root:not(#_) .fsai-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 30px;
+  border-radius: var(--fsai-pill);
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--fsai-ease),
+    border-color 0.3s var(--fsai-ease),
+    color 0.3s var(--fsai-ease),
+    transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary {
+  background: var(--fsai-accent);
+  color: #fff;
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover {
+  background: var(--fsai-accent-deep);
+  transform: translateY(-2px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost {
+  background: transparent;
+  color: var(--fsai-text);
+  border-color: var(--fsai-line-strong);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost:hover {
+  border-color: var(--fsai-text);
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fsai-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fsai-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(241, 102, 16, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(241, 102, 16, 0);
+  }
+}
+
+
+@keyframes fsai-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .fsai-root:not(#_) *,
+  .fsai-root:not(#_) *::before,
+  .fsai-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-term-row {
+    opacity: 1;
+  }
+
+
+  .fsai-root:not(#_).is-ready [data-reveal],
+  .fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+}
+
 /* ============================================================
    MANIFESTO
    ============================================================ */
 
 .fsai-root:not(#_) .fsai-manifesto {
   padding: var(--fsai-pad) 0;
-  border-top: 1px solid var(--fsai-line);
+  border-top: 1px solid var(--fsai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--fsai-seam) 22%, var(--fsai-seam) 78%, transparent) 1;
 }
 
 
@@ -932,9 +1480,9 @@
   margin: 0 0 26px;
   max-width: 16em;
   font-size: clamp(2.4rem, 5.2vw, 4rem);
-  font-weight: 700;
-  letter-spacing: -0.042em;
-  line-height: 1.04;
+  font-weight: 500;
+  letter-spacing: -0.024em;
+  line-height: 1.1;
 }
 
 
@@ -985,16 +1533,16 @@
   display: block;
   margin-bottom: 22px;
   font-size: 0.78rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  color: var(--fsai-accent);
+  color: var(--fsai-accent-ink);
 }
 
 
 .fsai-root:not(#_) .fsai-pillar h3 {
   margin: 0 0 12px;
   font-size: 1.18rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.025em;
 }
 
@@ -1012,7 +1560,9 @@
 
 .fsai-root:not(#_) .fsai-compare {
   padding: var(--fsai-pad) 0;
-  border-top: 1px solid var(--fsai-line);
+  border-top: 1px solid var(--fsai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--fsai-seam) 22%, var(--fsai-seam) 78%, transparent) 1;
 }
 
 
@@ -1047,7 +1597,7 @@
 .fsai-root:not(#_) .fsai-compare-head {
   background: var(--fsai-canvas);
   font-size: 0.7rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--fsai-dim);
@@ -1061,18 +1611,12 @@
 
 .fsai-root:not(#_) .fsai-compare-now-head {
   gap: 8px;
-  color: var(--fsai-accent);
-}
-
-
-.fsai-root:not(#_) .fsai-compare-spark {
-  width: 11px;
-  height: 11px;
+  color: var(--fsai-accent-ink);
 }
 
 
 .fsai-root:not(#_) .fsai-compare-label {
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 
@@ -1080,14 +1624,14 @@
 .fsai-root:not(#_) .fsai-compare-old {
   color: var(--fsai-dim);
   text-decoration-line: line-through;
-  text-decoration-color: rgba(255, 255, 255, 0.3);
+  text-decoration-color: rgba(0, 0, 0, 0.28);
   text-decoration-thickness: 1px;
 }
 
 
 .fsai-root:not(#_) .fsai-compare-now {
   gap: 11px;
-  font-weight: 620;
+  font-weight: 600;
   letter-spacing: -0.01em;
   background: var(--fsai-accent-soft);
   border-left: 2px solid var(--fsai-accent);
@@ -1122,15 +1666,9 @@
   gap: 8px;
   margin: 0 0 20px;
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-}
-
-
-.fsai-root:not(#_) .fsai-compare-panel-spark {
-  width: 12px;
-  height: 12px;
 }
 
 
@@ -1161,7 +1699,7 @@
 
 
 .fsai-root:not(#_) .fsai-compare-panel strong {
-  font-weight: 650;
+  font-weight: 600;
 }
 
 
@@ -1191,7 +1729,7 @@
 
 
 .fsai-root:not(#_) .fsai-compare-panel-new h3 {
-  color: var(--fsai-accent);
+  color: var(--fsai-accent-ink);
 }
 
 
@@ -1208,12 +1746,140 @@
 .fsai-root:not(#_) .fsai-compare-panel-new strong {
   color: var(--fsai-text);
 }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1024px) {
+
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 88px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 24px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillars,
+  .fsai-root:not(#_) .fsai-services-grid,
+  .fsai-root:not(#_) .fsai-testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar:nth-child(odd),
+  .fsai-root:not(#_) .fsai-testimonial-card:nth-child(odd) {
+    border-left: none;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar:not(:nth-last-child(-n + 1)),
+  .fsai-root:not(#_) .fsai-testimonial-card:not(:nth-last-child(-n + 1)) {
+    border-bottom: 1px solid var(--fsai-line);
+  }
+}
+
+
+
+
+@media (max-width: 680px) {
+
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 72px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 20px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-hero-actions .fsai-btn {
+    width: 100%;
+  }
+
+
+
+  /* Bento collapses to a single column — reset every shared divider and
+     rebuild it as a simple horizontal rule between rows. */
+  .fsai-root:not(#_) .fsai-pillars,
+  .fsai-root:not(#_) .fsai-services-grid,
+  .fsai-root:not(#_) .fsai-testimonials-grid,
+  .fsai-root:not(#_) .fsai-split-grid,
+  .fsai-root:not(#_) .fsai-steps {
+    grid-template-columns: 1fr;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar + .fsai-pillar,
+  .fsai-root:not(#_) .fsai-step + .fsai-step,
+  .fsai-root:not(#_) .fsai-testimonial-card + .fsai-testimonial-card,
+  .fsai-root:not(#_) .fsai-split-card + .fsai-split-card {
+    border-left: none;
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar,
+  .fsai-root:not(#_) .fsai-testimonial-card,
+  .fsai-root:not(#_) .fsai-step {
+    border-bottom: none !important;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-section-head {
+    margin-bottom: 44px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar,
+  .fsai-root:not(#_) .fsai-step,
+  .fsai-root:not(#_) .fsai-service-card,
+  .fsai-root:not(#_) .fsai-testimonial-card {
+    padding: 30px 24px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-compare-table {
+    display: none;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-compare-mobile {
+    display: grid;
+    gap: 16px;
+  }
+}
 </style>
 <div class="fsai-root">
+
+  <!-- Icons this block uses. Self-contained on purpose. -->
+  <svg class="fsai-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="fsai-i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="fsai-i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  </svg>
+
   <section class="fsai-manifesto">
     <div class="fsai-container">
       <p class="fsai-eyebrow fsai-eyebrow-light">
-        <svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Why AI-native
+        Why AI-native
       </p>
       <h2 class="fsai-manifesto-headline" data-reveal>
         Most firms <em>added</em> AI.
@@ -1229,18 +1895,18 @@
       <div class="fsai-pillars" data-reveal-stagger>
         <article class="fsai-pillar">
           <span class="fsai-pillar-number">01</span>
-          <h3>AI does the repetitive work</h3>
-          <p>Categorization, reconciliation, data capture and deadline tracking run continuously — not once a month. Your books are current every morning.</p>
+          <h3>The boring work runs itself</h3>
+          <p>Sorting transactions, matching bank lines, chasing receipts, watching deadlines — it happens every day instead of once a month. You wake up to books that are already current.</p>
         </article>
         <article class="fsai-pillar">
           <span class="fsai-pillar-number">02</span>
-          <h3>Accountants own the outcome</h3>
-          <p>Every number the AI produces is reviewed by a qualified accountant before it reaches you or the FTA. AI drafts. Humans sign.</p>
+          <h3>A real accountant owns your numbers</h3>
+          <p>Nothing reaches you or the FTA until a qualified accountant has been through it. The software does the typing. A person takes responsibility.</p>
         </article>
         <article class="fsai-pillar">
           <span class="fsai-pillar-number">03</span>
-          <h3>You see everything, live</h3>
-          <p>No more waiting for month-end PDFs. A real-time dashboard shows cash, runway, VAT position and P&amp;L the moment anything changes.</p>
+          <h3>You can look any time</h3>
+          <p>No waiting for a PDF at month-end. Open the dashboard and see your cash, your runway, what you owe in VAT and how the month is going — as of this morning.</p>
         </article>
       </div>
     </div>
@@ -1249,7 +1915,7 @@
   <section class="fsai-compare">
     <div class="fsai-container">
       <div class="fsai-section-head" data-reveal>
-        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> The difference</p>
+        <p class="fsai-eyebrow">The difference</p>
         <h2>Traditional firm vs. <span class="fsai-accent">AI-native</span></h2>
       </div>
 
@@ -1258,38 +1924,38 @@
           <span role="columnheader"></span>
           <span role="columnheader">The old way</span>
           <span role="columnheader" class="fsai-compare-now-head">
-            <svg class="fsai-compare-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Finanshels
+            Finanshels
           </span>
         </div>
         <div class="fsai-compare-row" role="row">
           <span class="fsai-compare-label" role="cell">Monthly close</span>
           <span class="fsai-compare-old" role="cell">Weeks after month-end</span>
-          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Days — AI reconciles continuously</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Days — the matching never stops</span>
         </div>
         <div class="fsai-compare-row" role="row">
           <span class="fsai-compare-label" role="cell">Data entry</span>
           <span class="fsai-compare-old" role="cell">Manual keying, human error</span>
-          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Automated capture, accountant-verified</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Captured for you, checked by a person</span>
         </div>
         <div class="fsai-compare-row" role="row">
           <span class="fsai-compare-label" role="cell">Visibility</span>
           <span class="fsai-compare-old" role="cell">Static PDFs, once a month</span>
-          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Live dashboard, always current</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>A dashboard that is always current</span>
         </div>
         <div class="fsai-compare-row" role="row">
           <span class="fsai-compare-label" role="cell">Tax deadlines</span>
           <span class="fsai-compare-old" role="cell">Last-minute scrambles</span>
-          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Tracked by AI, filed early</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Watched all year, filed early</span>
         </div>
         <div class="fsai-compare-row" role="row">
           <span class="fsai-compare-label" role="cell">Errors</span>
           <span class="fsai-compare-old" role="cell">Discovered at audit</span>
-          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Flagged the moment they happen</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Caught the day they happen</span>
         </div>
         <div class="fsai-compare-row" role="row">
           <span class="fsai-compare-label" role="cell">Cost</span>
           <span class="fsai-compare-old" role="cell">Grows with headcount</span>
-          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Grows with software — not people</span>
+          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Grows with software, not headcount</span>
         </div>
       </div>
 
@@ -1307,14 +1973,14 @@
           </ul>
         </div>
         <div class="fsai-compare-panel fsai-compare-panel-new">
-          <h3><svg class="fsai-compare-panel-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> With Finanshels</h3>
+          <h3>With Finanshels</h3>
           <ul>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Monthly close.</strong> Days — AI reconciles continuously</span></li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Data entry.</strong> Automated capture, accountant-verified</span></li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Visibility.</strong> Live dashboard, always current</span></li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Tax deadlines.</strong> Tracked by AI, filed early</span></li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Errors.</strong> Flagged the moment they happen</span></li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Cost.</strong> Grows with software — not people</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Monthly close.</strong> Days — the matching never stops</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Data entry.</strong> Captured for you, checked by a person</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Visibility.</strong> A dashboard that is always current</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Tax deadlines.</strong> Watched all year, filed early</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Errors.</strong> Caught the day they happen</span></li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Cost.</strong> Grows with software, not headcount</span></li>
           </ul>
         </div>
       </div>
@@ -1324,18 +1990,431 @@
 <!-- ==========================================================================
      FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 3 of 7: WHATSAPP STRIP + HOW IT WORKS
 
-     Paste into its own Webflow HTML Embed element, in order.
-     Self-contained: this block carries the CSS for its own sections.
+     Paste into its own Webflow HTML Embed element.
 
-     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
-     7 holds the animations and all media queries, so every block must be
-     present and in sequence or the responsive rules won't apply.
+     SELF-CONTAINED — this block carries the design tokens, the reset, the icons
+     it references and its own media queries. Paste the blocks in any order, or
+     paste one on its own: it renders correctly either way. Page order is still
+     3 of 7 if you want the full page reading top to bottom.
 
-     Place each embed in a Section with no padding. Do NOT put a block inside a
-     Webflow Form Block — block 7 contains its own <form>.
+     Place each embed in a Section with no padding. Do NOT put block 7 inside
+     a Webflow Form Block — it contains its own form element.
      ========================================================================== -->
 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
 <style>
+/* --------------------------------------------------------------------------
+   CASCADE FENCE — see webflow-embed/README.md
+   `all: revert` discards every author-origin declaration the host page
+   contributed, falling back to the browser's own defaults. At (1,1,0) it
+   outranks Webflow's tag and class styles; the component rules that follow
+   sit higher still, so they win against the reset.
+   -------------------------------------------------------------------------- */
+
+/* SVG subtrees are deliberately excluded. Presentation attributes (fill,
+   stroke, stroke-width, d) cascade at author origin, so reverting them erases
+   the icon geometry outright — verified: `d` computes to `none`. */
+.fsai-root:not(#_),
+.fsai-root:not(#_) :where(*:not(svg, svg *)),
+.fsai-root:not(#_) :where(*:not(svg, svg *))::before,
+.fsai-root:not(#_) :where(*:not(svg, svg *))::after {
+  all: revert;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Baseline the source stylesheet was authored against (src/App.css applies a
+   global `* { margin: 0; padding: 0 }`, src/index.css the link/button rules). */
+.fsai-root:not(#_) :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fsai-root:not(#_) :where(button) {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fsai-root:not(#_) :where(ul, ol) {
+  list-style: none;
+}
+
+/* SVGs sit outside the `all: revert` sweep, so a host rule like Webflow's
+   `img, svg { max-width: 100%; vertical-align: middle }` would still reach
+   them. Neutralise box-model and decoration properties only — every paint and
+   geometry property is left alone. `baseline` is the UA default and matches
+   the React page. */
+.fsai-root:not(#_) :where(svg, svg *) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  vertical-align: baseline;
+  float: none;
+}
+
+.fsai-root:not(#_) :where(img) {
+  max-width: none;
+}
+
+/* Icon sprite host — never rendered. */
+.fsai-root:not(#_) :where(.fsai-sprite) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Optional full-bleed escape hatch — add `fsai-fullbleed` to a wrapper that
+   sits inside a padded Webflow container. Needs body { overflow-x: hidden }
+   when a vertical scrollbar is present. */
+.fsai-root:not(#_).fsai-fullbleed {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+}
+
+/* ============================================================
+   AI-Native Accounting Landing
+   Single warm-paper canvas, one accent, hairline bento grids.
+   Palette: warm cream, Finanshels orange
+   Type: Inter only — light display weights, relaxed tracking.
+   Google Fonts serves Inter as static weights, so only 300/400/500/
+   600/700 exist: anything in between silently snaps up a step.
+   ============================================================ */
+
+.fsai-root:not(#_) {
+  /* Three colours only: cream, white, orange. The whole page sits on one
+     warm paper canvas — depth comes from hairline borders and white surface
+     lifts, never from a hue shift. The cream matches the site footer so the
+     section seams into the rest of the page. */
+  --fsai-canvas: #faf9f5;
+  --fsai-surface: #ffffff;
+  --fsai-surface-raised: #ffffff;
+  --fsai-line: #e7e3d8;
+  --fsai-line-strong: #d6cfbe;
+  /* Section seams only. On black the hairlines were near-invisible; on
+     cream, ten stacked full-bleed rules read as ten hard cuts, so the
+     seam is lighter than the structural line and fades at both ends. */
+  --fsai-seam: #eeeae0;
+
+  /* Cards that need to lift off the canvas — the terminal and the CTA form. */
+  --fsai-paper: #ffffff;
+  --fsai-paper-sunk: #faf9f5;
+  --fsai-paper-line: #e7e3d8;
+  --fsai-paper-ink: #191919;
+  --fsai-paper-muted: #6b6b6b;
+
+  /* Orange ramp, picked by contrast against the cream canvas rather than by
+     eye — brand orange is only 3.0:1 on #faf9f5, which is fine for a fill or
+     an icon but fails AA the moment it carries a sentence. Each step below is
+     measured, so the rule is simply: fill with accent, write with ink.
+       accent      #f16610  3.0:1   fills, icons, dots (non-text, needs 3:1)
+       accent-deep #d45a0e  3.8:1   display-size accent text, hovers
+       accent-ink  #b0500a  5.0:1   any accent text under 24px
+       accent-band #c25309  4.6:1   band behind white copy */
+  --fsai-accent: #f16610;
+  --fsai-accent-deep: #d45a0e;
+  --fsai-accent-ink: #b0500a;
+  --fsai-accent-band: #c25309;
+  /* Tints sit on cream rather than black, so they need less alpha to read. */
+  --fsai-accent-soft: rgba(241, 102, 16, 0.10);
+  --fsai-accent-line: rgba(241, 102, 16, 0.30);
+
+  /* Neutral ramp, also measured: 15.9:1 / 7.3:1 / 4.8:1. Three clearly
+     separated steps so hierarchy survives without any of them dropping
+     below AA — the previous dim grey sat at 3.2:1 and was the single
+     biggest readability problem on the light canvas. */
+  --fsai-text: #191919;
+  --fsai-muted: #57534a;
+  --fsai-dim: #746e64;
+
+  /* Financial direction reads through emphasis, not hue — orange marks the
+     figure worth looking at, neutral grey carries everything else. Both are
+     always rendered as small text, so both take the AA-safe steps. */
+  --fsai-up: var(--fsai-accent-ink);
+  --fsai-down: var(--fsai-dim);
+
+  --fsai-radius: 12px;
+  --fsai-radius-lg: 16px;
+  --fsai-pill: 999px;
+  --fsai-pad: 120px;
+
+  /* CrossVal's motion tokens: ease-out for entrances, ease-in-out for state. */
+  --fsai-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --fsai-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+  background: var(--fsai-canvas);
+  color: var(--fsai-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+
+.fsai-root:not(#_) *,
+.fsai-root:not(#_) *::before,
+.fsai-root:not(#_) *::after {
+  box-sizing: border-box;
+}
+
+
+.fsai-root:not(#_) .fsai-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+
+.fsai-root:not(#_) .fsai-accent {
+  color: var(--fsai-accent-deep);
+}
+
+
+/* ---------- Scroll reveal ----------
+   The hidden state is gated behind `.is-ready`, which JS adds on mount, so
+   the page still renders fully if the observer never runs. */
+
+/* Whole element fades up as one. */
+.fsai-root:not(#_).is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--fsai-ease-out),
+    transform 0.65s var(--fsai-ease-out);
+}
+
+
+/* Children fade up one after another — used on the bento grids, where the
+   cards reading in sequence is the point. The container itself stays put. */
+.fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > * {
+  animation: fsai-rise 0.6s var(--fsai-ease-out) both;
+  animation-delay: var(--fsai-stagger, 0s);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --fsai-stagger: 0.07s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --fsai-stagger: 0.14s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --fsai-stagger: 0.21s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(5) { --fsai-stagger: 0.28s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(6) { --fsai-stagger: 0.35s; }
+
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.fsai-root:not(#_) .fsai-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+/* Kept so existing markup that still passes the light modifier renders sanely
+   now that every section shares one canvas. */
+.fsai-root:not(#_) .fsai-eyebrow-light {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-section-head {
+  max-width: 780px;
+  margin-bottom: 64px;
+}
+
+
+.fsai-root:not(#_) .fsai-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+
+/* Uppercase micro-caption pinned under card copy */
+.fsai-root:not(#_) .fsai-microcap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--fsai-accent-ink);
+}
+
+
+.fsai-root:not(#_) .fsai-microcap::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  margin-top: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+
+/* ---------- Buttons ---------- */
+
+.fsai-root:not(#_) .fsai-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 30px;
+  border-radius: var(--fsai-pill);
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--fsai-ease),
+    border-color 0.3s var(--fsai-ease),
+    color 0.3s var(--fsai-ease),
+    transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary {
+  background: var(--fsai-accent);
+  color: #fff;
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover {
+  background: var(--fsai-accent-deep);
+  transform: translateY(-2px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost {
+  background: transparent;
+  color: var(--fsai-text);
+  border-color: var(--fsai-line-strong);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost:hover {
+  border-color: var(--fsai-text);
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fsai-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fsai-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(241, 102, 16, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(241, 102, 16, 0);
+  }
+}
+
+
+@keyframes fsai-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .fsai-root:not(#_) *,
+  .fsai-root:not(#_) *::before,
+  .fsai-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-term-row {
+    opacity: 1;
+  }
+
+
+  .fsai-root:not(#_).is-ready [data-reveal],
+  .fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+}
+
 /* ============================================================
    LEAD STRIP — the one saturated band on the page
    ============================================================ */
@@ -1343,8 +2422,8 @@
 .fsai-root:not(#_) .fsai-lead-strip {
   padding: 60px 0;
   background:
-    radial-gradient(40rem 22rem at 90% -20%, rgba(255, 255, 255, 0.18), transparent 60%),
-    var(--fsai-accent);
+    radial-gradient(40rem 22rem at 90% -20%, rgba(255, 255, 255, 0.16), transparent 60%),
+    var(--fsai-accent-band);
   color: #fff;
 }
 
@@ -1360,8 +2439,8 @@
 .fsai-root:not(#_) .fsai-lead-copy h2 {
   margin: 0 0 8px;
   font-size: clamp(1.5rem, 2.6vw, 2rem);
-  font-weight: 680;
-  letter-spacing: -0.03em;
+  font-weight: 500;
+  letter-spacing: -0.018em;
   line-height: 1.15;
 }
 
@@ -1369,7 +2448,7 @@
 .fsai-root:not(#_) .fsai-lead-copy p {
   margin: 0;
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255, 0.94);
 }
 
 
@@ -1377,7 +2456,7 @@
   justify-self: end;
   padding: 17px 34px;
   background: #fff;
-  color: var(--fsai-accent-deep);
+  color: var(--fsai-accent-ink);
   border: none;
   font-size: 1rem;
   white-space: nowrap;
@@ -1401,7 +2480,9 @@
 
 .fsai-root:not(#_) .fsai-workflow {
   padding: var(--fsai-pad) 0;
-  border-top: 1px solid var(--fsai-line);
+  border-top: 1px solid var(--fsai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--fsai-seam) 22%, var(--fsai-seam) 78%, transparent) 1;
 }
 
 
@@ -1450,16 +2531,16 @@
   display: block;
   margin-bottom: 20px;
   font-size: 0.78rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  color: var(--fsai-accent);
+  color: var(--fsai-accent-ink);
 }
 
 
 .fsai-root:not(#_) .fsai-step h3 {
   margin: 0 0 10px;
   font-size: 1.12rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.025em;
 }
 
@@ -1470,8 +2551,143 @@
   line-height: 1.65;
   color: var(--fsai-muted);
 }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1024px) {
+
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 88px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 24px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-steps {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-step:nth-child(odd) {
+    border-left: none;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-step:nth-child(n + 3) {
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-lead-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-lead-whatsapp {
+    justify-self: start;
+  }
+}
+
+
+
+
+@media (max-width: 680px) {
+
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 72px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 20px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-hero-actions .fsai-btn {
+    width: 100%;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-lead-strip {
+    padding: 52px 0;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-lead-whatsapp {
+    justify-self: stretch;
+  }
+
+
+
+  /* Bento collapses to a single column — reset every shared divider and
+     rebuild it as a simple horizontal rule between rows. */
+  .fsai-root:not(#_) .fsai-pillars,
+  .fsai-root:not(#_) .fsai-services-grid,
+  .fsai-root:not(#_) .fsai-testimonials-grid,
+  .fsai-root:not(#_) .fsai-split-grid,
+  .fsai-root:not(#_) .fsai-steps {
+    grid-template-columns: 1fr;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar + .fsai-pillar,
+  .fsai-root:not(#_) .fsai-step + .fsai-step,
+  .fsai-root:not(#_) .fsai-testimonial-card + .fsai-testimonial-card,
+  .fsai-root:not(#_) .fsai-split-card + .fsai-split-card {
+    border-left: none;
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar,
+  .fsai-root:not(#_) .fsai-testimonial-card,
+  .fsai-root:not(#_) .fsai-step {
+    border-bottom: none !important;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-section-head {
+    margin-bottom: 44px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar,
+  .fsai-root:not(#_) .fsai-step,
+  .fsai-root:not(#_) .fsai-service-card,
+  .fsai-root:not(#_) .fsai-testimonial-card {
+    padding: 30px 24px;
+  }
+}
 </style>
 <div class="fsai-root">
+
+  <!-- Icons this block uses. Self-contained on purpose. -->
+  <svg class="fsai-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="fsai-i-whatsapp" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></symbol>
+  </svg>
+
   <section class="fsai-lead-strip" aria-label="Get a free quote">
     <div class="fsai-container">
       <div class="fsai-lead-inner" data-reveal>
@@ -1483,7 +2699,8 @@
           href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20to%20learn%20more%20about%20your%20AI-native%20accounting%20services.&amp;type=phone_number&amp;app_absent=0"
           target="_blank"
           rel="noopener noreferrer"
-          class="fsai-btn fsai-lead-whatsapp"
+          class="fsai-btn fsai-lead-whatsapp data-wa-track"
+          data-wa-track
           data-fsai-wa="ai_landing_strip"
         >
           <svg aria-hidden="true" focusable="false"><use href="#fsai-i-whatsapp"/></svg>
@@ -1496,7 +2713,7 @@
   <section class="fsai-workflow">
     <div class="fsai-container">
       <div class="fsai-section-head" data-reveal>
-        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> How it works</p>
+        <p class="fsai-eyebrow">How it works</p>
         <h2>From your bank feed to <span class="fsai-accent">board-ready</span></h2>
       </div>
 
@@ -1508,13 +2725,13 @@
         </li>
         <li class="fsai-step">
           <span class="fsai-step-number">02</span>
-          <h3>AI agents process</h3>
-          <p>Transactions are captured, categorized and reconciled daily. Anomalies, duplicates and missing documents get flagged automatically.</p>
+          <h3>We do the daily work</h3>
+          <p>Every transaction is captured, sorted and matched against your bank — daily. Anything odd, duplicated or missing a receipt gets pulled out for a person to look at.</p>
         </li>
         <li class="fsai-step">
           <span class="fsai-step-number">03</span>
-          <h3>Accountants review</h3>
-          <p>Your dedicated accountant checks every output, resolves exceptions and signs off on filings. Nothing ships on AI confidence alone.</p>
+          <h3>Your accountant checks it</h3>
+          <p>A dedicated accountant goes through the work, sorts out anything that was set aside, and signs the filings. Nothing goes out on the software’s say-so alone.</p>
         </li>
         <li class="fsai-step">
           <span class="fsai-step-number">04</span>
@@ -1528,27 +2745,442 @@
 <!-- ==========================================================================
      FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 4 of 7: FINDELIVERY DASHBOARD
 
-     Paste into its own Webflow HTML Embed element, in order.
-     Self-contained: this block carries the CSS for its own sections.
+     Paste into its own Webflow HTML Embed element.
 
-     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
-     7 holds the animations and all media queries, so every block must be
-     present and in sequence or the responsive rules won't apply.
+     SELF-CONTAINED — this block carries the design tokens, the reset, the icons
+     it references and its own media queries. Paste the blocks in any order, or
+     paste one on its own: it renders correctly either way. Page order is still
+     4 of 7 if you want the full page reading top to bottom.
 
-     Place each embed in a Section with no padding. Do NOT put a block inside a
-     Webflow Form Block — block 7 contains its own <form>.
+     Place each embed in a Section with no padding. Do NOT put block 7 inside
+     a Webflow Form Block — it contains its own form element.
      ========================================================================== -->
 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
 <style>
+/* --------------------------------------------------------------------------
+   CASCADE FENCE — see webflow-embed/README.md
+   `all: revert` discards every author-origin declaration the host page
+   contributed, falling back to the browser's own defaults. At (1,1,0) it
+   outranks Webflow's tag and class styles; the component rules that follow
+   sit higher still, so they win against the reset.
+   -------------------------------------------------------------------------- */
+
+/* SVG subtrees are deliberately excluded. Presentation attributes (fill,
+   stroke, stroke-width, d) cascade at author origin, so reverting them erases
+   the icon geometry outright — verified: `d` computes to `none`. */
+.fsai-root:not(#_),
+.fsai-root:not(#_) :where(*:not(svg, svg *)),
+.fsai-root:not(#_) :where(*:not(svg, svg *))::before,
+.fsai-root:not(#_) :where(*:not(svg, svg *))::after {
+  all: revert;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Baseline the source stylesheet was authored against (src/App.css applies a
+   global `* { margin: 0; padding: 0 }`, src/index.css the link/button rules). */
+.fsai-root:not(#_) :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fsai-root:not(#_) :where(button) {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fsai-root:not(#_) :where(ul, ol) {
+  list-style: none;
+}
+
+/* SVGs sit outside the `all: revert` sweep, so a host rule like Webflow's
+   `img, svg { max-width: 100%; vertical-align: middle }` would still reach
+   them. Neutralise box-model and decoration properties only — every paint and
+   geometry property is left alone. `baseline` is the UA default and matches
+   the React page. */
+.fsai-root:not(#_) :where(svg, svg *) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  vertical-align: baseline;
+  float: none;
+}
+
+.fsai-root:not(#_) :where(img) {
+  max-width: none;
+}
+
+/* Icon sprite host — never rendered. */
+.fsai-root:not(#_) :where(.fsai-sprite) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Optional full-bleed escape hatch — add `fsai-fullbleed` to a wrapper that
+   sits inside a padded Webflow container. Needs body { overflow-x: hidden }
+   when a vertical scrollbar is present. */
+.fsai-root:not(#_).fsai-fullbleed {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+}
+
+/* ============================================================
+   AI-Native Accounting Landing
+   Single warm-paper canvas, one accent, hairline bento grids.
+   Palette: warm cream, Finanshels orange
+   Type: Inter only — light display weights, relaxed tracking.
+   Google Fonts serves Inter as static weights, so only 300/400/500/
+   600/700 exist: anything in between silently snaps up a step.
+   ============================================================ */
+
+.fsai-root:not(#_) {
+  /* Three colours only: cream, white, orange. The whole page sits on one
+     warm paper canvas — depth comes from hairline borders and white surface
+     lifts, never from a hue shift. The cream matches the site footer so the
+     section seams into the rest of the page. */
+  --fsai-canvas: #faf9f5;
+  --fsai-surface: #ffffff;
+  --fsai-surface-raised: #ffffff;
+  --fsai-line: #e7e3d8;
+  --fsai-line-strong: #d6cfbe;
+  /* Section seams only. On black the hairlines were near-invisible; on
+     cream, ten stacked full-bleed rules read as ten hard cuts, so the
+     seam is lighter than the structural line and fades at both ends. */
+  --fsai-seam: #eeeae0;
+
+  /* Cards that need to lift off the canvas — the terminal and the CTA form. */
+  --fsai-paper: #ffffff;
+  --fsai-paper-sunk: #faf9f5;
+  --fsai-paper-line: #e7e3d8;
+  --fsai-paper-ink: #191919;
+  --fsai-paper-muted: #6b6b6b;
+
+  /* Orange ramp, picked by contrast against the cream canvas rather than by
+     eye — brand orange is only 3.0:1 on #faf9f5, which is fine for a fill or
+     an icon but fails AA the moment it carries a sentence. Each step below is
+     measured, so the rule is simply: fill with accent, write with ink.
+       accent      #f16610  3.0:1   fills, icons, dots (non-text, needs 3:1)
+       accent-deep #d45a0e  3.8:1   display-size accent text, hovers
+       accent-ink  #b0500a  5.0:1   any accent text under 24px
+       accent-band #c25309  4.6:1   band behind white copy */
+  --fsai-accent: #f16610;
+  --fsai-accent-deep: #d45a0e;
+  --fsai-accent-ink: #b0500a;
+  --fsai-accent-band: #c25309;
+  /* Tints sit on cream rather than black, so they need less alpha to read. */
+  --fsai-accent-soft: rgba(241, 102, 16, 0.10);
+  --fsai-accent-line: rgba(241, 102, 16, 0.30);
+
+  /* Neutral ramp, also measured: 15.9:1 / 7.3:1 / 4.8:1. Three clearly
+     separated steps so hierarchy survives without any of them dropping
+     below AA — the previous dim grey sat at 3.2:1 and was the single
+     biggest readability problem on the light canvas. */
+  --fsai-text: #191919;
+  --fsai-muted: #57534a;
+  --fsai-dim: #746e64;
+
+  /* Financial direction reads through emphasis, not hue — orange marks the
+     figure worth looking at, neutral grey carries everything else. Both are
+     always rendered as small text, so both take the AA-safe steps. */
+  --fsai-up: var(--fsai-accent-ink);
+  --fsai-down: var(--fsai-dim);
+
+  --fsai-radius: 12px;
+  --fsai-radius-lg: 16px;
+  --fsai-pill: 999px;
+  --fsai-pad: 120px;
+
+  /* CrossVal's motion tokens: ease-out for entrances, ease-in-out for state. */
+  --fsai-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --fsai-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+  background: var(--fsai-canvas);
+  color: var(--fsai-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+
+.fsai-root:not(#_) *,
+.fsai-root:not(#_) *::before,
+.fsai-root:not(#_) *::after {
+  box-sizing: border-box;
+}
+
+
+.fsai-root:not(#_) .fsai-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+
+.fsai-root:not(#_) .fsai-accent {
+  color: var(--fsai-accent-deep);
+}
+
+
+/* ---------- Scroll reveal ----------
+   The hidden state is gated behind `.is-ready`, which JS adds on mount, so
+   the page still renders fully if the observer never runs. */
+
+/* Whole element fades up as one. */
+.fsai-root:not(#_).is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--fsai-ease-out),
+    transform 0.65s var(--fsai-ease-out);
+}
+
+
+/* Children fade up one after another — used on the bento grids, where the
+   cards reading in sequence is the point. The container itself stays put. */
+.fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > * {
+  animation: fsai-rise 0.6s var(--fsai-ease-out) both;
+  animation-delay: var(--fsai-stagger, 0s);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --fsai-stagger: 0.07s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --fsai-stagger: 0.14s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --fsai-stagger: 0.21s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(5) { --fsai-stagger: 0.28s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(6) { --fsai-stagger: 0.35s; }
+
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.fsai-root:not(#_) .fsai-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+/* Kept so existing markup that still passes the light modifier renders sanely
+   now that every section shares one canvas. */
+.fsai-root:not(#_) .fsai-eyebrow-light {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-section-head {
+  max-width: 780px;
+  margin-bottom: 64px;
+}
+
+
+.fsai-root:not(#_) .fsai-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+
+/* Uppercase micro-caption pinned under card copy */
+.fsai-root:not(#_) .fsai-microcap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--fsai-accent-ink);
+}
+
+
+.fsai-root:not(#_) .fsai-microcap::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  margin-top: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+
+/* ---------- Buttons ---------- */
+
+.fsai-root:not(#_) .fsai-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 30px;
+  border-radius: var(--fsai-pill);
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--fsai-ease),
+    border-color 0.3s var(--fsai-ease),
+    color 0.3s var(--fsai-ease),
+    transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary {
+  background: var(--fsai-accent);
+  color: #fff;
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover {
+  background: var(--fsai-accent-deep);
+  transform: translateY(-2px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost {
+  background: transparent;
+  color: var(--fsai-text);
+  border-color: var(--fsai-line-strong);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost:hover {
+  border-color: var(--fsai-text);
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fsai-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fsai-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(241, 102, 16, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(241, 102, 16, 0);
+  }
+}
+
+
+@keyframes fsai-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .fsai-root:not(#_) *,
+  .fsai-root:not(#_) *::before,
+  .fsai-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-term-row {
+    opacity: 1;
+  }
+
+
+  .fsai-root:not(#_).is-ready [data-reveal],
+  .fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+}
+
 /* ============================================================
    FINDELIVERY DASHBOARD
    ============================================================ */
 
 .fsai-root:not(#_) .fsai-dashboard {
   padding: var(--fsai-pad) 0;
-  border-top: 1px solid var(--fsai-line);
+  border-top: 1px solid var(--fsai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--fsai-seam) 22%, var(--fsai-seam) 78%, transparent) 1;
   background:
-    radial-gradient(50rem 30rem at 12% -10%, rgba(241, 102, 16, 0.1), transparent 60%),
+    radial-gradient(50rem 30rem at 12% -10%, rgba(241, 102, 16, 0.06), transparent 60%),
     var(--fsai-canvas);
 }
 
@@ -1570,7 +3202,8 @@
   border: 1px solid var(--fsai-line);
   border-radius: var(--fsai-radius-lg);
   background: var(--fsai-surface);
-  box-shadow: 0 32px 80px -32px rgba(0, 0, 0, 0.7);
+  /* Warm, shallow lift — a heavy black drop reads as dirt on cream. */
+  box-shadow: 0 24px 56px -32px rgba(60, 45, 25, 0.28);
   overflow: hidden;
 }
 
@@ -1583,7 +3216,7 @@
   padding: 16px 24px;
   border-bottom: 1px solid var(--fsai-line);
   font-size: 0.8rem;
-  font-weight: 620;
+  font-weight: 600;
 }
 
 
@@ -1591,13 +3224,6 @@
   display: inline-flex;
   align-items: center;
   gap: 9px;
-}
-
-
-.fsai-root:not(#_) .fsai-dash-brand-spark {
-  width: 13px;
-  height: 13px;
-  color: var(--fsai-accent);
 }
 
 
@@ -1613,9 +3239,9 @@
 .fsai-root:not(#_) .fsai-dash-ask {
   padding: 7px 18px;
   border-radius: var(--fsai-pill);
-  background: var(--fsai-accent);
+  background: var(--fsai-accent-band);
   color: #fff;
-  font-weight: 650;
+  font-weight: 600;
 }
 
 
@@ -1641,7 +3267,7 @@
 
 .fsai-root:not(#_) .fsai-dash-kpi-label {
   font-size: 0.66rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--fsai-dim);
@@ -1650,8 +3276,8 @@
 
 .fsai-root:not(#_) .fsai-dash-kpi-value {
   font-size: 1.55rem;
-  font-weight: 680;
-  letter-spacing: -0.03em;
+  font-weight: 500;
+  letter-spacing: -0.018em;
 }
 
 
@@ -1688,14 +3314,14 @@
   justify-content: space-between;
   margin-bottom: 18px;
   font-size: 0.93rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: -0.015em;
 }
 
 
 .fsai-root:not(#_) .fsai-dash-panel-tag {
   font-size: 0.66rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.14em;
   color: var(--fsai-dim);
 }
@@ -1713,7 +3339,7 @@
 
 
 .fsai-root:not(#_) .fsai-dash-row-strong {
-  font-weight: 680;
+  font-weight: 600;
   color: var(--fsai-text);
 }
 
@@ -1737,8 +3363,8 @@
   gap: 7px;
   margin-top: 18px;
   font-size: 0.8rem;
-  font-weight: 680;
-  color: var(--fsai-accent);
+  font-weight: 600;
+  color: var(--fsai-accent-ink);
 }
 
 
@@ -1758,7 +3384,7 @@
 
 .fsai-root:not(#_) .fsai-dash-cash-label {
   font-size: 0.66rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--fsai-dim);
@@ -1767,9 +3393,9 @@
 
 .fsai-root:not(#_) .fsai-dash-cash-value {
   font-size: 1.75rem;
-  font-weight: 680;
-  letter-spacing: -0.03em;
-  color: var(--fsai-accent);
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  color: var(--fsai-accent-ink);
 }
 
 
@@ -1789,7 +3415,7 @@
 .fsai-root:not(#_) .fsai-dash-guardrail strong {
   display: block;
   font-size: 0.84rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 
@@ -1807,7 +3433,7 @@
   align-items: center;
   gap: 7px;
   font-size: 0.84rem;
-  font-weight: 680;
+  font-weight: 600;
   color: var(--fsai-up);
   white-space: nowrap;
 }
@@ -1817,12 +3443,123 @@
   width: 14px;
   height: 14px;
 }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1024px) {
+
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 88px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 24px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-dash-kpis {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-dash-kpi:nth-child(3) {
+    border-left: none;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-dash-kpi:nth-child(n + 3) {
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-dash-body {
+    grid-template-columns: 1fr;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-dash-panel + .fsai-dash-panel {
+    border-left: none;
+    border-top: 1px solid var(--fsai-line);
+  }
+}
+
+
+
+
+@media (max-width: 680px) {
+
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 72px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 20px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-hero-actions .fsai-btn {
+    width: 100%;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-dash-topbar {
+    flex-wrap: wrap;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-dash-kpis {
+    grid-template-columns: 1fr;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-dash-kpi + .fsai-dash-kpi {
+    border-left: none;
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-dash-row {
+    grid-template-columns: 1.3fr 1fr 0.8fr;
+    gap: 8px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-section-head {
+    margin-bottom: 44px;
+  }
+}
 </style>
 <div class="fsai-root">
+
+  <!-- Icons this block uses. Self-contained on purpose. -->
+  <svg class="fsai-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="fsai-i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="fsai-i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  </svg>
+
   <section class="fsai-dashboard">
     <div class="fsai-container">
       <div class="fsai-section-head fsai-dash-head" data-reveal>
-        <p class="fsai-eyebrow fsai-eyebrow-light"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> The product</p>
+        <p class="fsai-eyebrow fsai-eyebrow-light">The product</p>
         <h2>Your numbers, live in <span class="fsai-accent">Findelivery</span></h2>
         <p class="fsai-dash-sub">
           Every Finanshels client gets Findelivery — our AI CFO dashboard. P&amp;L, cash,
@@ -1834,7 +3571,6 @@
       <div class="fsai-dash-frame" data-reveal aria-label="Preview of the Findelivery AI CFO dashboard">
         <div class="fsai-dash-topbar">
           <span class="fsai-dash-brand">
-            <svg class="fsai-dash-brand-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
             Findelivery &middot; AI CFO
           </span>
           <span class="fsai-dash-period">June 2026</span>
@@ -1925,25 +3661,440 @@
 <!-- ==========================================================================
      FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 5 of 7: AI/HUMAN SPLIT + SERVICES
 
-     Paste into its own Webflow HTML Embed element, in order.
-     Self-contained: this block carries the CSS for its own sections.
+     Paste into its own Webflow HTML Embed element.
 
-     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
-     7 holds the animations and all media queries, so every block must be
-     present and in sequence or the responsive rules won't apply.
+     SELF-CONTAINED — this block carries the design tokens, the reset, the icons
+     it references and its own media queries. Paste the blocks in any order, or
+     paste one on its own: it renders correctly either way. Page order is still
+     5 of 7 if you want the full page reading top to bottom.
 
-     Place each embed in a Section with no padding. Do NOT put a block inside a
-     Webflow Form Block — block 7 contains its own <form>.
+     Place each embed in a Section with no padding. Do NOT put block 7 inside
+     a Webflow Form Block — it contains its own form element.
      ========================================================================== -->
 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
 <style>
+/* --------------------------------------------------------------------------
+   CASCADE FENCE — see webflow-embed/README.md
+   `all: revert` discards every author-origin declaration the host page
+   contributed, falling back to the browser's own defaults. At (1,1,0) it
+   outranks Webflow's tag and class styles; the component rules that follow
+   sit higher still, so they win against the reset.
+   -------------------------------------------------------------------------- */
+
+/* SVG subtrees are deliberately excluded. Presentation attributes (fill,
+   stroke, stroke-width, d) cascade at author origin, so reverting them erases
+   the icon geometry outright — verified: `d` computes to `none`. */
+.fsai-root:not(#_),
+.fsai-root:not(#_) :where(*:not(svg, svg *)),
+.fsai-root:not(#_) :where(*:not(svg, svg *))::before,
+.fsai-root:not(#_) :where(*:not(svg, svg *))::after {
+  all: revert;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Baseline the source stylesheet was authored against (src/App.css applies a
+   global `* { margin: 0; padding: 0 }`, src/index.css the link/button rules). */
+.fsai-root:not(#_) :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fsai-root:not(#_) :where(button) {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fsai-root:not(#_) :where(ul, ol) {
+  list-style: none;
+}
+
+/* SVGs sit outside the `all: revert` sweep, so a host rule like Webflow's
+   `img, svg { max-width: 100%; vertical-align: middle }` would still reach
+   them. Neutralise box-model and decoration properties only — every paint and
+   geometry property is left alone. `baseline` is the UA default and matches
+   the React page. */
+.fsai-root:not(#_) :where(svg, svg *) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  vertical-align: baseline;
+  float: none;
+}
+
+.fsai-root:not(#_) :where(img) {
+  max-width: none;
+}
+
+/* Icon sprite host — never rendered. */
+.fsai-root:not(#_) :where(.fsai-sprite) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Optional full-bleed escape hatch — add `fsai-fullbleed` to a wrapper that
+   sits inside a padded Webflow container. Needs body { overflow-x: hidden }
+   when a vertical scrollbar is present. */
+.fsai-root:not(#_).fsai-fullbleed {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+}
+
+/* ============================================================
+   AI-Native Accounting Landing
+   Single warm-paper canvas, one accent, hairline bento grids.
+   Palette: warm cream, Finanshels orange
+   Type: Inter only — light display weights, relaxed tracking.
+   Google Fonts serves Inter as static weights, so only 300/400/500/
+   600/700 exist: anything in between silently snaps up a step.
+   ============================================================ */
+
+.fsai-root:not(#_) {
+  /* Three colours only: cream, white, orange. The whole page sits on one
+     warm paper canvas — depth comes from hairline borders and white surface
+     lifts, never from a hue shift. The cream matches the site footer so the
+     section seams into the rest of the page. */
+  --fsai-canvas: #faf9f5;
+  --fsai-surface: #ffffff;
+  --fsai-surface-raised: #ffffff;
+  --fsai-line: #e7e3d8;
+  --fsai-line-strong: #d6cfbe;
+  /* Section seams only. On black the hairlines were near-invisible; on
+     cream, ten stacked full-bleed rules read as ten hard cuts, so the
+     seam is lighter than the structural line and fades at both ends. */
+  --fsai-seam: #eeeae0;
+
+  /* Cards that need to lift off the canvas — the terminal and the CTA form. */
+  --fsai-paper: #ffffff;
+  --fsai-paper-sunk: #faf9f5;
+  --fsai-paper-line: #e7e3d8;
+  --fsai-paper-ink: #191919;
+  --fsai-paper-muted: #6b6b6b;
+
+  /* Orange ramp, picked by contrast against the cream canvas rather than by
+     eye — brand orange is only 3.0:1 on #faf9f5, which is fine for a fill or
+     an icon but fails AA the moment it carries a sentence. Each step below is
+     measured, so the rule is simply: fill with accent, write with ink.
+       accent      #f16610  3.0:1   fills, icons, dots (non-text, needs 3:1)
+       accent-deep #d45a0e  3.8:1   display-size accent text, hovers
+       accent-ink  #b0500a  5.0:1   any accent text under 24px
+       accent-band #c25309  4.6:1   band behind white copy */
+  --fsai-accent: #f16610;
+  --fsai-accent-deep: #d45a0e;
+  --fsai-accent-ink: #b0500a;
+  --fsai-accent-band: #c25309;
+  /* Tints sit on cream rather than black, so they need less alpha to read. */
+  --fsai-accent-soft: rgba(241, 102, 16, 0.10);
+  --fsai-accent-line: rgba(241, 102, 16, 0.30);
+
+  /* Neutral ramp, also measured: 15.9:1 / 7.3:1 / 4.8:1. Three clearly
+     separated steps so hierarchy survives without any of them dropping
+     below AA — the previous dim grey sat at 3.2:1 and was the single
+     biggest readability problem on the light canvas. */
+  --fsai-text: #191919;
+  --fsai-muted: #57534a;
+  --fsai-dim: #746e64;
+
+  /* Financial direction reads through emphasis, not hue — orange marks the
+     figure worth looking at, neutral grey carries everything else. Both are
+     always rendered as small text, so both take the AA-safe steps. */
+  --fsai-up: var(--fsai-accent-ink);
+  --fsai-down: var(--fsai-dim);
+
+  --fsai-radius: 12px;
+  --fsai-radius-lg: 16px;
+  --fsai-pill: 999px;
+  --fsai-pad: 120px;
+
+  /* CrossVal's motion tokens: ease-out for entrances, ease-in-out for state. */
+  --fsai-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --fsai-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+  background: var(--fsai-canvas);
+  color: var(--fsai-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+
+.fsai-root:not(#_) *,
+.fsai-root:not(#_) *::before,
+.fsai-root:not(#_) *::after {
+  box-sizing: border-box;
+}
+
+
+.fsai-root:not(#_) .fsai-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+
+.fsai-root:not(#_) .fsai-accent {
+  color: var(--fsai-accent-deep);
+}
+
+
+/* ---------- Scroll reveal ----------
+   The hidden state is gated behind `.is-ready`, which JS adds on mount, so
+   the page still renders fully if the observer never runs. */
+
+/* Whole element fades up as one. */
+.fsai-root:not(#_).is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--fsai-ease-out),
+    transform 0.65s var(--fsai-ease-out);
+}
+
+
+/* Children fade up one after another — used on the bento grids, where the
+   cards reading in sequence is the point. The container itself stays put. */
+.fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > * {
+  animation: fsai-rise 0.6s var(--fsai-ease-out) both;
+  animation-delay: var(--fsai-stagger, 0s);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --fsai-stagger: 0.07s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --fsai-stagger: 0.14s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --fsai-stagger: 0.21s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(5) { --fsai-stagger: 0.28s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(6) { --fsai-stagger: 0.35s; }
+
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.fsai-root:not(#_) .fsai-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+/* Kept so existing markup that still passes the light modifier renders sanely
+   now that every section shares one canvas. */
+.fsai-root:not(#_) .fsai-eyebrow-light {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-section-head {
+  max-width: 780px;
+  margin-bottom: 64px;
+}
+
+
+.fsai-root:not(#_) .fsai-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+
+/* Uppercase micro-caption pinned under card copy */
+.fsai-root:not(#_) .fsai-microcap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--fsai-accent-ink);
+}
+
+
+.fsai-root:not(#_) .fsai-microcap::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  margin-top: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+
+/* ---------- Buttons ---------- */
+
+.fsai-root:not(#_) .fsai-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 30px;
+  border-radius: var(--fsai-pill);
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--fsai-ease),
+    border-color 0.3s var(--fsai-ease),
+    color 0.3s var(--fsai-ease),
+    transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary {
+  background: var(--fsai-accent);
+  color: #fff;
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover {
+  background: var(--fsai-accent-deep);
+  transform: translateY(-2px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost {
+  background: transparent;
+  color: var(--fsai-text);
+  border-color: var(--fsai-line-strong);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost:hover {
+  border-color: var(--fsai-text);
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fsai-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fsai-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(241, 102, 16, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(241, 102, 16, 0);
+  }
+}
+
+
+@keyframes fsai-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .fsai-root:not(#_) *,
+  .fsai-root:not(#_) *::before,
+  .fsai-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-term-row {
+    opacity: 1;
+  }
+
+
+  .fsai-root:not(#_).is-ready [data-reveal],
+  .fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+}
+
 /* ============================================================
    AI + HUMAN SPLIT
    ============================================================ */
 
 .fsai-root:not(#_) .fsai-split {
   padding: var(--fsai-pad) 0;
-  border-top: 1px solid var(--fsai-line);
+  border-top: 1px solid var(--fsai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--fsai-seam) 22%, var(--fsai-seam) 78%, transparent) 1;
 }
 
 
@@ -1991,7 +4142,7 @@
 .fsai-root:not(#_) .fsai-split-card-head h3 {
   margin: 0;
   font-size: 1.22rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.025em;
 }
 
@@ -2029,7 +4180,9 @@
 
 .fsai-root:not(#_) .fsai-services {
   padding: var(--fsai-pad) 0;
-  border-top: 1px solid var(--fsai-line);
+  border-top: 1px solid var(--fsai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--fsai-seam) 22%, var(--fsai-seam) 78%, transparent) 1;
 }
 
 
@@ -2092,7 +4245,7 @@
 .fsai-root:not(#_) .fsai-service-card h3 {
   margin: 0 0 10px;
   font-size: 1.12rem;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.025em;
 }
 
@@ -2103,12 +4256,155 @@
   line-height: 1.6;
   color: var(--fsai-muted);
 }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1024px) {
+
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 88px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 24px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillars,
+  .fsai-root:not(#_) .fsai-services-grid,
+  .fsai-root:not(#_) .fsai-testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-service-card:nth-child(3n) {
+    border-right: 1px solid var(--fsai-line);
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-service-card:nth-child(2n) {
+    border-right: none;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-service-card:nth-last-child(-n + 3) {
+    border-bottom: 1px solid var(--fsai-line);
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-service-card:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+}
+
+
+
+
+@media (max-width: 680px) {
+
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 72px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 20px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-hero-actions .fsai-btn {
+    width: 100%;
+  }
+
+
+
+  /* Bento collapses to a single column — reset every shared divider and
+     rebuild it as a simple horizontal rule between rows. */
+  .fsai-root:not(#_) .fsai-pillars,
+  .fsai-root:not(#_) .fsai-services-grid,
+  .fsai-root:not(#_) .fsai-testimonials-grid,
+  .fsai-root:not(#_) .fsai-split-grid,
+  .fsai-root:not(#_) .fsai-steps {
+    grid-template-columns: 1fr;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar + .fsai-pillar,
+  .fsai-root:not(#_) .fsai-step + .fsai-step,
+  .fsai-root:not(#_) .fsai-testimonial-card + .fsai-testimonial-card,
+  .fsai-root:not(#_) .fsai-split-card + .fsai-split-card {
+    border-left: none;
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-service-card {
+    border-right: none !important;
+    border-bottom: 1px solid var(--fsai-line) !important;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-service-card:last-child {
+    border-bottom: none !important;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-section-head {
+    margin-bottom: 44px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar,
+  .fsai-root:not(#_) .fsai-step,
+  .fsai-root:not(#_) .fsai-service-card,
+  .fsai-root:not(#_) .fsai-testimonial-card {
+    padding: 30px 24px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-split-card {
+    padding: 32px 24px;
+  }
+}
 </style>
 <div class="fsai-root">
+
+  <!-- Icons this block uses. Self-contained on purpose. -->
+  <svg class="fsai-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="fsai-i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="fsai-i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="fsai-i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="fsai-i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="fsai-i-percent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+    <symbol id="fsai-i-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="fsai-i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="fsai-i-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+    <symbol id="fsai-i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+  </svg>
+
   <section class="fsai-split">
     <div class="fsai-container">
       <div class="fsai-section-head" data-reveal>
-        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Division of labor</p>
+        <p class="fsai-eyebrow">Division of labor</p>
         <h2>AI drafts. <span class="fsai-accent">Humans sign.</span></h2>
       </div>
 
@@ -2119,12 +4415,12 @@
             <h3>What the AI does</h3>
           </div>
           <ul>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Categorizes every transaction, daily</li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Reconciles bank feeds continuously</li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Extracts data from invoices &amp; receipts</li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Tracks VAT and Corporate Tax deadlines</li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Drafts returns and monthly reports</li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Flags anomalies and duplicates instantly</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Sorts every transaction, every day</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Matches your bank lines as they land</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Reads your invoices and receipts</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Keeps an eye on every tax deadline</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Drafts your returns and monthly reports</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Spots duplicates and odd entries</li>
           </ul>
         </div>
 
@@ -2134,11 +4430,11 @@
             <h3>Where humans stay in the loop</h3>
           </div>
           <ul>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Reviews and approves every AI output</li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Resolves flagged exceptions with context</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Checks and approves the work</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Sorts out anything that looks wrong</li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Signs off on VAT &amp; Corporate Tax filings</li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Advises on structure, cash and runway</li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Answers you on WhatsApp — a person, fast</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Talks through cash, runway and structure</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Answers on WhatsApp — quickly, and as a person</li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Owns the numbers at audit time</li>
           </ul>
         </div>
@@ -2149,7 +4445,7 @@
   <section class="fsai-services" id="fsai-services">
     <div class="fsai-container">
       <div class="fsai-section-head" data-reveal>
-        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Everything covered</p>
+        <p class="fsai-eyebrow">Everything covered</p>
         <h2>One firm for your entire <span class="fsai-accent">finance stack</span></h2>
       </div>
 
@@ -2157,17 +4453,17 @@
         <article class="fsai-service-card">
           <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-book"/></svg></span>
           <h3>Bookkeeping</h3>
-          <p>Daily, AI-reconciled books reviewed by your dedicated accountant. Always audit-ready.</p>
+          <p>Books matched daily and checked by your own accountant. Ready whenever an auditor, a bank or an investor asks.</p>
         </article>
         <article class="fsai-service-card">
           <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-percent"/></svg></span>
           <h3>VAT Compliance</h3>
-          <p>Registration, quarterly returns and FTA correspondence — drafted by AI, filed by humans.</p>
+          <p>Registration, quarterly returns and FTA letters — drafted for you, filed by a person.</p>
         </article>
         <article class="fsai-service-card">
           <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-briefcase"/></svg></span>
           <h3>Corporate Tax</h3>
-          <p>9% Corporate Tax registration, planning and filing with deadlines tracked automatically.</p>
+          <p>9% Corporate Tax registration, planning and filing, with the deadlines watched for you.</p>
         </article>
         <article class="fsai-service-card">
           <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-users"/></svg></span>
@@ -2191,25 +4487,440 @@
 <!-- ==========================================================================
      FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 6 of 7: TESTIMONIALS + FAQ
 
-     Paste into its own Webflow HTML Embed element, in order.
-     Self-contained: this block carries the CSS for its own sections.
+     Paste into its own Webflow HTML Embed element.
 
-     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
-     7 holds the animations and all media queries, so every block must be
-     present and in sequence or the responsive rules won't apply.
+     SELF-CONTAINED — this block carries the design tokens, the reset, the icons
+     it references and its own media queries. Paste the blocks in any order, or
+     paste one on its own: it renders correctly either way. Page order is still
+     6 of 7 if you want the full page reading top to bottom.
 
-     Place each embed in a Section with no padding. Do NOT put a block inside a
-     Webflow Form Block — block 7 contains its own <form>.
+     Place each embed in a Section with no padding. Do NOT put block 7 inside
+     a Webflow Form Block — it contains its own form element.
      ========================================================================== -->
 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
 <style>
+/* --------------------------------------------------------------------------
+   CASCADE FENCE — see webflow-embed/README.md
+   `all: revert` discards every author-origin declaration the host page
+   contributed, falling back to the browser's own defaults. At (1,1,0) it
+   outranks Webflow's tag and class styles; the component rules that follow
+   sit higher still, so they win against the reset.
+   -------------------------------------------------------------------------- */
+
+/* SVG subtrees are deliberately excluded. Presentation attributes (fill,
+   stroke, stroke-width, d) cascade at author origin, so reverting them erases
+   the icon geometry outright — verified: `d` computes to `none`. */
+.fsai-root:not(#_),
+.fsai-root:not(#_) :where(*:not(svg, svg *)),
+.fsai-root:not(#_) :where(*:not(svg, svg *))::before,
+.fsai-root:not(#_) :where(*:not(svg, svg *))::after {
+  all: revert;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Baseline the source stylesheet was authored against (src/App.css applies a
+   global `* { margin: 0; padding: 0 }`, src/index.css the link/button rules). */
+.fsai-root:not(#_) :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fsai-root:not(#_) :where(button) {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fsai-root:not(#_) :where(ul, ol) {
+  list-style: none;
+}
+
+/* SVGs sit outside the `all: revert` sweep, so a host rule like Webflow's
+   `img, svg { max-width: 100%; vertical-align: middle }` would still reach
+   them. Neutralise box-model and decoration properties only — every paint and
+   geometry property is left alone. `baseline` is the UA default and matches
+   the React page. */
+.fsai-root:not(#_) :where(svg, svg *) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  vertical-align: baseline;
+  float: none;
+}
+
+.fsai-root:not(#_) :where(img) {
+  max-width: none;
+}
+
+/* Icon sprite host — never rendered. */
+.fsai-root:not(#_) :where(.fsai-sprite) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Optional full-bleed escape hatch — add `fsai-fullbleed` to a wrapper that
+   sits inside a padded Webflow container. Needs body { overflow-x: hidden }
+   when a vertical scrollbar is present. */
+.fsai-root:not(#_).fsai-fullbleed {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+}
+
+/* ============================================================
+   AI-Native Accounting Landing
+   Single warm-paper canvas, one accent, hairline bento grids.
+   Palette: warm cream, Finanshels orange
+   Type: Inter only — light display weights, relaxed tracking.
+   Google Fonts serves Inter as static weights, so only 300/400/500/
+   600/700 exist: anything in between silently snaps up a step.
+   ============================================================ */
+
+.fsai-root:not(#_) {
+  /* Three colours only: cream, white, orange. The whole page sits on one
+     warm paper canvas — depth comes from hairline borders and white surface
+     lifts, never from a hue shift. The cream matches the site footer so the
+     section seams into the rest of the page. */
+  --fsai-canvas: #faf9f5;
+  --fsai-surface: #ffffff;
+  --fsai-surface-raised: #ffffff;
+  --fsai-line: #e7e3d8;
+  --fsai-line-strong: #d6cfbe;
+  /* Section seams only. On black the hairlines were near-invisible; on
+     cream, ten stacked full-bleed rules read as ten hard cuts, so the
+     seam is lighter than the structural line and fades at both ends. */
+  --fsai-seam: #eeeae0;
+
+  /* Cards that need to lift off the canvas — the terminal and the CTA form. */
+  --fsai-paper: #ffffff;
+  --fsai-paper-sunk: #faf9f5;
+  --fsai-paper-line: #e7e3d8;
+  --fsai-paper-ink: #191919;
+  --fsai-paper-muted: #6b6b6b;
+
+  /* Orange ramp, picked by contrast against the cream canvas rather than by
+     eye — brand orange is only 3.0:1 on #faf9f5, which is fine for a fill or
+     an icon but fails AA the moment it carries a sentence. Each step below is
+     measured, so the rule is simply: fill with accent, write with ink.
+       accent      #f16610  3.0:1   fills, icons, dots (non-text, needs 3:1)
+       accent-deep #d45a0e  3.8:1   display-size accent text, hovers
+       accent-ink  #b0500a  5.0:1   any accent text under 24px
+       accent-band #c25309  4.6:1   band behind white copy */
+  --fsai-accent: #f16610;
+  --fsai-accent-deep: #d45a0e;
+  --fsai-accent-ink: #b0500a;
+  --fsai-accent-band: #c25309;
+  /* Tints sit on cream rather than black, so they need less alpha to read. */
+  --fsai-accent-soft: rgba(241, 102, 16, 0.10);
+  --fsai-accent-line: rgba(241, 102, 16, 0.30);
+
+  /* Neutral ramp, also measured: 15.9:1 / 7.3:1 / 4.8:1. Three clearly
+     separated steps so hierarchy survives without any of them dropping
+     below AA — the previous dim grey sat at 3.2:1 and was the single
+     biggest readability problem on the light canvas. */
+  --fsai-text: #191919;
+  --fsai-muted: #57534a;
+  --fsai-dim: #746e64;
+
+  /* Financial direction reads through emphasis, not hue — orange marks the
+     figure worth looking at, neutral grey carries everything else. Both are
+     always rendered as small text, so both take the AA-safe steps. */
+  --fsai-up: var(--fsai-accent-ink);
+  --fsai-down: var(--fsai-dim);
+
+  --fsai-radius: 12px;
+  --fsai-radius-lg: 16px;
+  --fsai-pill: 999px;
+  --fsai-pad: 120px;
+
+  /* CrossVal's motion tokens: ease-out for entrances, ease-in-out for state. */
+  --fsai-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --fsai-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+  background: var(--fsai-canvas);
+  color: var(--fsai-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+
+.fsai-root:not(#_) *,
+.fsai-root:not(#_) *::before,
+.fsai-root:not(#_) *::after {
+  box-sizing: border-box;
+}
+
+
+.fsai-root:not(#_) .fsai-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+
+.fsai-root:not(#_) .fsai-accent {
+  color: var(--fsai-accent-deep);
+}
+
+
+/* ---------- Scroll reveal ----------
+   The hidden state is gated behind `.is-ready`, which JS adds on mount, so
+   the page still renders fully if the observer never runs. */
+
+/* Whole element fades up as one. */
+.fsai-root:not(#_).is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--fsai-ease-out),
+    transform 0.65s var(--fsai-ease-out);
+}
+
+
+/* Children fade up one after another — used on the bento grids, where the
+   cards reading in sequence is the point. The container itself stays put. */
+.fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > * {
+  animation: fsai-rise 0.6s var(--fsai-ease-out) both;
+  animation-delay: var(--fsai-stagger, 0s);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --fsai-stagger: 0.07s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --fsai-stagger: 0.14s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --fsai-stagger: 0.21s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(5) { --fsai-stagger: 0.28s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(6) { --fsai-stagger: 0.35s; }
+
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.fsai-root:not(#_) .fsai-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+/* Kept so existing markup that still passes the light modifier renders sanely
+   now that every section shares one canvas. */
+.fsai-root:not(#_) .fsai-eyebrow-light {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-section-head {
+  max-width: 780px;
+  margin-bottom: 64px;
+}
+
+
+.fsai-root:not(#_) .fsai-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+
+/* Uppercase micro-caption pinned under card copy */
+.fsai-root:not(#_) .fsai-microcap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--fsai-accent-ink);
+}
+
+
+.fsai-root:not(#_) .fsai-microcap::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  margin-top: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+
+/* ---------- Buttons ---------- */
+
+.fsai-root:not(#_) .fsai-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 30px;
+  border-radius: var(--fsai-pill);
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--fsai-ease),
+    border-color 0.3s var(--fsai-ease),
+    color 0.3s var(--fsai-ease),
+    transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary {
+  background: var(--fsai-accent);
+  color: #fff;
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover {
+  background: var(--fsai-accent-deep);
+  transform: translateY(-2px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost {
+  background: transparent;
+  color: var(--fsai-text);
+  border-color: var(--fsai-line-strong);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost:hover {
+  border-color: var(--fsai-text);
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fsai-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fsai-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(241, 102, 16, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(241, 102, 16, 0);
+  }
+}
+
+
+@keyframes fsai-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .fsai-root:not(#_) *,
+  .fsai-root:not(#_) *::before,
+  .fsai-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-term-row {
+    opacity: 1;
+  }
+
+
+  .fsai-root:not(#_).is-ready [data-reveal],
+  .fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+}
+
 /* ============================================================
    TESTIMONIALS
    ============================================================ */
 
 .fsai-root:not(#_) .fsai-testimonials {
   padding: var(--fsai-pad) 0;
-  border-top: 1px solid var(--fsai-line);
+  border-top: 1px solid var(--fsai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--fsai-seam) 22%, var(--fsai-seam) 78%, transparent) 1;
 }
 
 
@@ -2242,14 +4953,6 @@
 }
 
 
-.fsai-root:not(#_) .fsai-quote-spark {
-  width: 18px;
-  height: 18px;
-  margin-bottom: 22px;
-  color: var(--fsai-accent);
-}
-
-
 .fsai-root:not(#_) .fsai-testimonial-card blockquote {
   flex: 1;
   margin: 0 0 26px;
@@ -2276,14 +4979,14 @@
   border: 1px solid var(--fsai-line-strong);
   color: var(--fsai-text);
   font-size: 0.76rem;
-  font-weight: 680;
+  font-weight: 600;
 }
 
 
 .fsai-root:not(#_) .fsai-testimonial-card figcaption strong {
   display: block;
   font-size: 0.88rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 
@@ -2301,7 +5004,9 @@
 
 .fsai-root:not(#_) .fsai-faq {
   padding: var(--fsai-pad) 0;
-  border-top: 1px solid var(--fsai-line);
+  border-top: 1px solid var(--fsai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--fsai-seam) 22%, var(--fsai-seam) 78%, transparent) 1;
 }
 
 
@@ -2332,7 +5037,7 @@
   text-align: left;
   font-family: inherit;
   font-size: 1.05rem;
-  font-weight: 620;
+  font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--fsai-text);
   transition: color 0.3s var(--fsai-ease);
@@ -2340,7 +5045,7 @@
 
 
 .fsai-root:not(#_) .fsai-faq-question:hover {
-  color: var(--fsai-accent);
+  color: var(--fsai-accent-ink);
 }
 
 
@@ -2382,18 +5087,131 @@
 .fsai-root:not(#_) .fsai-faq-item.is-open .fsai-faq-answer p {
   padding-bottom: 26px;
 }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1024px) {
+
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 88px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 24px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillars,
+  .fsai-root:not(#_) .fsai-services-grid,
+  .fsai-root:not(#_) .fsai-testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar:nth-child(odd),
+  .fsai-root:not(#_) .fsai-testimonial-card:nth-child(odd) {
+    border-left: none;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar:not(:nth-last-child(-n + 1)),
+  .fsai-root:not(#_) .fsai-testimonial-card:not(:nth-last-child(-n + 1)) {
+    border-bottom: 1px solid var(--fsai-line);
+  }
+}
+
+
+
+
+@media (max-width: 680px) {
+
+
+  .fsai-root:not(#_) {
+    --fsai-pad: 72px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-container {
+    padding: 0 20px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-hero-actions .fsai-btn {
+    width: 100%;
+  }
+
+
+
+  /* Bento collapses to a single column — reset every shared divider and
+     rebuild it as a simple horizontal rule between rows. */
+  .fsai-root:not(#_) .fsai-pillars,
+  .fsai-root:not(#_) .fsai-services-grid,
+  .fsai-root:not(#_) .fsai-testimonials-grid,
+  .fsai-root:not(#_) .fsai-split-grid,
+  .fsai-root:not(#_) .fsai-steps {
+    grid-template-columns: 1fr;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar + .fsai-pillar,
+  .fsai-root:not(#_) .fsai-step + .fsai-step,
+  .fsai-root:not(#_) .fsai-testimonial-card + .fsai-testimonial-card,
+  .fsai-root:not(#_) .fsai-split-card + .fsai-split-card {
+    border-left: none;
+    border-top: 1px solid var(--fsai-line);
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar,
+  .fsai-root:not(#_) .fsai-testimonial-card,
+  .fsai-root:not(#_) .fsai-step {
+    border-bottom: none !important;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-section-head {
+    margin-bottom: 44px;
+  }
+
+
+
+  .fsai-root:not(#_) .fsai-pillar,
+  .fsai-root:not(#_) .fsai-step,
+  .fsai-root:not(#_) .fsai-service-card,
+  .fsai-root:not(#_) .fsai-testimonial-card {
+    padding: 30px 24px;
+  }
+}
 </style>
 <div class="fsai-root">
+
+  <!-- Icons this block uses. Self-contained on purpose. -->
+  <svg class="fsai-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="fsai-i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></symbol>
+  </svg>
+
   <section class="fsai-testimonials" id="fsai-testimonials">
     <div class="fsai-container">
       <div class="fsai-section-head" data-reveal>
-        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> In their words</p>
+        <p class="fsai-eyebrow">In their words</p>
         <h2>Founders who made the <span class="fsai-accent">switch</span></h2>
       </div>
 
       <div class="fsai-testimonials-grid" data-reveal-stagger>
         <figure class="fsai-testimonial-card">
-          <svg class="fsai-quote-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
           <blockquote>They designed an accounting system tailor made to our needs &amp; completely automated our finance operations just like they promised. They’ve been super helpful for us to scale.</blockquote>
           <figcaption>
             <span class="fsai-testimonial-avatar">JK</span>
@@ -2404,7 +5222,6 @@
           </figcaption>
         </figure>
         <figure class="fsai-testimonial-card">
-          <svg class="fsai-quote-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
           <blockquote>Always very responsive, supportive, having a business mindset, providing visuals and on top of all that, open for feedback so they can keep improving. Very happy that I took the decision to work with them.</blockquote>
           <figcaption>
             <span class="fsai-testimonial-avatar">SV</span>
@@ -2415,7 +5232,6 @@
           </figcaption>
         </figure>
         <figure class="fsai-testimonial-card">
-          <svg class="fsai-quote-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
           <blockquote>They thoroughly understood our business processes and streamlined our accounting processes perfectly where our both in-house and outsourced accountants failed multiple times.</blockquote>
           <figcaption>
             <span class="fsai-testimonial-avatar">MP</span>
@@ -2432,7 +5248,7 @@
   <section class="fsai-faq" id="fsai-faq">
     <div class="fsai-container fsai-faq-container">
       <div class="fsai-section-head" data-reveal>
-        <p class="fsai-eyebrow"><svg class="fsai-eyebrow-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg> Questions</p>
+        <p class="fsai-eyebrow">Questions</p>
         <h2>Fair questions about <span class="fsai-accent">AI accounting</span></h2>
       </div>
 
@@ -2498,28 +5314,443 @@
 <!-- ==========================================================================
      FINANSHELS · AI-NATIVE ACCOUNTING — BLOCK 7 of 7: FINAL CTA + FORM
 
-     Paste into its own Webflow HTML Embed element, in order.
-     Self-contained: this block carries the CSS for its own sections.
+     Paste into its own Webflow HTML Embed element.
 
-     ORDER MATTERS — the CSS is split across the blocks, not repeated. Block
-     7 holds the animations and all media queries, so every block must be
-     present and in sequence or the responsive rules won't apply.
+     SELF-CONTAINED — this block carries the design tokens, the reset, the icons
+     it references and its own media queries. Paste the blocks in any order, or
+     paste one on its own: it renders correctly either way. Page order is still
+     7 of 7 if you want the full page reading top to bottom.
 
-     Place each embed in a Section with no padding. Do NOT put a block inside a
-     Webflow Form Block — block 7 contains its own <form>.
+     Place each embed in a Section with no padding. Do NOT put block 7 inside
+     a Webflow Form Block — it contains its own form element.
      Also carries the script (FAQ accordion, scroll reveals, WhatsApp tracking).
      ========================================================================== -->
 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
 <style>
+/* --------------------------------------------------------------------------
+   CASCADE FENCE — see webflow-embed/README.md
+   `all: revert` discards every author-origin declaration the host page
+   contributed, falling back to the browser's own defaults. At (1,1,0) it
+   outranks Webflow's tag and class styles; the component rules that follow
+   sit higher still, so they win against the reset.
+   -------------------------------------------------------------------------- */
+
+/* SVG subtrees are deliberately excluded. Presentation attributes (fill,
+   stroke, stroke-width, d) cascade at author origin, so reverting them erases
+   the icon geometry outright — verified: `d` computes to `none`. */
+.fsai-root:not(#_),
+.fsai-root:not(#_) :where(*:not(svg, svg *)),
+.fsai-root:not(#_) :where(*:not(svg, svg *))::before,
+.fsai-root:not(#_) :where(*:not(svg, svg *))::after {
+  all: revert;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Baseline the source stylesheet was authored against (src/App.css applies a
+   global `* { margin: 0; padding: 0 }`, src/index.css the link/button rules). */
+.fsai-root:not(#_) :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fsai-root:not(#_) :where(button) {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fsai-root:not(#_) :where(ul, ol) {
+  list-style: none;
+}
+
+/* SVGs sit outside the `all: revert` sweep, so a host rule like Webflow's
+   `img, svg { max-width: 100%; vertical-align: middle }` would still reach
+   them. Neutralise box-model and decoration properties only — every paint and
+   geometry property is left alone. `baseline` is the UA default and matches
+   the React page. */
+.fsai-root:not(#_) :where(svg, svg *) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  vertical-align: baseline;
+  float: none;
+}
+
+.fsai-root:not(#_) :where(img) {
+  max-width: none;
+}
+
+/* Icon sprite host — never rendered. */
+.fsai-root:not(#_) :where(.fsai-sprite) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Optional full-bleed escape hatch — add `fsai-fullbleed` to a wrapper that
+   sits inside a padded Webflow container. Needs body { overflow-x: hidden }
+   when a vertical scrollbar is present. */
+.fsai-root:not(#_).fsai-fullbleed {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+}
+
+/* ============================================================
+   AI-Native Accounting Landing
+   Single warm-paper canvas, one accent, hairline bento grids.
+   Palette: warm cream, Finanshels orange
+   Type: Inter only — light display weights, relaxed tracking.
+   Google Fonts serves Inter as static weights, so only 300/400/500/
+   600/700 exist: anything in between silently snaps up a step.
+   ============================================================ */
+
+.fsai-root:not(#_) {
+  /* Three colours only: cream, white, orange. The whole page sits on one
+     warm paper canvas — depth comes from hairline borders and white surface
+     lifts, never from a hue shift. The cream matches the site footer so the
+     section seams into the rest of the page. */
+  --fsai-canvas: #faf9f5;
+  --fsai-surface: #ffffff;
+  --fsai-surface-raised: #ffffff;
+  --fsai-line: #e7e3d8;
+  --fsai-line-strong: #d6cfbe;
+  /* Section seams only. On black the hairlines were near-invisible; on
+     cream, ten stacked full-bleed rules read as ten hard cuts, so the
+     seam is lighter than the structural line and fades at both ends. */
+  --fsai-seam: #eeeae0;
+
+  /* Cards that need to lift off the canvas — the terminal and the CTA form. */
+  --fsai-paper: #ffffff;
+  --fsai-paper-sunk: #faf9f5;
+  --fsai-paper-line: #e7e3d8;
+  --fsai-paper-ink: #191919;
+  --fsai-paper-muted: #6b6b6b;
+
+  /* Orange ramp, picked by contrast against the cream canvas rather than by
+     eye — brand orange is only 3.0:1 on #faf9f5, which is fine for a fill or
+     an icon but fails AA the moment it carries a sentence. Each step below is
+     measured, so the rule is simply: fill with accent, write with ink.
+       accent      #f16610  3.0:1   fills, icons, dots (non-text, needs 3:1)
+       accent-deep #d45a0e  3.8:1   display-size accent text, hovers
+       accent-ink  #b0500a  5.0:1   any accent text under 24px
+       accent-band #c25309  4.6:1   band behind white copy */
+  --fsai-accent: #f16610;
+  --fsai-accent-deep: #d45a0e;
+  --fsai-accent-ink: #b0500a;
+  --fsai-accent-band: #c25309;
+  /* Tints sit on cream rather than black, so they need less alpha to read. */
+  --fsai-accent-soft: rgba(241, 102, 16, 0.10);
+  --fsai-accent-line: rgba(241, 102, 16, 0.30);
+
+  /* Neutral ramp, also measured: 15.9:1 / 7.3:1 / 4.8:1. Three clearly
+     separated steps so hierarchy survives without any of them dropping
+     below AA — the previous dim grey sat at 3.2:1 and was the single
+     biggest readability problem on the light canvas. */
+  --fsai-text: #191919;
+  --fsai-muted: #57534a;
+  --fsai-dim: #746e64;
+
+  /* Financial direction reads through emphasis, not hue — orange marks the
+     figure worth looking at, neutral grey carries everything else. Both are
+     always rendered as small text, so both take the AA-safe steps. */
+  --fsai-up: var(--fsai-accent-ink);
+  --fsai-down: var(--fsai-dim);
+
+  --fsai-radius: 12px;
+  --fsai-radius-lg: 16px;
+  --fsai-pill: 999px;
+  --fsai-pad: 120px;
+
+  /* CrossVal's motion tokens: ease-out for entrances, ease-in-out for state. */
+  --fsai-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --fsai-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+  background: var(--fsai-canvas);
+  color: var(--fsai-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+
+.fsai-root:not(#_) *,
+.fsai-root:not(#_) *::before,
+.fsai-root:not(#_) *::after {
+  box-sizing: border-box;
+}
+
+
+.fsai-root:not(#_) .fsai-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+
+.fsai-root:not(#_) .fsai-accent {
+  color: var(--fsai-accent-deep);
+}
+
+
+/* ---------- Scroll reveal ----------
+   The hidden state is gated behind `.is-ready`, which JS adds on mount, so
+   the page still renders fully if the observer never runs. */
+
+/* Whole element fades up as one. */
+.fsai-root:not(#_).is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--fsai-ease-out),
+    transform 0.65s var(--fsai-ease-out);
+}
+
+
+/* Children fade up one after another — used on the bento grids, where the
+   cards reading in sequence is the point. The container itself stays put. */
+.fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > * {
+  animation: fsai-rise 0.6s var(--fsai-ease-out) both;
+  animation-delay: var(--fsai-stagger, 0s);
+}
+
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --fsai-stagger: 0.07s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --fsai-stagger: 0.14s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --fsai-stagger: 0.21s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(5) { --fsai-stagger: 0.28s; }
+
+.fsai-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(6) { --fsai-stagger: 0.35s; }
+
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.fsai-root:not(#_) .fsai-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fsai-dim);
+}
+
+
+/* Kept so existing markup that still passes the light modifier renders sanely
+   now that every section shares one canvas. */
+.fsai-root:not(#_) .fsai-eyebrow-light {
+  color: var(--fsai-dim);
+}
+
+
+.fsai-root:not(#_) .fsai-section-head {
+  max-width: 780px;
+  margin-bottom: 64px;
+}
+
+
+.fsai-root:not(#_) .fsai-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+
+/* Uppercase micro-caption pinned under card copy */
+.fsai-root:not(#_) .fsai-microcap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--fsai-accent-ink);
+}
+
+
+.fsai-root:not(#_) .fsai-microcap::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  margin-top: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+
+/* ---------- Buttons ---------- */
+
+.fsai-root:not(#_) .fsai-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 30px;
+  border-radius: var(--fsai-pill);
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--fsai-ease),
+    border-color 0.3s var(--fsai-ease),
+    color 0.3s var(--fsai-ease),
+    transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.3s var(--fsai-ease);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary {
+  background: var(--fsai-accent);
+  color: #fff;
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover {
+  background: var(--fsai-accent-deep);
+  transform: translateY(-2px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost {
+  background: transparent;
+  color: var(--fsai-text);
+  border-color: var(--fsai-line-strong);
+}
+
+
+.fsai-root:not(#_) .fsai-btn-ghost:hover {
+  border-color: var(--fsai-text);
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fsai-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fsai-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(241, 102, 16, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(241, 102, 16, 0);
+  }
+}
+
+
+@keyframes fsai-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .fsai-root:not(#_) *,
+  .fsai-root:not(#_) *::before,
+  .fsai-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fsai-root:not(#_) .fsai-term-row {
+    opacity: 1;
+  }
+
+
+  .fsai-root:not(#_).is-ready [data-reveal],
+  .fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+}
+
 /* ============================================================
    FINAL CTA
    ============================================================ */
 
 .fsai-root:not(#_) .fsai-cta {
   padding: var(--fsai-pad) 0;
-  border-top: 1px solid var(--fsai-line);
+  border-top: 1px solid var(--fsai-seam);
+  /* Falls back to the flat seam colour anywhere border-image is unsupported. */
+  border-image: linear-gradient(90deg, transparent, var(--fsai-seam) 22%, var(--fsai-seam) 78%, transparent) 1;
   background:
-    radial-gradient(46rem 28rem at 88% 0%, rgba(241, 102, 16, 0.16), transparent 60%),
+    radial-gradient(46rem 28rem at 88% 0%, rgba(241, 102, 16, 0.09), transparent 60%),
     var(--fsai-canvas);
   scroll-margin-top: 80px;
 }
@@ -2533,21 +5764,12 @@
 }
 
 
-.fsai-root:not(#_) .fsai-cta-spark {
-  width: 30px;
-  height: 30px;
-  margin-bottom: 28px;
-  color: var(--fsai-accent);
-  animation: fsai-spin 20s linear infinite;
-}
-
-
 .fsai-root:not(#_) .fsai-cta-copy h2 {
   margin: 0 0 22px;
   font-size: clamp(2.3rem, 4.6vw, 3.5rem);
-  font-weight: 700;
-  letter-spacing: -0.042em;
-  line-height: 1.04;
+  font-weight: 500;
+  letter-spacing: -0.024em;
+  line-height: 1.1;
 }
 
 
@@ -2591,8 +5813,8 @@
   align-items: center;
   gap: 9px;
   font-size: 0.93rem;
-  font-weight: 620;
-  color: var(--fsai-accent);
+  font-weight: 600;
+  color: var(--fsai-accent-ink);
   text-decoration: none;
   border-bottom: 1px solid var(--fsai-accent-line);
   padding-bottom: 3px;
@@ -2612,22 +5834,23 @@
 }
 
 
-/* ---------- CTA form card — the second light moment ---------- */
+/* ---------- CTA form card — the page's one raised surface ---------- */
 
 .fsai-root:not(#_) .fsai-cta-form-card {
   padding: 40px 38px;
+  border: 1px solid var(--fsai-paper-line);
   border-radius: var(--fsai-radius-lg);
   background: var(--fsai-paper);
   color: var(--fsai-paper-ink);
-  box-shadow: 0 32px 72px -28px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 24px 56px -32px rgba(60, 45, 25, 0.28);
 }
 
 
 .fsai-root:not(#_) .fsai-cta-form-card h3 {
   margin: 0 0 6px;
   font-size: 1.35rem;
-  font-weight: 680;
-  letter-spacing: -0.03em;
+  font-weight: 600;
+  letter-spacing: -0.018em;
 }
 
 
@@ -2659,7 +5882,7 @@
 
 .fsai-root:not(#_) .fsai-form-group label {
   font-size: 0.68rem;
-  font-weight: 680;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--fsai-paper-muted);
@@ -2708,165 +5931,22 @@
 }
 
 /* ============================================================
-   Animations
-   ============================================================ */
-
-@keyframes fsai-rise {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-@keyframes fsai-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(241, 102, 16, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 0 6px rgba(241, 102, 16, 0);
-  }
-}
-
-
-@keyframes fsai-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.5;
-  }
-  50% {
-    transform: translateY(-4px);
-    opacity: 1;
-  }
-}
-
-
-@keyframes fsai-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-@media (prefers-reduced-motion: reduce) {
-
-  .fsai-root:not(#_) *,
-  .fsai-root:not(#_) *::before,
-  .fsai-root:not(#_) *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
-
-  .fsai-root:not(#_) .fsai-feed-item {
-    opacity: 1;
-  }
-
-
-  .fsai-root:not(#_).is-ready [data-reveal],
-  .fsai-root:not(#_).is-ready [data-reveal-stagger] > * {
-    opacity: 1;
-    transform: none;
-  }
-
-}
-
-/* ============================================================
    Responsive
    ============================================================ */
 
 @media (max-width: 1024px) {
+
 
   .fsai-root:not(#_) {
     --fsai-pad: 88px;
   }
 
 
+
   .fsai-root:not(#_) .fsai-container {
     padding: 0 24px;
   }
 
-
-  .fsai-root:not(#_) .fsai-hero {
-    padding: 84px 0 72px;
-  }
-
-
-  .fsai-root:not(#_) .fsai-hero-grid {
-    grid-template-columns: 1fr;
-    gap: 56px;
-  }
-
-
-  .fsai-root:not(#_) .fsai-hero-visual {
-    max-width: 560px;
-  }
-
-
-  .fsai-root:not(#_) .fsai-hero-stats {
-    gap: 32px;
-  }
-
-
-  .fsai-root:not(#_) .fsai-pillars,
-  .fsai-root:not(#_) .fsai-services-grid,
-  .fsai-root:not(#_) .fsai-testimonials-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-
-  .fsai-root:not(#_) .fsai-pillar:nth-child(odd),
-  .fsai-root:not(#_) .fsai-testimonial-card:nth-child(odd) {
-    border-left: none;
-  }
-
-
-  .fsai-root:not(#_) .fsai-pillar:not(:nth-last-child(-n + 1)),
-  .fsai-root:not(#_) .fsai-testimonial-card:not(:nth-last-child(-n + 1)) {
-    border-bottom: 1px solid var(--fsai-line);
-  }
-
-
-  .fsai-root:not(#_) .fsai-service-card:nth-child(3n) {
-    border-right: 1px solid var(--fsai-line);
-  }
-
-
-  .fsai-root:not(#_) .fsai-service-card:nth-child(2n) {
-    border-right: none;
-  }
-
-
-  .fsai-root:not(#_) .fsai-service-card:nth-last-child(-n + 3) {
-    border-bottom: 1px solid var(--fsai-line);
-  }
-
-
-  .fsai-root:not(#_) .fsai-service-card:nth-last-child(-n + 2) {
-    border-bottom: none;
-  }
-
-
-  .fsai-root:not(#_) .fsai-steps {
-    grid-template-columns: 1fr 1fr;
-  }
-
-
-  .fsai-root:not(#_) .fsai-step:nth-child(odd) {
-    border-left: none;
-  }
-
-
-  .fsai-root:not(#_) .fsai-step:nth-child(n + 3) {
-    border-top: 1px solid var(--fsai-line);
-  }
 
 
   .fsai-root:not(#_) .fsai-cta-grid {
@@ -2875,55 +5955,22 @@
   }
 
 
+
   .fsai-root:not(#_) .fsai-cta-form-card {
     max-width: 560px;
   }
-
-
-  .fsai-root:not(#_) .fsai-lead-inner {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-
-  .fsai-root:not(#_) .fsai-lead-whatsapp {
-    justify-self: start;
-  }
-
-
-  .fsai-root:not(#_) .fsai-dash-kpis {
-    grid-template-columns: 1fr 1fr;
-  }
-
-
-  .fsai-root:not(#_) .fsai-dash-kpi:nth-child(3) {
-    border-left: none;
-  }
-
-
-  .fsai-root:not(#_) .fsai-dash-kpi:nth-child(n + 3) {
-    border-top: 1px solid var(--fsai-line);
-  }
-
-
-  .fsai-root:not(#_) .fsai-dash-body {
-    grid-template-columns: 1fr;
-  }
-
-
-  .fsai-root:not(#_) .fsai-dash-panel + .fsai-dash-panel {
-    border-left: none;
-    border-top: 1px solid var(--fsai-line);
-  }
-
 }
+
+
 
 
 @media (max-width: 680px) {
 
+
   .fsai-root:not(#_) {
     --fsai-pad: 72px;
   }
+
 
 
   .fsai-root:not(#_) .fsai-container {
@@ -2931,90 +5978,11 @@
   }
 
 
-  .fsai-root:not(#_) .fsai-hero {
-    padding: 64px 0 56px;
-  }
-
-
-  .fsai-root:not(#_) .fsai-hero-stats {
-    grid-template-columns: 1fr 1fr;
-    gap: 26px 32px;
-  }
-
 
   .fsai-root:not(#_) .fsai-hero-actions .fsai-btn {
     width: 100%;
   }
 
-
-  .fsai-root:not(#_) .fsai-lead-strip {
-    padding: 52px 0;
-  }
-
-
-  .fsai-root:not(#_) .fsai-lead-whatsapp {
-    justify-self: stretch;
-  }
-
-
-  .fsai-root:not(#_) .fsai-dash-topbar {
-    flex-wrap: wrap;
-  }
-
-
-  .fsai-root:not(#_) .fsai-dash-kpis {
-    grid-template-columns: 1fr;
-  }
-
-
-  .fsai-root:not(#_) .fsai-dash-kpi + .fsai-dash-kpi {
-    border-left: none;
-    border-top: 1px solid var(--fsai-line);
-  }
-
-
-  .fsai-root:not(#_) .fsai-dash-row {
-    grid-template-columns: 1.3fr 1fr 0.8fr;
-    gap: 8px;
-  }
-
-
-  /* Bento collapses to a single column — reset every shared divider and
-     rebuild it as a simple horizontal rule between rows. */
-  .fsai-root:not(#_) .fsai-pillars,
-  .fsai-root:not(#_) .fsai-services-grid,
-  .fsai-root:not(#_) .fsai-testimonials-grid,
-  .fsai-root:not(#_) .fsai-split-grid,
-  .fsai-root:not(#_) .fsai-steps {
-    grid-template-columns: 1fr;
-  }
-
-
-  .fsai-root:not(#_) .fsai-pillar + .fsai-pillar,
-  .fsai-root:not(#_) .fsai-step + .fsai-step,
-  .fsai-root:not(#_) .fsai-testimonial-card + .fsai-testimonial-card,
-  .fsai-root:not(#_) .fsai-split-card + .fsai-split-card {
-    border-left: none;
-    border-top: 1px solid var(--fsai-line);
-  }
-
-
-  .fsai-root:not(#_) .fsai-pillar,
-  .fsai-root:not(#_) .fsai-testimonial-card,
-  .fsai-root:not(#_) .fsai-step {
-    border-bottom: none !important;
-  }
-
-
-  .fsai-root:not(#_) .fsai-service-card {
-    border-right: none !important;
-    border-bottom: 1px solid var(--fsai-line) !important;
-  }
-
-
-  .fsai-root:not(#_) .fsai-service-card:last-child {
-    border-bottom: none !important;
-  }
 
 
   .fsai-root:not(#_) .fsai-section-head {
@@ -3022,54 +5990,31 @@
   }
 
 
-  .fsai-root:not(#_) .fsai-pillar,
-  .fsai-root:not(#_) .fsai-step,
-  .fsai-root:not(#_) .fsai-service-card,
-  .fsai-root:not(#_) .fsai-testimonial-card {
-    padding: 30px 24px;
-  }
-
-
-  .fsai-root:not(#_) .fsai-split-card {
-    padding: 32px 24px;
-  }
-
-
-  .fsai-root:not(#_) .fsai-compare-table {
-    display: none;
-  }
-
-
-  .fsai-root:not(#_) .fsai-compare-mobile {
-    display: grid;
-    gap: 16px;
-  }
-
 
   .fsai-root:not(#_) .fsai-form-row {
     grid-template-columns: 1fr;
   }
 
 
+
   .fsai-root:not(#_) .fsai-cta-form-card {
     padding: 32px 24px;
   }
-
-
-  .fsai-root:not(#_) .fsai-hero-spark-1,
-  .fsai-root:not(#_) .fsai-hero-spark-2 {
-    display: none;
-  }
-
 }
 </style>
 <div class="fsai-root">
+
+  <!-- Icons this block uses. Self-contained on purpose. -->
+  <svg class="fsai-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="fsai-i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="fsai-i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  </svg>
+
   <span id="fsai-pricing"></span>
   <section class="fsai-cta" id="fsai-consultation">
     <div class="fsai-container">
       <div class="fsai-cta-grid">
         <div class="fsai-cta-copy" data-reveal>
-          <svg class="fsai-cta-spark" aria-hidden="true" focusable="false"><use href="#fsai-i-spark"/></svg>
           <h2>
             See your books run
             <br />
@@ -3088,7 +6033,8 @@
           href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20to%20learn%20more%20about%20your%20AI-native%20accounting%20services.&amp;type=phone_number&amp;app_absent=0"
           target="_blank"
           rel="noopener noreferrer"
-          class="fsai-cta-whatsapp"
+          class="fsai-cta-whatsapp data-wa-track"
+          data-wa-track
           data-fsai-wa="ai_landing_footer"
         >
             Prefer chat? Message us on WhatsApp <svg aria-hidden="true" focusable="false"><use href="#fsai-i-arrow"/></svg>

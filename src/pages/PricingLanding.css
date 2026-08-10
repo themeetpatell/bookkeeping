@@ -1,0 +1,2723 @@
+/* ============================================================
+   Pricing — Webflow embed source
+   Same design system as AIAccountingLanding.css: warm paper canvas,
+   one accent, hairline bento grids, Inter at light display weights.
+   Authored with a `.pr-` prefix so the build can namespace it to
+   `.fspr-` and the two pages can never collide on a class name.
+   ============================================================ */
+
+.pr-page {
+  --pr-canvas: #faf9f5;
+  --pr-surface: #ffffff;
+  --pr-line: #e7e3d8;
+  --pr-line-strong: #d6cfbe;
+  --pr-seam: #eeeae0;
+
+  --pr-paper: #ffffff;
+  --pr-paper-sunk: #faf9f5;
+  --pr-paper-line: #e7e3d8;
+  --pr-paper-ink: #191919;
+  --pr-paper-muted: #6b6b6b;
+
+  /* Orange ramp measured against the cream canvas — fill with accent,
+     write with ink. See AIAccountingLanding.css for the full ratios. */
+  --pr-accent: #f16610;
+  --pr-accent-deep: #d45a0e;
+  --pr-accent-ink: #b0500a;
+  --pr-accent-band: #c25309;
+  --pr-accent-soft: rgba(241, 102, 16, 0.10);
+  --pr-accent-line: rgba(241, 102, 16, 0.30);
+
+  --pr-text: #191919;
+  --pr-muted: #57534a;
+  --pr-dim: #746e64;
+
+  --pr-radius: 12px;
+  --pr-radius-lg: 16px;
+  --pr-pill: 999px;
+  --pr-pad: 112px;
+  /* Container side padding as a token, so the testimonial rail can cancel it
+     with a negative margin and let cards scroll to the screen edge without
+     re-deriving the number at every breakpoint. */
+  --pr-gutter: 32px;
+
+  --pr-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --pr-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+  background: var(--pr-canvas);
+  color: var(--pr-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+.pr-page *,
+.pr-page *::before,
+.pr-page *::after {
+  box-sizing: border-box;
+}
+
+.pr-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--pr-gutter);
+}
+
+.pr-accent {
+  color: var(--pr-accent-deep);
+}
+
+/* Visible to screen readers only — icon-only controls still need a name. */
+.pr-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Scroll reveal ----------
+   Hidden state is gated behind `.is-ready`, added by the script, so the page
+   renders fully visible if JS never runs. */
+
+.pr-page.is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.pr-page.is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--pr-ease-out),
+    transform 0.65s var(--pr-ease-out);
+}
+
+.pr-page.is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+.pr-page.is-ready [data-reveal-stagger].is-in > * {
+  animation: pr-rise 0.6s var(--pr-ease-out) both;
+  animation-delay: var(--pr-stagger, 0s);
+}
+
+.pr-page.is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --pr-stagger: 0.08s; }
+.pr-page.is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --pr-stagger: 0.16s; }
+.pr-page.is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --pr-stagger: 0.24s; }
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.pr-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pr-dim);
+}
+
+.pr-section-head {
+  max-width: 760px;
+  margin-bottom: 60px;
+}
+
+.pr-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+.pr-section-head p {
+  margin: 18px 0 0;
+  max-width: 40rem;
+  font-size: 1.03rem;
+  line-height: 1.7;
+  color: var(--pr-muted);
+}
+
+/* ---------- Buttons ---------- */
+
+.pr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border-radius: var(--pr-pill);
+  border: 1px solid transparent;
+  font-size: 0.93rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--pr-ease),
+    border-color 0.3s var(--pr-ease),
+    color 0.3s var(--pr-ease),
+    transform 0.3s var(--pr-ease);
+}
+
+.pr-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s var(--pr-ease);
+}
+
+.pr-btn-primary {
+  background: var(--pr-accent);
+  color: #fff;
+}
+
+.pr-btn-primary:hover {
+  background: var(--pr-accent-deep);
+  transform: translateY(-2px);
+}
+
+.pr-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+.pr-btn-ghost {
+  background: transparent;
+  color: var(--pr-text);
+  border-color: var(--pr-line-strong);
+}
+
+.pr-btn-ghost:hover {
+  border-color: var(--pr-text);
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* ---------- Conversion rail ----------
+   The page exists to produce quote requests, so each proof block ends with
+   the ask rather than saving it all for the footer. One shared component,
+   repeated after the comparison, the alternatives and the FAQs. */
+
+.pr-rail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 40px;
+  padding: 26px 30px;
+  border: 1px solid var(--pr-line);
+  border-radius: var(--pr-radius-lg);
+  background:
+    radial-gradient(30rem 14rem at 100% 0%, rgba(241, 102, 16, 0.09), transparent 62%),
+    var(--pr-surface);
+}
+
+.pr-rail-copy b {
+  display: block;
+  font-size: 1.06rem;
+  font-weight: 600;
+  letter-spacing: -0.016em;
+}
+
+.pr-rail-copy span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--pr-muted);
+}
+
+.pr-rail-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.pr-rail-actions .pr-btn {
+  padding: 13px 24px;
+  font-size: 0.89rem;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.pr-hero {
+  position: relative;
+  padding: 104px 0 76px;
+  text-align: center;
+  background:
+    radial-gradient(46rem 30rem at 50% -14%, rgba(241, 102, 16, 0.09), transparent 62%),
+    var(--pr-canvas);
+}
+
+.pr-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 18px;
+  margin-bottom: 28px;
+  border: 1px solid var(--pr-line);
+  border-radius: var(--pr-pill);
+  background: var(--pr-surface);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--pr-muted);
+}
+
+.pr-hero h1 {
+  margin: 0 auto 24px;
+  max-width: 20ch;
+  font-size: clamp(1.95rem, 5vw, 3.9rem);
+  font-weight: 500;
+  letter-spacing: -0.024em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.pr-hero-sub {
+  margin: 0 auto 36px;
+  max-width: 38rem;
+  font-size: 1.1rem;
+  line-height: 1.68;
+  color: var(--pr-muted);
+}
+
+.pr-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  justify-content: center;
+  margin-bottom: 46px;
+}
+
+.pr-hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-hero-trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--pr-muted);
+}
+
+.pr-hero-trust svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--pr-accent);
+}
+
+/* ============================================================
+   LOGOS
+   ============================================================ */
+
+.pr-logos {
+  padding: 8px 0 56px;
+}
+
+.pr-logos-label {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pr-dim);
+}
+
+.pr-logos-track {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 22px 52px;
+}
+
+/* Client marks render in their own brand colours — the row is social proof,
+   and washing it to grey made it read as decoration rather than evidence. */
+.pr-logo-tile img {
+  /* 32/132 is the largest that still fits all nine marks on one row at
+     1200px — any bigger and the last logo wraps to a lonely second line. */
+  height: 32px;
+  width: auto;
+  max-width: 132px;
+  object-fit: contain;
+  transition: transform 0.3s var(--pr-ease);
+}
+
+.pr-logo-tile:hover img {
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   PLANS
+   ============================================================ */
+
+.pr-plans {
+  padding: 0 0 var(--pr-pad);
+}
+
+.pr-plans-grid {
+  /* Reflows 3 -> 2 -> 1 on its own; a fixed count plus a breakpoint was
+     collapsing to a single 520px column while a tablet still had room. */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(288px, 100%), 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* ---------- Plan switcher (mobile only) ----------
+   Stacked, the three cards ran 2,400px before the comparison table even
+   started — nobody scrolls three full plans to pick one. Below 760px this
+   segmented control swaps a single card in place instead.
+
+   Hidden here and revealed only inside the mobile media query once `is-ready`
+   is on the page, so a JS failure falls back to the three stacked cards
+   rather than showing one card and no way to reach the others. */
+
+.pr-plan-switch {
+  display: none;
+  margin-bottom: 20px;
+  padding: 4px;
+  border: 1px solid var(--pr-line);
+  border-radius: var(--pr-pill);
+  background: var(--pr-surface);
+}
+
+.pr-plan-switch-btn {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 11px 6px;
+  border: none;
+  border-radius: var(--pr-pill);
+  background: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--pr-muted);
+  cursor: pointer;
+  transition:
+    background-color 0.28s var(--pr-ease),
+    color 0.28s var(--pr-ease);
+}
+
+.pr-plan-switch-btn.is-active {
+  background: var(--pr-accent);
+  color: #fff;
+}
+
+/* Marks the recommended tab before it is opened — the "Most picked" badge
+   inside the card only pays off after you have already tapped it. */
+.pr-plan-switch-btn[data-pr-popular]::after {
+  content: '';
+  position: absolute;
+  top: 7px;
+  right: 12px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--pr-accent);
+}
+
+.pr-plan-switch-btn.is-active[data-pr-popular]::after {
+  background: #fff;
+}
+
+.pr-plan {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 34px 30px 30px;
+  border: 1px solid var(--pr-line);
+  border-radius: var(--pr-radius-lg);
+  background: var(--pr-surface);
+}
+
+/* The recommended plan is the one visual lift on the row — a thicker accent
+   edge rather than a colour fill, so the card copy stays on white. */
+.pr-plan-featured {
+  border-color: var(--pr-accent-line);
+  box-shadow: 0 24px 56px -34px rgba(60, 45, 25, 0.32);
+}
+
+.pr-plan-tag {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  margin-bottom: 18px;
+  border-radius: var(--pr-pill);
+  background: var(--pr-paper-sunk);
+  border: 1px solid var(--pr-line);
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pr-dim);
+}
+
+.pr-plan-featured .pr-plan-tag {
+  background: var(--pr-accent-soft);
+  border-color: var(--pr-accent-line);
+  color: var(--pr-accent-ink);
+}
+
+.pr-plan h3 {
+  margin: 0 0 8px;
+  font-size: 1.32rem;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+}
+
+.pr-plan-for {
+  margin: 0 0 20px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--pr-muted);
+}
+
+/* Volume is the real price axis on a quote-based page, so it takes the slot
+   a number would otherwise occupy. */
+.pr-plan-volume {
+  padding: 16px 18px;
+  margin-bottom: 22px;
+  border-radius: var(--pr-radius);
+  background: var(--pr-paper-sunk);
+  border: 1px solid var(--pr-paper-line);
+}
+
+.pr-plan-volume b {
+  display: block;
+  font-size: 1.32rem;
+  font-weight: 500;
+  letter-spacing: -0.018em;
+}
+
+.pr-plan-volume span {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pr-dim);
+}
+
+.pr-plan-cadence {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--pr-accent-ink);
+}
+
+.pr-plan-cadence svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.pr-plan-list {
+  list-style: none;
+  margin: 0 0 26px;
+  padding: 0;
+  display: grid;
+  gap: 11px;
+}
+
+.pr-plan-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.89rem;
+  line-height: 1.5;
+  color: var(--pr-muted);
+}
+
+.pr-plan-list svg {
+  width: 15px;
+  height: 15px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  color: var(--pr-accent);
+}
+
+.pr-plan-inherit {
+  margin: 0 0 14px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pr-dim);
+}
+
+.pr-plan-actions {
+  margin-top: auto;
+  display: grid;
+  gap: 10px;
+}
+
+.pr-plan-actions .pr-btn {
+  width: 100%;
+}
+
+.pr-plan-note {
+  margin: 14px 0 0;
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--pr-dim);
+}
+
+/* ============================================================
+   COMPARE
+   ============================================================ */
+
+.pr-compare {
+  padding: var(--pr-pad) 0;
+  border-top: 1px solid var(--pr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--pr-seam) 22%, var(--pr-seam) 78%, transparent) 1;
+}
+
+/* The matrix stays a real table at every width. Below 940px it scrolls
+   sideways under a pinned feature column instead of being transposed into
+   three stacked cards — that fallback repeated "Included / Not included"
+   42 times and cost 3,000px of scroll to say what a tick says. */
+
+.pr-compare-scroll {
+  position: relative;
+  border: 1px solid var(--pr-line);
+  border-radius: var(--pr-radius-lg);
+  background: var(--pr-surface);
+  overflow: hidden;
+}
+
+.pr-compare-scroll-inner {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fades the cut-off column so the sideways scroll is discoverable. JS drops
+   `has-more` at the end of the track; without JS the hint simply never shows. */
+.pr-compare-scroll::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.94));
+  transition: opacity 0.25s var(--pr-ease);
+}
+
+.pr-compare-scroll.has-more::after {
+  opacity: 1;
+}
+
+.pr-compare-table {
+  width: 100%;
+  /* `separate` rather than `collapse`: collapsed borders are painted by the
+     table, not the cell, so they vanish under a position:sticky column. */
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--pr-surface);
+}
+
+.pr-compare-table th,
+.pr-compare-table td {
+  padding: 15px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--pr-line);
+  font-size: 0.88rem;
+  vertical-align: middle;
+}
+
+/* Feature column pins so a tick is never orphaned from its row label. */
+.pr-compare-table th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--pr-surface);
+  border-right: 1px solid var(--pr-line);
+}
+
+.pr-compare-table thead th:first-child {
+  background: var(--pr-paper-sunk);
+}
+
+.pr-compare-table thead th {
+  background: var(--pr-paper-sunk);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pr-dim);
+}
+
+.pr-compare-table thead th b {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--pr-text);
+}
+
+.pr-compare-table thead th.pr-col-featured b {
+  color: var(--pr-accent-ink);
+}
+
+.pr-compare-table tbody tr:last-child th,
+.pr-compare-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.pr-compare-table tbody th {
+  font-weight: 600;
+  color: var(--pr-text);
+  width: 30%;
+}
+
+.pr-compare-table td {
+  color: var(--pr-muted);
+}
+
+.pr-col-featured {
+  background: var(--pr-accent-soft);
+}
+
+.pr-tick {
+  width: 16px;
+  height: 16px;
+  color: var(--pr-accent);
+}
+
+.pr-none {
+  color: var(--pr-dim);
+}
+
+/* Shown only where the table actually overflows. */
+.pr-compare-hint {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pr-dim);
+}
+
+.pr-compare-hint svg {
+  width: 14px;
+  height: 14px;
+  color: var(--pr-accent);
+  animation: pr-nudge 2.4s var(--pr-ease) infinite;
+}
+
+/* ============================================================
+   ASSURANCE
+   ============================================================ */
+
+.pr-assurance {
+  padding: 60px 0;
+  border-top: 1px solid var(--pr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--pr-seam) 22%, var(--pr-seam) 78%, transparent) 1;
+}
+
+.pr-assurance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+  /* 1px gap over a line-coloured backdrop draws the bento hairlines at
+     whatever column count auto-fit lands on — no nth-child rules to break. */
+  gap: 1px;
+  background: var(--pr-line);
+  border: 1px solid var(--pr-line);
+  border-radius: var(--pr-radius-lg);
+  overflow: hidden;
+}
+
+.pr-assurance-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 24px 22px;
+  background: var(--pr-surface);
+}
+
+.pr-assurance-item svg {
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  color: var(--pr-accent);
+}
+
+.pr-assurance-item b {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.pr-assurance-item span {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--pr-muted);
+}
+
+/* ============================================================
+   INCLUDED
+   ============================================================ */
+
+.pr-included {
+  padding: var(--pr-pad) 0;
+  border-top: 1px solid var(--pr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--pr-seam) 22%, var(--pr-seam) 78%, transparent) 1;
+  scroll-margin-top: 90px;
+}
+
+/* One hairline grid rather than two floating cards: the claim is that these
+   two halves are a single operation, so they share a border. */
+.pr-split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  background: var(--pr-surface);
+  border: 1px solid var(--pr-line);
+  border-radius: var(--pr-radius-lg);
+  overflow: hidden;
+}
+
+.pr-split-col {
+  padding: 30px 30px 32px;
+}
+
+.pr-split-col + .pr-split-col {
+  border-left: 1px solid var(--pr-line);
+}
+
+/* The human half is the reassurance, so it gets the accent tint. */
+.pr-split-human {
+  background: linear-gradient(180deg, var(--pr-accent-soft), transparent 200px);
+}
+
+.pr-split-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--pr-line);
+}
+
+.pr-split-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--pr-paper-sunk);
+  border: 1px solid var(--pr-line);
+  color: var(--pr-accent);
+}
+
+.pr-split-human .pr-split-icon {
+  background: var(--pr-surface);
+  border-color: var(--pr-accent-line);
+}
+
+.pr-split-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.pr-split-head b {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+
+.pr-split-head span span {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.82rem;
+  color: var(--pr-dim);
+}
+
+.pr-split-list {
+  display: grid;
+  gap: 13px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-split-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--pr-muted);
+}
+
+.pr-split-list svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  color: var(--pr-accent);
+}
+
+/* The one line that has to survive a skim of this whole section. */
+.pr-split-seal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 640px;
+  margin: 22px auto 0;
+  padding: 15px 22px;
+  text-align: center;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--pr-muted);
+  background: var(--pr-accent-soft);
+  border: 1px solid var(--pr-accent-line);
+  border-radius: var(--pr-pill);
+}
+
+.pr-split-seal b {
+  color: var(--pr-text);
+  font-weight: 600;
+}
+
+.pr-split-seal svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  color: var(--pr-accent-ink);
+}
+
+.pr-trust-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  margin-top: 44px;
+  background: var(--pr-line);
+  border: 1px solid var(--pr-line);
+  border-radius: var(--pr-radius);
+  overflow: hidden;
+}
+
+.pr-trust-item {
+  padding: 24px 22px 26px;
+  background: var(--pr-canvas);
+}
+
+.pr-trust-item svg {
+  width: 19px;
+  height: 19px;
+  color: var(--pr-accent);
+}
+
+.pr-trust-item b {
+  display: block;
+  margin: 13px 0 7px;
+  font-size: 0.94rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.pr-trust-item p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.62;
+  color: var(--pr-muted);
+}
+
+/* ============================================================
+   ALTERNATIVES
+   ============================================================ */
+
+.pr-alt {
+  padding: var(--pr-pad) 0;
+  border-top: 1px solid var(--pr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--pr-seam) 22%, var(--pr-seam) 78%, transparent) 1;
+  background:
+    radial-gradient(50rem 28rem at 12% -10%, rgba(241, 102, 16, 0.06), transparent 60%),
+    var(--pr-canvas);
+}
+
+.pr-alt-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--pr-line);
+  border-radius: var(--pr-radius-lg);
+  overflow: hidden;
+  background: var(--pr-surface);
+}
+
+.pr-alt-table th,
+.pr-alt-table td {
+  padding: 16px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--pr-line);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  vertical-align: top;
+}
+
+.pr-alt-table thead th {
+  background: var(--pr-paper-sunk);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pr-dim);
+}
+
+.pr-alt-table thead th.pr-col-featured {
+  color: var(--pr-accent-ink);
+}
+
+.pr-alt-table tbody th {
+  width: 22%;
+  font-weight: 600;
+  color: var(--pr-text);
+}
+
+.pr-alt-table td {
+  color: var(--pr-muted);
+}
+
+.pr-alt-table tbody tr:last-child th,
+.pr-alt-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.pr-alt-note {
+  margin: 16px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--pr-dim);
+}
+
+.pr-alt-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 52px;
+  padding-top: 40px;
+  border-top: 1px solid var(--pr-line);
+}
+
+.pr-alt-stat dt {
+  font-size: 1.9rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.pr-alt-stat dd {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: var(--pr-dim);
+}
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+
+.pr-process {
+  padding: var(--pr-pad) 0;
+  border-top: 1px solid var(--pr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--pr-seam) 22%, var(--pr-seam) 78%, transparent) 1;
+}
+
+.pr-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr));
+  gap: 1px;
+  background: var(--pr-line);
+  border: 1px solid var(--pr-line);
+  border-radius: var(--pr-radius-lg);
+  overflow: hidden;
+}
+
+.pr-step {
+  padding: 34px 30px;
+  background: var(--pr-surface);
+}
+
+.pr-step-when {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 4px 11px;
+  border-radius: var(--pr-pill);
+  background: var(--pr-accent-soft);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pr-accent-ink);
+}
+
+.pr-step h3 {
+  margin: 0 0 10px;
+  font-size: 1.12rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.pr-step p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--pr-muted);
+}
+
+/* ============================================================
+   VOICES
+   ============================================================ */
+
+/* A scroll-snap rail rather than a two-up bento. There are eight reviews to
+   show and a grid of eight is a wall; a rail keeps the section one screen tall
+   at any width and reads as "there are more of these", which two cards side by
+   side never does.
+
+   Deliberately not an auto-rotating carousel: it moves only when the reader
+   moves it. Swipe, trackpad, arrow buttons and keyboard all drive the same
+   native scroll, so there is no JS-only path to the content. */
+
+.pr-voices {
+  padding: var(--pr-pad) 0;
+  border-top: 1px solid var(--pr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--pr-seam) 22%, var(--pr-seam) 78%, transparent) 1;
+  overflow: hidden;
+}
+
+.pr-voices-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 26px;
+}
+
+.pr-voices-head h2 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+/* ---------- Rating summary ---------- */
+
+.pr-voices-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-bottom: 30px;
+  font-size: 0.88rem;
+  color: var(--pr-muted);
+}
+
+/* Glyph stars are text, not an icon, so they take the AA-safe orange rather
+   than the brand fill — at 14px the bright accent lands at 3.2:1. */
+.pr-voices-stars {
+  font-size: 0.95rem;
+  letter-spacing: 0.16em;
+  color: var(--pr-accent-ink);
+}
+
+.pr-voices-meta b {
+  font-weight: 600;
+  color: var(--pr-text);
+}
+
+.pr-voices-sep {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--pr-line-strong);
+}
+
+/* ---------- Arrows ---------- */
+
+.pr-voices-nav {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.pr-voices-arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--pr-line-strong);
+  border-radius: 50%;
+  background: var(--pr-surface);
+  color: var(--pr-text);
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--pr-ease),
+    border-color 0.25s var(--pr-ease),
+    opacity 0.25s var(--pr-ease);
+}
+
+.pr-voices-arrow svg {
+  width: 17px;
+  height: 17px;
+}
+
+.pr-voices-arrow:hover:not(:disabled) {
+  border-color: var(--pr-accent);
+  background: var(--pr-accent-soft);
+  color: var(--pr-accent-ink);
+}
+
+.pr-voices-arrow:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+
+/* ---------- Rail ---------- */
+
+.pr-voices-rail {
+  display: flex;
+  gap: 16px;
+  /* Cancels the container gutter so cards run to the screen edge, then pads it
+     back so the first card still lines up with the heading above it. */
+  margin: 0 calc(var(--pr-gutter) * -1);
+  padding: 4px var(--pr-gutter) 4px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--pr-gutter);
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  /* The progress bar below already reports position; a raw scrollbar under
+     the cards just adds noise. Keyboard and touch scrolling are unaffected. */
+  scrollbar-width: none;
+}
+
+.pr-voices-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.pr-voices-rail:focus-visible {
+  outline: 2px solid var(--pr-accent);
+  outline-offset: 4px;
+  border-radius: var(--pr-radius);
+}
+
+.pr-voice {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  width: 352px;
+  padding: 30px 28px;
+  margin: 0;
+  border: 1px solid var(--pr-line);
+  border-radius: var(--pr-radius-lg);
+  background: var(--pr-surface);
+  scroll-snap-align: start;
+}
+
+.pr-voice-stars {
+  margin-bottom: 16px;
+  font-size: 0.88rem;
+  letter-spacing: 0.18em;
+  color: var(--pr-accent-ink);
+}
+
+.pr-voice blockquote {
+  margin: 0 0 24px;
+  font-size: 0.99rem;
+  line-height: 1.68;
+  color: var(--pr-text);
+}
+
+.pr-voice figcaption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--pr-seam);
+}
+
+/* Named rather than styled as `figcaption span`, which is what broke this
+   before: the descendant selector outranked `.pr-voice-avatar` and reset the
+   circle to `display: block`, dropping the initials to its top-left corner. */
+.pr-voice-avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--pr-accent-soft);
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--pr-accent-ink);
+}
+
+.pr-voice-who {
+  min-width: 0;
+}
+
+.pr-voice-name {
+  display: block;
+  font-size: 0.89rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.pr-voice-role {
+  display: block;
+  margin-top: 1px;
+  font-size: 0.79rem;
+  line-height: 1.4;
+  color: var(--pr-dim);
+}
+
+/* ---------- Progress ---------- */
+
+.pr-voices-progress {
+  position: relative;
+  height: 3px;
+  margin-top: 22px;
+  border-radius: var(--pr-pill);
+  background: var(--pr-line);
+  overflow: hidden;
+}
+
+.pr-voices-progress i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--pr-progress-w, 30%);
+  border-radius: inherit;
+  background: var(--pr-accent);
+  transform: translateX(var(--pr-progress-x, 0));
+  transition: transform 0.18s var(--pr-ease-out);
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+
+.pr-faq {
+  padding: var(--pr-pad) 0;
+  border-top: 1px solid var(--pr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--pr-seam) 22%, var(--pr-seam) 78%, transparent) 1;
+  scroll-margin-top: 90px;
+}
+
+/* Split rail: the heading holds still while the answers scroll past it, so
+   there is never a screen of accordion rows with no context above them. */
+.pr-faq-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+}
+
+.pr-faq-aside {
+  position: sticky;
+  top: 96px;
+}
+
+.pr-faq-aside h2 {
+  margin: 0 0 18px;
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.12;
+}
+
+.pr-faq-aside-sub {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: var(--pr-muted);
+}
+
+.pr-faq-facts {
+  margin: 30px 0 0;
+  border-top: 1px solid var(--pr-line);
+}
+
+.pr-faq-facts > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--pr-line);
+}
+
+.pr-faq-facts dt {
+  font-size: 0.82rem;
+  color: var(--pr-dim);
+}
+
+.pr-faq-facts dd {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--pr-text);
+}
+
+.pr-faq-group + .pr-faq-group {
+  margin-top: 38px;
+}
+
+.pr-faq-group-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  padding-left: 2px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pr-dim);
+}
+
+.pr-faq-group-label span {
+  font-variant-numeric: tabular-nums;
+  color: var(--pr-accent);
+}
+
+/* Cards rather than a ruled list: at ten questions the rules ran together,
+   and a closed card reads as a thing you can press. */
+.pr-faq-item {
+  border: 1px solid var(--pr-line);
+  border-radius: var(--pr-radius);
+  background: rgba(255, 255, 255, 0.45);
+  transition:
+    background 0.3s var(--pr-ease),
+    border-color 0.3s var(--pr-ease),
+    box-shadow 0.3s var(--pr-ease);
+}
+
+.pr-faq-item + .pr-faq-item {
+  margin-top: 8px;
+}
+
+.pr-faq-item:hover {
+  background: var(--pr-surface);
+  border-color: var(--pr-line-strong);
+}
+
+.pr-faq-item.is-open {
+  background: var(--pr-surface);
+  border-color: var(--pr-accent-line);
+  box-shadow: 0 10px 30px -22px rgba(25, 25, 25, 0.4);
+}
+
+.pr-faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 19px 22px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.45;
+  color: var(--pr-text);
+  cursor: pointer;
+  transition: color 0.3s var(--pr-ease);
+}
+
+.pr-faq-question:hover {
+  color: var(--pr-accent-ink);
+}
+
+/* One plus glyph, rotated 45deg into a close icon — no second asset, and the
+   rotation reads as the row opening rather than a state swap. */
+.pr-faq-toggle {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--pr-line);
+  background: var(--pr-paper-sunk);
+  color: var(--pr-accent-ink);
+  transition:
+    transform 0.35s var(--pr-ease),
+    background 0.3s var(--pr-ease),
+    border-color 0.3s var(--pr-ease),
+    color 0.3s var(--pr-ease);
+}
+
+.pr-faq-toggle svg {
+  width: 14px;
+  height: 14px;
+}
+
+.pr-faq-item.is-open .pr-faq-toggle {
+  transform: rotate(45deg);
+  background: var(--pr-accent);
+  border-color: var(--pr-accent);
+  color: #ffffff;
+}
+
+/* Grid-rows animation keeps the accordion smooth without a fixed max-height.
+   The collapsed state is gated behind `is-ready` — the class the script adds —
+   so if the script never runs every answer renders open instead of being
+   permanently unreachable behind a button nothing is listening to. */
+.pr-faq-answer {
+  display: grid;
+  transition: grid-template-rows 0.35s var(--pr-ease);
+}
+
+.pr-page.is-ready .pr-faq-answer {
+  grid-template-rows: 0fr;
+}
+
+.pr-faq-item.is-open .pr-faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.pr-faq-answer > div {
+  overflow: hidden;
+}
+
+.pr-faq-answer p {
+  margin: 0;
+  /* Right padding clears the toggle column so the answer sits under the
+     question text, not under the button. */
+  padding: 0 62px 22px 22px;
+  max-width: 68ch;
+  font-size: 0.94rem;
+  line-height: 1.75;
+  color: var(--pr-muted);
+}
+
+.pr-faq-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 34px;
+  padding: 24px 26px;
+  background: linear-gradient(120deg, var(--pr-accent-soft), transparent 60%), var(--pr-surface);
+  border: 1px solid var(--pr-accent-line);
+  border-radius: var(--pr-radius-lg);
+}
+
+.pr-faq-cta-copy b {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+
+.pr-faq-cta-copy span {
+  display: block;
+  max-width: 46ch;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--pr-muted);
+}
+
+.pr-faq-cta-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+
+.pr-cta {
+  padding: var(--pr-pad) 0;
+  border-top: 1px solid var(--pr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--pr-seam) 22%, var(--pr-seam) 78%, transparent) 1;
+  background:
+    radial-gradient(46rem 26rem at 88% 0%, rgba(241, 102, 16, 0.09), transparent 60%),
+    var(--pr-canvas);
+  scroll-margin-top: 80px;
+}
+
+.pr-cta-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+  gap: 72px;
+  align-items: center;
+}
+
+.pr-cta-copy h2 {
+  margin: 0 0 20px;
+  font-size: clamp(2.2rem, 4.4vw, 3.3rem);
+  font-weight: 500;
+  letter-spacing: -0.024em;
+  line-height: 1.1;
+}
+
+.pr-cta-copy > p {
+  margin: 0 0 30px;
+  max-width: 30rem;
+  font-size: 1.03rem;
+  line-height: 1.7;
+  color: var(--pr-muted);
+}
+
+.pr-cta-points {
+  list-style: none;
+  margin: 0 0 34px;
+  padding: 0;
+  display: grid;
+  gap: 13px;
+}
+
+.pr-cta-points li {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.pr-cta-points svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--pr-accent);
+}
+
+.pr-cta-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--pr-accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--pr-accent-line);
+  padding-bottom: 3px;
+  transition: color 0.3s var(--pr-ease), border-color 0.3s var(--pr-ease);
+}
+
+.pr-cta-whatsapp:hover {
+  color: var(--pr-text);
+  border-color: var(--pr-text);
+}
+
+.pr-cta-whatsapp svg {
+  width: 15px;
+  height: 15px;
+}
+
+.pr-form-card {
+  padding: 38px 36px;
+  border: 1px solid var(--pr-paper-line);
+  border-radius: var(--pr-radius-lg);
+  background: var(--pr-paper);
+  color: var(--pr-paper-ink);
+  box-shadow: 0 24px 56px -32px rgba(60, 45, 25, 0.28);
+}
+
+.pr-form-card h3 {
+  margin: 0 0 6px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+}
+
+.pr-form-card > p {
+  margin: 0 0 26px;
+  font-size: 0.87rem;
+  color: var(--pr-paper-muted);
+}
+
+.pr-form {
+  display: grid;
+  gap: 15px;
+}
+
+.pr-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.pr-form-group {
+  display: grid;
+  gap: 7px;
+}
+
+.pr-form-group label {
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pr-paper-muted);
+}
+
+.pr-form-group input,
+.pr-form-group select {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid var(--pr-paper-line);
+  border-radius: 10px;
+  background: var(--pr-paper-sunk);
+  font-family: inherit;
+  font-size: 0.93rem;
+  color: var(--pr-paper-ink);
+  transition: border-color 0.3s var(--pr-ease), box-shadow 0.3s var(--pr-ease);
+}
+
+.pr-form-group input::placeholder {
+  color: rgba(0, 0, 0, 0.38);
+}
+
+.pr-form-group input:focus,
+.pr-form-group select:focus {
+  outline: none;
+  border-color: var(--pr-accent);
+  box-shadow: 0 0 0 3px rgba(241, 102, 16, 0.18);
+}
+
+.pr-form-submit {
+  width: 100%;
+  margin-top: 6px;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.pr-form-privacy {
+  margin: 16px 0 0;
+  font-size: 0.72rem;
+  text-align: center;
+  color: var(--pr-paper-muted);
+}
+
+/* ---------- Sticky quote bar (mobile only) ----------
+   The quote form sits at the end of a long page; on a phone that is a lot of
+   scroll between wanting to convert and being able to. The bar rides along
+   from just past the hero and steps aside once the form is actually in view.
+
+   Revealed by JS only, so it can never strand a user behind a bar that has no
+   way to dismiss it if the script fails. */
+
+.pr-sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  display: none;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--pr-line);
+  background: rgba(250, 249, 245, 0.94);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  transform: translateY(120%);
+  transition: transform 0.38s var(--pr-ease-out);
+}
+
+.pr-sticky-cta.is-visible {
+  transform: none;
+}
+
+.pr-sticky-cta-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.pr-sticky-cta-copy {
+  flex: 1 1 auto;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.pr-sticky-cta-copy b {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+
+.pr-sticky-cta-copy span {
+  display: block;
+  font-size: 0.71rem;
+  color: var(--pr-dim);
+}
+
+.pr-sticky-cta-wa {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border: 1px solid var(--pr-line-strong);
+  border-radius: var(--pr-pill);
+  background: var(--pr-surface);
+  color: var(--pr-accent-ink);
+}
+
+.pr-sticky-cta-wa svg {
+  width: 19px;
+  height: 19px;
+}
+
+.pr-sticky-cta .pr-btn {
+  flex-shrink: 0;
+  padding: 14px 22px;
+  font-size: 0.88rem;
+}
+
+/* ============================================================
+   ADD-ONS
+   ============================================================ */
+
+.pr-addons {
+  padding: var(--pr-pad) 0;
+  border-top: 1px solid var(--pr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--pr-seam) 22%, var(--pr-seam) 78%, transparent) 1;
+}
+
+/* The other bento grids paint their hairlines by showing a line-coloured
+   backdrop through 1px gaps. That can't work here: 13 cards never fill the
+   last row at any column count, and the leftover cells rendered as a large
+   block of bare backdrop. Each card draws its own 1px ring instead — adjacent
+   rings coincide in the gap, so the seams look identical, and empty cells
+   simply stay the surface colour. */
+.pr-addons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(248px, 100%), 1fr));
+  gap: 1px;
+  padding: 1px;
+  background: var(--pr-surface);
+  border-radius: var(--pr-radius-lg);
+  overflow: hidden;
+}
+
+/* `min-width: 0` overrides the grid item default of `auto`, which lets a
+   card's min-content push its track wider than the container. The full-width
+   AML card was the culprit: spanning both columns, it split its min-content
+   across them and forced the whole grid ~36px past the viewport at 320px. */
+.pr-addon {
+  min-width: 0;
+  box-shadow: 0 0 0 1px var(--pr-line);
+}
+
+.pr-addon-name span {
+  overflow-wrap: break-word;
+}
+
+.pr-addon {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 20px;
+  background: var(--pr-surface);
+  transition: background-color 0.3s var(--pr-ease);
+}
+
+.pr-addon:hover {
+  background: var(--pr-paper-sunk);
+}
+
+.pr-addon-name {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 0 0 8px;
+  font-size: 0.96rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.35;
+}
+
+.pr-addon-name svg {
+  width: 15px;
+  height: 15px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  color: var(--pr-accent);
+}
+
+/* Scoped to the description, not `.pr-addon p` — that also matched
+   `.pr-addon-name`, which is itself a paragraph, and outranked it on
+   specificity, so every add-on title rendered at the muted body size with no
+   hierarchy at all.
+
+   Note: never write a tag name in angle brackets in these comments. Webflow's
+   embed sanitiser parses the block as markup, so a literal tag inside a CSS
+   comment closes the style element early and silently drops every rule below
+   it. The build now fails on this rather than shipping it. */
+.pr-addon-desc {
+  margin: 0;
+  padding-left: 24px;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--pr-muted);
+}
+
+/* ---------- Per-service actions ----------
+   Every add-on is bought separately, so every card carries its own two exits:
+   a WhatsApp thread that already names the service, and that service's own
+   page. Pinned to the bottom so the row lines up across a mixed-height grid. */
+
+.pr-addon-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding: 16px 0 0 24px;
+}
+
+.pr-addon-wa,
+.pr-addon-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 36px;
+  border-radius: var(--pr-pill);
+  font-size: 0.79rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  transition:
+    background-color 0.25s var(--pr-ease),
+    border-color 0.25s var(--pr-ease),
+    color 0.25s var(--pr-ease);
+}
+
+.pr-addon-wa {
+  padding: 0 14px;
+  border: 1px solid var(--pr-line-strong);
+  background: var(--pr-surface);
+  color: var(--pr-accent-ink);
+}
+
+.pr-addon-wa:hover {
+  border-color: var(--pr-accent);
+  background: var(--pr-accent-soft);
+}
+
+.pr-addon-wa svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.pr-addon-more {
+  padding: 0 12px;
+  color: var(--pr-muted);
+}
+
+.pr-addon-more:hover {
+  background: var(--pr-paper-sunk);
+  color: var(--pr-text);
+}
+
+.pr-addon-more svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  transition: transform 0.25s var(--pr-ease);
+}
+
+.pr-addon-more:hover svg {
+  transform: translateX(2px);
+}
+
+/* Regulated activities carry a real deadline, so AML gets the one flagged
+   card in the grid rather than being lost in an alphabetical list. */
+.pr-addon-flagged {
+  background: var(--pr-accent-soft);
+}
+
+.pr-addon-flagged .pr-addon-wa {
+  border-color: var(--pr-accent);
+  background: var(--pr-surface);
+}
+
+.pr-addon-flagged:hover {
+  background: rgba(241, 102, 16, 0.14);
+}
+
+.pr-addon-flag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: var(--pr-pill);
+  background: var(--pr-accent-band);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #fff;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.pr-addons-note {
+  margin: 22px 0 0;
+  font-size: 0.87rem;
+  line-height: 1.7;
+  color: var(--pr-muted);
+}
+
+.pr-addons-note a {
+  color: var(--pr-accent-ink);
+  font-weight: 600;
+  border-bottom: 1px solid var(--pr-accent-line);
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes pr-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pr-nudge {
+  0%, 60%, 100% { transform: translateX(0); }
+  30% { transform: translateX(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .pr-page *,
+  .pr-page *::before,
+  .pr-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .pr-page.is-ready [data-reveal],
+  .pr-page.is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Most grids reflow on their own via auto-fit, so these breakpoints handle
+   only what intrinsic sizing can't: the wide data tables, the mobile plan
+   switcher, and the density of a page that has to convert on a phone. */
+
+@media (max-width: 1080px) {
+
+  .pr-page {
+    --pr-pad: 88px;
+    --pr-gutter: 24px;
+  }
+
+  .pr-hero {
+    padding: 80px 0 62px;
+  }
+
+  .pr-cta-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .pr-form-card {
+    max-width: 560px;
+  }
+
+  .pr-alt-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 28px;
+  }
+
+}
+
+
+/* Both wide tables change behaviour here rather than at 680px. A 4-column
+   matrix squeezed into 700px leaves prose cells under 170px wide —
+   technically not overflowing, but nobody can read it. */
+@media (max-width: 940px) {
+
+  /* Below this the sticky rail leaves the answers under ~330px of column, so
+     the heading unpins and becomes a normal section head above the list. */
+  .pr-faq-shell {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .pr-faq-aside {
+    position: static;
+    max-width: 640px;
+  }
+
+  /* Two panels side by side would each be under 320px here, which breaks the
+     duty lines onto three rows apiece. */
+  .pr-split {
+    grid-template-columns: 1fr;
+  }
+
+  .pr-split-col + .pr-split-col {
+    border-left: none;
+    border-top: 1px solid var(--pr-line);
+  }
+
+  .pr-split-human {
+    background: linear-gradient(180deg, var(--pr-accent-soft), transparent 160px);
+  }
+
+  /* Comparison keeps its columns and scrolls sideways under a pinned
+     feature column, so plans stay genuinely side by side on a phone. */
+  .pr-compare-table {
+    min-width: 596px;
+  }
+
+  .pr-compare-table th,
+  .pr-compare-table td {
+    padding: 12px 14px;
+    font-size: 0.82rem;
+  }
+
+  .pr-compare-table th:first-child {
+    width: 146px;
+    min-width: 146px;
+  }
+
+  .pr-compare-table thead th b {
+    font-size: 0.88rem;
+  }
+
+  .pr-compare-hint {
+    display: flex;
+  }
+
+  /* The alternatives matrix is prose, not ticks — it can't scroll sideways
+     and stay readable, so each criterion becomes its own card with the
+     Finanshels column visually winning. */
+  .pr-alt-table,
+  .pr-alt-table thead,
+  .pr-alt-table tbody,
+  .pr-alt-table tr,
+  .pr-alt-table th,
+  .pr-alt-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .pr-alt-table {
+    border: none;
+    border-radius: 0;
+    background: none;
+  }
+
+  .pr-alt-table thead {
+    display: none;
+  }
+
+  .pr-alt-table tbody {
+    display: grid;
+    gap: 14px;
+  }
+
+  .pr-alt-table tbody tr {
+    border: 1px solid var(--pr-line);
+    border-radius: var(--pr-radius);
+    background: var(--pr-surface);
+    overflow: hidden;
+  }
+
+  .pr-alt-table tbody th {
+    width: 100%;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--pr-line);
+    background: var(--pr-paper-sunk);
+    font-size: 0.92rem;
+  }
+
+  .pr-alt-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--pr-seam);
+    font-size: 0.85rem;
+  }
+
+  .pr-alt-table tbody tr td:last-child {
+    border-bottom: none;
+  }
+
+  /* Each cell names its own column now that the header row is gone. */
+  .pr-alt-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 3px;
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pr-dim);
+  }
+
+  /* Inset rather than a real border so the copy doesn't shift 2px right of
+     the two cells above it. */
+  .pr-alt-table td.pr-col-featured {
+    box-shadow: inset 3px 0 0 var(--pr-accent);
+    color: var(--pr-text);
+  }
+
+  .pr-alt-table td.pr-col-featured::before {
+    color: var(--pr-accent-ink);
+  }
+
+}
+
+
+@media (max-width: 760px) {
+
+  /* ---- Client logos tighten before they wrap to three lines ---- */
+  .pr-logos {
+    padding: 4px 0 44px;
+  }
+
+  .pr-logos-label {
+    margin-bottom: 22px;
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+  }
+
+  .pr-logos-track {
+    gap: 18px 32px;
+  }
+
+  .pr-logo-tile img {
+    height: 25px;
+    max-width: 104px;
+  }
+
+  /* ---- What you get ---- */
+  .pr-split-col {
+    padding: 24px 22px 26px;
+  }
+
+  .pr-split-seal {
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px 18px;
+    text-align: left;
+    border-radius: var(--pr-radius);
+  }
+
+  .pr-split-seal svg {
+    margin-top: 3px;
+  }
+
+  .pr-trust-row {
+    margin-top: 30px;
+  }
+
+  .pr-trust-item {
+    padding: 20px 18px 22px;
+  }
+
+  /* ---- FAQ closer stacks, both exits stay full width ---- */
+  .pr-faq-cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    padding: 22px 20px;
+  }
+
+  .pr-faq-cta-actions {
+    flex-direction: column;
+  }
+
+  .pr-faq-cta-actions .pr-btn {
+    width: 100%;
+  }
+
+  /* ---- Testimonials: swipe replaces the arrows ---- */
+  .pr-voices-nav {
+    display: none;
+  }
+
+  .pr-voices-head {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  /* Sized so the next card always peeks past the edge — that overhang is the
+     affordance once the arrow buttons are gone. */
+  .pr-voice {
+    width: min(80vw, 330px);
+  }
+
+  .pr-voices-meta {
+    margin-bottom: 22px;
+    font-size: 0.83rem;
+  }
+
+  /* The two claims wrap onto their own lines here, which leaves the separator
+     dangling at the end of the first one. */
+  .pr-voices-sep {
+    display: none;
+  }
+
+  /* ---- Plan switcher takes over from the stacked cards ---- */
+  .pr-page.is-ready .pr-plan-switch {
+    display: flex;
+  }
+
+  .pr-page.is-ready .pr-plan:not(.is-active) {
+    display: none;
+  }
+
+  /* The stagger would re-run on a card that was display:none when its
+     animation played. One card is visible at a time here anyway. */
+  .pr-page.is-ready .pr-plans-grid.is-in > * {
+    animation: none;
+    opacity: 1;
+  }
+
+  .pr-sticky-cta {
+    display: block;
+  }
+
+  /* Clears the sticky bar so it never covers the submit button or the
+     privacy line under the form. */
+  .pr-cta {
+    padding-bottom: calc(var(--pr-pad) + 78px);
+  }
+
+  /* ---- Add-ons: 13 stacked cards was 2,000px of scroll ---- */
+  .pr-addons-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pr-addon {
+    padding: 15px 14px;
+  }
+
+  .pr-addon-name {
+    margin: 0;
+    gap: 7px;
+    font-size: 0.84rem;
+    line-height: 1.4;
+  }
+
+  .pr-addon-name svg {
+    width: 13px;
+    height: 13px;
+    margin-top: 3px;
+  }
+
+  /* The card becomes a directory entry at this size: name plus its WhatsApp
+     exit. The detail comes back in the WhatsApp thread, which already names the
+     service, so repeating it here only buys scroll. The flagged one keeps its
+     copy — it is the only add-on with a real deadline attached. */
+  .pr-addon-desc {
+    display: none;
+  }
+
+  .pr-addon-flagged {
+    grid-column: 1 / -1;
+  }
+
+  .pr-addon-flagged .pr-addon-desc {
+    display: block;
+    margin-top: 6px;
+    padding-left: 20px;
+    font-size: 0.8rem;
+  }
+
+  .pr-addon-flag {
+    margin-left: 6px;
+  }
+
+  /* Two 36px targets plus a label do not fit a ~150px column, so WhatsApp
+     drops to an icon and the link sheds its button padding. */
+  .pr-addon-actions {
+    gap: 6px;
+    padding: 14px 0 0;
+  }
+
+  .pr-addon-wa {
+    width: 36px;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  .pr-addon-wa span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .pr-addon-more {
+    padding: 0;
+    gap: 5px;
+    font-size: 0.76rem;
+    color: var(--pr-accent-ink);
+  }
+
+  .pr-addon-flagged .pr-addon-actions {
+    padding-left: 20px;
+  }
+
+  /* ---- Conversion rail stacks ---- */
+  .pr-rail {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    margin-top: 28px;
+    padding: 22px 20px;
+  }
+
+  .pr-rail-actions {
+    flex-direction: column;
+  }
+
+  .pr-rail-actions .pr-btn {
+    width: 100%;
+  }
+
+}
+
+
+@media (max-width: 680px) {
+
+  .pr-page {
+    --pr-pad: 60px;
+    --pr-gutter: 18px;
+  }
+
+  .pr-hero {
+    padding: 48px 0 40px;
+  }
+
+  .pr-hero-badge {
+    margin-bottom: 20px;
+    padding: 7px 15px;
+    font-size: 0.73rem;
+  }
+
+  .pr-hero h1 {
+    margin-bottom: 18px;
+  }
+
+  .pr-hero-sub {
+    margin-bottom: 26px;
+    font-size: 1rem;
+  }
+
+  .pr-hero-actions {
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+
+  .pr-hero-actions .pr-btn {
+    width: 100%;
+  }
+
+  /* Wraps to two tight lines instead of three stacked ones. */
+  .pr-hero-trust {
+    gap: 9px 18px;
+  }
+
+  .pr-hero-trust li {
+    font-size: 0.8rem;
+    gap: 7px;
+  }
+
+  .pr-hero-trust svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .pr-section-head {
+    margin-bottom: 32px;
+  }
+
+  .pr-section-head p {
+    font-size: 0.96rem;
+  }
+
+  .pr-plan {
+    padding: 26px 22px 24px;
+  }
+
+  .pr-step,
+  .pr-voice {
+    padding: 24px 22px;
+  }
+
+  .pr-voice blockquote {
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+
+  .pr-assurance {
+    padding: 40px 0;
+  }
+
+  .pr-assurance-item {
+    padding: 18px 16px;
+  }
+
+  .pr-alt-stats {
+    gap: 22px 20px;
+    margin-top: 36px;
+    padding-top: 30px;
+  }
+
+  .pr-alt-stat dt {
+    font-size: 1.6rem;
+  }
+
+  /* Nine marks wrapping freely land 4/4/1 and the last one reads as a mistake.
+     A fixed 3-up grid is the only layout that stays balanced at every phone
+     width, since the marks have wildly different aspect ratios. */
+  .pr-logos-track {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px 14px;
+  }
+
+  .pr-logo-tile {
+    display: grid;
+    place-items: center;
+  }
+
+  .pr-logo-tile img {
+    height: 24px;
+    max-width: 100%;
+  }
+
+  .pr-faq-aside h2 {
+    margin-bottom: 14px;
+  }
+
+  .pr-faq-aside-sub {
+    font-size: 0.94rem;
+  }
+
+  .pr-faq-facts {
+    margin-top: 24px;
+  }
+
+  .pr-faq-group + .pr-faq-group {
+    margin-top: 28px;
+  }
+
+  .pr-faq-question {
+    gap: 14px;
+    padding: 16px 16px;
+    font-size: 0.94rem;
+  }
+
+  .pr-faq-toggle {
+    width: 25px;
+    height: 25px;
+  }
+
+  .pr-faq-toggle svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* The toggle no longer needs its own gutter once the card is this narrow —
+     reclaiming it buys the answer about six characters a line. */
+  .pr-faq-answer p {
+    padding: 0 18px 19px 16px;
+    font-size: 0.9rem;
+    line-height: 1.72;
+  }
+
+  .pr-split-list li,
+  .pr-split-seal {
+    font-size: 0.88rem;
+  }
+
+  .pr-split-head b {
+    font-size: 0.98rem;
+  }
+
+  .pr-cta-grid {
+    gap: 36px;
+  }
+
+  .pr-cta-copy h2 {
+    margin-bottom: 16px;
+  }
+
+  .pr-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pr-form-card {
+    padding: 26px 20px;
+  }
+
+  /* Comfortable tap targets and no iOS zoom-on-focus (needs >=16px). */
+  .pr-form-group input,
+  .pr-form-group select {
+    padding: 14px 15px;
+    font-size: 1rem;
+  }
+
+  .pr-btn {
+    padding: 15px 24px;
+  }
+
+}
+
+
+@media (max-width: 400px) {
+
+  .pr-page {
+    --pr-gutter: 15px;
+  }
+
+  .pr-plan,
+  .pr-step,
+  .pr-voice {
+    padding: 22px 17px;
+  }
+
+  .pr-alt-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pr-plan-volume b {
+    font-size: 1.18rem;
+  }
+
+  .pr-plan-switch-btn {
+    font-size: 0.8rem;
+    padding: 10px 4px;
+  }
+
+  .pr-compare-table {
+    min-width: 540px;
+  }
+
+  .pr-compare-table th:first-child {
+    width: 124px;
+    min-width: 124px;
+  }
+
+  .pr-compare-table th,
+  .pr-compare-table td {
+    padding: 11px 12px;
+    font-size: 0.79rem;
+  }
+
+  /* Keeps the label, the WhatsApp button and the pill on one line at 320px. */
+  .pr-sticky-cta-copy span {
+    display: none;
+  }
+
+  .pr-sticky-cta .pr-btn {
+    padding: 13px 16px;
+    font-size: 0.84rem;
+  }
+
+}
+
+
+/* Below this the two-column add-on grid leaves ~108px of content per card,
+   which is narrower than the WhatsApp button needs to stay a comfortable tap
+   target. The exit matters more than the density, so the grid drops to one
+   column rather than shrinking the target or dropping its label. */
+@media (max-width: 370px) {
+
+  .pr-addons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pr-addon {
+    padding: 14px;
+  }
+
+  .pr-addon-actions {
+    padding-top: 12px;
+  }
+
+  /* Full width again, so the label is affordable. */
+  .pr-addon-wa {
+    width: auto;
+    padding: 0 14px;
+  }
+
+  .pr-addon-wa span {
+    position: static;
+    width: auto;
+    height: auto;
+    clip: auto;
+  }
+
+  .pr-addon-more {
+    padding: 0 10px;
+  }
+
+}

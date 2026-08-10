@@ -1,0 +1,854 @@
+<!-- ==========================================================================
+     FINANSHELS · ACCOUNTING PACKAGES / PRICING — BLOCK 4 of 7: WAYS TO RUN FINANCE
+
+     Paste into its own Webflow HTML Embed element.
+
+     SELF-CONTAINED — this block carries the design tokens, the reset, the icons
+     it references and its own media queries. Paste the blocks in any order, or
+     paste one on its own: it renders correctly either way. Page order is still
+     4 of 7 if you want the full page reading top to bottom.
+
+     Place each embed in a Section with no padding. Do NOT put block 7 inside
+     a Webflow Form Block — it contains its own form element.
+     ========================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+<style>
+/* --------------------------------------------------------------------------
+   CASCADE FENCE — see webflow-embed/README.md
+   `all: revert` discards every author-origin declaration the host page
+   contributed, falling back to the browser's own defaults. At (1,1,0) it
+   outranks Webflow's tag and class styles; the component rules that follow
+   sit higher still, so they win against the reset.
+   -------------------------------------------------------------------------- */
+
+/* SVG subtrees are deliberately excluded. Presentation attributes (fill,
+   stroke, stroke-width, d) cascade at author origin, so reverting them erases
+   the icon geometry outright — verified: `d` computes to `none`. */
+.fspr-root:not(#_),
+.fspr-root:not(#_) :where(*:not(svg, svg *)),
+.fspr-root:not(#_) :where(*:not(svg, svg *))::before,
+.fspr-root:not(#_) :where(*:not(svg, svg *))::after {
+  all: revert;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Baseline the source stylesheet was authored against (src/App.css applies a
+   global `* { margin: 0; padding: 0 }`, src/index.css the link/button rules). */
+.fspr-root:not(#_) :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fspr-root:not(#_) :where(button) {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fspr-root:not(#_) :where(ul, ol) {
+  list-style: none;
+}
+
+/* SVGs sit outside the `all: revert` sweep, so a host rule like Webflow's
+   `img, svg { max-width: 100%; vertical-align: middle }` would still reach
+   them. Neutralise box-model and decoration properties only — every paint and
+   geometry property is left alone. `baseline` is the UA default and matches
+   the React page. */
+.fspr-root:not(#_) :where(svg, svg *) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  vertical-align: baseline;
+  float: none;
+}
+
+.fspr-root:not(#_) :where(img) {
+  max-width: none;
+}
+
+/* Icon sprite host — never rendered. */
+.fspr-root:not(#_) :where(.fspr-sprite) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Optional full-bleed escape hatch — add `fspr-fullbleed` to a wrapper that
+   sits inside a padded Webflow container. Needs body { overflow-x: hidden }
+   when a vertical scrollbar is present. */
+.fspr-root:not(#_).fspr-fullbleed {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+}
+
+/* ============================================================
+   Pricing — Webflow embed source
+   Same design system as AIAccountingLanding.css: warm paper canvas,
+   one accent, hairline bento grids, Inter at light display weights.
+   Authored with a `.fspr-` prefix so the build can namespace it to
+   `.fspr-` and the two pages can never collide on a class name.
+   ============================================================ */
+
+.fspr-root:not(#_) {
+  --fspr-canvas: #faf9f5;
+  --fspr-surface: #ffffff;
+  --fspr-line: #e7e3d8;
+  --fspr-line-strong: #d6cfbe;
+  --fspr-seam: #eeeae0;
+
+  --fspr-paper: #ffffff;
+  --fspr-paper-sunk: #faf9f5;
+  --fspr-paper-line: #e7e3d8;
+  --fspr-paper-ink: #191919;
+  --fspr-paper-muted: #6b6b6b;
+
+  /* Orange ramp measured against the cream canvas — fill with accent,
+     write with ink. See AIAccountingLanding.css for the full ratios. */
+  --fspr-accent: #f16610;
+  --fspr-accent-deep: #d45a0e;
+  --fspr-accent-ink: #b0500a;
+  --fspr-accent-band: #c25309;
+  --fspr-accent-soft: rgba(241, 102, 16, 0.10);
+  --fspr-accent-line: rgba(241, 102, 16, 0.30);
+
+  --fspr-text: #191919;
+  --fspr-muted: #57534a;
+  --fspr-dim: #746e64;
+
+  --fspr-radius: 12px;
+  --fspr-radius-lg: 16px;
+  --fspr-pill: 999px;
+  --fspr-pad: 112px;
+  /* Container side padding as a token, so the testimonial rail can cancel it
+     with a negative margin and let cards scroll to the screen edge without
+     re-deriving the number at every breakpoint. */
+  --fspr-gutter: 32px;
+
+  --fspr-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --fspr-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+  background: var(--fspr-canvas);
+  color: var(--fspr-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+
+.fspr-root:not(#_) *,
+.fspr-root:not(#_) *::before,
+.fspr-root:not(#_) *::after {
+  box-sizing: border-box;
+}
+
+
+.fspr-root:not(#_) .fspr-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--fspr-gutter);
+}
+
+
+.fspr-root:not(#_) .fspr-accent {
+  color: var(--fspr-accent-deep);
+}
+
+
+/* Visible to screen readers only — icon-only controls still need a name. */
+.fspr-root:not(#_) .fspr-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* ---------- Scroll reveal ----------
+   Hidden state is gated behind `.is-ready`, added by the script, so the page
+   renders fully visible if JS never runs. */
+
+.fspr-root:not(#_).is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--fspr-ease-out),
+    transform 0.65s var(--fspr-ease-out);
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > * {
+  animation: fspr-rise 0.6s var(--fspr-ease-out) both;
+  animation-delay: var(--fspr-stagger, 0s);
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --fspr-stagger: 0.08s; }
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --fspr-stagger: 0.16s; }
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --fspr-stagger: 0.24s; }
+
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.fspr-root:not(#_) .fspr-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fspr-dim);
+}
+
+
+.fspr-root:not(#_) .fspr-section-head {
+  max-width: 760px;
+  margin-bottom: 60px;
+}
+
+
+.fspr-root:not(#_) .fspr-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+
+.fspr-root:not(#_) .fspr-section-head p {
+  margin: 18px 0 0;
+  max-width: 40rem;
+  font-size: 1.03rem;
+  line-height: 1.7;
+  color: var(--fspr-muted);
+}
+
+
+/* ---------- Buttons ---------- */
+
+.fspr-root:not(#_) .fspr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border-radius: var(--fspr-pill);
+  border: 1px solid transparent;
+  font-size: 0.93rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--fspr-ease),
+    border-color 0.3s var(--fspr-ease),
+    color 0.3s var(--fspr-ease),
+    transform 0.3s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-primary {
+  background: var(--fspr-accent);
+  color: #fff;
+}
+
+
+.fspr-root:not(#_) .fspr-btn-primary:hover {
+  background: var(--fspr-accent-deep);
+  transform: translateY(-2px);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-ghost {
+  background: transparent;
+  color: var(--fspr-text);
+  border-color: var(--fspr-line-strong);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-ghost:hover {
+  border-color: var(--fspr-text);
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+
+/* ---------- Conversion rail ----------
+   The page exists to produce quote requests, so each proof block ends with
+   the ask rather than saving it all for the footer. One shared component,
+   repeated after the comparison, the alternatives and the FAQs. */
+
+.fspr-root:not(#_) .fspr-rail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 40px;
+  padding: 26px 30px;
+  border: 1px solid var(--fspr-line);
+  border-radius: var(--fspr-radius-lg);
+  background:
+    radial-gradient(30rem 14rem at 100% 0%, rgba(241, 102, 16, 0.09), transparent 62%),
+    var(--fspr-surface);
+}
+
+
+.fspr-root:not(#_) .fspr-rail-copy b {
+  display: block;
+  font-size: 1.06rem;
+  font-weight: 600;
+  letter-spacing: -0.016em;
+}
+
+
+.fspr-root:not(#_) .fspr-rail-copy span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--fspr-muted);
+}
+
+
+.fspr-root:not(#_) .fspr-rail-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+
+.fspr-root:not(#_) .fspr-rail-actions .fspr-btn {
+  padding: 13px 24px;
+  font-size: 0.89rem;
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fspr-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fspr-nudge {
+  0%, 60%, 100% { transform: translateX(0); }
+  30% { transform: translateX(4px); }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+
+  .fspr-root:not(#_) *,
+  .fspr-root:not(#_) *::before,
+  .fspr-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fspr-root:not(#_).is-ready [data-reveal],
+  .fspr-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+
+}
+
+/* ============================================================
+   ALTERNATIVES
+   ============================================================ */
+
+.fspr-root:not(#_) .fspr-alt {
+  padding: var(--fspr-pad) 0;
+  border-top: 1px solid var(--fspr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--fspr-seam) 22%, var(--fspr-seam) 78%, transparent) 1;
+  background:
+    radial-gradient(50rem 28rem at 12% -10%, rgba(241, 102, 16, 0.06), transparent 60%),
+    var(--fspr-canvas);
+}
+
+
+.fspr-root:not(#_) .fspr-alt-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--fspr-line);
+  border-radius: var(--fspr-radius-lg);
+  overflow: hidden;
+  background: var(--fspr-surface);
+}
+
+
+.fspr-root:not(#_) .fspr-alt-table th,
+.fspr-root:not(#_) .fspr-alt-table td {
+  padding: 16px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--fspr-line);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  vertical-align: top;
+}
+
+
+.fspr-root:not(#_) .fspr-alt-table thead th {
+  background: var(--fspr-paper-sunk);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fspr-dim);
+}
+
+
+.fspr-root:not(#_) .fspr-alt-table thead th.fspr-col-featured {
+  color: var(--fspr-accent-ink);
+}
+
+
+.fspr-root:not(#_) .fspr-alt-table tbody th {
+  width: 22%;
+  font-weight: 600;
+  color: var(--fspr-text);
+}
+
+
+.fspr-root:not(#_) .fspr-alt-table td {
+  color: var(--fspr-muted);
+}
+
+
+.fspr-root:not(#_) .fspr-alt-table tbody tr:last-child th,
+.fspr-root:not(#_) .fspr-alt-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+.fspr-root:not(#_) .fspr-alt-note {
+  margin: 16px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--fspr-dim);
+}
+
+
+.fspr-root:not(#_) .fspr-alt-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 52px;
+  padding-top: 40px;
+  border-top: 1px solid var(--fspr-line);
+}
+
+
+.fspr-root:not(#_) .fspr-alt-stat dt {
+  font-size: 1.9rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+
+.fspr-root:not(#_) .fspr-alt-stat dd {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: var(--fspr-dim);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Most grids reflow on their own via auto-fit, so these breakpoints handle
+   only what intrinsic sizing can't: the wide data tables, the mobile plan
+   switcher, and the density of a page that has to convert on a phone. */
+
+@media (max-width: 1080px) {
+
+
+
+  .fspr-root:not(#_) {
+    --fspr-pad: 88px;
+    --fspr-gutter: 24px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-alt-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 28px;
+  }
+}
+
+
+
+
+
+/* Both wide tables change behaviour here rather than at 680px. A 4-column
+   matrix squeezed into 700px leaves prose cells under 170px wide —
+   technically not overflowing, but nobody can read it. */
+@media (max-width: 940px) {
+
+
+
+  /* The alternatives matrix is prose, not ticks — it can't scroll sideways
+     and stay readable, so each criterion becomes its own card with the
+     Finanshels column visually winning. */
+  .fspr-root:not(#_) .fspr-alt-table,
+  .fspr-root:not(#_) .fspr-alt-table thead,
+  .fspr-root:not(#_) .fspr-alt-table tbody,
+  .fspr-root:not(#_) .fspr-alt-table tr,
+  .fspr-root:not(#_) .fspr-alt-table th,
+  .fspr-root:not(#_) .fspr-alt-table td {
+    display: block;
+    width: 100%;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-alt-table {
+    border: none;
+    border-radius: 0;
+    background: none;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-alt-table thead {
+    display: none;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-alt-table tbody {
+    display: grid;
+    gap: 14px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-alt-table tbody tr {
+    border: 1px solid var(--fspr-line);
+    border-radius: var(--fspr-radius);
+    background: var(--fspr-surface);
+    overflow: hidden;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-alt-table tbody th {
+    width: 100%;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--fspr-line);
+    background: var(--fspr-paper-sunk);
+    font-size: 0.92rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-alt-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--fspr-seam);
+    font-size: 0.85rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-alt-table tbody tr td:last-child {
+    border-bottom: none;
+  }
+
+
+
+  /* Each cell names its own column now that the header row is gone. */
+  .fspr-root:not(#_) .fspr-alt-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 3px;
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fspr-dim);
+  }
+
+
+
+  /* Inset rather than a real border so the copy doesn't shift 2px right of
+     the two cells above it. */
+  .fspr-root:not(#_) .fspr-alt-table td.fspr-col-featured {
+    box-shadow: inset 3px 0 0 var(--fspr-accent);
+    color: var(--fspr-text);
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-alt-table td.fspr-col-featured::before {
+    color: var(--fspr-accent-ink);
+  }
+}
+
+
+
+
+
+@media (max-width: 760px) {
+
+
+
+  .fspr-root:not(#_) .fspr-faq-cta-actions .fspr-btn {
+    width: 100%;
+  }
+
+
+
+  /* ---- Conversion rail stacks ---- */
+  .fspr-root:not(#_) .fspr-rail {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    margin-top: 28px;
+    padding: 22px 20px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-rail-actions {
+    flex-direction: column;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-rail-actions .fspr-btn {
+    width: 100%;
+  }
+}
+
+
+
+
+
+@media (max-width: 680px) {
+
+
+
+  .fspr-root:not(#_) {
+    --fspr-pad: 60px;
+    --fspr-gutter: 18px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-hero-actions .fspr-btn {
+    width: 100%;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-section-head {
+    margin-bottom: 32px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-section-head p {
+    font-size: 0.96rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-alt-stats {
+    gap: 22px 20px;
+    margin-top: 36px;
+    padding-top: 30px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-alt-stat dt {
+    font-size: 1.6rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-btn {
+    padding: 15px 24px;
+  }
+}
+
+
+
+
+
+@media (max-width: 400px) {
+
+
+
+  .fspr-root:not(#_) {
+    --fspr-gutter: 15px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-alt-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-sticky-cta .fspr-btn {
+    padding: 13px 16px;
+    font-size: 0.84rem;
+  }
+}
+</style>
+<div class="fspr-root">
+
+  <!-- Icons this block uses. Self-contained on purpose. -->
+  <svg class="fspr-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="fspr-i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  </svg>
+
+  <section class="fspr-alt">
+    <div class="fspr-container">
+      <div class="fspr-section-head" data-reveal>
+        <p class="fspr-eyebrow">The alternatives</p>
+        <h2>Three ways to run finance</h2>
+        <p>Worth comparing honestly before you pick one. Here is how an in-house hire, a traditional firm and a Finanshels plan actually differ.</p>
+      </div>
+
+      <table class="fspr-alt-table" data-reveal>
+        <thead>
+          <tr>
+            <th scope="col">Criteria</th>
+            <th scope="col">In-house hire</th>
+            <th scope="col">Traditional firm</th>
+            <th scope="col" class="fspr-col-featured">Finanshels</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Monthly cost</th>
+            <td data-label="In-house hire">AED 12,000&ndash;25,000+ in salary, visa and benefits</td>
+            <td data-label="Traditional firm">AED 3,000&ndash;10,000+, often billed by the hour</td>
+            <td data-label="Finanshels" class="fspr-col-featured">One fixed monthly fee, quoted to your volume</td>
+          </tr>
+          <tr>
+            <th scope="row">Time to productive</th>
+            <td data-label="In-house hire">3&ndash;6 months of hiring, onboarding and visas</td>
+            <td data-label="Traditional firm">2&ndash;4 weeks scoping, then a slow ramp-up</td>
+            <td data-label="Finanshels" class="fspr-col-featured">Fully operational within 7 days</td>
+          </tr>
+          <tr>
+            <th scope="row">Coverage</th>
+            <td data-label="In-house hire">One generalist, with gaps in VAT, CT or CFO work</td>
+            <td data-label="Traditional firm">Audit or tax only &mdash; rarely both</td>
+            <td data-label="Finanshels" class="fspr-col-featured">VAT, CT, AML, accounting and CFO under one roof</td>
+          </tr>
+          <tr>
+            <th scope="row">Compliance risk</th>
+            <td data-label="In-house hire">A single point of failure if that person leaves</td>
+            <td data-label="Traditional firm">Reactive &mdash; you chase them for updates</td>
+            <td data-label="Finanshels" class="fspr-col-featured">Proactive alerts and a tracked filing calendar</td>
+          </tr>
+          <tr>
+            <th scope="row">Scales with you</th>
+            <td data-label="In-house hire">Another hire at every growth stage</td>
+            <td data-label="Traditional firm">Re-scope and renegotiate every year</td>
+            <td data-label="Finanshels" class="fspr-col-featured">Change plan in minutes, no new contract</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="fspr-alt-note">
+        In-house and traditional-firm figures are typical UAE market ranges for comparison only
+        &mdash; they are not Finanshels-verified statistics.
+      </p>
+
+      <dl class="fspr-alt-stats" data-reveal>
+        <div class="fspr-alt-stat"><dt>7,000+</dt><dd>UAE businesses served</dd></div>
+        <div class="fspr-alt-stat"><dt>180+</dt><dd>Finance specialists</dd></div>
+        <div class="fspr-alt-stat"><dt>&lt;24h</dt><dd>Reply time</dd></div>
+        <div class="fspr-alt-stat"><dt>4.9&#9733;</dt><dd>Trustpilot rating</dd></div>
+      </dl>
+
+      <div class="fspr-rail" data-reveal>
+        <div class="fspr-rail-copy">
+          <b>Cheaper than a hire, broader than a firm.</b>
+          <span>One 30-minute call and you&rsquo;ll have a fixed monthly number to compare against both.</span>
+        </div>
+        <div class="fspr-rail-actions">
+          <a href="#fspr-quote" class="fspr-btn fspr-btn-primary">
+            Request a quote
+            <svg aria-hidden="true" focusable="false"><use href="#fspr-i-arrow"/></svg>
+          </a>
+          <a
+          href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20a%20quote%20for%20your%20accounting%20packages.&amp;type=phone_number&amp;app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fspr-btn fspr-btn-ghost data-wa-track"
+          data-wa-track
+          data-fspr-wa="pricing_alternatives"
+        >WhatsApp us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

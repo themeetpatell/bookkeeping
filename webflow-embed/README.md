@@ -10,31 +10,43 @@ self-contained: it carries the CSS for its own sections alongside its markup.
 
 | # | File | Contains | Chars |
 |---|---|---|---|
-| 1 | [block-1-hero.html](block-1-hero.html) | Hero + client logos · **icon sprite** · base tokens | 29,434 |
-| 2 | [block-2-manifesto.html](block-2-manifesto.html) | Why AI-native + comparison table | 13,667 |
-| 3 | [block-3-workflow.html](block-3-workflow.html) | WhatsApp strip + how it works | 5,908 |
-| 4 | [block-4-dashboard.html](block-4-dashboard.html) | Findelivery dashboard | 11,287 |
-| 5 | [block-5-services.html](block-5-services.html) | AI/human split + services bento | 9,144 |
-| 6 | [block-6-social-proof.html](block-6-social-proof.html) | Testimonials + FAQ | 11,078 |
-| 7 | [block-7-cta.html](block-7-cta.html) | Final CTA + form · **animations, media queries, script** | 18,514 |
+| 1 | [block-1-hero.html](block-1-hero.html) | Hero + client logos | 31,253 |
+| 2 | [block-2-manifesto.html](block-2-manifesto.html) | Why AI-native + comparison table | 28,756 |
+| 3 | [block-3-workflow.html](block-3-workflow.html) | WhatsApp strip + how it works | 21,257 |
+| 4 | [block-4-dashboard.html](block-4-dashboard.html) | Findelivery dashboard | 25,382 |
+| 5 | [block-5-services.html](block-5-services.html) | AI/human split + services bento | 26,186 |
+| 6 | [block-6-social-proof.html](block-6-social-proof.html) | Testimonials + FAQ | 25,650 |
+| 7 | [block-7-cta.html](block-7-cta.html) | Final CTA + form · **script** | 25,658 |
 
-Webflow's limit is 50,000 characters per embed; the largest block is 29,434.
+Webflow's limit is 50,000 characters per embed; the largest block is 31,253.
 
-### Order matters
+### Each block stands alone
 
-The CSS is **partitioned** across the blocks, not repeated. Two consequences:
+Every block carries the design tokens, the cascade fence, the icons it
+references and its own media queries. **Paste them in any order, or paste one on
+its own** — each renders correctly by itself. The numbering is just page order.
 
-- **All seven must be on the page, in sequence.** Block 7 holds the animations
-  and every media query — out of order, the responsive rules stop applying
-  because they'd land before the base rules they override.
-- **Block 1 defines the icon sprite** that blocks 2–7 reference with `<use>`.
-  Without it every icon disappears.
+The CSS used to be partitioned across the blocks, which made any single one
+meaningless: it consumed custom properties it didn't define, so on its own every
+`var(--fsai-*)` resolved to nothing and the section rendered as unstyled text.
+Duplicating the shared layer is idempotent and leaves plenty of headroom.
+
+- **Block 7 still carries the script** (FAQ accordion, scroll reveals, WhatsApp
+  tracking). Without it those degrade to static fallbacks rather than vanishing.
+
+### Never write a tag name in a CSS comment
+
+Webflow parses an embed as markup, so a literal `p` in angle brackets inside a
+CSS comment **closes the style element early and silently drops every rule below
+it** — the section renders unstyled from that line down, which looks like the
+CSS failed to load. The build now fails on any tag-like sequence in a stylesheet
+and reports the line. Write "a p element", not the tag.
 
 ### Placement
 
 - Drop each embed into a **Section with no padding**, ideally a direct child of
-  Body. Each section paints its own full-width black background, so the blocks
-  seam together invisibly.
+  Body. Each section paints its own full-width warm-cream background (#faf9f5),
+  so the blocks seam together invisibly.
 - If a wrapper is padded or width-capped, change that block's opening tag to
   `<div class="fsai-root fsai-fullbleed">`. The escape hatch is already in the
   CSS; it needs `body { overflow-x: hidden }` when a scrollbar is present.
@@ -112,8 +124,8 @@ with the JSX, or edit the JSX and re-run the build.
 
 ## Assets
 
-Client logos load from `https://accounting.finanshels.com/clients/*` (verified
-200). They're knocked out to white for the black canvas. If that host moves,
+Client logos load from `https://accounting.finanshels.co/clients/*` (verified
+200). They render in full brand colour on the cream canvas. If that host moves,
 change `ASSETS` in `build/html.mjs`.
 
 ## Not included

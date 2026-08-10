@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { FiStar, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const testimonials = [
@@ -14,7 +14,7 @@ const testimonials = [
       'They designed an accounting system tailor made to our needs & completely automated our finance operations just like they promised. They\'ve been super helpful for us to scale.',
     name: 'Jeremy Khatar',
     title: 'CEO, Ronin Global LLC, USA',
-    avatar: '/Founders/jeremy.png',
+    avatar: '/Founders/jeremy.jpg',
   },
   {
     quote: 'If you ever do any financial modeling/forecasting, I seriously can\'t recommend Finanshels enough. they are a dependable team of professionals who work hard to deliver results.',
@@ -44,7 +44,7 @@ const testimonials = [
     quote: 'They thoroughly understood our business processes and streamlined our accounting processes perfectly where our both in-house and outsourced accountants failed multiple times to streamline and structure our complex financial ops.',
     name: 'Meet Patel',
     title: 'Former COO, StudentHub & BAWES',
-    avatar: '/Founders/themeetpatel.png',
+    avatar: '/Founders/themeetpatel.jpg',
   },
 
   {

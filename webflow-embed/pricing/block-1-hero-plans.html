@@ -1,0 +1,1313 @@
+<!-- ==========================================================================
+     FINANSHELS · ACCOUNTING PACKAGES / PRICING — BLOCK 1 of 7: HERO + CLIENT LOGOS + PLAN CARDS
+
+     Paste into its own Webflow HTML Embed element.
+
+     SELF-CONTAINED — this block carries the design tokens, the reset, the icons
+     it references and its own media queries. Paste the blocks in any order, or
+     paste one on its own: it renders correctly either way. Page order is still
+     1 of 7 if you want the full page reading top to bottom.
+
+     Place each embed in a Section with no padding. Do NOT put block 7 inside
+     a Webflow Form Block — it contains its own form element.
+     ========================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+<style>
+/* --------------------------------------------------------------------------
+   CASCADE FENCE — see webflow-embed/README.md
+   `all: revert` discards every author-origin declaration the host page
+   contributed, falling back to the browser's own defaults. At (1,1,0) it
+   outranks Webflow's tag and class styles; the component rules that follow
+   sit higher still, so they win against the reset.
+   -------------------------------------------------------------------------- */
+
+/* SVG subtrees are deliberately excluded. Presentation attributes (fill,
+   stroke, stroke-width, d) cascade at author origin, so reverting them erases
+   the icon geometry outright — verified: `d` computes to `none`. */
+.fspr-root:not(#_),
+.fspr-root:not(#_) :where(*:not(svg, svg *)),
+.fspr-root:not(#_) :where(*:not(svg, svg *))::before,
+.fspr-root:not(#_) :where(*:not(svg, svg *))::after {
+  all: revert;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Baseline the source stylesheet was authored against (src/App.css applies a
+   global `* { margin: 0; padding: 0 }`, src/index.css the link/button rules). */
+.fspr-root:not(#_) :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fspr-root:not(#_) :where(button) {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fspr-root:not(#_) :where(ul, ol) {
+  list-style: none;
+}
+
+/* SVGs sit outside the `all: revert` sweep, so a host rule like Webflow's
+   `img, svg { max-width: 100%; vertical-align: middle }` would still reach
+   them. Neutralise box-model and decoration properties only — every paint and
+   geometry property is left alone. `baseline` is the UA default and matches
+   the React page. */
+.fspr-root:not(#_) :where(svg, svg *) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  vertical-align: baseline;
+  float: none;
+}
+
+.fspr-root:not(#_) :where(img) {
+  max-width: none;
+}
+
+/* Icon sprite host — never rendered. */
+.fspr-root:not(#_) :where(.fspr-sprite) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Optional full-bleed escape hatch — add `fspr-fullbleed` to a wrapper that
+   sits inside a padded Webflow container. Needs body { overflow-x: hidden }
+   when a vertical scrollbar is present. */
+.fspr-root:not(#_).fspr-fullbleed {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+}
+
+/* ============================================================
+   Pricing — Webflow embed source
+   Same design system as AIAccountingLanding.css: warm paper canvas,
+   one accent, hairline bento grids, Inter at light display weights.
+   Authored with a `.fspr-` prefix so the build can namespace it to
+   `.fspr-` and the two pages can never collide on a class name.
+   ============================================================ */
+
+.fspr-root:not(#_) {
+  --fspr-canvas: #faf9f5;
+  --fspr-surface: #ffffff;
+  --fspr-line: #e7e3d8;
+  --fspr-line-strong: #d6cfbe;
+  --fspr-seam: #eeeae0;
+
+  --fspr-paper: #ffffff;
+  --fspr-paper-sunk: #faf9f5;
+  --fspr-paper-line: #e7e3d8;
+  --fspr-paper-ink: #191919;
+  --fspr-paper-muted: #6b6b6b;
+
+  /* Orange ramp measured against the cream canvas — fill with accent,
+     write with ink. See AIAccountingLanding.css for the full ratios. */
+  --fspr-accent: #f16610;
+  --fspr-accent-deep: #d45a0e;
+  --fspr-accent-ink: #b0500a;
+  --fspr-accent-band: #c25309;
+  --fspr-accent-soft: rgba(241, 102, 16, 0.10);
+  --fspr-accent-line: rgba(241, 102, 16, 0.30);
+
+  --fspr-text: #191919;
+  --fspr-muted: #57534a;
+  --fspr-dim: #746e64;
+
+  --fspr-radius: 12px;
+  --fspr-radius-lg: 16px;
+  --fspr-pill: 999px;
+  --fspr-pad: 112px;
+  /* Container side padding as a token, so the testimonial rail can cancel it
+     with a negative margin and let cards scroll to the screen edge without
+     re-deriving the number at every breakpoint. */
+  --fspr-gutter: 32px;
+
+  --fspr-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --fspr-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+  background: var(--fspr-canvas);
+  color: var(--fspr-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+
+.fspr-root:not(#_) *,
+.fspr-root:not(#_) *::before,
+.fspr-root:not(#_) *::after {
+  box-sizing: border-box;
+}
+
+
+.fspr-root:not(#_) .fspr-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--fspr-gutter);
+}
+
+
+.fspr-root:not(#_) .fspr-accent {
+  color: var(--fspr-accent-deep);
+}
+
+
+/* Visible to screen readers only — icon-only controls still need a name. */
+.fspr-root:not(#_) .fspr-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* ---------- Scroll reveal ----------
+   Hidden state is gated behind `.is-ready`, added by the script, so the page
+   renders fully visible if JS never runs. */
+
+.fspr-root:not(#_).is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--fspr-ease-out),
+    transform 0.65s var(--fspr-ease-out);
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > * {
+  animation: fspr-rise 0.6s var(--fspr-ease-out) both;
+  animation-delay: var(--fspr-stagger, 0s);
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --fspr-stagger: 0.08s; }
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --fspr-stagger: 0.16s; }
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --fspr-stagger: 0.24s; }
+
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.fspr-root:not(#_) .fspr-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fspr-dim);
+}
+
+
+.fspr-root:not(#_) .fspr-section-head {
+  max-width: 760px;
+  margin-bottom: 60px;
+}
+
+
+.fspr-root:not(#_) .fspr-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+
+.fspr-root:not(#_) .fspr-section-head p {
+  margin: 18px 0 0;
+  max-width: 40rem;
+  font-size: 1.03rem;
+  line-height: 1.7;
+  color: var(--fspr-muted);
+}
+
+
+/* ---------- Buttons ---------- */
+
+.fspr-root:not(#_) .fspr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border-radius: var(--fspr-pill);
+  border: 1px solid transparent;
+  font-size: 0.93rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--fspr-ease),
+    border-color 0.3s var(--fspr-ease),
+    color 0.3s var(--fspr-ease),
+    transform 0.3s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-primary {
+  background: var(--fspr-accent);
+  color: #fff;
+}
+
+
+.fspr-root:not(#_) .fspr-btn-primary:hover {
+  background: var(--fspr-accent-deep);
+  transform: translateY(-2px);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-ghost {
+  background: transparent;
+  color: var(--fspr-text);
+  border-color: var(--fspr-line-strong);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-ghost:hover {
+  border-color: var(--fspr-text);
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+
+/* ---------- Conversion rail ----------
+   The page exists to produce quote requests, so each proof block ends with
+   the ask rather than saving it all for the footer. One shared component,
+   repeated after the comparison, the alternatives and the FAQs. */
+
+.fspr-root:not(#_) .fspr-rail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 40px;
+  padding: 26px 30px;
+  border: 1px solid var(--fspr-line);
+  border-radius: var(--fspr-radius-lg);
+  background:
+    radial-gradient(30rem 14rem at 100% 0%, rgba(241, 102, 16, 0.09), transparent 62%),
+    var(--fspr-surface);
+}
+
+
+.fspr-root:not(#_) .fspr-rail-copy b {
+  display: block;
+  font-size: 1.06rem;
+  font-weight: 600;
+  letter-spacing: -0.016em;
+}
+
+
+.fspr-root:not(#_) .fspr-rail-copy span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--fspr-muted);
+}
+
+
+.fspr-root:not(#_) .fspr-rail-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+
+.fspr-root:not(#_) .fspr-rail-actions .fspr-btn {
+  padding: 13px 24px;
+  font-size: 0.89rem;
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fspr-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fspr-nudge {
+  0%, 60%, 100% { transform: translateX(0); }
+  30% { transform: translateX(4px); }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+
+  .fspr-root:not(#_) *,
+  .fspr-root:not(#_) *::before,
+  .fspr-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fspr-root:not(#_).is-ready [data-reveal],
+  .fspr-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.fspr-root:not(#_) .fspr-hero {
+  position: relative;
+  padding: 104px 0 76px;
+  text-align: center;
+  background:
+    radial-gradient(46rem 30rem at 50% -14%, rgba(241, 102, 16, 0.09), transparent 62%),
+    var(--fspr-canvas);
+}
+
+
+.fspr-root:not(#_) .fspr-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 18px;
+  margin-bottom: 28px;
+  border: 1px solid var(--fspr-line);
+  border-radius: var(--fspr-pill);
+  background: var(--fspr-surface);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--fspr-muted);
+}
+
+
+.fspr-root:not(#_) .fspr-hero h1 {
+  margin: 0 auto 24px;
+  max-width: 20ch;
+  font-size: clamp(1.95rem, 5vw, 3.9rem);
+  font-weight: 500;
+  letter-spacing: -0.024em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+
+.fspr-root:not(#_) .fspr-hero-sub {
+  margin: 0 auto 36px;
+  max-width: 38rem;
+  font-size: 1.1rem;
+  line-height: 1.68;
+  color: var(--fspr-muted);
+}
+
+
+.fspr-root:not(#_) .fspr-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  justify-content: center;
+  margin-bottom: 46px;
+}
+
+
+.fspr-root:not(#_) .fspr-hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+.fspr-root:not(#_) .fspr-hero-trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--fspr-muted);
+}
+
+
+.fspr-root:not(#_) .fspr-hero-trust svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--fspr-accent);
+}
+
+/* ============================================================
+   LOGOS
+   ============================================================ */
+
+.fspr-root:not(#_) .fspr-logos {
+  padding: 8px 0 56px;
+}
+
+
+.fspr-root:not(#_) .fspr-logos-label {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fspr-dim);
+}
+
+
+.fspr-root:not(#_) .fspr-logos-track {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 22px 52px;
+}
+
+
+/* Client marks render in their own brand colours — the row is social proof,
+   and washing it to grey made it read as decoration rather than evidence. */
+.fspr-root:not(#_) .fspr-logo-tile img {
+  /* 32/132 is the largest that still fits all nine marks on one row at
+     1200px — any bigger and the last logo wraps to a lonely second line. */
+  height: 32px;
+  width: auto;
+  max-width: 132px;
+  object-fit: contain;
+  transition: transform 0.3s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-logo-tile:hover img {
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   PLANS
+   ============================================================ */
+
+.fspr-root:not(#_) .fspr-plans {
+  padding: 0 0 var(--fspr-pad);
+}
+
+
+.fspr-root:not(#_) .fspr-plans-grid {
+  /* Reflows 3 -> 2 -> 1 on its own; a fixed count plus a breakpoint was
+     collapsing to a single 520px column while a tablet still had room. */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(288px, 100%), 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+
+/* ---------- Plan switcher (mobile only) ----------
+   Stacked, the three cards ran 2,400px before the comparison table even
+   started — nobody scrolls three full plans to pick one. Below 760px this
+   segmented control swaps a single card in place instead.
+
+   Hidden here and revealed only inside the mobile media query once `is-ready`
+   is on the page, so a JS failure falls back to the three stacked cards
+   rather than showing one card and no way to reach the others. */
+
+.fspr-root:not(#_) .fspr-plan-switch {
+  display: none;
+  margin-bottom: 20px;
+  padding: 4px;
+  border: 1px solid var(--fspr-line);
+  border-radius: var(--fspr-pill);
+  background: var(--fspr-surface);
+}
+
+
+.fspr-root:not(#_) .fspr-plan-switch-btn {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 11px 6px;
+  border: none;
+  border-radius: var(--fspr-pill);
+  background: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fspr-muted);
+  cursor: pointer;
+  transition:
+    background-color 0.28s var(--fspr-ease),
+    color 0.28s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-plan-switch-btn.is-active {
+  background: var(--fspr-accent);
+  color: #fff;
+}
+
+
+/* Marks the recommended tab before it is opened — the "Most picked" badge
+   inside the card only pays off after you have already tapped it. */
+.fspr-root:not(#_) .fspr-plan-switch-btn[data-pr-popular]::after {
+  content: '';
+  position: absolute;
+  top: 7px;
+  right: 12px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--fspr-accent);
+}
+
+
+.fspr-root:not(#_) .fspr-plan-switch-btn.is-active[data-pr-popular]::after {
+  background: #fff;
+}
+
+
+.fspr-root:not(#_) .fspr-plan {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 34px 30px 30px;
+  border: 1px solid var(--fspr-line);
+  border-radius: var(--fspr-radius-lg);
+  background: var(--fspr-surface);
+}
+
+
+/* The recommended plan is the one visual lift on the row — a thicker accent
+   edge rather than a colour fill, so the card copy stays on white. */
+.fspr-root:not(#_) .fspr-plan-featured {
+  border-color: var(--fspr-accent-line);
+  box-shadow: 0 24px 56px -34px rgba(60, 45, 25, 0.32);
+}
+
+
+.fspr-root:not(#_) .fspr-plan-tag {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  margin-bottom: 18px;
+  border-radius: var(--fspr-pill);
+  background: var(--fspr-paper-sunk);
+  border: 1px solid var(--fspr-line);
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fspr-dim);
+}
+
+
+.fspr-root:not(#_) .fspr-plan-featured .fspr-plan-tag {
+  background: var(--fspr-accent-soft);
+  border-color: var(--fspr-accent-line);
+  color: var(--fspr-accent-ink);
+}
+
+
+.fspr-root:not(#_) .fspr-plan h3 {
+  margin: 0 0 8px;
+  font-size: 1.32rem;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+}
+
+
+.fspr-root:not(#_) .fspr-plan-for {
+  margin: 0 0 20px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--fspr-muted);
+}
+
+
+/* Volume is the real price axis on a quote-based page, so it takes the slot
+   a number would otherwise occupy. */
+.fspr-root:not(#_) .fspr-plan-volume {
+  padding: 16px 18px;
+  margin-bottom: 22px;
+  border-radius: var(--fspr-radius);
+  background: var(--fspr-paper-sunk);
+  border: 1px solid var(--fspr-paper-line);
+}
+
+
+.fspr-root:not(#_) .fspr-plan-volume b {
+  display: block;
+  font-size: 1.32rem;
+  font-weight: 500;
+  letter-spacing: -0.018em;
+}
+
+
+.fspr-root:not(#_) .fspr-plan-volume span {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fspr-dim);
+}
+
+
+.fspr-root:not(#_) .fspr-plan-cadence {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--fspr-accent-ink);
+}
+
+
+.fspr-root:not(#_) .fspr-plan-cadence svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+
+.fspr-root:not(#_) .fspr-plan-list {
+  list-style: none;
+  margin: 0 0 26px;
+  padding: 0;
+  display: grid;
+  gap: 11px;
+}
+
+
+.fspr-root:not(#_) .fspr-plan-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.89rem;
+  line-height: 1.5;
+  color: var(--fspr-muted);
+}
+
+
+.fspr-root:not(#_) .fspr-plan-list svg {
+  width: 15px;
+  height: 15px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  color: var(--fspr-accent);
+}
+
+
+.fspr-root:not(#_) .fspr-plan-inherit {
+  margin: 0 0 14px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fspr-dim);
+}
+
+
+.fspr-root:not(#_) .fspr-plan-actions {
+  margin-top: auto;
+  display: grid;
+  gap: 10px;
+}
+
+
+.fspr-root:not(#_) .fspr-plan-actions .fspr-btn {
+  width: 100%;
+}
+
+
+.fspr-root:not(#_) .fspr-plan-note {
+  margin: 14px 0 0;
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--fspr-dim);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Most grids reflow on their own via auto-fit, so these breakpoints handle
+   only what intrinsic sizing can't: the wide data tables, the mobile plan
+   switcher, and the density of a page that has to convert on a phone. */
+
+@media (max-width: 1080px) {
+
+
+
+  .fspr-root:not(#_) {
+    --fspr-pad: 88px;
+    --fspr-gutter: 24px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-hero {
+    padding: 80px 0 62px;
+  }
+}
+
+
+
+
+
+@media (max-width: 760px) {
+
+
+
+  /* ---- Client logos tighten before they wrap to three lines ---- */
+  .fspr-root:not(#_) .fspr-logos {
+    padding: 4px 0 44px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-logos-label {
+    margin-bottom: 22px;
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-logos-track {
+    gap: 18px 32px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-logo-tile img {
+    height: 25px;
+    max-width: 104px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-faq-cta-actions .fspr-btn {
+    width: 100%;
+  }
+
+
+
+  /* ---- Plan switcher takes over from the stacked cards ---- */
+  .fspr-root:not(#_).is-ready .fspr-plan-switch {
+    display: flex;
+  }
+
+
+
+  .fspr-root:not(#_).is-ready .fspr-plan:not(.is-active) {
+    display: none;
+  }
+
+
+
+  /* The stagger would re-run on a card that was display:none when its
+     animation played. One card is visible at a time here anyway. */
+  .fspr-root:not(#_).is-ready .fspr-plans-grid.is-in > * {
+    animation: none;
+    opacity: 1;
+  }
+
+
+
+  /* ---- Conversion rail stacks ---- */
+  .fspr-root:not(#_) .fspr-rail {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    margin-top: 28px;
+    padding: 22px 20px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-rail-actions {
+    flex-direction: column;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-rail-actions .fspr-btn {
+    width: 100%;
+  }
+}
+
+
+
+
+
+@media (max-width: 680px) {
+
+
+
+  .fspr-root:not(#_) {
+    --fspr-pad: 60px;
+    --fspr-gutter: 18px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-hero {
+    padding: 48px 0 40px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-hero-badge {
+    margin-bottom: 20px;
+    padding: 7px 15px;
+    font-size: 0.73rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-hero h1 {
+    margin-bottom: 18px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-hero-sub {
+    margin-bottom: 26px;
+    font-size: 1rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-hero-actions {
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-hero-actions .fspr-btn {
+    width: 100%;
+  }
+
+
+
+  /* Wraps to two tight lines instead of three stacked ones. */
+  .fspr-root:not(#_) .fspr-hero-trust {
+    gap: 9px 18px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-hero-trust li {
+    font-size: 0.8rem;
+    gap: 7px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-hero-trust svg {
+    width: 13px;
+    height: 13px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-section-head {
+    margin-bottom: 32px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-section-head p {
+    font-size: 0.96rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-plan {
+    padding: 26px 22px 24px;
+  }
+
+
+
+  /* Nine marks wrapping freely land 4/4/1 and the last one reads as a mistake.
+     A fixed 3-up grid is the only layout that stays balanced at every phone
+     width, since the marks have wildly different aspect ratios. */
+  .fspr-root:not(#_) .fspr-logos-track {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px 14px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-logo-tile {
+    display: grid;
+    place-items: center;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-logo-tile img {
+    height: 24px;
+    max-width: 100%;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-btn {
+    padding: 15px 24px;
+  }
+}
+
+
+
+
+
+@media (max-width: 400px) {
+
+
+
+  .fspr-root:not(#_) {
+    --fspr-gutter: 15px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-plan,
+  .fspr-root:not(#_) .fspr-step,
+  .fspr-root:not(#_) .fspr-voice {
+    padding: 22px 17px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-plan-volume b {
+    font-size: 1.18rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-plan-switch-btn {
+    font-size: 0.8rem;
+    padding: 10px 4px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-sticky-cta .fspr-btn {
+    padding: 13px 16px;
+    font-size: 0.84rem;
+  }
+}
+</style>
+<div class="fspr-root">
+
+  <!-- Icons this block uses. Self-contained on purpose. -->
+  <svg class="fspr-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="fspr-i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="fspr-i-tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="fspr-i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  </svg>
+
+  <section class="fspr-hero">
+    <div class="fspr-container">
+      <div class="fspr-hero-badge">
+        <span>Accounting packages &middot; UAE</span>
+      </div>
+
+      <h1>Pick the plan. We&rsquo;ll quote the number.</h1>
+
+      <p class="fspr-hero-sub">
+        Three packages built around how many transactions you actually run. Tell us your
+        volume and we&rsquo;ll come back with one fixed monthly fee &mdash; no hourly billing,
+        no surprise invoices.
+      </p>
+
+      <div class="fspr-hero-actions">
+        <a href="#fspr-quote" class="fspr-btn fspr-btn-primary">
+          Request a quote
+          <svg aria-hidden="true" focusable="false"><use href="#fspr-i-arrow"/></svg>
+        </a>
+        <a
+          href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20a%20quote%20for%20your%20accounting%20packages.&amp;type=phone_number&amp;app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fspr-btn fspr-btn-ghost data-wa-track"
+          data-wa-track
+          data-fspr-wa="pricing_hero"
+        >Chat with an expert</a>
+      </div>
+
+      <ul class="fspr-hero-trust">
+        <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-check"/></svg> 7,000+ UAE businesses</li>
+        <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-check"/></svg> FTA-registered tax agency</li>
+        <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-check"/></svg> Pay only if satisfied</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="fspr-logos" aria-label="Client logos">
+    <div class="fspr-container">
+      <p class="fspr-logos-label">Trusted by 7,000+ leading UAE businesses</p>
+      <div class="fspr-logos-track" data-reveal>
+        <div class="fspr-logo-tile">
+          <img src="https://accounting.finanshels.co/clients/Binary.png" alt="Binary logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fspr-logo-tile">
+          <img src="https://accounting.finanshels.co/clients/actualize.png" alt="Actualize logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fspr-logo-tile">
+          <img src="https://accounting.finanshels.co/clients/carbonsirf.png" alt="CarbonSirf logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fspr-logo-tile">
+          <img src="https://accounting.finanshels.co/clients/cotu.avif" alt="COTU Ventures logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fspr-logo-tile">
+          <img src="https://accounting.finanshels.co/clients/fuze.png" alt="Fuze logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fspr-logo-tile">
+          <img src="https://accounting.finanshels.co/clients/growdash.png" alt="Growdash logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fspr-logo-tile">
+          <img src="https://accounting.finanshels.co/clients/humlog.png" alt="Humlog logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fspr-logo-tile">
+          <img src="https://accounting.finanshels.co/clients/veehive.png" alt="Veehive logo" loading="lazy" decoding="async" />
+        </div>
+        <div class="fspr-logo-tile">
+          <img src="https://accounting.finanshels.co/clients/zywa.png" alt="Zywa logo" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fspr-plans" id="fspr-plans">
+    <div class="fspr-container">
+      <div class="fspr-plan-switch" role="tablist" aria-label="Choose a plan">
+        <button
+          type="button"
+          role="tab"
+          id="fspr-plan-tab-0"
+          class="fspr-plan-switch-btn"
+          aria-selected="false"
+          aria-controls="fspr-plan-0"
+          data-fspr-plan="0"
+        >Essential</button>
+        <button
+          type="button"
+          role="tab"
+          id="fspr-plan-tab-1"
+          class="fspr-plan-switch-btn is-active"
+          aria-selected="true"
+          aria-controls="fspr-plan-1"
+          data-fspr-plan="1" data-pr-popular
+        >Growth</button>
+        <button
+          type="button"
+          role="tab"
+          id="fspr-plan-tab-2"
+          class="fspr-plan-switch-btn"
+          aria-selected="false"
+          aria-controls="fspr-plan-2"
+          data-fspr-plan="2"
+        >Scale</button>
+      </div>
+
+      <div class="fspr-plans-grid" data-reveal-stagger>
+        <article
+          class="fspr-plan"
+          id="fspr-plan-0"
+          role="tabpanel"
+          aria-labelledby="fspr-plan-tab-0"
+        >
+          <span class="fspr-plan-tag">Basic</span>
+          <h3>Essential</h3>
+          <p class="fspr-plan-for">Solo founders and early-stage companies that need the books clean and the filings on time.</p>
+
+          <div class="fspr-plan-volume">
+            <b>Up to 100</b>
+            <span>transactions / year</span>
+          </div>
+
+          <p class="fspr-plan-cadence"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-check"/></svg> Cash-basis, reported annually</p>
+          <ul class="fspr-plan-list">
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Annual management report</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Annual bank &amp; credit card reconciliation</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Free tax advisory &mdash; 1 hour a year</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Free Corporate Tax registration</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Free Corporate Tax filing</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Unlimited email &amp; chat support</li>
+          </ul>
+
+          <div class="fspr-plan-actions">
+            <a href="#fspr-quote" class="fspr-btn fspr-btn-primary">
+              Request a quote
+              <svg aria-hidden="true" focusable="false"><use href="#fspr-i-arrow"/></svg>
+            </a>
+            <a
+          href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20a%20quote%20for%20your%20accounting%20packages.&amp;type=phone_number&amp;app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fspr-btn fspr-btn-ghost data-wa-track"
+          data-wa-track
+          data-fspr-wa="pricing_plan_essential"
+        >Chat with an expert</a>
+          </div>
+          <p class="fspr-plan-note">Fixed monthly fee &middot; quoted in 24h</p>
+        </article>
+
+        <article
+          class="fspr-plan fspr-plan-featured is-active"
+          id="fspr-plan-1"
+          role="tabpanel"
+          aria-labelledby="fspr-plan-tab-1"
+        >
+          <span class="fspr-plan-tag">Most picked</span>
+          <h3>Growth</h3>
+          <p class="fspr-plan-for">Growing SMEs that want quarterly numbers and VAT handled without chasing anyone.</p>
+
+          <div class="fspr-plan-volume">
+            <b>Up to 500</b>
+            <span>transactions / year</span>
+          </div>
+
+          <p class="fspr-plan-cadence"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-check"/></svg> Cash-basis, reported quarterly</p>
+          <p class="fspr-plan-inherit">Everything in Essential, plus</p>
+          <ul class="fspr-plan-list">
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Quarterly management reports</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Quarterly bank &amp; credit card reconciliation</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Free tax advisory &mdash; 2 hours a quarter</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Free VAT registration</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Free quarterly VAT filing</li>
+          </ul>
+
+          <div class="fspr-plan-actions">
+            <a href="#fspr-quote" class="fspr-btn fspr-btn-primary">
+              Request a quote
+              <svg aria-hidden="true" focusable="false"><use href="#fspr-i-arrow"/></svg>
+            </a>
+            <a
+          href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20a%20quote%20for%20your%20accounting%20packages.&amp;type=phone_number&amp;app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fspr-btn fspr-btn-ghost data-wa-track"
+          data-wa-track
+          data-fspr-wa="pricing_plan_growth"
+        >Chat with an expert</a>
+          </div>
+          <p class="fspr-plan-note">Fixed monthly fee &middot; quoted in 24h</p>
+        </article>
+
+        <article
+          class="fspr-plan"
+          id="fspr-plan-2"
+          role="tabpanel"
+          aria-labelledby="fspr-plan-tab-2"
+        >
+          <span class="fspr-plan-tag">Enterprise</span>
+          <h3>Scale</h3>
+          <p class="fspr-plan-for">Higher-volume operators that need monthly accrual accounting and a fuller picture.</p>
+
+          <div class="fspr-plan-volume">
+            <b>Up to 1,500</b>
+            <span>transactions / year</span>
+          </div>
+
+          <p class="fspr-plan-cadence"><svg aria-hidden="true" focusable="false"><use href="#fspr-i-check"/></svg> Accrual-basis, reported monthly</p>
+          <p class="fspr-plan-inherit">Everything in Growth, plus</p>
+          <ul class="fspr-plan-list">
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Monthly management reports</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Monthly bank &amp; credit card reconciliation</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Free tax advisory &mdash; 1 hour a month</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Receivables &amp; payables summaries</li>
+            <li><svg aria-hidden="true" focusable="false"><use href="#fspr-i-tick"/></svg> Schedule preparation</li>
+          </ul>
+
+          <div class="fspr-plan-actions">
+            <a href="#fspr-quote" class="fspr-btn fspr-btn-primary">
+              Request a quote
+              <svg aria-hidden="true" focusable="false"><use href="#fspr-i-arrow"/></svg>
+            </a>
+            <a
+          href="https://api.whatsapp.com/send/?phone=971521549572&amp;text=Hi%20Finanshels!%20I'd%20like%20a%20quote%20for%20your%20accounting%20packages.&amp;type=phone_number&amp;app_absent=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fspr-btn fspr-btn-ghost data-wa-track"
+          data-wa-track
+          data-fspr-wa="pricing_plan_scale"
+        >Chat with an expert</a>
+          </div>
+          <p class="fspr-plan-note">Fixed monthly fee &middot; quoted in 24h</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</div>

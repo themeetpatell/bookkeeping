@@ -1,0 +1,1065 @@
+<!-- ==========================================================================
+     FINANSHELS · ACCOUNTING PACKAGES / PRICING — BLOCK 5 of 7: HOW IT WORKS + TESTIMONIALS
+
+     Paste into its own Webflow HTML Embed element.
+
+     SELF-CONTAINED — this block carries the design tokens, the reset, the icons
+     it references and its own media queries. Paste the blocks in any order, or
+     paste one on its own: it renders correctly either way. Page order is still
+     5 of 7 if you want the full page reading top to bottom.
+
+     Place each embed in a Section with no padding. Do NOT put block 7 inside
+     a Webflow Form Block — it contains its own form element.
+     ========================================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+<style>
+/* --------------------------------------------------------------------------
+   CASCADE FENCE — see webflow-embed/README.md
+   `all: revert` discards every author-origin declaration the host page
+   contributed, falling back to the browser's own defaults. At (1,1,0) it
+   outranks Webflow's tag and class styles; the component rules that follow
+   sit higher still, so they win against the reset.
+   -------------------------------------------------------------------------- */
+
+/* SVG subtrees are deliberately excluded. Presentation attributes (fill,
+   stroke, stroke-width, d) cascade at author origin, so reverting them erases
+   the icon geometry outright — verified: `d` computes to `none`. */
+.fspr-root:not(#_),
+.fspr-root:not(#_) :where(*:not(svg, svg *)),
+.fspr-root:not(#_) :where(*:not(svg, svg *))::before,
+.fspr-root:not(#_) :where(*:not(svg, svg *))::after {
+  all: revert;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Baseline the source stylesheet was authored against (src/App.css applies a
+   global `* { margin: 0; padding: 0 }`, src/index.css the link/button rules). */
+.fspr-root:not(#_) :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fspr-root:not(#_) :where(button) {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fspr-root:not(#_) :where(ul, ol) {
+  list-style: none;
+}
+
+/* SVGs sit outside the `all: revert` sweep, so a host rule like Webflow's
+   `img, svg { max-width: 100%; vertical-align: middle }` would still reach
+   them. Neutralise box-model and decoration properties only — every paint and
+   geometry property is left alone. `baseline` is the UA default and matches
+   the React page. */
+.fspr-root:not(#_) :where(svg, svg *) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-shadow: none;
+  max-width: none;
+  max-height: none;
+  min-width: 0;
+  min-height: 0;
+  vertical-align: baseline;
+  float: none;
+}
+
+.fspr-root:not(#_) :where(img) {
+  max-width: none;
+}
+
+/* Icon sprite host — never rendered. */
+.fspr-root:not(#_) :where(.fspr-sprite) {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Optional full-bleed escape hatch — add `fspr-fullbleed` to a wrapper that
+   sits inside a padded Webflow container. Needs body { overflow-x: hidden }
+   when a vertical scrollbar is present. */
+.fspr-root:not(#_).fspr-fullbleed {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+}
+
+/* ============================================================
+   Pricing — Webflow embed source
+   Same design system as AIAccountingLanding.css: warm paper canvas,
+   one accent, hairline bento grids, Inter at light display weights.
+   Authored with a `.fspr-` prefix so the build can namespace it to
+   `.fspr-` and the two pages can never collide on a class name.
+   ============================================================ */
+
+.fspr-root:not(#_) {
+  --fspr-canvas: #faf9f5;
+  --fspr-surface: #ffffff;
+  --fspr-line: #e7e3d8;
+  --fspr-line-strong: #d6cfbe;
+  --fspr-seam: #eeeae0;
+
+  --fspr-paper: #ffffff;
+  --fspr-paper-sunk: #faf9f5;
+  --fspr-paper-line: #e7e3d8;
+  --fspr-paper-ink: #191919;
+  --fspr-paper-muted: #6b6b6b;
+
+  /* Orange ramp measured against the cream canvas — fill with accent,
+     write with ink. See AIAccountingLanding.css for the full ratios. */
+  --fspr-accent: #f16610;
+  --fspr-accent-deep: #d45a0e;
+  --fspr-accent-ink: #b0500a;
+  --fspr-accent-band: #c25309;
+  --fspr-accent-soft: rgba(241, 102, 16, 0.10);
+  --fspr-accent-line: rgba(241, 102, 16, 0.30);
+
+  --fspr-text: #191919;
+  --fspr-muted: #57534a;
+  --fspr-dim: #746e64;
+
+  --fspr-radius: 12px;
+  --fspr-radius-lg: 16px;
+  --fspr-pill: 999px;
+  --fspr-pad: 112px;
+  /* Container side padding as a token, so the testimonial rail can cancel it
+     with a negative margin and let cards scroll to the screen edge without
+     re-deriving the number at every breakpoint. */
+  --fspr-gutter: 32px;
+
+  --fspr-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --fspr-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+  background: var(--fspr-canvas);
+  color: var(--fspr-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+
+.fspr-root:not(#_) *,
+.fspr-root:not(#_) *::before,
+.fspr-root:not(#_) *::after {
+  box-sizing: border-box;
+}
+
+
+.fspr-root:not(#_) .fspr-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--fspr-gutter);
+}
+
+
+.fspr-root:not(#_) .fspr-accent {
+  color: var(--fspr-accent-deep);
+}
+
+
+/* Visible to screen readers only — icon-only controls still need a name. */
+.fspr-root:not(#_) .fspr-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* ---------- Scroll reveal ----------
+   Hidden state is gated behind `.is-ready`, added by the script, so the page
+   renders fully visible if JS never runs. */
+
+.fspr-root:not(#_).is-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s var(--fspr-ease-out),
+    transform 0.65s var(--fspr-ease-out);
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger] > * {
+  opacity: 0;
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > * {
+  animation: fspr-rise 0.6s var(--fspr-ease-out) both;
+  animation-delay: var(--fspr-stagger, 0s);
+}
+
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(2) { --fspr-stagger: 0.08s; }
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(3) { --fspr-stagger: 0.16s; }
+
+.fspr-root:not(#_).is-ready [data-reveal-stagger].is-in > *:nth-child(4) { --fspr-stagger: 0.24s; }
+
+
+/* ---------- Eyebrows & section heads ---------- */
+
+.fspr-root:not(#_) .fspr-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fspr-dim);
+}
+
+
+.fspr-root:not(#_) .fspr-section-head {
+  max-width: 760px;
+  margin-bottom: 60px;
+}
+
+
+.fspr-root:not(#_) .fspr-section-head h2 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+
+.fspr-root:not(#_) .fspr-section-head p {
+  margin: 18px 0 0;
+  max-width: 40rem;
+  font-size: 1.03rem;
+  line-height: 1.7;
+  color: var(--fspr-muted);
+}
+
+
+/* ---------- Buttons ---------- */
+
+.fspr-root:not(#_) .fspr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border-radius: var(--fspr-pill);
+  border: 1px solid transparent;
+  font-size: 0.93rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background-color 0.3s var(--fspr-ease),
+    border-color 0.3s var(--fspr-ease),
+    color 0.3s var(--fspr-ease),
+    transform 0.3s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-primary {
+  background: var(--fspr-accent);
+  color: #fff;
+}
+
+
+.fspr-root:not(#_) .fspr-btn-primary:hover {
+  background: var(--fspr-accent-deep);
+  transform: translateY(-2px);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-primary:hover svg {
+  transform: translateX(3px);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-ghost {
+  background: transparent;
+  color: var(--fspr-text);
+  border-color: var(--fspr-line-strong);
+}
+
+
+.fspr-root:not(#_) .fspr-btn-ghost:hover {
+  border-color: var(--fspr-text);
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+
+/* ---------- Conversion rail ----------
+   The page exists to produce quote requests, so each proof block ends with
+   the ask rather than saving it all for the footer. One shared component,
+   repeated after the comparison, the alternatives and the FAQs. */
+
+.fspr-root:not(#_) .fspr-rail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 40px;
+  padding: 26px 30px;
+  border: 1px solid var(--fspr-line);
+  border-radius: var(--fspr-radius-lg);
+  background:
+    radial-gradient(30rem 14rem at 100% 0%, rgba(241, 102, 16, 0.09), transparent 62%),
+    var(--fspr-surface);
+}
+
+
+.fspr-root:not(#_) .fspr-rail-copy b {
+  display: block;
+  font-size: 1.06rem;
+  font-weight: 600;
+  letter-spacing: -0.016em;
+}
+
+
+.fspr-root:not(#_) .fspr-rail-copy span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--fspr-muted);
+}
+
+
+.fspr-root:not(#_) .fspr-rail-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+
+.fspr-root:not(#_) .fspr-rail-actions .fspr-btn {
+  padding: 13px 24px;
+  font-size: 0.89rem;
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+
+@keyframes fspr-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fspr-nudge {
+  0%, 60%, 100% { transform: translateX(0); }
+  30% { transform: translateX(4px); }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+
+  .fspr-root:not(#_) *,
+  .fspr-root:not(#_) *::before,
+  .fspr-root:not(#_) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+
+  .fspr-root:not(#_).is-ready [data-reveal],
+  .fspr-root:not(#_).is-ready [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+
+}
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+
+.fspr-root:not(#_) .fspr-process {
+  padding: var(--fspr-pad) 0;
+  border-top: 1px solid var(--fspr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--fspr-seam) 22%, var(--fspr-seam) 78%, transparent) 1;
+}
+
+
+.fspr-root:not(#_) .fspr-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr));
+  gap: 1px;
+  background: var(--fspr-line);
+  border: 1px solid var(--fspr-line);
+  border-radius: var(--fspr-radius-lg);
+  overflow: hidden;
+}
+
+
+.fspr-root:not(#_) .fspr-step {
+  padding: 34px 30px;
+  background: var(--fspr-surface);
+}
+
+
+.fspr-root:not(#_) .fspr-step-when {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 4px 11px;
+  border-radius: var(--fspr-pill);
+  background: var(--fspr-accent-soft);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fspr-accent-ink);
+}
+
+
+.fspr-root:not(#_) .fspr-step h3 {
+  margin: 0 0 10px;
+  font-size: 1.12rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+
+.fspr-root:not(#_) .fspr-step p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--fspr-muted);
+}
+
+/* ============================================================
+   VOICES
+   ============================================================ */
+
+/* A scroll-snap rail rather than a two-up bento. There are eight reviews to
+   show and a grid of eight is a wall; a rail keeps the section one screen tall
+   at any width and reads as "there are more of these", which two cards side by
+   side never does.
+
+   Deliberately not an auto-rotating carousel: it moves only when the reader
+   moves it. Swipe, trackpad, arrow buttons and keyboard all drive the same
+   native scroll, so there is no JS-only path to the content. */
+
+.fspr-root:not(#_) .fspr-voices {
+  padding: var(--fspr-pad) 0;
+  border-top: 1px solid var(--fspr-seam);
+  border-image: linear-gradient(90deg, transparent, var(--fspr-seam) 22%, var(--fspr-seam) 78%, transparent) 1;
+  overflow: hidden;
+}
+
+
+.fspr-root:not(#_) .fspr-voices-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 26px;
+}
+
+
+.fspr-root:not(#_) .fspr-voices-head h2 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+
+/* ---------- Rating summary ---------- */
+
+.fspr-root:not(#_) .fspr-voices-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-bottom: 30px;
+  font-size: 0.88rem;
+  color: var(--fspr-muted);
+}
+
+
+/* Glyph stars are text, not an icon, so they take the AA-safe orange rather
+   than the brand fill — at 14px the bright accent lands at 3.2:1. */
+.fspr-root:not(#_) .fspr-voices-stars {
+  font-size: 0.95rem;
+  letter-spacing: 0.16em;
+  color: var(--fspr-accent-ink);
+}
+
+
+.fspr-root:not(#_) .fspr-voices-meta b {
+  font-weight: 600;
+  color: var(--fspr-text);
+}
+
+
+.fspr-root:not(#_) .fspr-voices-sep {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--fspr-line-strong);
+}
+
+
+/* ---------- Arrows ---------- */
+
+.fspr-root:not(#_) .fspr-voices-nav {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+
+.fspr-root:not(#_) .fspr-voices-arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--fspr-line-strong);
+  border-radius: 50%;
+  background: var(--fspr-surface);
+  color: var(--fspr-text);
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--fspr-ease),
+    border-color 0.25s var(--fspr-ease),
+    opacity 0.25s var(--fspr-ease);
+}
+
+
+.fspr-root:not(#_) .fspr-voices-arrow svg {
+  width: 17px;
+  height: 17px;
+}
+
+
+.fspr-root:not(#_) .fspr-voices-arrow:hover:not(:disabled) {
+  border-color: var(--fspr-accent);
+  background: var(--fspr-accent-soft);
+  color: var(--fspr-accent-ink);
+}
+
+
+.fspr-root:not(#_) .fspr-voices-arrow:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+
+
+/* ---------- Rail ---------- */
+
+.fspr-root:not(#_) .fspr-voices-rail {
+  display: flex;
+  gap: 16px;
+  /* Cancels the container gutter so cards run to the screen edge, then pads it
+     back so the first card still lines up with the heading above it. */
+  margin: 0 calc(var(--fspr-gutter) * -1);
+  padding: 4px var(--fspr-gutter) 4px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--fspr-gutter);
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  /* The progress bar below already reports position; a raw scrollbar under
+     the cards just adds noise. Keyboard and touch scrolling are unaffected. */
+  scrollbar-width: none;
+}
+
+
+.fspr-root:not(#_) .fspr-voices-rail::-webkit-scrollbar {
+  display: none;
+}
+
+
+.fspr-root:not(#_) .fspr-voices-rail:focus-visible {
+  outline: 2px solid var(--fspr-accent);
+  outline-offset: 4px;
+  border-radius: var(--fspr-radius);
+}
+
+
+.fspr-root:not(#_) .fspr-voice {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  width: 352px;
+  padding: 30px 28px;
+  margin: 0;
+  border: 1px solid var(--fspr-line);
+  border-radius: var(--fspr-radius-lg);
+  background: var(--fspr-surface);
+  scroll-snap-align: start;
+}
+
+
+.fspr-root:not(#_) .fspr-voice-stars {
+  margin-bottom: 16px;
+  font-size: 0.88rem;
+  letter-spacing: 0.18em;
+  color: var(--fspr-accent-ink);
+}
+
+
+.fspr-root:not(#_) .fspr-voice blockquote {
+  margin: 0 0 24px;
+  font-size: 0.99rem;
+  line-height: 1.68;
+  color: var(--fspr-text);
+}
+
+
+.fspr-root:not(#_) .fspr-voice figcaption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--fspr-seam);
+}
+
+
+/* Named rather than styled as `figcaption span`, which is what broke this
+   before: the descendant selector outranked `.fspr-voice-avatar` and reset the
+   circle to `display: block`, dropping the initials to its top-left corner. */
+.fspr-root:not(#_) .fspr-voice-avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--fspr-accent-soft);
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--fspr-accent-ink);
+}
+
+
+.fspr-root:not(#_) .fspr-voice-who {
+  min-width: 0;
+}
+
+
+.fspr-root:not(#_) .fspr-voice-name {
+  display: block;
+  font-size: 0.89rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+
+.fspr-root:not(#_) .fspr-voice-role {
+  display: block;
+  margin-top: 1px;
+  font-size: 0.79rem;
+  line-height: 1.4;
+  color: var(--fspr-dim);
+}
+
+
+/* ---------- Progress ---------- */
+
+.fspr-root:not(#_) .fspr-voices-progress {
+  position: relative;
+  height: 3px;
+  margin-top: 22px;
+  border-radius: var(--fspr-pill);
+  background: var(--fspr-line);
+  overflow: hidden;
+}
+
+
+.fspr-root:not(#_) .fspr-voices-progress i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--fspr-progress-w, 30%);
+  border-radius: inherit;
+  background: var(--fspr-accent);
+  transform: translateX(var(--fspr-progress-x, 0));
+  transition: transform 0.18s var(--fspr-ease-out);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Most grids reflow on their own via auto-fit, so these breakpoints handle
+   only what intrinsic sizing can't: the wide data tables, the mobile plan
+   switcher, and the density of a page that has to convert on a phone. */
+
+@media (max-width: 1080px) {
+
+
+
+  .fspr-root:not(#_) {
+    --fspr-pad: 88px;
+    --fspr-gutter: 24px;
+  }
+}
+
+
+
+
+
+@media (max-width: 760px) {
+
+
+
+  .fspr-root:not(#_) .fspr-faq-cta-actions .fspr-btn {
+    width: 100%;
+  }
+
+
+
+  /* ---- Testimonials: swipe replaces the arrows ---- */
+  .fspr-root:not(#_) .fspr-voices-nav {
+    display: none;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-voices-head {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+
+
+  /* Sized so the next card always peeks past the edge — that overhang is the
+     affordance once the arrow buttons are gone. */
+  .fspr-root:not(#_) .fspr-voice {
+    width: min(80vw, 330px);
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-voices-meta {
+    margin-bottom: 22px;
+    font-size: 0.83rem;
+  }
+
+
+
+  /* The two claims wrap onto their own lines here, which leaves the separator
+     dangling at the end of the first one. */
+  .fspr-root:not(#_) .fspr-voices-sep {
+    display: none;
+  }
+
+
+
+  /* ---- Conversion rail stacks ---- */
+  .fspr-root:not(#_) .fspr-rail {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    margin-top: 28px;
+    padding: 22px 20px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-rail-actions {
+    flex-direction: column;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-rail-actions .fspr-btn {
+    width: 100%;
+  }
+}
+
+
+
+
+
+@media (max-width: 680px) {
+
+
+
+  .fspr-root:not(#_) {
+    --fspr-pad: 60px;
+    --fspr-gutter: 18px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-hero-actions .fspr-btn {
+    width: 100%;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-section-head {
+    margin-bottom: 32px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-section-head p {
+    font-size: 0.96rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-step,
+  .fspr-root:not(#_) .fspr-voice {
+    padding: 24px 22px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-voice blockquote {
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-btn {
+    padding: 15px 24px;
+  }
+}
+
+
+
+
+
+@media (max-width: 400px) {
+
+
+
+  .fspr-root:not(#_) {
+    --fspr-gutter: 15px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-plan,
+  .fspr-root:not(#_) .fspr-step,
+  .fspr-root:not(#_) .fspr-voice {
+    padding: 22px 17px;
+  }
+
+
+
+  .fspr-root:not(#_) .fspr-sticky-cta .fspr-btn {
+    padding: 13px 16px;
+    font-size: 0.84rem;
+  }
+}
+</style>
+<div class="fspr-root">
+
+  <!-- Icons this block uses. Self-contained on purpose. -->
+  <svg class="fspr-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="fspr-i-chev-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></symbol>
+    <symbol id="fspr-i-chev-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></symbol>
+  </svg>
+
+  <section class="fspr-process">
+    <div class="fspr-container">
+      <div class="fspr-section-head" data-reveal>
+        <p class="fspr-eyebrow">How it works</p>
+        <h2>From messy books to a month that runs itself</h2>
+        <p>No long ramp-up. Most clients are fully live inside a week &mdash; and then it just keeps happening.</p>
+      </div>
+
+      <div class="fspr-steps" data-reveal-stagger>
+        <div class="fspr-step">
+          <span class="fspr-step-when">Week 1</span>
+          <h3>We take the mess off your plate</h3>
+          <p>We migrate your books, reconcile the history and connect your banks and tools &mdash; without disturbing a single deadline.</p>
+        </div>
+        <div class="fspr-step">
+          <span class="fspr-step-when">Weeks 2&ndash;3</span>
+          <h3>You finally see your numbers clearly</h3>
+          <p>Live reporting, a compliance calendar, and a named team that knows your business rather than a ticket queue.</p>
+        </div>
+        <div class="fspr-step">
+          <span class="fspr-step-when">Every month</span>
+          <h3>It just runs</h3>
+          <p>Reports on time, VAT and Corporate Tax handled ahead of the deadline, and someone to call when you need an answer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fspr-voices">
+    <div class="fspr-container">
+      <div class="fspr-voices-head" data-reveal>
+        <div>
+          <p class="fspr-eyebrow">In their words</p>
+          <h2>Founders who made the switch</h2>
+        </div>
+
+        <div class="fspr-voices-nav">
+          <button class="fspr-voices-arrow" type="button" data-fspr-voices="prev" aria-label="Previous reviews" aria-controls="fspr-voices-rail">
+            <svg aria-hidden="true" focusable="false"><use href="#fspr-i-chev-left"/></svg>
+          </button>
+          <button class="fspr-voices-arrow" type="button" data-fspr-voices="next" aria-label="Next reviews" aria-controls="fspr-voices-rail">
+            <svg aria-hidden="true" focusable="false"><use href="#fspr-i-chev-right"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <p class="fspr-voices-meta" data-reveal>
+        <span class="fspr-voices-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span><b>4.9</b> average rating</span>
+        <span class="fspr-voices-sep" aria-hidden="true"></span>
+        <span><b>7,000+</b> UAE businesses served</span>
+      </p>
+
+      <!-- tabindex makes the rail focusable so it can be scrolled with the
+           arrow keys, which is the only route through for keyboard users who
+           can't reach the buttons. -->
+      <div
+        class="fspr-voices-rail"
+        id="fspr-voices-rail"
+        tabindex="0"
+        role="group"
+        aria-label="Customer reviews, scrollable"
+      >
+        <figure class="fspr-voice">
+          <div class="fspr-voice-stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>They designed an accounting system tailor made to our needs &amp; completely automated our finance operations just like they promised. They&rsquo;ve been super helpful for us to scale.</blockquote>
+          <figcaption>
+            <span class="fspr-voice-avatar" aria-hidden="true">JK</span>
+            <span class="fspr-voice-who">
+              <span class="fspr-voice-name">Jeremy Khatar</span>
+              <span class="fspr-voice-role">CEO, Ronin Global LLC</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="fspr-voice">
+          <div class="fspr-voice-stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>Finanshels team is very professional. They have been handling ZWAG AI&rsquo;s accounts since 2022. From bookkeeping to auditing and Corporate Tax filings, they made it simple and hassle free for me. Highly recommended.</blockquote>
+          <figcaption>
+            <span class="fspr-voice-avatar" aria-hidden="true">PN</span>
+            <span class="fspr-voice-who">
+              <span class="fspr-voice-name">Priya M Nair</span>
+              <span class="fspr-voice-role">Founder, ZWAG AI</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="fspr-voice">
+          <div class="fspr-voice-stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>Always very responsive, supportive, having a business mindset, providing visuals and on top of all that, open for feedback so they can keep improving. Very happy that I took the decision to work with them.</blockquote>
+          <figcaption>
+            <span class="fspr-voice-avatar" aria-hidden="true">SV</span>
+            <span class="fspr-voice-who">
+              <span class="fspr-voice-name">Szilvia Vitos</span>
+              <span class="fspr-voice-role">Founder, Livvity</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="fspr-voice">
+          <div class="fspr-voice-stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>If you ever do any financial modeling/forecasting, I seriously can&rsquo;t recommend Finanshels enough. They are a dependable team of professionals who work hard to deliver results.</blockquote>
+          <figcaption>
+            <span class="fspr-voice-avatar" aria-hidden="true">BK</span>
+            <span class="fspr-voice-who">
+              <span class="fspr-voice-name">Bader Al Kazimi</span>
+              <span class="fspr-voice-role">Founder, Optimize App</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="fspr-voice">
+          <div class="fspr-voice-stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>We are genuinely happy with the way Finanshels have been handling our accounts. From day one the team has been proactive and professional, and always available to answer our questions. They have done a great job filing our Corporate Taxes and keeping our books sound.</blockquote>
+          <figcaption>
+            <span class="fspr-voice-avatar" aria-hidden="true">NS</span>
+            <span class="fspr-voice-who">
+              <span class="fspr-voice-name">Nassib Sawaya</span>
+              <span class="fspr-voice-role">Director, UAE Business</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="fspr-voice">
+          <div class="fspr-voice-stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>Fast, friendly, and very professional. I love how communicative they were handling our Corporate tax registration.</blockquote>
+          <figcaption>
+            <span class="fspr-voice-avatar" aria-hidden="true">AO</span>
+            <span class="fspr-voice-who">
+              <span class="fspr-voice-name">Abdulla Al-Ogail</span>
+              <span class="fspr-voice-role">Co-founder &amp; CEO, Olymon</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="fspr-voice">
+          <div class="fspr-voice-stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>I am extremely grateful for the exceptional service we received from Finanshels.com. We highly recommend their services to anyone seeking a reliable and trustworthy accounting partner.</blockquote>
+          <figcaption>
+            <span class="fspr-voice-avatar" aria-hidden="true">JU</span>
+            <span class="fspr-voice-who">
+              <span class="fspr-voice-name">Jomon Ulahannan</span>
+              <span class="fspr-voice-role">Founder &amp; CEO, Insurance Hub</span>
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="fspr-voice">
+          <div class="fspr-voice-stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>They thoroughly understood our business processes and streamlined our accounting processes perfectly where both our in-house and outsourced accountants failed multiple times.</blockquote>
+          <figcaption>
+            <span class="fspr-voice-avatar" aria-hidden="true">MP</span>
+            <span class="fspr-voice-who">
+              <span class="fspr-voice-name">Meet Patel</span>
+              <span class="fspr-voice-role">Former COO, StudentHub &amp; BAWES</span>
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="fspr-voices-progress" aria-hidden="true"><i></i></div>
+    </div>
+  </section>
+</div>

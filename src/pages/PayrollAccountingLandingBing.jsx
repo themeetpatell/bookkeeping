@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiAlertTriangle, FiTrendingDown, FiUsers, FiZap, FiBarChart2, FiShield, FiX, FiArrowRight } from 'react-icons/fi';
-import './PayrollAccountingLandingBing.css';
+// Shares the Google-ads stylesheet: the Bing variant is visually identical and
+// only differs in the prefilled WhatsApp copy below.
+import './PayrollAccountingLanding.css';
 
 const ZohoPayrollForm = ({ formId }) => (
   <form

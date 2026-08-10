@@ -10,7 +10,7 @@
 .hero-section {
   background:
     linear-gradient(135deg, rgba(0, 0, 0, 0.82) 0%, rgba(44, 82, 130, 0.9) 100%),
-    url('/Dubai.png');
+    url('/Dubai.jpg');
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
