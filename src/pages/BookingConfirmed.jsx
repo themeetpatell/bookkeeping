@@ -132,7 +132,6 @@ const BookingConfirmed = () => {
           <div className="contact-info">
             <p>Need to reschedule or have a question?</p>
             <a href="tel:+971521549572" className="phone-link">+971 52 154 9572</a>
-            <a href="mailto:contact@finanshels.com" className="email-link">contact@finanshels.com</a>
           </div>
         </div>
       </div>

@@ -108,17 +108,17 @@ const BookkeepingLanding = () => {
   const seoJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    name: 'Finanshels Bookkeeping & Tax (UAE)',
+    name: 'Finanshels Bookkeeping (UAE)',
     url: absoluteUrl('/bookkeeping'),
     image: absoluteUrl('/Dubai.jpg'),
     description:
-      'UAE bookkeeping, corporate tax, and VAT compliance with real-time dashboards. Free consultation and pay only if satisfied.',
+      'UAE bookkeeping and management reporting with real-time dashboards. Free consultation and pay only if satisfied.',
     areaServed: 'AE',
     telephone: '+971521549572',
     serviceType: [
       'Bookkeeping',
-      'Corporate Tax Compliance',
-      'VAT Compliance',
+      'Management Accounts',
+      'Bank Reconciliation',
       'Financial Reporting',
       'Cash Flow Forecasting'
     ],
@@ -159,8 +159,8 @@ const BookkeepingLanding = () => {
     },
     {
       icon: <FiAlertTriangle />,
-      title: 'Tax Compliance Stress',
-      description: 'UAE Corporate Tax deadlines looming. Worried about penalties and mistakes.'
+      title: 'Year-End Panic',
+      description: 'Year-end creeps up and the books are months behind. Numbers you cannot defend.'
     }
   ];
 
@@ -182,8 +182,8 @@ const BookkeepingLanding = () => {
     },
     {
       icon: <FiShield />,
-      title: 'UAE Tax Compliance',
-      description: 'Corporate tax and VAT compliances handled. Stay compliant without the stress.'
+      title: 'Always Close-Ready',
+      description: 'Reconciled ledgers and clean schedules every month. No year-end scramble.'
     }
   ];
 
@@ -197,8 +197,8 @@ const BookkeepingLanding = () => {
       after: 'Weekly automated forecasts'
     },
     {
-      before: 'Late Corporate Tax and VAT compliances',
-      after: '100% on-time, audit-ready'
+      before: 'Month-end close drags on for weeks',
+      after: 'Closed in days, review-ready'
     },
     {
       before: 'Disconnected tools',
@@ -219,7 +219,7 @@ const BookkeepingLanding = () => {
     {
       stage: 'Setup & Reporting',
       timeline: 'Day 8–20',
-      description: 'Build dashboards, setup cashflow, tax calendars'
+      description: 'Build dashboards, setup cashflow, reporting calendars'
     },
     {
       stage: 'Month-End & Review',
@@ -246,11 +246,11 @@ const BookkeepingLanding = () => {
       period: '/mo',
       transactions: 'Up to 50 transactions/year',
       features: [
-        'Corporate Tax Compliance (Annual)',
-        'VAT Quarterly Compliance',
+        'Annual Financial Statements',
+        'Quarterly Management Accounts',
         'Quarterly Financial Statements',
         'Dedicated Support Manager',
-        '30 Min Free Tax Consultation'
+        '30 Min Free Finance Review'
       ]
     },
     {
@@ -303,8 +303,8 @@ const BookkeepingLanding = () => {
 
   const faqs = [
     {
-      question: 'How does Finanshels handle UAE Corporate Tax compliance?',
-      answer: 'We manage your complete Corporate Tax lifecycle - from quarterly compliances to annual book closure. Our team stays updated with the latest UAE tax regulations to ensure 100% compliance and help you avoid penalties.'
+      question: 'What does month-end close look like with Finanshels?',
+      answer: 'Your books are reconciled continuously, not in a month-end rush. We close each month within days, deliver management accounts and a cash-flow view, and roll it all into annual financial statements your accountant, bank or investor can rely on.'
     },
     {
       question: 'What accounting software do you support?',
@@ -347,7 +347,7 @@ const BookkeepingLanding = () => {
             
             <p className="hero-description">
               Expert outsourced accounting & bookkeeping for UAE small businesses.
-              Corporate tax compliance, VAT compliance, and real-time financial
+              Month-end close, management accounts, and real-time financial
               insights — all handled by our dedicated team.
             </p>
             
@@ -448,11 +448,11 @@ const BookkeepingLanding = () => {
             <p className="section-eyebrow">THE PROBLEM</p>
             <h2 className="section-title">
               Managing Small Business<br />
-              Accounting is <span className="highlight-green">Taxing</span>
+              Accounting is <span className="highlight-green">Draining</span>
             </h2>
             <p className="section-subtitle">
               You started your business to pursue your passion — not to wrestle with spreadsheets and
-              tax compliances. Yet here you are, spending hours on tasks that drain your energy.
+              month-end close. Yet here you are, spending hours on tasks that drain your energy.
             </p>
           </div>
           
@@ -480,7 +480,7 @@ const BookkeepingLanding = () => {
               </h2>
               <p className="solution-description">
                 In one platform, one dedicated team manages all your finance
-                functions. From bookkeeping to tax compliance — we handle it so you can
+                functions. From bookkeeping to management reporting — we handle it so you can
                 focus on what you do best.
               </p>
               

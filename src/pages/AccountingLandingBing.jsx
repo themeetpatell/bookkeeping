@@ -140,7 +140,7 @@ const AccountingLandingBing = () => {
   const faqs = [
     {
       question: "What accounting and bookkeeping services do you offer?",
-      answer: "We provide comprehensive accounting solutions including bookkeeping, tax compliance, profit and loss statement preparation, cash flow accounting, bank reconciliation, audit support, and CFO advisory services. Our finance and accounting services are tailored to meet your business needs."
+      answer: "We provide comprehensive accounting solutions including bookkeeping, management accounts, profit and loss statement preparation, cash flow accounting, bank reconciliation, month-end close, and CFO advisory services. Our finance and accounting services are tailored to meet your business needs."
     },
     {
       question: "How does your accounting automation work?",
@@ -194,7 +194,7 @@ const AccountingLandingBing = () => {
               </h1>
               
               <p className="hero-subheadline">
-                Expert outsourced accounting & bookkeeping services for growing businesses in Dubai, Abu Dhabi, Sharjah & across the UAE. From profit and loss statements to tax compliance — we streamline your finance and accounting operations so you can focus on growth.
+                Expert outsourced accounting & bookkeeping services for growing businesses in Dubai, Abu Dhabi, Sharjah & across the UAE. From profit and loss statements to month-end close — we streamline your finance and accounting operations so you can focus on growth.
               </p>
               
               <div className="hero-features">
@@ -285,10 +285,10 @@ const AccountingLandingBing = () => {
           <div className="section-header">
             <span className="section-label">THE PROBLEM</span>
             <h2 className="section-title">
-              Managing Business Accounting is <span className="text-orange">Taxing</span>
+              Managing Business Accounting is <span className="text-orange">Draining</span>
             </h2>
             <p className="section-description">
-              You started your business to pursue your passion — not to wrestle with spreadsheets and tax filings. Yet here you are, spending hours on tasks that drain your energy.
+              You started your business to pursue your passion — not to wrestle with spreadsheets and month-end close. Yet here you are, spending hours on tasks that drain your energy.
             </p>
           </div>
           
@@ -321,8 +321,8 @@ const AccountingLandingBing = () => {
               <div className="problem-icon">
                 <FiAlertTriangle />
               </div>
-              <h3>Tax Compliance Stress</h3>
-              <p>Tax deadlines looming. Worried about penalties and mistakes with auditing services.</p>
+              <h3>Year-End Panic</h3>
+              <p>Year-end creeps up and the books are months behind. Numbers you cannot defend in a review.</p>
             </div>
           </div>
         </div>
@@ -338,7 +338,7 @@ const AccountingLandingBing = () => {
                 One Platform. One Team. <span className="text-orange">10× Faster.</span>
               </h2>
               <p className="section-description">
-                In one platform, one dedicated team manages all your finance and accounting functions. From bookkeeping to tax filing — we handle it so you can focus on what you do best.
+                In one platform, one dedicated team manages all your finance and accounting functions. From bookkeeping to management reporting — we handle it so you can focus on what you do best.
               </p>
               
               <div className="solution-features">
@@ -377,8 +377,8 @@ const AccountingLandingBing = () => {
                     <FiShield />
                   </div>
                   <div className="feature-content">
-                    <h3>Full Tax Compliance</h3>
-                    <p>Corporate tax and VAT filings handled. Stay compliant without the stress.</p>
+                    <h3>Always Close-Ready</h3>
+                    <p>Reconciled ledgers and clean schedules every month. No year-end scramble.</p>
                   </div>
                 </div>
               </div>
@@ -425,10 +425,10 @@ const AccountingLandingBing = () => {
                 </div>
                 
                 <div className="dashboard-footer">
-                  <span className="footer-text">All filings up to date</span>
+                  <span className="footer-text">All reconciliations up to date</span>
                   <div className="status-badges">
-                    <span className="status-badge green">Tax Filed</span>
-                    <span className="status-badge orange">Audit Ready</span>
+                    <span className="status-badge green">Books Reconciled</span>
+                    <span className="status-badge orange">Report Ready</span>
                   </div>
                 </div>
               </div>
@@ -486,11 +486,11 @@ const AccountingLandingBing = () => {
               <div className="comparison-row">
                 <div className="comparison-cell before">
                   <FiX className="icon-red" />
-                  <span>Late tax filings & penalties</span>
+                  <span>Month-end close drags on for weeks</span>
                 </div>
                 <div className="comparison-cell after">
                   <FiCheckCircle className="icon-green" />
-                  <span>100% on-time, audit-ready</span>
+                  <span>Closed in days, review-ready</span>
                 </div>
               </div>
               
@@ -549,8 +549,8 @@ const AccountingLandingBing = () => {
               <p className="pricing-limit">Up to 50 transactions/year</p>
               
               <ul className="pricing-features">
-                <li><FiCheckCircle /> Annual Tax Filing</li>
-                <li><FiCheckCircle /> Tax Compliance Support</li>
+                <li><FiCheckCircle /> Annual Financial Statements</li>
+                <li><FiCheckCircle /> Year-End Close Support</li>
                 <li><FiCheckCircle /> Basic Financial Statements</li>
                 <li><FiCheckCircle /> Dedicated Support Manager</li>
                 <li><FiCheckCircle /> 30 Min Free Consultation</li>
@@ -691,7 +691,7 @@ const AccountingLandingBing = () => {
                 <div className="timeline-cell">
                   <span className="timeline-badge">Day 8–20</span>
                 </div>
-                <div className="timeline-cell">Build dashboards, setup cash flow tracking, tax calendars</div>
+                <div className="timeline-cell">Build dashboards, setup cash flow tracking, reporting calendars</div>
               </div>
               
               <div className="timeline-row">

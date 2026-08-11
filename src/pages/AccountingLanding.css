@@ -1079,7 +1079,7 @@
   font-size: 20px;
 }
 
-.pricing-tax-highlight {
+.pricing-bonus-highlight {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1092,7 +1092,7 @@
   font-weight: 600;
 }
 
-.pricing-tax-highlight strong {
+.pricing-bonus-highlight strong {
   color: #16a34a;
 }
 

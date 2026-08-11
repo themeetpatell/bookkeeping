@@ -138,7 +138,7 @@ const heroFeedItems = [
   { icon: 'check', time: '06:04:12', text: 'Sorted 214 transactions', meta: 'Emirates NBD, Mashreq' },
   { icon: 'check', time: '06:04:38', text: 'Matched every bank line', meta: 'nothing left over' },
   { icon: 'flag', time: '06:05:07', text: 'Set 3 invoices aside', meta: 'your accountant is on it' },
-  { icon: 'check', time: '06:05:41', text: 'Drafted your quarterly VAT compliance', meta: 'due 28 Aug, ready now' },
+  { icon: 'check', time: '06:05:41', text: 'Drafted your quarterly management report', meta: 'due 28 Aug, ready now' },
   { icon: 'human', time: '06:06:02', text: 'Your accountant signed it off', meta: 'checked line by line' },
 ];
 
@@ -163,12 +163,12 @@ const pillars = [
   {
     number: '02',
     title: 'A real accountant owns your numbers',
-    text: 'Nothing reaches you or the FTA until a qualified accountant has been through it. The software does the typing. A person takes responsibility.',
+    text: 'Nothing leaves our desk until a qualified accountant has been through it. The software does the typing. A person takes responsibility.',
   },
   {
     number: '03',
     title: 'You can look any time',
-    text: 'No waiting for a PDF at month-end. Open the dashboard and see your cash, your runway, what you owe in VAT and how the month is going — as of this morning.',
+    text: 'No waiting for a PDF at month-end. Open the dashboard and see your cash, your runway, what you owe suppliers and how the month is going — as of this morning.',
   },
 ];
 
@@ -189,13 +189,13 @@ const comparisonRows = [
     now: 'A dashboard that is always current',
   },
   {
-    label: 'Tax deadlines',
+    label: 'Month-end deadlines',
     old: 'Last-minute scrambles',
     now: 'Watched all year, ready early',
   },
   {
     label: 'Errors',
-    old: 'Discovered at audit',
+    old: 'Discovered months later',
     now: 'Caught the day they happen',
   },
   {
@@ -219,12 +219,12 @@ const workflowSteps = [
   {
     step: '03',
     title: 'Your accountant checks it',
-    text: 'A dedicated accountant goes through the work, sorts out anything that was set aside, and signs off on the compliance work. Nothing goes out on the software’s say-so alone.',
+    text: 'A dedicated accountant goes through the work, sorts out anything that was set aside, and signs off on the month’s numbers. Nothing goes out on the software’s say-so alone.',
   },
   {
     step: '04',
     title: 'You decide',
-    text: 'Clean books, live dashboards and on-time VAT & Corporate Tax compliance — plus a team on WhatsApp when you need an answer.',
+    text: 'Clean books, live dashboards and month-end numbers that land on time — plus a team on WhatsApp when you need an answer.',
   },
 ];
 
@@ -232,40 +232,40 @@ const aiDuties = [
   'Sorts every transaction, every day',
   'Matches your bank lines as they land',
   'Reads your invoices and receipts',
-  'Keeps an eye on every tax deadline',
-  'Drafts your compliance work and monthly reports',
+  'Keeps an eye on every reporting deadline',
+  'Drafts your monthly and quarterly reports',
   'Spots duplicates and odd entries',
 ];
 
 const humanDuties = [
   'Checks and approves the work',
   'Sorts out anything that looks wrong',
-  'Signs off on VAT & Corporate Tax compliance',
+  'Signs off on every set of accounts',
   'Talks through cash, runway and structure',
   'Answers on WhatsApp — quickly, and as a person',
-  'Owns the numbers at audit time',
+  'Owns the numbers when they get questioned',
 ];
 
 const services = [
   {
     icon: FiBookOpen,
     title: 'Bookkeeping',
-    text: 'Books matched daily and checked by your own accountant. Ready whenever an auditor, a bank or an investor asks.',
+    text: 'Books matched daily and checked by your own accountant. Ready whenever a bank, a lender or an investor asks.',
   },
   {
     icon: FiPercent,
-    title: 'VAT Compliance',
-    text: 'Quarterly VAT compliance and FTA letters — drafted for you, checked by a person.',
+    title: 'Management Accounts',
+    text: 'Monthly and quarterly management accounts — drafted for you, checked by a person.',
   },
   {
     icon: FiBriefcase,
-    title: 'Corporate Tax',
-    text: '9% Corporate Tax planning and compliance, with the deadlines watched for you.',
+    title: 'Year-End Close',
+    text: 'Annual financial statements prepared from books that stayed current all year.',
   },
   {
     icon: FiUsers,
-    title: 'Payroll & WPS',
-    text: 'Salaries processed, WPS files generated and gratuity accruals kept current every month.',
+    title: 'Payroll',
+    text: 'Salaries processed, bank payment files prepared and gratuity accruals kept current every month.',
   },
   {
     icon: FiTrendingUp,
@@ -274,8 +274,8 @@ const services = [
   },
   {
     icon: FiFileText,
-    title: 'Audit Support',
-    text: 'Clean trails and organized documents mean audits close faster and cost less.',
+    title: 'Records & Handover',
+    text: 'Clean trails and organized documents mean any review closes faster and costs less.',
   },
 ];
 
@@ -325,12 +325,12 @@ const faqs = [
   {
     question: 'What does "AI-native" actually mean?',
     answer:
-      'Most firms bolt AI tools onto a manual workflow. We built our workflow around AI from day one: agents handle categorization, reconciliation, document capture and deadline tracking continuously, and our accountants spend their time on review, exceptions and advice — not data entry. The result is books that are 10× faster to close and current every day.',
+      'Most firms bolt AI tools onto a manual workflow. We built our workflow around AI from day one: agents handle categorization, reconciliation, document capture and close tracking continuously, and our accountants spend their time on review, exceptions and advice — not data entry. The result is books that are 10× faster to close and current every day.',
   },
   {
     question: 'Is AI doing my accounting on its own?',
     answer:
-      'No. AI drafts, humans sign. Every categorization, reconciliation and compliance check is reviewed by a qualified accountant before it reaches you or the FTA. You get the speed of automation with the accountability of a licensed firm.',
+      'No. AI drafts, humans sign. Every categorization, reconciliation and review check is signed off by a qualified accountant before it reaches you. You get the speed of automation with the accountability of a real firm.',
   },
   {
     question: 'Which tools do you integrate with?',
@@ -359,7 +359,7 @@ const seoJsonLd = {
   '@type': 'AccountingService',
   name: 'Finanshels — First AI-Native Accounting Firm',
   description:
-    'UAE’s First AI-native accounting firm. AI agents reconcile and draft; qualified accountants review and sign off. Bookkeeping, VAT, Corporate Tax, payroll and CFO insights.',
+    'UAE’s First AI-native accounting firm. AI agents reconcile and draft; qualified accountants review and sign off. Bookkeeping, management accounts, payroll and CFO insights.',
   areaServed: 'AE',
   url: absoluteUrl('/ai-accounting'),
 };
@@ -388,7 +388,7 @@ const AIAccountingLanding = () => {
     <div className="ai-landing" ref={rootRef}>
       <Seo
         title="First AI-Native Accounting Firm in UAE | Finanshels"
-        description="AI agents reconcile your books daily. Qualified accountants review and sign off. Bookkeeping, VAT, Corporate Tax and payroll for 7,000+ UAE businesses — 10× faster."
+        description="AI agents reconcile your books daily. Qualified accountants review and sign off. Bookkeeping, management accounts and payroll for 7,000+ UAE businesses — 10× faster."
         canonicalPath="/ai-accounting"
         jsonLd={seoJsonLd}
       />
@@ -411,7 +411,7 @@ const AIAccountingLanding = () => {
               <p className="ai-hero-sub">
                 Software does the sorting, the matching and the first draft overnight. A qualified
                 accountant checks every number before it goes anywhere. That&rsquo;s how 7,000+ UAE
-                businesses close 10&times; faster and stay ready for an audit.
+                businesses close 10&times; faster and always know where they stand.
               </p>
 
               <div className="ai-hero-actions">
@@ -672,7 +672,7 @@ const AIAccountingLanding = () => {
             </h2>
             <p className="ai-dash-sub">
               Every Finanshels client gets Findelivery — our AI CFO dashboard. P&amp;L, cash,
-              runway and tax positions update as your books do, and you can ask the CFO anything
+              runway and margins update as your books do, and you can ask the CFO anything
               in plain English.
             </p>
           </div>

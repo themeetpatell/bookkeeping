@@ -43,19 +43,22 @@ const PARAMS = [
 
 /* Registrable domains this component may be served from. Attribution cookies
    are widened to `.<domain>` so they survive navigation between that domain's
-   subdomains. Cookies cannot be shared ACROSS these entries — finanshels.co and
-   finanshels.com are separate registrable domains, so each keeps its own
-   fs_first / fs_last. */
-const COOKIE_DOMAINS = ["finanshelsaccounting.co", "finanshels.co", "finanshels.com"];
+   subdomains. Cookies cannot be shared ACROSS these entries — each registrable
+   domain keeps its own fs_first / fs_last.
+
+   The main Finanshels web presence is deliberately absent: this ads-only site
+   never runs there, and nothing in this repo may reference or link to it. */
+const COOKIE_DOMAINS = ["finanshelsaccounting.co", "finanshels.co"];
 
 /* ---------- cookies ---------- */
 function getCookie(n) {
   const m = document.cookie.match("(?:^|; )" + n + "=([^;]*)");
   return m ? decodeURIComponent(m[1]) : null;
 }
-/* Exact suffix match, never `indexOf`: "accounting.finanshels.com" contains the
-   substring "finanshels.co", so a substring test would set an unsettable
-   domain=.finanshels.co cookie on the .com host and silently drop it. */
+/* Exact suffix match, never `indexOf`: a host ending in ".co" + one more letter
+   still contains the substring of a shorter entry above, so a substring test
+   would set an unsettable cookie domain on the wrong host and silently drop
+   it. */
 function cookieDomain() {
   const host = location.hostname;
   for (let i = 0; i < COOKIE_DOMAINS.length; i++) {

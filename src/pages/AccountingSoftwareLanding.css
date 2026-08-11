@@ -944,13 +944,13 @@
   font-weight: 500;
 }
 
-.software-badge.vat {
+.software-badge.primary {
   background: rgba(249, 115, 22, 0.2);
   color: var(--orange-primary);
   border: 1px solid rgba(249, 115, 22, 0.3);
 }
 
-.software-badge.ct {
+.software-badge.secondary {
   background: rgba(249, 115, 22, 0.2);
   color: var(--orange-primary);
   border: 1px solid rgba(249, 115, 22, 0.3);

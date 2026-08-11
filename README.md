@@ -1,6 +1,8 @@
 # Finanshels Bookkeeping Landing
 
-Marketing site for Finanshels’ UAE bookkeeping, tax, and consultation offering. Built with React + Vite, styled in CSS, and wired to Zoho Forms/Bookings for lead capture.
+Paid-ads landing site for Finanshels’ UAE bookkeeping, month-end close, and CFO advisory offering. Built with React + Vite, styled in CSS, and wired to Zoho Forms/Bookings for lead capture.
+
+> **Ad-policy constraint:** this site must never claim to perform registrations, filings, or submissions to any government body (VAT, Corporate Tax, FTA, WPS, Ministry of Labour, etc.), and must not link to or mention any other Finanshels domain. Google Ads disapproves the destination on both counts. Keep copy on bookkeeping, reconciliation, close, reporting, payroll processing, and advisory.
 
 ## Getting Started
 - Install deps: `npm install`

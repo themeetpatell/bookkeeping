@@ -139,7 +139,7 @@ const PayrollAccountingLandingBing = () => {
 
   const testimonials = [
     {
-      text: "Finanshels transformed our payroll operations. What used to take us days now happens automatically. WPS compliance is handled flawlessly every month.",
+      text: "Finanshels transformed our payroll operations. What used to take us days now happens automatically. Salary runs land on time, every month, without me chasing anyone.",
       name: "Ahmed Al-Rashid",
       title: "CEO, TechVentures Dubai",
       initials: "AA"
@@ -161,19 +161,19 @@ const PayrollAccountingLandingBing = () => {
   const faqs = [
     {
       question: "What is included in your payroll services?",
-      answer: "Our payroll services include salary processing, WPS compliance and filing, gratuity calculations, leave management, end-of-service benefits, payslip generation, and real-time reporting dashboards. We handle everything from employee onboarding to final settlements."
+      answer: "Our payroll services include salary processing, bank payment file preparation, gratuity accruals, leave management, end-of-service calculations, payslip generation, and real-time reporting dashboards. We handle everything from employee onboarding to final settlements."
     },
     {
       question: "How long does it take to set up?",
-      answer: "Most businesses are fully onboarded within 30 days. This includes data migration, system setup, WPS configuration, and your first payroll run. We provide dedicated support throughout the process to ensure a smooth transition."
+      answer: "Most businesses are fully onboarded within 30 days. This includes data migration, system setup, pay-cycle configuration, and your first payroll run. We provide dedicated support throughout the process to ensure a smooth transition."
     },
     {
       question: "Is my employee data secure?",
       answer: "Absolutely. We use bank-level encryption and security protocols to protect all sensitive data. Our systems are compliant with UAE data protection regulations, and we never share your information with third parties."
     },
     {
-      question: "Do you handle WPS compliance?",
-      answer: "Yes, WPS (Wages Protection System) compliance is a core part of our service. We handle setup, monthly salary file generation, and ensure timely submissions to meet Ministry of Labour requirements."
+      question: "Do you prepare the monthly salary files for our bank?",
+      answer: "Yes. We calculate the payroll, generate the monthly salary file in your bank's required format, and hand it to you ready to upload — so the run goes out on schedule every month."
     },
     {
       question: "Can you handle multi-entity payroll?",
@@ -192,8 +192,8 @@ const PayrollAccountingLandingBing = () => {
       price: "499",
       limit: "Up to 50 transactions/year",
       features: [
-        "Annual Tax Filing",
-        "Tax Compliance Support",
+        "Annual Financial Statements",
+        "Year-End Close Support",
         "Basic Financial Statements",
         "Dedicated Support Manager",
         "30 Min Free Consultation"
@@ -267,7 +267,7 @@ const PayrollAccountingLandingBing = () => {
               </h1>
               
               <p className="hero-subheadline">
-                Expert payroll accounting services for growing businesses in Dubai, Abu Dhabi, Sharjah & across the UAE. From salary processing to WPS compliance and payroll bookkeeping — we streamline your payroll accounting so you can focus on growth.
+                Expert payroll accounting services for growing businesses in Dubai, Abu Dhabi, Sharjah & across the UAE. From salary processing to payroll bookkeeping and reporting — we streamline your payroll accounting so you can focus on growth.
               </p>
               
               <div className="hero-features">
@@ -351,10 +351,10 @@ const PayrollAccountingLandingBing = () => {
           <div className="section-header">
             <span className="section-label">THE PROBLEM</span>
             <h2 className="section-title">
-              Managing Payroll Accounting is Taxing
+              Managing Payroll Accounting is Draining
             </h2>
             <p className="section-description">
-              You started your business to pursue your passion — not to wrestle with payroll spreadsheets and tax filings. Yet here you are, spending hours on tasks that drain your energy.
+              You started your business to pursue your passion — not to wrestle with payroll spreadsheets and month-end close. Yet here you are, spending hours on tasks that drain your energy.
             </p>
           </div>
           
@@ -388,7 +388,7 @@ const PayrollAccountingLandingBing = () => {
                 <FiAlertTriangle />
               </div>
               <h3>Compliance Anxiety</h3>
-              <p>WPS deadlines, tax filings, and Ministry of Labour requirements keeping you up at night.</p>
+              <p>Pay dates, gratuity accruals, and end-of-service maths keeping you up at night.</p>
             </div>
           </div>
         </div>
@@ -404,7 +404,7 @@ const PayrollAccountingLandingBing = () => {
                 One Platform. One Team. 10× Faster.
               </h2>
               <p className="section-description">
-                In one platform, one dedicated team manages all your payroll accounting. From salary processing to tax compliance — we handle your books so you can focus on what you do best.
+                In one platform, one dedicated team manages all your payroll accounting. From salary processing to month-end close — we handle your books so you can focus on what you do best.
               </p>
               
               <div className="solution-features">
@@ -443,8 +443,8 @@ const PayrollAccountingLandingBing = () => {
                     <FiShield />
                   </div>
                   <div className="feature-content">
-                    <h3>Full Tax & WPS Compliance</h3>
-                    <p>WPS filing and corporate tax compliance handled. Stay audit-ready without stress.</p>
+                    <h3>Payroll That Never Slips</h3>
+                    <p>Salary runs, accruals and payroll journals handled. Stay review-ready without stress.</p>
                   </div>
                 </div>
               </div>
@@ -477,7 +477,7 @@ const PayrollAccountingLandingBing = () => {
                 <div className="dashboard-items">
                   <div className="dashboard-item">
                     <FiCheckCircle className="item-icon green" />
-                    <span>WPS Filed</span>
+                    <span>Salaries Paid</span>
                     <span className="item-status">Today</span>
                   </div>
                   <div className="dashboard-item">
@@ -519,7 +519,7 @@ const PayrollAccountingLandingBing = () => {
               <ul className="comparison-list">
                 <li><FiX className="list-icon" /> 15–20 hrs/month chasing accountants</li>
                 <li><FiX className="list-icon" /> No cash flow visibility</li>
-                <li><FiX className="list-icon" /> Late tax filings & penalties</li>
+                <li><FiX className="list-icon" /> Month-end close drags on for weeks</li>
                 <li><FiX className="list-icon" /> Disconnected tools & spreadsheets</li>
                 <li><FiX className="list-icon" /> Costly in-house finance team</li>
               </ul>
@@ -533,7 +533,7 @@ const PayrollAccountingLandingBing = () => {
               <ul className="comparison-list">
                 <li><FiCheckCircle className="list-icon" /> 2 hrs/month reviewing dashboards</li>
                 <li><FiCheckCircle className="list-icon" /> Weekly automated forecasts</li>
-                <li><FiCheckCircle className="list-icon" /> 100% on-time, audit-ready</li>
+                <li><FiCheckCircle className="list-icon" /> Closed in days, review-ready</li>
                 <li><FiCheckCircle className="list-icon" /> One streamlined accounting platform</li>
                 <li><FiCheckCircle className="list-icon" /> 70% cost reduction with predictable outcomes</li>
               </ul>
@@ -631,7 +631,7 @@ const PayrollAccountingLandingBing = () => {
                   <h3>Setup & Reporting</h3>
                   <span className="timeline-badge">Day 8–20</span>
                 </div>
-                <p>Build dashboards, setup cash flow tracking, configure tax calendars and payroll schedules.</p>
+                <p>Build dashboards, setup cash flow tracking, configure reporting calendars and payroll schedules.</p>
               </div>
             </div>
             

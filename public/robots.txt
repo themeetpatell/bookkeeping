@@ -3,9 +3,11 @@
 # every page carries a noindex — see the X-Robots-Tag header in vercel.json, the
 # meta tag in index.html and the runtime tag in src/components/Seo.jsx.
 #
-# Crawling is deliberately ALLOWED. A crawler blocked here never reads the
-# noindex, and can still list a bare URL it found linked somewhere else. Letting
-# bots in to read the noindex is what actually keeps the site out of the index.
+# Crawling by SEARCH engines is deliberately ALLOWED. A crawler blocked here
+# never reads the noindex, and can still list a bare URL it found linked
+# somewhere else. Letting bots in to read the noindex is what actually keeps the
+# site out of the index. AI/LLM crawlers are a different case and are blocked
+# outright at the bottom of this file.
 #
 # Ad crawlers must never be blocked or the ads get disapproved for an
 # unreachable destination. They are listed explicitly so that adding a
@@ -24,6 +26,65 @@ Allow: /
 # Microsoft Advertising landing page crawler
 User-agent: adidxbot
 Allow: /
+
+# ---------------------------------------------------------------------------
+# AI / LLM training and answer-engine crawlers are blocked outright. They have
+# no bearing on ad serving, they ignore noindex (a search-index directive, not a
+# training one), and anything they ingest here can resurface as an answer that
+# ties this ads site to the wider Finanshels web presence — exactly the
+# association these campaigns must not carry. See also /llms.txt.
+# ---------------------------------------------------------------------------
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Perplexity-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
 
 # No Sitemap line on purpose: a sitemap asks search engines to index the pages,
 # which is the opposite of what a paid-only site wants.

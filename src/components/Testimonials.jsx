@@ -23,7 +23,7 @@ const testimonials = [
     avatar: '/Founders/bader.jpeg',
   },
   {
-    quote: 'I am extremely grateful for the exceptional service we received from Finanshels.com. We insurancehub.ae highly recommend their services to anyone seeking reliable and trustworthy Accounting Partner.',
+    quote: 'I am extremely grateful for the exceptional service we received from Finanshels. We insurancehub.ae highly recommend their services to anyone seeking reliable and trustworthy Accounting Partner.',
     name: 'Jomon Ulahannan',
     title: 'Founder & CEO, INSURANCE HUB',
     avatar: '/Founders/jomon.jpg',

@@ -187,17 +187,17 @@ const AccountingSoftwareLandingBing = () => {
       finanshels: true
     },
     {
-      feature: 'UAE Corporate Tax Filing',
+      feature: 'Month-End Close Done For You',
       software: false,
       finanshels: true
     },
     {
-      feature: 'VAT Filing & Compliance',
+      feature: 'Management Accounts & Reporting',
       software: false,
       finanshels: true
     },
     {
-      feature: 'Proactive Tax Strategy',
+      feature: 'Proactive Cash Flow Planning',
       software: false,
       finanshels: true
     },
@@ -212,7 +212,7 @@ const AccountingSoftwareLandingBing = () => {
       finanshels: true
     },
     {
-      feature: 'Audit-Ready Documentation',
+      feature: 'Review-Ready Documentation',
       software: 'limited',
       finanshels: true
     }
@@ -230,7 +230,7 @@ const AccountingSoftwareLandingBing = () => {
       title: "Founder, Livvity"
     },
     {
-      text: "My old xero setup got messy quickly. Too many errors I didn't catch. Finanshels does our books + shows cashflow forecasts weekly + remembers to file taxes. I can finally focus on revenue.",
+      text: "My old xero setup got messy quickly. Too many errors I didn't catch. Finanshels does our books + shows cashflow forecasts weekly + closes the month before I have to ask. I can finally focus on revenue.",
       name: "Jeremy Khatar",
       title: "CEO, Ronin Global LLC"
     },
@@ -259,8 +259,8 @@ const AccountingSoftwareLandingBing = () => {
       after: 'Dedicated account manager for strategic guidance'
     },
     {
-      before: 'Tax compliance anxiety and deadlines',
-      after: '100% on-time, audit-ready filings'
+      before: 'Month-end anxiety and missed deadlines',
+      after: 'Closed in days, review-ready every month'
     }
   ];
 
@@ -271,19 +271,19 @@ const AccountingSoftwareLandingBing = () => {
     },
     {
       question: "What's included in the client portal?",
-      answer: "Your client portal includes real-time financial dashboards, profit & loss statements, cash flow forecasts, expense categorization, tax filing status, and all your financial records in one place. You can access everything 24/7 from any device."
+      answer: "Your client portal includes real-time financial dashboards, profit & loss statements, cash flow forecasts, expense categorization, month-end close status, and all your financial records in one place. You can access everything 24/7 from any device."
     },
     {
       question: "How does Finanshels pricing compare to accounting software costs?",
-      answer: "QuickBooks costs AED 80-300/month plus your time to manage it (and potential accountant fees for cleanup and tax filing). Finanshels includes everything — bookkeeping, expert advice, tax compliance, and your client portal — starting at AED 499/month with no hidden costs."
+      answer: "QuickBooks costs AED 80-300/month plus your time to manage it (and potential accountant fees for cleanup and year-end work). Finanshels includes everything — bookkeeping, expert advice, month-end close, and your client portal — starting at AED 499/month with no hidden costs."
     },
     {
       question: "Do you replace my current bookkeeping software?",
       answer: "We can work with your existing software (QuickBooks, Xero, Zoho Books) or migrate you to a better solution. Our team handles all the data migration and setup so you don't have to worry about the technical details."
     },
     {
-      question: "How does Finanshels handle UAE Corporate Tax compliance?",
-      answer: "We manage your complete Corporate Tax lifecycle — from quarterly filings to annual returns. Our team stays updated with the latest UAE tax regulations to ensure 100% compliance and help you avoid penalties."
+      question: "What does month-end close look like with Finanshels?",
+      answer: "Your books are reconciled continuously, not in a month-end rush. We close each month within days, deliver management accounts and a cash-flow view, and roll it all into annual financial statements your accountant, bank or investor can rely on."
     },
     {
       question: "Is my financial data secure?",
@@ -304,7 +304,7 @@ const AccountingSoftwareLandingBing = () => {
     serviceType: [
       'Accounting',
       'Bookkeeping',
-      'Tax Compliance',
+      'Management Accounts',
       'Financial Reporting',
       'CFO Advisory'
     ],
@@ -458,13 +458,13 @@ const AccountingSoftwareLandingBing = () => {
             <div className="software-problem-card">
               <div className="software-problem-icon">👁️</div>
               <h3>No Financial Guidance</h3>
-              <p>Xero accounting software shows numbers, but who explains what they mean? Who advises on cash flow or tax strategy?</p>
+              <p>Xero accounting software shows numbers, but who explains what they mean? Who advises on cash flow or margins?</p>
             </div>
             
             <div className="software-problem-card">
               <div className="software-problem-icon">⚠️</div>
-              <h3>Compliance Anxiety</h3>
-              <p>UAE Corporate Tax and VAT deadlines loom. Your bookkeeping software won't remind you — or file for you.</p>
+              <h3>Nobody Owns the Close</h3>
+              <p>Month-end arrives and the books are still half-done. Your bookkeeping software won't chase it — or close it for you.</p>
             </div>
           </div>
         </div>
@@ -578,8 +578,8 @@ const AccountingSoftwareLandingBing = () => {
             
             <div className="software-solution-card">
               <div className="software-solution-icon">🛡️</div>
-              <h3>UAE Tax Compliance</h3>
-              <p>Corporate tax and VAT filings handled. Stay compliant without the stress of managing software yourself.</p>
+              <h3>Month-End, Handled</h3>
+              <p>Reconciled ledgers and clean schedules every month, without the stress of managing software yourself.</p>
             </div>
           </div>
           
@@ -671,10 +671,10 @@ const AccountingSoftwareLandingBing = () => {
                 </div>
                 
                 <div className="software-dashboard-compliance">
-                  <span className="software-compliance-text">All filings up to date</span>
+                  <span className="software-compliance-text">All reconciliations up to date</span>
                   <div className="software-compliance-badges">
-                    <span className="software-badge vat">VAT Filed</span>
-                    <span className="software-badge ct">CT Registered</span>
+                    <span className="software-badge primary">Books Reconciled</span>
+                    <span className="software-badge secondary">Report Ready</span>
                   </div>
                 </div>
               </div>
@@ -713,12 +713,11 @@ const AccountingSoftwareLandingBing = () => {
               <p className="software-pricing-limit">Up to 50 transactions/year</p>
               
               <ul className="software-pricing-features">
-                <li><FiCheckCircle /> Corporate Tax Filing (Annual)</li>
-                <li><FiCheckCircle /> CT Filing</li>
-                <li><FiCheckCircle /> VAT Quarterly Filing</li>
+                <li><FiCheckCircle /> Annual Financial Statements</li>
+                <li><FiCheckCircle /> Quarterly Management Accounts</li>
                 <li><FiCheckCircle /> Quarterly Financial Statements</li>
                 <li><FiCheckCircle /> Dedicated Support Manager</li>
-                <li><FiCheckCircle /> 30 Min Free Tax Consultation</li>
+                <li><FiCheckCircle /> 30 Min Free Finance Review</li>
               </ul>
               
               <a 

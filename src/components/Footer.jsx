@@ -1,4 +1,4 @@
-import { FiMail, FiMessageCircle } from 'react-icons/fi';
+import { FiMessageCircle } from 'react-icons/fi';
 import {
   FaFacebookF,
   FaInstagram,
@@ -55,14 +55,10 @@ const Footer = () => {
               qualified accountants stand behind every number.
             </p>
             <div className="footer-contact-links">
-              <a href="mailto:contact@finanshels.com" className="footer-email">
-                <FiMail className="footer-email-icon" />
-                <span>contact@finanshels.com</span>
-              </a>
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="footer-email"
               >
                 <FiMessageCircle className="footer-email-icon" />
@@ -90,13 +86,15 @@ const Footer = () => {
 
           <div className="footer-column">
             <h4 className="footer-heading">Company</h4>
-            <a href="mailto:contact@finanshels.com" className="footer-link">
-              Contact Us
-            </a>
             <Link to={getBookingPath(pathname)} className="footer-link">
               Book a Free Call
             </Link>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="footer-link">
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="footer-link"
+            >
               Chat on WhatsApp
             </a>
           </div>
@@ -111,7 +109,10 @@ const Footer = () => {
                     key={social.label}
                     href={social.href}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    /* nofollow on every outbound link: this is a paid-ads-only
+                       site and nothing here should build a crawlable path back
+                       to the main Finanshels web presence. */
+                    rel="noopener noreferrer nofollow"
                     className="footer-social-link"
                     aria-label={`Finanshels on ${social.label}`}
                   >
