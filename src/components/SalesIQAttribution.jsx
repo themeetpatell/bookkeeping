@@ -13,7 +13,7 @@
    1. Attribution capture (UTMs + gclid/gbraid/wbraid/fbclid/
       msclkid/li_fat_id/ttclid → fs_first / fs_last cookies)
    2. Zoho Forms iframe patcher (formperma + zfrmz embeds)
-   3. WhatsApp [Ref:FS-xxxxxx] tagger + PostHog click event
+   3. WhatsApp [Ref:FS-xxxxxx] tagger (off here) + PostHog click event
    4. Zoho SalesIQ widget + visitor.info bridge → CRM fields
       (MGCLID, UTM_*, First_UTM_*, Attribution_Method, …)
 
@@ -35,6 +35,15 @@ const WIDGET_SRC =
    WhatsApp/PostHog listeners keep running, so lead tracking is unaffected.
    Flip back to true to bring the chat widget back on every page. */
 const IS_SALESIQ_ENABLED = false;
+
+/* The [Ref:FS-xxxxxx] code is appended to the prefilled WhatsApp message in
+   plain sight, and reads as noise to a prospect opening their first chat. This
+   site instead leans on the Gallabox tracker (see WhatsAppTracker.jsx), which
+   hides the source page in the message as zero-width characters — invisible to
+   the customer. That only carries the landing page, not the campaign or gclid,
+   so flip this back to true wherever the ad-level join matters more than the
+   cosmetics. The PostHog click event fires either way. */
+const IS_WA_REF_TAG_ENABLED = false;
 
 const PARAMS = [
   "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
@@ -221,10 +230,10 @@ function initListeners() {
     try {
       const el = e.target && e.target.closest ? e.target.closest("a") : null;
       if (el && /wa\.me|api\.whatsapp\.com/.test(el.href || "")) {
-        el.href = tagWa(el.href);
+        if (IS_WA_REF_TAG_ENABLED) el.href = tagWa(el.href);
         if (window.posthog && window.posthog.capture) {
           const p = window.fsAttribution ? window.fsAttribution() : {};
-          p.ref_code = refCode();
+          if (IS_WA_REF_TAG_ENABLED) p.ref_code = refCode();
           p.wa_href = el.href;
           p.page = window.location.pathname;
           window.posthog.capture("whatsapp_click_attributed", p);
