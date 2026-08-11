@@ -30,6 +30,12 @@ import { useEffect } from "react";
 const WIDGET_SRC =
   "https://salesiq.zohopublic.com/widget?wc=siqa011f58f27c11f682c3ee45163d23f5d23510ed43403091004de5d7cfe5f4468cc1dcc26b4874c0235a0c032bccd6fff";
 
+/* The chat bubble is hidden site-wide for now. Only the widget injection is
+   skipped — attribution capture, the Zoho Forms iframe patcher and the
+   WhatsApp/PostHog listeners keep running, so lead tracking is unaffected.
+   Flip back to true to bring the chat widget back on every page. */
+const IS_SALESIQ_ENABLED = false;
+
 const PARAMS = [
   "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
   "gclid", "gbraid", "wbraid", "fbclid", "msclkid", "li_fat_id", "ttclid",
@@ -249,7 +255,9 @@ export default function SalesIQAttribution() {
     window.__fsSiq = 1;
     try { initCapture(); } catch (e) {}
     try { initListeners(); } catch (e) {}
-    try { initSalesIQ(); } catch (e) {}
+    if (IS_SALESIQ_ENABLED) {
+      try { initSalesIQ(); } catch (e) {}
+    }
   }, []);
   return null;
 }
