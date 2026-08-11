@@ -7,6 +7,7 @@ import Seo from '../components/Seo';
 import './AccountingSoftwareLanding.css';
 import { ZOHO_BING_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
+import { getSiteOrigin } from '../utils/site';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
@@ -114,7 +115,7 @@ const ZohoConsultationForm = ({ formId }) => (
 const AccountingSoftwareLandingBing = () => {
   const [openFaq, setOpenFaq] = useState(null);
   const { pathname } = useLocation();
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://accounting.finanshels.co';
+  const baseUrl = getSiteOrigin();
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);

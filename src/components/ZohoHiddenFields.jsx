@@ -1,5 +1,5 @@
 import { getGclid, getZohoUtmValues } from '../utils/zohoUtm';
-import { ZOHO_REDIRECT_URL } from '../utils/zohoForms';
+import { getZohoRedirectUrl } from '../utils/zohoForms';
 
 /**
  * The hidden inputs every Zoho lead form on the site must carry.
@@ -21,7 +21,7 @@ export default function ZohoHiddenFields() {
   return (
     <>
       <input type="hidden" name="zf_referrer_name" value="" readOnly />
-      <input type="hidden" name="zf_redirect_url" value={ZOHO_REDIRECT_URL} readOnly />
+      <input type="hidden" name="zf_redirect_url" value={getZohoRedirectUrl()} readOnly />
       <input type="hidden" name="zc_gad" value={getGclid()} readOnly />
       <input type="hidden" name="utm_source" value={utm.utm_source} readOnly />
       <input type="hidden" name="utm_medium" value={utm.utm_medium} readOnly />

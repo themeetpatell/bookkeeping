@@ -1,6 +1,8 @@
 # Conversion Tracking — How It Should Work
 
-GTM container: **GTM-MXFJ6CGB** • Site: `accounting.finanshels.co`
+GTM container: **GTM-MXFJ6CGB** • Sites: `finanshelsaccounting.co` and `accounting.finanshels.co`
+(same app, no redirect between them — the form redirect is built from the live origin so a conversion
+never crosses domains and loses its sessionStorage flag)
 
 ## The rule
 

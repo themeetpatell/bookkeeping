@@ -1,11 +1,29 @@
-# accounting.finanshels.co — standalone Google/Bing Ads site.
-# Every ad landing page must stay crawlable so AdsBot can reach it; only the
-# post-conversion pages are held back from organic indexing.
+# Standalone Google/Bing Ads site, served on finanshelsaccounting.co and on the
+# older accounting.finanshels.co. Nothing here is meant for organic search, so
+# every page carries a noindex — see the X-Robots-Tag header in vercel.json, the
+# meta tag in index.html and the runtime tag in src/components/Seo.jsx.
+#
+# Crawling is deliberately ALLOWED. A crawler blocked here never reads the
+# noindex, and can still list a bare URL it found linked somewhere else. Letting
+# bots in to read the noindex is what actually keeps the site out of the index.
+#
+# Ad crawlers must never be blocked or the ads get disapproved for an
+# unreachable destination. They are listed explicitly so that adding a
+# "Disallow: /" later cannot take the campaigns down with it.
 
 User-agent: *
 Allow: /
-Disallow: /thank-you
-Disallow: /thank-you-from-finanshels
-Disallow: /booking-confirmed
 
-Sitemap: https://accounting.finanshels.co/sitemap.xml
+# Google Ads landing page crawler
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+# Microsoft Advertising landing page crawler
+User-agent: adidxbot
+Allow: /
+
+# No Sitemap line on purpose: a sitemap asks search engines to index the pages,
+# which is the opposite of what a paid-only site wants.

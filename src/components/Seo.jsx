@@ -82,7 +82,9 @@ const Seo = ({
     const canonicalUrl = canonicalPath ? buildUrl(canonicalPath) : '';
 
     setMetaTag({ name: 'description', content: description });
-    setMetaTag({ name: 'robots', content: 'index, follow' });
+    // Paid-advertising site: nothing here should surface in organic search.
+    // Mirrors the static tag in index.html and the X-Robots-Tag in vercel.json.
+    setMetaTag({ name: 'robots', content: 'noindex, nofollow' });
     setMetaTag({ property: 'og:type', content: ogType });
     setMetaTag({ property: 'og:title', content: title });
     setMetaTag({ property: 'og:description', content: description });

@@ -21,6 +21,7 @@ import { buildWhatsAppUrl } from '../utils/whatsapp';
 import './AIAccountingLanding.css';
 import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
+import { absoluteUrl } from '../utils/site';
 
 const WHATSAPP_MESSAGE =
   "Hi Finanshels! I'd like to learn more about your AI-native accounting services.";
@@ -360,7 +361,7 @@ const seoJsonLd = {
   description:
     'UAE’s First AI-native accounting firm. AI agents reconcile and draft; qualified accountants review and sign off. Bookkeeping, VAT, Corporate Tax, payroll and CFO insights.',
   areaServed: 'AE',
-  url: 'https://accounting.finanshels.co/ai-accounting',
+  url: absoluteUrl('/ai-accounting'),
 };
 
 const AIAccountingLanding = () => {

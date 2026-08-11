@@ -10,10 +10,18 @@ Marketing site for Finanshels’ UAE bookkeeping, tax, and consultation offering
 
 ## Environment & Integrations
 - Zoho consultation form lives in `src/pages/NewHomePage.jsx` (`ZohoConsultationForm`). Do not change Zoho field `name` attributes or the form action URL.
-- Booking CTA targets: `https://contact-finanshels.zohobookings.com/accounting`.
-- Zoho Bookings must redirect after a confirmed booking to `https://accounting.finanshels.co/booking-confirmed`
+- Domains: `finanshelsaccounting.co` (primary) and `accounting.finanshels.co` (older, still live because
+  campaigns point at it). Neither redirects to the other, so no absolute URL may be hardcoded in the app —
+  build them from `src/utils/site.js` so the visitor stays on the domain they arrived on.
+- Paid traffic only: every page is `noindex, nofollow` (meta tag in `index.html`, runtime tag in
+  `src/components/Seo.jsx`, `X-Robots-Tag` header in `vercel.json`). robots.txt still allows crawling —
+  a blocked crawler never reads the noindex — and never blocks AdsBot/adidxbot.
+- Booking CTA targets: `https://contact-finanshels.zohobookings.com/accounting-google`, and
+  `.../accounting-bing` from the `-bing` routes. Resolved in `src/utils/booking.js`.
+- Zoho Bookings must redirect after a confirmed booking to `/booking-confirmed`
   (`src/pages/BookingConfirmed.jsx`), which pushes the `zoho_booking_completed` dataLayer event. The GTM
-  "Book a meeting Zoho" Google Ads conversion fires on that event — not on booking-link clicks.
+  "Book a meeting Zoho" Google Ads conversion fires on that event — not on booking-link clicks. Set it on
+  **both** Zoho services; each stores a single absolute URL, so pick the domain that campaign runs on.
 - Floating contacts: WhatsApp + phone links configured in `src/components/FloatingContacts.jsx`.
 
 ## Project Structure

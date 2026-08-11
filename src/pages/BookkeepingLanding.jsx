@@ -4,6 +4,7 @@ import Testimonials from '../components/Testimonials';
 import './BookkeepingLanding.css';
 import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
+import { absoluteUrl } from '../utils/site';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
@@ -108,8 +109,8 @@ const BookkeepingLanding = () => {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'Finanshels Bookkeeping & Tax (UAE)',
-    url: 'https://accounting.finanshels.co/bookkeeping',
-    image: 'https://accounting.finanshels.co/Dubai.jpg',
+    url: absoluteUrl('/bookkeeping'),
+    image: absoluteUrl('/Dubai.jpg'),
     description:
       'UAE bookkeeping, corporate tax, and VAT compliance with real-time dashboards. Free consultation and pay only if satisfied.',
     areaServed: 'AE',

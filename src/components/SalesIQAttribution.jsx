@@ -46,7 +46,7 @@ const PARAMS = [
    subdomains. Cookies cannot be shared ACROSS these entries — finanshels.co and
    finanshels.com are separate registrable domains, so each keeps its own
    fs_first / fs_last. */
-const COOKIE_DOMAINS = ["finanshels.co", "finanshels.com"];
+const COOKIE_DOMAINS = ["finanshelsaccounting.co", "finanshels.co", "finanshels.com"];
 
 /* ---------- cookies ---------- */
 function getCookie(n) {
