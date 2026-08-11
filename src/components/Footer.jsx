@@ -8,9 +8,9 @@ import {
   FaYoutube,
 } from 'react-icons/fa6';
 import finanshelsLogo from '../assets/finanshelslogo.svg';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
-import { BOOKING_PATH } from '../utils/booking';
+import { getBookingPath } from '../utils/booking';
 
 const SOCIAL_LINKS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/finanshels', Icon: FaLinkedinIn },
@@ -33,6 +33,8 @@ const WHATSAPP_URL = buildWhatsAppUrl(
 );
 
 const Footer = () => {
+  const { pathname } = useLocation();
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -91,7 +93,7 @@ const Footer = () => {
             <a href="mailto:contact@finanshels.com" className="footer-link">
               Contact Us
             </a>
-            <Link to={BOOKING_PATH} className="footer-link">
+            <Link to={getBookingPath(pathname)} className="footer-link">
               Book a Free Call
             </Link>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="footer-link">

@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { usePostHog } from '@posthog/react';
 import { FiArrowLeft } from 'react-icons/fi';
 import finanshelsLogo from '../assets/finanshelslogo.svg';
 import Seo from '../components/Seo';
-import { BOOKING_FALLBACK_URL, BOOKING_PORTAL_URL } from '../utils/booking';
+import { resolveBookingUrls } from '../utils/booking';
 import './BookACall.css';
 
 const EMBED_SCRIPT_SRC = 'https://bookings.nimbuspop.com/assets/embed.js';
@@ -55,6 +55,10 @@ const loadEmbedScript = () =>
 const BookACall = () => {
   const [status, setStatus] = useState('loading');
   const posthog = usePostHog();
+  const { search } = useLocation();
+  // Which Zoho scheduler to show — the landing page passes its ad channel through
+  // on the query string (Google pages omit it and get the Google calendar).
+  const { portalUrl, fallbackUrl } = useMemo(() => resolveBookingUrls(search), [search]);
   // The widget is injected imperatively, so it must not run twice — StrictMode
   // invokes effects twice in development.
   const hasEmbedded = useRef(false);
@@ -67,7 +71,7 @@ const BookACall = () => {
         if (!isActive || hasEmbedded.current) return;
         hasEmbedded.current = true;
         window.Bookings.inlineEmbed({
-          url: BOOKING_PORTAL_URL,
+          url: portalUrl,
           parent: `#${CONTAINER_ID}`,
           height: WIDGET_HEIGHT,
         });
@@ -85,7 +89,7 @@ const BookACall = () => {
     return () => {
       isActive = false;
     };
-  }, [posthog]);
+  }, [posthog, portalUrl]);
 
   return (
     <div className="booking-page">
@@ -127,7 +131,7 @@ const BookACall = () => {
                 likely blocking it.
               </p>
               <a
-                href={BOOKING_FALLBACK_URL}
+                href={fallbackUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="booking-fallback-link"

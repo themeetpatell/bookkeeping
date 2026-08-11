@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { usePostHog } from '@posthog/react';
 import finanshelsLogo from '../assets/finanshelslogo.svg';
-import { BOOKING_PATH } from '../utils/booking';
+import { getBookingPath } from '../utils/booking';
 
 const Nav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const posthog = usePostHog();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +39,7 @@ const Nav = () => {
         </nav>
         
         <Link
-          to={BOOKING_PATH}
+          to={getBookingPath(pathname)}
           className="btn-nav-primary"
           onClick={() => posthog?.capture('book_call_clicked', { location: 'nav' })}
         >

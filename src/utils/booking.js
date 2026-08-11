@@ -8,14 +8,69 @@
 // through the booking, which an off-site scheduler would drop.
 export const BOOKING_PATH = '/book-a-call';
 
-// Zoho's iframe-friendly portal, rendered by the embed widget on BOOKING_PATH.
-export const BOOKING_PORTAL_URL =
-  'https://contact-finanshels.zohobookings.com/portal-embed#/accounting';
+const BOOKING_ORIGIN = 'https://contact-finanshels.zohobookings.com';
 
-// Standalone Zoho page, offered as an escape hatch when the embed script is
-// blocked (ad blockers routinely eat third-party booking widgets).
-export const BOOKING_FALLBACK_URL =
-  'https://contact-finanshels.zohobookings.com/#/accounting';
+// One Zoho service per ad channel, so bookings land in the right calendar and
+// stay attributable to the campaign that paid for them.
+const BOOKING_SLUGS = {
+  google: 'accounting-google',
+  bing: 'accounting-bing',
+};
+
+const DEFAULT_CHANNEL = 'google';
+
+// The channel travels from the landing page to the booking page on the query
+// string, because BOOKING_PATH is its own route and would otherwise have no way
+// of knowing which ad brought the visitor here.
+export const BOOKING_CHANNEL_PARAM = 'channel';
+
+// Bing traffic has its own set of landing pages, all suffixed this way in the
+// router — see App.jsx.
+const BING_PATH_SUFFIX = '-bing';
+
+/**
+ * @param {string} pathname - the current route, e.g. '/bookkeeping-bing'
+ * @returns {'google' | 'bing'} the ad channel that owns the page
+ */
+const channelForPath = (pathname) =>
+  String(pathname || '').endsWith(BING_PATH_SUFFIX) ? 'bing' : DEFAULT_CHANNEL;
+
+/**
+ * Booking link for a page, carrying that page's channel through to the scheduler.
+ * @param {string} pathname - the current route
+ * @returns {string} e.g. '/book-a-call?channel=bing'
+ */
+export const getBookingPath = (pathname) => {
+  const channel = channelForPath(pathname);
+  if (channel === DEFAULT_CHANNEL) return BOOKING_PATH;
+  return `${BOOKING_PATH}?${BOOKING_CHANNEL_PARAM}=${channel}`;
+};
+
+/**
+ * Resolves the two Zoho URLs the booking page needs for a channel.
+ * Unknown or missing values fall back to Google, which is the larger spend and
+ * the destination every non-Bing page uses.
+ * @param {string} search - the booking page's query string, e.g. '?channel=bing'
+ * @returns {{ portalUrl: string, fallbackUrl: string }}
+ */
+export const resolveBookingUrls = (search) => {
+  let channel = DEFAULT_CHANNEL;
+  try {
+    const requested = new URLSearchParams(search).get(BOOKING_CHANNEL_PARAM);
+    if (requested && BOOKING_SLUGS[requested]) channel = requested;
+  } catch {
+    // Malformed query string — the Google scheduler is the safe default.
+  }
+
+  const slug = BOOKING_SLUGS[channel];
+  return {
+    // Zoho's iframe-friendly portal, rendered by the embed widget on BOOKING_PATH.
+    portalUrl: `${BOOKING_ORIGIN}/portal-embed#/${slug}`,
+    // Standalone Zoho page, offered as an escape hatch when the embed script is
+    // blocked (ad blockers routinely eat third-party booking widgets).
+    fallbackUrl: `${BOOKING_ORIGIN}/${slug}`,
+  };
+};
 
 // Basic shape check so a malformed value never renders into the confirmation copy.
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
