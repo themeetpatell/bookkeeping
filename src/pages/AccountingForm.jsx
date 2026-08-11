@@ -392,7 +392,7 @@ const AccountingForm = () => {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="btn-primary btn-with-icon btn-whatsapp"
+                className="btn-primary btn-with-icon btn-whatsapp data-wa-track"
               >
                 <FaWhatsapp />
                 WhatsApp Now

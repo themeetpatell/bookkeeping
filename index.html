@@ -216,16 +216,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       })(window, document);
     </script>
     <!-- /Podscribe pixel -->
-    <!-- Gallabox WhatsApp Tracker -->
-    <script> 
-      (function (w, d, s, u) { 
-      w.gbwatracker = { selector: ".data-wa-track", autoInit: true, }; 
-      var h = d.getElementsByTagName(s)[0], 
-          j = d.createElement(s); 
-      j.async = true; 
-      j.src = u + "?_=" + Math.random(); 
-      h.parentNode.insertBefore(j, h); 
-      })(window, document, "script", "https://waw.gallabox.com/whatsapp-tracker.min.js"); 
+    <!-- Gallabox WhatsApp Tracker. Loaded exactly once: the script binds a click
+         handler per matching link, so a second copy would open two WhatsApp tabs
+         on every click. Auto-init is off because it would only scan the DOM once,
+         at DOMContentLoaded, and miss every CTA rendered by a later route —
+         src/components/WhatsAppTracker.jsx drives the binding instead. -->
+    <script>
+      (function (w, d, s, u) {
+        w.gbwatracker = { selector: ".data-wa-track", autoInit: false };
+        var h = d.getElementsByTagName(s)[0],
+            j = d.createElement(s);
+        j.async = true;
+        j.src = u + "?_=" + Math.random();
+        h.parentNode.insertBefore(j, h);
+      })(window, document, "script", "https://waw.gallabox.com/whatsapp-tracker.min.js");
     </script>
     <!-- End Gallabox WhatsApp Tracker -->
     
@@ -500,16 +504,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
     </script>
     <!-- End Zoho Forms Advanced Tracking Script -->
-  <script> 
-    (function (w, d, s, u) { 
-      w.gbwatracker = { selector: ".data-wa-track", autoInit: true, }; 
-      var h = d.getElementsByTagName(s)[0], 
-          j = d.createElement(s); 
-      j.async = true; 
-      j.src = u + "?_=" + Math.random(); 
-      h.parentNode.insertBefore(j, h); 
-    })(window, document, "script", "https://waw.gallabox.com/whatsapp-tracker.min.js");
-  </script>
 
     <!-- Zoho SalesIQ + attribution capture now ship from the React root:
          src/components/SalesIQAttribution.jsx (mounted in src/App.jsx). It

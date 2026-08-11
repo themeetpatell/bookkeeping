@@ -423,7 +423,7 @@ const AIAccountingLanding = () => {
                   href={buildWhatsAppUrl(WHATSAPP_MESSAGE)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ai-btn ai-btn-ghost"
+                  className="ai-btn ai-btn-ghost data-wa-track"
                   onClick={() => trackWhatsAppClick('ai_landing_hero')}
                 >
                   Talk on WhatsApp
@@ -626,7 +626,7 @@ const AIAccountingLanding = () => {
               href={buildWhatsAppUrl(WHATSAPP_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
-              className="ai-btn ai-lead-whatsapp"
+              className="ai-btn ai-lead-whatsapp data-wa-track"
               onClick={() => trackWhatsAppClick('ai_landing_strip')}
             >
               <FaWhatsapp aria-hidden="true" />
@@ -912,7 +912,7 @@ const AIAccountingLanding = () => {
                 href={buildWhatsAppUrl(WHATSAPP_MESSAGE)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ai-cta-whatsapp"
+                className="ai-cta-whatsapp data-wa-track"
                 onClick={() => trackWhatsAppClick('ai_landing_footer')}
               >
                 Prefer chat? Message us on WhatsApp <FiArrowRight aria-hidden="true" />

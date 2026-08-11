@@ -59,7 +59,7 @@ const Footer = () => {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                className="footer-email"
+                className="footer-email data-wa-track"
               >
                 <FiMessageCircle className="footer-email-icon" />
                 <span>WhatsApp: +971 52 154 9572</span>
@@ -93,7 +93,7 @@ const Footer = () => {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="footer-link"
+              className="footer-link data-wa-track"
             >
               Chat on WhatsApp
             </a>
