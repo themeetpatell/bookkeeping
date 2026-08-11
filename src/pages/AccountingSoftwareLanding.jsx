@@ -3,10 +3,12 @@ import { useLocation } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiX } from 'react-icons/fi';
 import Seo from '../components/Seo';
 import './AccountingSoftwareLanding.css';
+import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
+import ZohoHiddenFields from '../components/ZohoHiddenFields';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
-    action="https://forms.zohopublic.com/finanshelsllc/form/GetYourFreeAuditConsultation/formperma/EikNR5Pwn-Ak9PHJxB-cTO47ehdcxhrZeW_itd-c-I0/htmlRecords/submit"
+    action={ZOHO_GOOGLE_FORM_ACTION}
     name="form"
     id={formId || 'form'}
     method="POST"
@@ -15,16 +17,7 @@ const ZohoConsultationForm = ({ formId }) => (
     className="software-zoho-form"
     aria-label="Free consultation form"
   >
-    <input type="hidden" name="zf_referrer_name" value="" />
-    <input type="hidden" name="zf_redirect_url" value="" />
-    <input type="hidden" name="zc_gad" value="" />
-    <input type="hidden" name="utm_source" value="" />
-    <input type="hidden" name="utm_medium" value="" />
-    <input type="hidden" name="utm_campaign" value="" />
-    <input type="hidden" name="utm_term" value="" />
-    <input type="hidden" name="utm_content" value="" />
-    <input type="hidden" name="gclid" value="" />
-    <input type="hidden" name="referrername" value="" />
+    <ZohoHiddenFields />
     
     <div className="software-form-row">
       <div className="software-form-group">
@@ -71,7 +64,7 @@ const ZohoConsultationForm = ({ formId }) => (
     </div>
     
     <div className="software-form-group">
-      <label htmlFor={`phone-${formId}`}>Phone Number</label>
+      <label htmlFor={`phone-${formId}`}>Phone Number <span aria-label="required">*</span></label>
       <input
         type="text"
         id={`phone-${formId}`}
@@ -84,6 +77,8 @@ const ZohoConsultationForm = ({ formId }) => (
         placeholder="+971 00 000 0000"
         className="software-form-control"
         aria-label="Phone number"
+        required
+        aria-required="true"
       />
     </div>
     
@@ -92,7 +87,7 @@ const ZohoConsultationForm = ({ formId }) => (
       <input
         type="text"
         id={`company-${formId}`}
-        name="SingleLine1"
+        name="SingleLine"
         fieldType="1"
         maxLength="255"
         placeholder="i.e. dropxcell LLC"
@@ -100,20 +95,6 @@ const ZohoConsultationForm = ({ formId }) => (
         required
         aria-required="true"
         aria-label="Company name"
-      />
-    </div>
-    
-    <div className="software-form-group">
-      <label htmlFor={`job-title-${formId}`}>Job Title</label>
-      <input
-        type="text"
-        id={`job-title-${formId}`}
-        name="SingleLine2"
-        fieldType="1"
-        maxLength="255"
-        placeholder="i.e. Founder"
-        className="software-form-control"
-        aria-label="Job title"
       />
     </div>
     

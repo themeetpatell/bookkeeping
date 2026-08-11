@@ -3,12 +3,14 @@ import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAl
 import { FaWhatsapp } from 'react-icons/fa';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
 import './AccountingLanding.css';
+import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
+import ZohoHiddenFields from '../components/ZohoHiddenFields';
 
 const WHATSAPP_MESSAGE = 'Hi I saw your ad on Reddit for Accounting Services. I’d like to know more.';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
-    action="https://forms.zohopublic.com/finanshelsllc/form/GetYourFreeAuditConsultation/formperma/EikNR5Pwn-Ak9PHJxB-cTO47ehdcxhrZeW_itd-c-I0/htmlRecords/submit"
+    action={ZOHO_GOOGLE_FORM_ACTION}
     name="form"
     id={formId || 'form'}
     method="POST"
@@ -16,16 +18,7 @@ const ZohoConsultationForm = ({ formId }) => (
     encType="multipart/form-data"
     className="zoho-form"
   >
-    <input type="hidden" name="zf_referrer_name" value="" />
-    <input type="hidden" name="zf_redirect_url" value="" />
-    <input type="hidden" name="zc_gad" value="" />
-    <input type="hidden" name="utm_source" value="" />
-    <input type="hidden" name="utm_medium" value="" />
-    <input type="hidden" name="utm_campaign" value="" />
-    <input type="hidden" name="utm_term" value="" />
-    <input type="hidden" name="utm_content" value="" />
-    <input type="hidden" name="gclid" value="" />
-    <input type="hidden" name="referrername" value="" />
+    <ZohoHiddenFields />
     
     <div className="form-row">
       <div className="form-group">
@@ -67,7 +60,7 @@ const ZohoConsultationForm = ({ formId }) => (
     </div>
     
     <div className="form-group">
-      <label>Phone Number</label>
+      <label>Phone Number *</label>
       <input
         type="text"
         compname="PhoneNumber"
@@ -79,6 +72,7 @@ const ZohoConsultationForm = ({ formId }) => (
         id="international_PhoneNumber_countrycode"
         placeholder="+971 00 000 0000"
         className="form-control"
+        required
       />
     </div>
     
@@ -86,24 +80,12 @@ const ZohoConsultationForm = ({ formId }) => (
       <label>Company Name *</label>
       <input
         type="text"
-        name="SingleLine1"
+        name="SingleLine"
         maxLength="255"
         fieldType="1"
         placeholder="Your Company LLC"
         className="form-control"
         required
-      />
-    </div>
-    
-    <div className="form-group">
-      <label>Job Title</label>
-      <input
-        type="text"
-        name="SingleLine2"
-        maxLength="255"
-        fieldType="1"
-        placeholder="CEO"
-        className="form-control"
       />
     </div>
     

@@ -103,10 +103,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       // Use capture-phase listener so dynamically rendered React forms are covered
       document.addEventListener('submit', function(event) {
         var formEl = event.target;
-        var isTargetForm = formEl && formEl.matches(
-          '#form, #zoho-consultation-hero, #zoho-consultation-final, #hero-form, #final-form, #software-hero-form, #software-final-form'
-        );
-        if (!isTargetForm) return;
+        // Match on the Zoho action rather than a hand-maintained list of form
+        // ids: every lead form posts to a `formperma` endpoint, and the old id
+        // list had silently drifted (the /ai-accounting and payroll forms were
+        // missing, so those pages fired no conversion at all).
+        var formAction = (formEl && formEl.getAttribute && formEl.getAttribute('action')) || '';
+        if (formAction.indexOf('formperma') === -1) return;
 
         var emailField = formEl.querySelector('input[name=\"Email\"]');
         var emailValue = emailField ? emailField.value.trim() : '';

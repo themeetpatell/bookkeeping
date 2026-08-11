@@ -368,26 +368,27 @@
 
 .form-input {
   width: 100%;
-  padding: 12px 16px;
-  border: 1.5px solid #c3ccda;
-  border-radius: 12px;
-  font-size: 15px;
-  color: #0b1f33;
-  margin-bottom: 16px;
+  padding: var(--form-input-padding);
+  background: var(--form-input-bg);
+  border: var(--form-input-border-width) solid var(--form-input-border-color);
+  border-radius: var(--form-input-radius);
+  color: var(--form-input-text);
+  font-size: var(--form-input-size);
   font-family: inherit;
-  transition: all 0.2s;
-  background: #f7f9fc;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+  margin-bottom: 16px;
 }
 
 .form-input::placeholder {
-  color: #6b7280;
+  color: var(--form-placeholder);
 }
 
 .form-input:focus {
-  border-color: rgba(255, 107, 53, 0.6);
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.16);
   outline: none;
+  border-color: var(--orange-primary);
+  background: var(--form-input-bg-active);
+  box-shadow: var(--form-focus-ring);
 }
 
 /* Fix for browser autofill styling */
@@ -395,9 +396,9 @@
 .form-input:-webkit-autofill:hover,
 .form-input:-webkit-autofill:focus,
 .form-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #f7f9fc inset !important;
-  -webkit-text-fill-color: #0b1f33 !important;
-  caret-color: #0b1f33 !important;
+  -webkit-box-shadow: 0 0 0 30px var(--form-input-bg) inset !important;
+  -webkit-text-fill-color: var(--form-input-text) !important;
+  caret-color: var(--form-input-text) !important;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -467,10 +468,11 @@
 
 .form-field label {
   display: block;
-  font-size: 14px;
-  color: #0f1f34;
-  margin-bottom: 8px;
-  font-weight: 600;
+  margin-bottom: var(--form-label-gap);
+  font-size: var(--form-label-size);
+  font-weight: var(--form-label-weight);
+  color: var(--form-label-color);
+  letter-spacing: 0.01em;
 }
 
 @media (max-width: 640px) {
@@ -481,19 +483,27 @@
 
 /* Focus states already defined above */
 
+/* The label is wrapped in <em> to match Zoho's own markup; the emphasis is
+   structural, not visual, so keep it upright like every other submit button. */
+.form-submit em {
+  font-style: normal;
+}
+
 .form-submit {
   width: 100%;
-  background: linear-gradient(135deg, var(--orange-primary) 0%, #ff8a3d 100%);
-  color: white;
-  padding: 15px;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 17px;
+  padding: var(--form-submit-padding);
+  background: var(--orange-primary);
+  color: #ffffff;
   border: none;
+  border-radius: var(--form-submit-radius);
+  font-family: inherit;
+  font-size: var(--form-submit-size);
+  font-weight: var(--form-submit-weight);
+  letter-spacing: -0.01em;
   cursor: pointer;
-  transition: all 0.3s;
+  box-shadow: var(--form-submit-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-bottom: 16px;
-  box-shadow: 0 4px 16px rgba(241, 102, 16, 0.25);
 }
 
 .form-submit:hover {

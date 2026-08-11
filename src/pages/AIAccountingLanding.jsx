@@ -19,27 +19,11 @@ import { FaWhatsapp } from 'react-icons/fa6';
 import Seo from '../components/Seo';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
 import './AIAccountingLanding.css';
+import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
+import ZohoHiddenFields from '../components/ZohoHiddenFields';
 
 const WHATSAPP_MESSAGE =
   "Hi Finanshels! I'd like to learn more about your AI-native accounting services.";
-
-/* Eight-point starburst — the page's recurring accent mark */
-const Spark = ({ className }) => (
-  <svg
-    className={className}
-    viewBox="0 0 24 24"
-    fill="none"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path
-      d="M12 1v22M1 12h22M4.2 4.2l15.6 15.6M19.8 4.2L4.2 19.8"
-      stroke="currentColor"
-      strokeWidth="2.4"
-      strokeLinecap="round"
-    />
-  </svg>
-);
 
 const REVEAL_SELECTOR = '[data-reveal], [data-reveal-stagger]';
 
@@ -94,27 +78,9 @@ const useScrollReveal = () => {
   return rootRef;
 };
 
-const ZOHO_FORM_ACTION =
-  'https://forms.zohopublic.com/finanshelsllc/form/GetYourFreeAuditConsultation/formperma/EikNR5Pwn-Ak9PHJxB-cTO47ehdcxhrZeW_itd-c-I0/htmlRecords/submit';
-
-const ZohoHiddenFields = () => (
-  <>
-    <input type="hidden" name="zf_referrer_name" value="" />
-    <input type="hidden" name="zf_redirect_url" value="" />
-    <input type="hidden" name="zc_gad" value="" />
-    <input type="hidden" name="utm_source" value="" />
-    <input type="hidden" name="utm_medium" value="" />
-    <input type="hidden" name="utm_campaign" value="" />
-    <input type="hidden" name="utm_term" value="" />
-    <input type="hidden" name="utm_content" value="" />
-    <input type="hidden" name="gclid" value="" />
-    <input type="hidden" name="referrername" value="" />
-  </>
-);
-
 const ZohoConsultationForm = ({ formId }) => (
   <form
-    action={ZOHO_FORM_ACTION}
+    action={ZOHO_GOOGLE_FORM_ACTION}
     name="form"
     id={formId || 'form'}
     method="POST"
@@ -154,7 +120,7 @@ const ZohoConsultationForm = ({ formId }) => (
 
     <div className="ai-form-group">
       <label>Company Name *</label>
-      <input type="text" name="SingleLine1" maxLength="255" placeholder="Your Company LLC" required />
+      <input type="text" name="SingleLine" maxLength="255" placeholder="Your Company LLC" required />
     </div>
 
     <button type="submit" className="ai-btn ai-btn-primary ai-form-submit">
@@ -432,7 +398,6 @@ const AIAccountingLanding = () => {
           <div className="ai-hero-grid">
             <div className="ai-hero-copy">
               <div className="ai-hero-badge">
-                <Spark className="ai-badge-spark" />
                 <span>First AI-native accounting firm &middot; UAE</span>
               </div>
 
@@ -530,8 +495,6 @@ const AIAccountingLanding = () => {
                   A qualified accountant checks every line before it goes out
                 </div>
               </div>
-              <Spark className="ai-hero-spark ai-hero-spark-1" />
-              <Spark className="ai-hero-spark ai-hero-spark-2" />
             </div>
           </div>
         </div>
@@ -555,7 +518,7 @@ const AIAccountingLanding = () => {
       <section className="ai-manifesto">
         <div className="ai-container">
           <p className="ai-eyebrow ai-eyebrow-light">
-            <Spark className="ai-eyebrow-spark" /> Why AI-native
+            Why AI-native
           </p>
           <h2 className="ai-manifesto-headline" data-reveal>
             Most firms <em>added</em> AI.
@@ -585,7 +548,7 @@ const AIAccountingLanding = () => {
         <div className="ai-container">
           <div className="ai-section-head" data-reveal>
             <p className="ai-eyebrow">
-              <Spark className="ai-eyebrow-spark" /> The difference
+              The difference
             </p>
             <h2>
               Traditional firm vs. <span className="ai-accent">AI-native</span>
@@ -597,7 +560,7 @@ const AIAccountingLanding = () => {
               <span role="columnheader" />
               <span role="columnheader">The old way</span>
               <span role="columnheader" className="ai-compare-now-head">
-                <Spark className="ai-compare-spark" /> Finanshels
+                Finanshels
               </span>
             </div>
             {comparisonRows.map((row) => (
@@ -633,7 +596,7 @@ const AIAccountingLanding = () => {
             </div>
             <div className="ai-compare-panel ai-compare-panel-new">
               <h3>
-                <Spark className="ai-compare-panel-spark" /> With Finanshels
+                With Finanshels
               </h3>
               <ul>
                 {comparisonRows.map((row) => (
@@ -677,7 +640,7 @@ const AIAccountingLanding = () => {
         <div className="ai-container">
           <div className="ai-section-head" data-reveal>
             <p className="ai-eyebrow">
-              <Spark className="ai-eyebrow-spark" /> How it works
+              How it works
             </p>
             <h2>
               From your bank feed to <span className="ai-accent">board-ready</span>
@@ -701,7 +664,7 @@ const AIAccountingLanding = () => {
         <div className="ai-container">
           <div className="ai-section-head ai-dash-head" data-reveal>
             <p className="ai-eyebrow ai-eyebrow-light">
-              <Spark className="ai-eyebrow-spark" /> The product
+              The product
             </p>
             <h2>
               Your numbers, live in <span className="ai-accent">Findelivery</span>
@@ -716,7 +679,6 @@ const AIAccountingLanding = () => {
           <div className="ai-dash-frame" data-reveal aria-label="Preview of the Findelivery AI CFO dashboard">
             <div className="ai-dash-topbar">
               <span className="ai-dash-brand">
-                <Spark className="ai-dash-brand-spark" />
                 Findelivery &middot; AI CFO
               </span>
               <span className="ai-dash-period">June 2026</span>
@@ -786,7 +748,7 @@ const AIAccountingLanding = () => {
         <div className="ai-container">
           <div className="ai-section-head" data-reveal>
             <p className="ai-eyebrow">
-              <Spark className="ai-eyebrow-spark" /> Division of labor
+              Division of labor
             </p>
             <h2>
               AI drafts. <span className="ai-accent">Humans sign.</span>
@@ -832,7 +794,7 @@ const AIAccountingLanding = () => {
         <div className="ai-container">
           <div className="ai-section-head" data-reveal>
             <p className="ai-eyebrow">
-              <Spark className="ai-eyebrow-spark" /> Everything covered
+              Everything covered
             </p>
             <h2>
               One firm for your entire <span className="ai-accent">finance stack</span>
@@ -861,7 +823,7 @@ const AIAccountingLanding = () => {
         <div className="ai-container">
           <div className="ai-section-head" data-reveal>
             <p className="ai-eyebrow">
-              <Spark className="ai-eyebrow-spark" /> In their words
+              In their words
             </p>
             <h2>
               Founders who made the <span className="ai-accent">switch</span>
@@ -871,7 +833,6 @@ const AIAccountingLanding = () => {
           <div className="ai-testimonials-grid" data-reveal-stagger>
             {testimonials.map((testimonial) => (
               <figure key={testimonial.name} className="ai-testimonial-card">
-                <Spark className="ai-quote-spark" />
                 <blockquote>{testimonial.text}</blockquote>
                 <figcaption>
                   <span className="ai-testimonial-avatar">{testimonial.initials}</span>
@@ -891,7 +852,7 @@ const AIAccountingLanding = () => {
         <div className="ai-container ai-faq-container">
           <div className="ai-section-head" data-reveal>
             <p className="ai-eyebrow">
-              <Spark className="ai-eyebrow-spark" /> Questions
+              Questions
             </p>
             <h2>
               Fair questions about <span className="ai-accent">AI accounting</span>
@@ -926,7 +887,6 @@ const AIAccountingLanding = () => {
         <div className="ai-container">
           <div className="ai-cta-grid">
             <div className="ai-cta-copy" data-reveal>
-              <Spark className="ai-cta-spark" />
               <h2>
                 See your books run
                 <br />

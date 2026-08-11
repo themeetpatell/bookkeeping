@@ -1581,41 +1581,51 @@
 }
 
 .ai-form-group label {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ai-paper-muted);
+  font-size: var(--form-label-size);
+  font-weight: var(--form-label-weight);
+  color: var(--form-label-color);
+  letter-spacing: 0.01em;
 }
 
 .ai-form-group input {
   width: 100%;
-  padding: 14px 16px;
-  border: 1px solid var(--ai-paper-line);
-  border-radius: 10px;
-  background: var(--ai-paper-sunk);
+  padding: var(--form-input-padding);
+  background: var(--form-input-bg);
+  border: var(--form-input-border-width) solid var(--form-input-border-color);
+  border-radius: var(--form-input-radius);
+  color: var(--form-input-text);
+  font-size: var(--form-input-size);
   font-family: inherit;
-  font-size: 0.94rem;
-  color: var(--ai-paper-ink);
-  transition: border-color 0.3s var(--ai-ease), box-shadow 0.3s var(--ai-ease);
+  box-sizing: border-box;
+  transition: all 0.25s ease;
 }
 
 .ai-form-group input::placeholder {
-  color: rgba(0, 0, 0, 0.38);
+  color: var(--form-placeholder);
 }
 
 .ai-form-group input:focus {
   outline: none;
   border-color: var(--ai-accent);
-  box-shadow: 0 0 0 3px rgba(241, 102, 16, 0.18);
+  background: var(--form-input-bg-active);
+  box-shadow: var(--form-focus-ring);
 }
 
-.ai-form-submit {
+.ai-btn.ai-form-submit {
   width: 100%;
-  margin-top: 6px;
+  padding: var(--form-submit-padding);
+  background: var(--ai-accent);
+  color: #ffffff;
   border: none;
+  border-radius: var(--form-submit-radius);
   font-family: inherit;
+  font-size: var(--form-submit-size);
+  font-weight: var(--form-submit-weight);
+  letter-spacing: -0.01em;
   cursor: pointer;
+  box-shadow: var(--form-submit-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 6px;
 }
 
 .ai-form-privacy {

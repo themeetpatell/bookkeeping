@@ -7,7 +7,33 @@
   --orange-hover: #FF7F4D;
   --orange-light: rgba(255, 107, 53, 0.15);
   --orange-glow: rgba(255, 107, 53, 0.35);
-  
+
+  /* Lead form — every consultation form on the site renders the same way.
+     Each landing page keeps its own class names but reads these values, so a
+     change here lands everywhere instead of drifting page by page. */
+  --form-label-size: 14px;
+  --form-label-weight: 600;
+  --form-label-color: #1f2937;
+  --form-label-gap: 8px;
+  --form-input-padding: 14px 16px;
+  --form-input-size: 15px;
+  --form-input-radius: 10px;
+  --form-input-border-width: 1.5px;
+  --form-input-border-color: #e2e8f0;
+  --form-input-bg: #f8fafc;
+  --form-input-bg-active: #ffffff;
+  --form-input-text: #0f172a;
+  /* Deliberately light: the visible label carries the meaning, the placeholder
+     is only an example and must not compete with a value the user has typed. */
+  --form-placeholder: #94a3b8;
+  --form-focus-ring: 0 0 0 4px rgba(255, 107, 53, 0.15);
+  --form-submit-padding: 16px 24px;
+  --form-submit-radius: 10px;
+  --form-submit-size: 16px;
+  --form-submit-weight: 600;
+  --form-submit-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+
+
   /* Status Colors */
   --green: #10B981;
   --red: #EF4444;

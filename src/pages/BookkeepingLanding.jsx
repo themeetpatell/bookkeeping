@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield } from 'react-icons/fi';
 import Testimonials from '../components/Testimonials';
 import './BookkeepingLanding.css';
+import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
+import ZohoHiddenFields from '../components/ZohoHiddenFields';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
-    action="https://forms.zohopublic.com/finanshelsllc/form/GetYourFreeAuditConsultation/formperma/EikNR5Pwn-Ak9PHJxB-cTO47ehdcxhrZeW_itd-c-I0/htmlRecords/submit"
+    action={ZOHO_GOOGLE_FORM_ACTION}
     name="form"
     id={formId || 'form'}
     method="POST"
@@ -13,16 +15,7 @@ const ZohoConsultationForm = ({ formId }) => (
     encType="multipart/form-data"
   >
     {/* Change or deletion of the name attributes in the input tag will lead to empty values on record submission */}
-    <input type="hidden" name="zf_referrer_name" value="" />
-    <input type="hidden" name="zf_redirect_url" value="" />
-    <input type="hidden" name="zc_gad" value="" />
-    <input type="hidden" name="utm_source" value="" />
-    <input type="hidden" name="utm_medium" value="" />
-    <input type="hidden" name="utm_campaign" value="" />
-    <input type="hidden" name="utm_term" value="" />
-    <input type="hidden" name="utm_content" value="" />
-    <input type="hidden" name="gclid" value="" />
-    <input type="hidden" name="referrername" value="" />
+    <ZohoHiddenFields />
     <div className="form-header">
       <h2 className="form-title">Get Your Free Consultation</h2>
       <p className="form-subtitle">Book a 30-minute call with our finance experts. No obligation.</p>
@@ -62,10 +55,13 @@ const ZohoConsultationForm = ({ formId }) => (
         fieldType="9"
         placeholder="i.e. name@yourdomain.com"
         className="form-input"
+        required
       />
     </div>
     <div className="form-field">
-      <label>Phone</label>
+      <label>
+        Phone <em>*</em>
+      </label>
       <input
         type="text"
         compname="PhoneNumber"
@@ -77,6 +73,7 @@ const ZohoConsultationForm = ({ formId }) => (
         id="international_PhoneNumber_countrycode"
         placeholder="+971 00 000 0000"
         className="form-input"
+        required
       />
     </div>
     <div className="form-field">
@@ -85,22 +82,12 @@ const ZohoConsultationForm = ({ formId }) => (
       </label>
       <input
         type="text"
-        name="SingleLine1"
+        name="SingleLine"
         fieldType="1"
         maxLength="255"
         placeholder="i.e. dropxcell LLC"
         className="form-input"
-      />
-    </div>
-    <div className="form-field">
-      <label>Job Title</label>
-      <input
-        type="text"
-        name="SingleLine2"
-        fieldType="1"
-        maxLength="255"
-        placeholder="e.g. Finance Manager"
-        className="form-input"
+        required
       />
     </div>
     <button type="submit" className="form-submit">

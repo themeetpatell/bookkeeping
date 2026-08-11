@@ -317,33 +317,34 @@
 }
 
 .form-group label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #1f2937;
+  font-size: var(--form-label-size);
+  font-weight: var(--form-label-weight);
+  color: var(--form-label-color);
+  letter-spacing: 0.01em;
 }
 
 .form-control {
   width: 100%;
-  padding: 14px 16px;
-  background: #f8fafc !important;
-  background-color: #f8fafc !important;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 10px;
-  color: #0f172a !important;
-  -webkit-text-fill-color: #0f172a !important;
-  font-size: 15px;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  padding: var(--form-input-padding);
+  background: var(--form-input-bg) !important;
+  background-color: var(--form-input-bg) !important;
+  border: var(--form-input-border-width) solid var(--form-input-border-color);
+  border-radius: var(--form-input-radius);
+  color: var(--form-input-text) !important;
+  -webkit-text-fill-color: var(--form-input-text) !important;
+  font-size: var(--form-input-size);
   font-family: inherit;
   box-sizing: border-box;
+  transition: all 0.25s ease;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
 .form-control::placeholder {
-  color: #94a3b8;
+  color: var(--form-placeholder);
   opacity: 1;
-  -webkit-text-fill-color: #94a3b8;
+  -webkit-text-fill-color: var(--form-placeholder);
 }
 
 .form-control:hover {
@@ -353,11 +354,11 @@
 .form-control:focus {
   outline: none;
   border-color: var(--orange);
-  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  color: #0f172a !important;
-  -webkit-text-fill-color: #0f172a !important;
+  background: var(--form-input-bg-active) !important;
+  background-color: var(--form-input-bg-active) !important;
+  color: var(--form-input-text) !important;
+  -webkit-text-fill-color: var(--form-input-text) !important;
+  box-shadow: var(--form-focus-ring);
 }
 
 /* Fix for browser autofill styling */
@@ -365,35 +366,34 @@
 .form-control:-webkit-autofill:hover,
 .form-control:-webkit-autofill:focus,
 .form-control:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
-  -webkit-text-fill-color: #0f172a !important;
-  caret-color: #0f172a !important;
+  -webkit-box-shadow: 0 0 0 30px var(--form-input-bg-active) inset !important;
+  -webkit-text-fill-color: var(--form-input-text) !important;
+  caret-color: var(--form-input-text) !important;
   transition: background-color 5000s ease-in-out 0s;
-  background-color: #ffffff !important;
+  background-color: var(--form-input-bg-active) !important;
 }
 
-/* Additional fix for input states */
-.form-control:valid,
-.form-control:invalid {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  color: #0f172a !important;
-  -webkit-text-fill-color: #0f172a !important;
-}
+/* Removed: a `.form-control:valid, .form-control:invalid { background: #fff
+   !important }` rule lived here. Every input is always one or the other, so it
+   matched permanently — and because this stylesheet is loaded app-wide by the
+   SPA, it forced white onto the .form-control inputs of every other landing
+   page too. The base rule above already pins the background and text colour. */
 
 .btn-submit-form {
   width: 100%;
-  padding: 16px 24px;
+  padding: var(--form-submit-padding);
   background: var(--orange);
-  color: white;
+  color: #ffffff;
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: var(--form-submit-radius);
+  font-family: inherit;
+  font-size: var(--form-submit-size);
+  font-weight: var(--form-submit-weight);
+  letter-spacing: -0.01em;
   cursor: pointer;
-  margin-top: 8px;
+  box-shadow: var(--form-submit-shadow);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+  margin-top: 8px;
 }
 
 .btn-submit-form:hover {
