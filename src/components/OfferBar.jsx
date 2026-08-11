@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { usePostHog } from '@posthog/react';
-import { buildWhatsAppUrl, getAdKeyword, isBingRoute } from '../utils/whatsapp';
+import { buildWhatsAppUrl, getAdKeyword, getAdSource } from '../utils/whatsapp';
 
-const OFFER_MESSAGE =
-  "Hi, I'd like to claim the 3 months FREE Accounting offer on your Annual Plans.";
+const OFFER_ASK =
+  "I'd like to claim the 3 months FREE Accounting offer on your Annual Plans.";
+
+// The ask is the same everywhere; only the opener names where the click came
+// from, so sales can attribute the offer claim without asking.
+const OPENER_BY_SOURCE = {
+  bing: 'Hi, I saw your bing ads.',
+  reddit: 'Hi, I saw your ad on Reddit.',
+  google: 'Hi, I saw your google ad.',
+};
 
 // On the accounting-form page the CTA scrolls to the inline lead form
 // ("Contact Now") instead of opening WhatsApp.
@@ -72,11 +80,13 @@ const OfferBar = () => {
   const { pathname, search } = useLocation();
   const posthog = usePostHog();
 
+  const adSource = getAdSource(pathname);
   const keyword = getAdKeyword(search);
-  const message =
-    isBingRoute(pathname) && keyword
-      ? `${OFFER_MESSAGE} (I searched for “${keyword}” on Bing.)`
-      : OFFER_MESSAGE;
+  const opener =
+    adSource === 'bing' && keyword
+      ? `Hi, I saw your bing ads for “${keyword}”.`
+      : OPENER_BY_SOURCE[adSource];
+  const message = `${opener} ${OFFER_ASK}`;
   const whatsappUrl = buildWhatsAppUrl(message);
   const isFormPage = pathname === FORM_PAGE_PATH;
 

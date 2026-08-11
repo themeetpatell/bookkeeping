@@ -18,10 +18,20 @@ export const getAdKeyword = (search = '') => {
 };
 
 /**
+ * Which network sent the visitor, inferred from the landing route. Every
+ * network gets its own pages on this ads-only site, so the path is a more
+ * reliable signal than utm_source, which ad blockers and manual link edits
+ * strip. Anything unrecognised is Google — it buys the most traffic here.
+ *
  * @param {string} pathname - router location.pathname
- * @returns {boolean} true on the Bing landing routes (…-bing)
+ * @returns {'bing' | 'reddit' | 'google'}
  */
-export const isBingRoute = (pathname = '') => pathname.toLowerCase().includes('bing');
+export const getAdSource = (pathname = '') => {
+  const path = pathname.toLowerCase();
+  if (path.includes('bing')) return 'bing';
+  if (path.includes('reddit')) return 'reddit';
+  return 'google';
+};
 
 /**
  * @param {string} message - human-readable prefilled WhatsApp message
