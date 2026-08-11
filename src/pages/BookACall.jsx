@@ -4,7 +4,12 @@ import { usePostHog } from '@posthog/react';
 import { FiArrowLeft } from 'react-icons/fi';
 import finanshelsLogo from '../assets/finanshelslogo.svg';
 import Seo from '../components/Seo';
-import { resolveBookingUrls } from '../utils/booking';
+import {
+  APP_ORIGINS,
+  BOOKING_CONFIRMED_MESSAGE,
+  BOOKING_CONFIRMED_PATH,
+  resolveBookingUrls,
+} from '../utils/booking';
 import './BookACall.css';
 
 const EMBED_SCRIPT_SRC = 'https://bookings.nimbuspop.com/assets/embed.js';
@@ -62,6 +67,34 @@ const BookACall = () => {
   // The widget is injected imperatively, so it must not run twice — StrictMode
   // invokes effects twice in development.
   const hasEmbedded = useRef(false);
+
+  /* Zoho's post-booking redirect can only name one origin, so on every other
+     origin the confirmation page lands here cross-origin and cannot navigate
+     us itself. It asks instead; we own the top window, so we go. Without this
+     the visitor is left staring at a confirmation crushed into the widget box
+     and the booking conversion never fires at page level. */
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (!APP_ORIGINS.includes(event.origin)) return;
+      const { type, email } = event.data || {};
+      if (type !== BOOKING_CONFIRMED_MESSAGE) return;
+
+      // Hand the email to our own origin: the confirmation page reads it from
+      // here for the enhanced conversion, and it cannot cross origins by itself.
+      if (email) {
+        try {
+          window.sessionStorage.setItem('booking_customer_email', email);
+        } catch {
+          // Private mode — the conversion still fires, just without the match.
+        }
+      }
+
+      window.location.replace(BOOKING_CONFIRMED_PATH);
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
 
   useEffect(() => {
     let isActive = true;

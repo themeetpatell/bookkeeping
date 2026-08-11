@@ -8,6 +8,29 @@
 // through the booking, which an off-site scheduler would drop.
 export const BOOKING_PATH = '/book-a-call';
 
+// Where Zoho Bookings is told to send the visitor after a confirmed booking.
+export const BOOKING_CONFIRMED_PATH = '/booking-confirmed';
+
+/* Every origin this app answers on. Zoho Bookings allows exactly ONE redirect
+   URL per service, so whichever origin it points at, visitors arriving on any
+   of the others get a confirmation page that is CROSS-ORIGIN with the page
+   framing it — and a cross-origin frame cannot navigate the top window, so the
+   confirmation renders squeezed inside the scheduler and the conversion fires
+   in the wrong context. The two sides talk over postMessage instead, and this
+   list is the allowlist for both ends. Add any new domain here.
+
+   The long-term fix is to serve the site from one origin and redirect the rest;
+   until then this keeps bookings attributable on all of them. */
+export const APP_ORIGINS = [
+  'https://accounting.finanshels.com',
+  'https://accounting.finanshels.co',
+  'https://finanshelsaccounting.co',
+  'https://www.finanshelsaccounting.co',
+];
+
+// Sent by the framed confirmation page to whichever of our pages is framing it.
+export const BOOKING_CONFIRMED_MESSAGE = 'finanshels:booking-confirmed';
+
 const BOOKING_ORIGIN = 'https://contact-finanshels.zohobookings.com';
 
 // One Zoho service per ad channel, so bookings land in the right calendar and
