@@ -24,7 +24,7 @@ import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import { absoluteUrl } from '../utils/site';
 
 const WHATSAPP_MESSAGE =
-  "Hi Finanshels! I'd like to learn more about your AI-native accounting services.";
+  "Hi Finanshels! I saw your google ad. I'd like to learn more about your AI-native accounting services.";
 
 const REVEAL_SELECTOR = '[data-reveal], [data-reveal-stagger]';
 

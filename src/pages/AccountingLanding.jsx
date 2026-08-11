@@ -383,7 +383,7 @@ const AccountingLanding = () => {
               </div>
               
               <a 
-                href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
+                href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+google+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noreferrer"
                 className="btn-primary data-wa-track"
@@ -560,7 +560,7 @@ const AccountingLanding = () => {
               </ul>
               
               <a 
-                href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
+                href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+google+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noreferrer"
                 className="btn-pricing data-wa-track"
@@ -589,7 +589,7 @@ const AccountingLanding = () => {
               </ul>
               
               <a 
-                href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
+                href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+google+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noreferrer"
                 className="btn-pricing data-wa-track"
@@ -619,7 +619,7 @@ const AccountingLanding = () => {
               </ul>
               
               <a 
-                href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
+                href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+google+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noreferrer"
                 className="btn-pricing primary data-wa-track"
@@ -648,7 +648,7 @@ const AccountingLanding = () => {
               </ul>
               
               <a 
-                href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
+                href="https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+google+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noreferrer"
                 className="btn-pricing data-wa-track"
