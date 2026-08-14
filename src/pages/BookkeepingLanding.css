@@ -253,10 +253,16 @@
 
 .trust-logo-image {
   height: 28px;
+  max-width: 130px;
   width: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1) grayscale(100%);
-  opacity: 0.9;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.trust-logo:hover .trust-logo-image {
+  opacity: 1;
+  transform: scale(1.04);
 }
 
 .client-logos-section {
@@ -314,11 +320,11 @@
 
 .logo-image {
   max-height: 34px;
+  max-width: 140px;
   width: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1) grayscale(100%);
   opacity: 0.85;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .logo-tile:hover .logo-image {

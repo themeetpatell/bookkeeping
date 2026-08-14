@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield, FiX, FiMessageCircle, FiCalendar } from 'react-icons/fi';
 import './AccountingLanding.css';
 import { BOOKING_PATH } from '../utils/booking';
+import clientLogos from '../data/clientLogos';
 
 const WHATSAPP_URL =
   'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+google+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0';
@@ -98,17 +99,7 @@ const AccountingWhatsApp = () => {
     }
   ];
 
-  const clientLogos = [
-    { src: '/clients/Binary.png', alt: 'Binary' },
-    { src: '/clients/actualize.png', alt: 'Actualize' },
-    { src: '/clients/carbonsirf.png', alt: 'CarbonSirf' },
-    { src: '/clients/cotu.avif', alt: 'COTU Ventures' },
-    { src: '/clients/fuze.png', alt: 'Fuze' },
-    { src: '/clients/growdash.png', alt: 'Growdash' },
-    { src: '/clients/humlog.png', alt: 'Humlog' },
-    { src: '/clients/veehive.png', alt: 'Veehive' },
-    { src: '/clients/zywa.png', alt: 'Zywa' }
-  ];
+
 
   return (
     <div className="accounting-landing accounting-whatsapp-page">

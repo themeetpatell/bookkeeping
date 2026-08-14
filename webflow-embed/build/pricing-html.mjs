@@ -98,13 +98,33 @@ const waLink = (source, cls, label) => `<a
 const clientLogos = [
   ['Binary.png', 'Binary'],
   ['actualize.png', 'Actualize'],
-  ['carbonsirf.png', 'CarbonSirf'],
-  ['cotu.avif', 'COTU Ventures'],
+  ['carbonsifr.png', 'CarbonSifr'],
+  ['cotu.png', 'COTU Ventures'],
   ['fuze.png', 'Fuze'],
   ['growdash.png', 'Growdash'],
   ['humlog.png', 'Humlog'],
   ['veehive.png', 'Veehive'],
   ['zywa.png', 'Zywa'],
+  ['Bit2me.svg', 'Bit2Me'],
+  ['DFDF.png', 'DFDF'],
+  ['premialab.png', 'Premialab'],
+  ['MBHRS.png', 'MBHRS'],
+  ['Qureos.png', 'Qureos'],
+  ['retold.png', 'Retold'],
+  ['Signum.png', 'Signum'],
+  ['tie-dubai.png', 'TiE Dubai'],
+  ['wittify-ai.png', 'Wittify AI'],
+  ['abwaab.png', 'Abwaab'],
+  ['bigbadwolf.png', 'Big Bad Wolf'],
+  ['blooming-box.png', 'Blooming Box'],
+  ['cellusys.png', 'Cellusys'],
+  ['kroolo.png', 'Kroolo'],
+  ['optimize.png', 'Optimize'],
+  ['prime-financials.png', 'Prime Financials'],
+  ['sace.png', 'SACE'],
+  ['sharjah-book-authority.png', 'Sharjah Book Authority'],
+  ['silkhaus-logo.png', 'Silkhaus'],
+  ['swyt.png', 'Swyt'],
 ];
 
 /* The AI-native claim only converts if it comes with the human counterweight,
@@ -522,7 +542,7 @@ export const SECTIONS = [
       <div class="fspr-logos-track" data-reveal>
 ${clientLogos
       .map(([file, alt]) => `        <div class="fspr-logo-tile">
-          <img src="${ASSETS}/clients/${file}" alt="${alt} logo" loading="lazy" decoding="async" />
+          <img src="${ASSETS}/clients/white/${file}" alt="${alt} logo" loading="lazy" decoding="async" />
         </div>`)
       .join('\n')}
       </div>

@@ -22,6 +22,7 @@ import './AIAccountingLanding.css';
 import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import { absoluteUrl } from '../utils/site';
+import clientLogos from '../data/clientLogos';
 
 const WHATSAPP_MESSAGE =
   "Hi Finanshels! I saw your google ad. I'd like to learn more about your AI-native accounting services.";
@@ -142,17 +143,7 @@ const heroFeedItems = [
   { icon: 'human', time: '06:06:02', text: 'Your accountant signed it off', meta: 'checked line by line' },
 ];
 
-const clientLogos = [
-  { src: '/clients/Binary.png', alt: 'Binary' },
-  { src: '/clients/actualize.png', alt: 'Actualize' },
-  { src: '/clients/carbonsirf.png', alt: 'CarbonSirf' },
-  { src: '/clients/cotu.avif', alt: 'COTU Ventures' },
-  { src: '/clients/fuze.png', alt: 'Fuze' },
-  { src: '/clients/growdash.png', alt: 'Growdash' },
-  { src: '/clients/humlog.png', alt: 'Humlog' },
-  { src: '/clients/veehive.png', alt: 'Veehive' },
-  { src: '/clients/zywa.png', alt: 'Zywa' },
-];
+
 
 const pillars = [
   {

@@ -3,6 +3,7 @@ import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAl
 import './AccountingLandingBing.css';
 import { ZOHO_BING_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
+import clientLogos from '../data/clientLogos';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
@@ -164,17 +165,7 @@ const AccountingLandingBing = () => {
     }
   ];
 
-  const clientLogos = [
-    { src: '/clients/Binary.png', alt: 'Binary' },
-    { src: '/clients/actualize.png', alt: 'Actualize' },
-    { src: '/clients/carbonsirf.png', alt: 'CarbonSirf' },
-    { src: '/clients/cotu.avif', alt: 'COTU Ventures' },
-    { src: '/clients/fuze.png', alt: 'Fuze' },
-    { src: '/clients/growdash.png', alt: 'Growdash' },
-    { src: '/clients/humlog.png', alt: 'Humlog' },
-    { src: '/clients/veehive.png', alt: 'Veehive' },
-    { src: '/clients/zywa.png', alt: 'Zywa' }
-  ];
+
 
   return (
     <div className="accounting-landing">

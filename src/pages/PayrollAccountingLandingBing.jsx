@@ -5,6 +5,7 @@ import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiAlertTriangle, FiT
 import './PayrollAccountingLanding.css';
 import { ZOHO_BING_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
+import clientLogos from '../data/clientLogos';
 
 const ZohoPayrollForm = ({ formId }) => (
   <form
@@ -125,17 +126,7 @@ const PayrollAccountingLandingBing = () => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const clientLogos = [
-    { src: '/clients/Binary.png', alt: 'Binary' },
-    { src: '/clients/actualize.png', alt: 'Actualize' },
-    { src: '/clients/carbonsirf.png', alt: 'Carbonsirf' },
-    { src: '/clients/cotu.avif', alt: 'Cotu' },
-    { src: '/clients/fuze.png', alt: 'Fuze' },
-    { src: '/clients/growdash.png', alt: 'Growdash' },
-    { src: '/clients/humlog.png', alt: 'Humlog' },
-    { src: '/clients/veehive.png', alt: 'Veehive' },
-    { src: '/clients/zywa.png', alt: 'Zywa' }
-  ];
+
 
   const testimonials = [
     {
