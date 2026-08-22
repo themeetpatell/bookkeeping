@@ -1,0 +1,388 @@
+/* Packages landing page (/packages) — Google Ads "bookkeeping packages".
+   Only the sections this page introduces live here. The hero, section headers,
+   pricing cards, FAQ and final CTA are inherited from BookkeepingLanding.css,
+   which PackagesLanding.jsx imports alongside this file. */
+
+/* ── Quote form additions ───────────────────────────────────────────────── */
+
+/* .form-select rebuilds its arrow with a background shorthand, and its :focus
+   rule overwrites that shorthand — which drops the arrow the moment the field
+   is focused. Restore it for this page's select only. */
+.pkg-quote-select:focus {
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(15, 23, 42, 0.45) 50%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.45) 50%, transparent 50%),
+    linear-gradient(to right, #ffffff, #ffffff);
+  background-position:
+    calc(100% - 24px) calc(50% - 3px),
+    calc(100% - 16px) calc(50% - 3px),
+    100% 0;
+  background-size: 8px 8px, 8px 8px, 2.5em 100%;
+  background-repeat: no-repeat;
+}
+
+.form-hint {
+  margin: -8px 0 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+/* ── Hero ───────────────────────────────────────────────────────────────── */
+
+/* The shared 56px headline runs to four lines here, which pushes the proof
+   numbers under the fold. Trimming it keeps the price, the promise and the
+   proof all visible on a 900px viewport without shrinking the form.
+   Scoped to .packages-landing so /bookkeeping is untouched. */
+.packages-landing .hero-title {
+  font-size: 46px;
+  line-height: 1.12;
+  margin-bottom: 20px;
+}
+
+.packages-landing .hero-features {
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+/* ── Proof strip (hero) ─────────────────────────────────────────────────── */
+
+.pkg-proof-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pkg-proof-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+}
+
+.pkg-proof-value {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.pkg-proof-label {
+  font-size: 13px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ── Package cards ──────────────────────────────────────────────────────── */
+
+/* Three tiers here, against the four on /bookkeeping. */
+.pkg-grid {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* Starter carries fewer features than the other two, so without this its CTA
+   floats ~90px above theirs and the row of buttons reads as broken. The card is
+   already a flex column; this pins the button to the bottom of each one. */
+.pkg-grid .btn-plan {
+  margin-top: auto;
+}
+
+/* Reporting cadence is what this ad group compares on, so it is pulled out of
+   the feature list and given its own line on every card. */
+.pkg-reporting {
+  margin: 12px 0 20px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255, 107, 53, 0.08);
+  border: 1px solid rgba(255, 107, 53, 0.22);
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.pkg-reporting-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange-primary);
+}
+
+/* ── Comparison table ───────────────────────────────────────────────────── */
+
+.pkg-compare {
+  max-width: 1080px;
+  margin: 56px auto 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #121826;
+}
+
+.pkg-compare-row {
+  display: grid;
+  grid-template-columns: 1.1fr repeat(3, 1fr);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.pkg-compare-row:last-child {
+  border-bottom: none;
+}
+
+.pkg-compare-cell {
+  padding: 18px 20px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.pkg-compare-cell:first-child {
+  border-left: none;
+}
+
+.pkg-compare-label {
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.pkg-compare-head .pkg-compare-cell {
+  padding-top: 22px;
+  padding-bottom: 22px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(255, 107, 53, 0.1);
+}
+
+.pkg-compare-cta {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: var(--orange-primary);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background var(--transition-base);
+}
+
+.pkg-compare-cta:hover {
+  background: var(--orange-hover);
+}
+
+/* Only shown when the table collapses to stacked cards on small screens. */
+.pkg-compare-mobile-head {
+  display: none;
+}
+
+.pkg-offer-terms {
+  max-width: 860px;
+  margin: 40px auto 0;
+  padding: 18px 24px;
+  border-radius: 12px;
+  background: rgba(255, 107, 53, 0.08);
+  border: 1px solid rgba(255, 107, 53, 0.25);
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+.pkg-offer-terms strong {
+  color: #ffffff;
+}
+
+/* ── What's included ────────────────────────────────────────────────────── */
+
+.pkg-included-section {
+  padding: 100px 24px;
+  background: #0B1221;
+}
+
+.pkg-included-section .section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.pkg-included-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.pkg-included-card {
+  padding: 28px 24px;
+  border-radius: 16px;
+  background: #121826;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.pkg-included-card:hover {
+  border-color: rgba(255, 107, 53, 0.35);
+  transform: translateY(-3px);
+}
+
+.pkg-included-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 16px;
+  color: var(--orange-primary);
+}
+
+.pkg-included-title {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.pkg-included-description {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+/* ── Switch in 48 hours ─────────────────────────────────────────────────── */
+
+.pkg-switch-section {
+  padding: 100px 24px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.pkg-switch-section .section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.pkg-switch-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.pkg-switch-step {
+  position: relative;
+  padding: 32px 24px 28px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pkg-switch-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  background: var(--orange-primary);
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.pkg-switch-title {
+  margin: 0 0 10px;
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.pkg-switch-description {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.pkg-switch-cta-row {
+  margin-top: 48px;
+  text-align: center;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .pkg-grid,
+  .pkg-included-grid,
+  .pkg-switch-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pkg-compare-cell {
+    padding: 16px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pkg-proof-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pkg-grid,
+  .pkg-included-grid,
+  .pkg-switch-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .pkg-included-section,
+  .pkg-switch-section {
+    padding: 64px 20px;
+  }
+
+  /* The table becomes one stacked block per attribute: the row label is the
+     heading, and each plan's value carries its own name so the value is never
+     orphaned from the plan it belongs to. */
+  .pkg-compare {
+    margin-top: 40px;
+  }
+
+  .pkg-compare-head {
+    display: none;
+  }
+
+  .pkg-compare-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pkg-compare-cell {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .pkg-compare-label {
+    border-top: none;
+    font-size: 15px;
+  }
+
+  .pkg-compare-mobile-head {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--orange-primary);
+  }
+}

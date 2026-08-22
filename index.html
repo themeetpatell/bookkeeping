@@ -127,6 +127,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         var emailField = formEl.querySelector('input[name=\"Email\"]');
         var emailValue = emailField ? emailField.value.trim() : '';
 
+        // Monthly transaction volume, asked only on the /packages quote form.
+        // Read here rather than from a React onSubmit handler: this listener is
+        // the one already proven to fire before the browser navigates to Zoho,
+        // so the answer rides along with the conversion instead of racing it.
+        var volumeField = formEl.querySelector('select[name=\"SingleLine1\"]');
+        var volumeValue = volumeField ? volumeField.value.trim() : '';
+
         // The form WAS submitted, so the Zoho submit signal is accurate here.
         window.dataLayer.push({ event: 'zf_submitform', _event: 'zf_submitform' });
 
@@ -141,7 +148,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             window.posthog.capture('consultation_form_submitted', {
               form_id: formEl.id || '',
               page_path: window.location.pathname,
-              keyword: new URLSearchParams(window.location.search).get('utm_term') || ''
+              keyword: new URLSearchParams(window.location.search).get('utm_term') || '',
+              monthly_transaction_volume: volumeValue
             });
           }
         } catch (e) {}

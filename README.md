@@ -36,6 +36,24 @@ Paid-ads landing site for Finanshels’ UAE bookkeeping, month-end close, and CF
 ## Routes
 - `/` — AccountingLanding (primary home page - new design matching Lovable)
 - `/bookkeeping` — BookkeepingLanding (original bookkeeping page)
+- `/packages` — PackagesLanding, the ad-group variant for "bookkeeping packages"
+
+### Ad-group landing page variants
+Pages like `/packages` exist to match the *search intent of one ad group*, not a
+whole campaign, so the Quality Score "landing page experience" rating stops
+being dragged down by a generic destination. The pattern:
+
+- Copy and plan data live in `src/content/<variant>.js`; the page component only
+  lays them out. Fork the content file for the next ad group.
+- Shared chrome (hero, pricing cards, FAQ, final CTA) is inherited by importing
+  `BookkeepingLanding.css`. A variant's own stylesheet holds only new sections,
+  and page-specific overrides are scoped under a root class (`.packages-landing`)
+  so they cannot leak onto the other pages.
+- The global `Nav` scrolls to `#services`, `#pricing`, `#testimonials` and
+  `#faq`. A variant must expose those ids or those nav links are dead on it.
+- **Every variant is re-checked against the ad-policy grep below before it
+  ships.** Briefs written by the ads team routinely ask for the exact terms that
+  got this site disapproved; rewrite them, do not ship them.
 
 ## SEO & Analytics
 - Base meta, OG/Twitter tags defined in `index.html`.

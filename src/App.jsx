@@ -8,6 +8,7 @@ import AccountingLanding from './pages/AccountingLanding';
 import AccountingLandingBing from './pages/AccountingLandingBing';
 import BookkeepingLanding from './pages/BookkeepingLanding';
 import BookkeepingLandingBing from './pages/BookkeepingLandingBing';
+import PackagesLanding from './pages/PackagesLanding';
 import AccountingSoftwareLanding from './pages/AccountingSoftwareLanding';
 import AccountingSoftwareLandingBing from './pages/AccountingSoftwareLandingBing';
 import PayrollAccountingLanding from './pages/PayrollAccountingLanding';
@@ -49,6 +50,9 @@ function App() {
           <Route path="/accounting-bing" element={<AccountingLandingBing />} />
           <Route path="/bookkeeping" element={<BookkeepingLanding />} />
           <Route path="/bookkeeping-bing" element={<BookkeepingLandingBing />} />
+          {/* Ad-group-specific variant for "bookkeeping packages" — leads with
+              the three published tiers instead of the service story. */}
+          <Route path="/packages" element={<PackagesLanding />} />
           <Route path="/accounting-software" element={<AccountingSoftwareLanding />} />
           <Route path="/accounting-software-bing" element={<AccountingSoftwareLandingBing />} />
           <Route path="/payroll-accounting" element={<PayrollAccountingLanding />} />
