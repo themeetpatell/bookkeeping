@@ -82,17 +82,38 @@
 
 /* ── Package cards ──────────────────────────────────────────────────────── */
 
-/* Three tiers here, against the four on /bookkeeping. */
-.pkg-grid {
+/* Three tiers here, against the four on /bookkeeping.
+
+   Every rule below is scoped under .packages-landing rather than written as a
+   bare .pkg-grid. BookkeepingLanding.css is imported by two page components, so
+   Vite emits its `.pricing-grid { repeat(4, 1fr) }` TWICE — and the second copy
+   lands after this file. At equal specificity source order wins, which left
+   three cards in a four-column track with a dead column on the right. Two
+   classes beat one regardless of order. Keep the scope on any override here
+   that targets a class owned by BookkeepingLanding.css. */
+.packages-landing .pricing-grid {
   grid-template-columns: repeat(3, 1fr);
-  max-width: 1080px;
-  margin: 0 auto;
+  gap: 28px;
+  align-items: stretch;
+}
+
+/* The shared "popular" card is scaled 1.05. That reads fine as one of four
+   narrow cards, but across three wide ones it just knocks the middle card out
+   of line with its neighbours. The badge and the gradient already carry the
+   emphasis, so drop the scale and let all three sit on one baseline. */
+.packages-landing .pricing-card.popular {
+  transform: none;
+}
+
+.packages-landing .pricing-card:hover,
+.packages-landing .pricing-card.popular:hover {
+  transform: translateY(-6px);
 }
 
 /* Starter carries fewer features than the other two, so without this its CTA
    floats ~90px above theirs and the row of buttons reads as broken. The card is
    already a flex column; this pins the button to the bottom of each one. */
-.pkg-grid .btn-plan {
+.packages-landing .pricing-card .btn-plan {
   margin-top: auto;
 }
 
@@ -323,7 +344,10 @@
 /* ── Responsive ─────────────────────────────────────────────────────────── */
 
 @media (max-width: 1024px) {
-  .pkg-grid,
+  /* Scoped for the same reason as the base rule above: BookkeepingLanding.css
+     ships its own .pricing-grid breakpoints, and a later duplicate of that file
+     would otherwise win. */
+  .packages-landing .pricing-grid,
   .pkg-included-grid,
   .pkg-switch-steps {
     grid-template-columns: repeat(2, 1fr);
@@ -340,7 +364,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .pkg-grid,
+  .packages-landing .pricing-grid,
   .pkg-included-grid,
   .pkg-switch-steps {
     grid-template-columns: 1fr;
