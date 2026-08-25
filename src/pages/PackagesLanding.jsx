@@ -6,6 +6,7 @@ import Testimonials from '../components/Testimonials';
 import PackageQuoteForm from '../components/PackageQuoteForm';
 import clientLogos from '../data/clientLogos';
 import { absoluteUrl } from '../utils/site';
+import { ZOHO_BING_FORM_ACTION, ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import {
   QUOTE_ANCHOR_ID,
   QUOTE_RESPONSE_TIME,
@@ -34,21 +35,33 @@ const SEO_TITLE = 'Bookkeeping Packages UAE | Monthly Bookkeeping Plans from AED
 const SEO_DESCRIPTION =
   'Compare monthly bookkeeping packages for UAE businesses from AED 499/month. Clear bookkeeping pricing, a dedicated accountant, management reports and a 48-hour switch.';
 
-const PackagesLanding = () => {
+/**
+ * One component, two routes: /packages (Google Ads) and /packages-bing.
+ * The Bing twin serves identical content at its own URL so Bing traffic stays
+ * separable in analytics, posts to the Bing Zoho form, and — because the path
+ * ends in `-bing` — the nav/footer booking CTAs resolve to the Bing scheduler
+ * automatically (see src/utils/booking.js).
+ * @param {{ channel?: 'google' | 'bing' }} props
+ */
+const PackagesLanding = ({ channel = 'google' }) => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const posthog = usePostHog();
+
+  const isBing = channel === 'bing';
+  const pagePath = isBing ? `${PAGE_PATH}-bing` : PAGE_PATH;
+  const formAction = isBing ? ZOHO_BING_FORM_ACTION : ZOHO_GOOGLE_FORM_ACTION;
 
   const toggleFaq = (index) => setOpenFaqIndex(openFaqIndex === index ? null : index);
 
   const trackCta = (location, plan) =>
-    posthog?.capture('packages_cta_clicked', { location, plan, page_path: PAGE_PATH });
+    posthog?.capture('packages_cta_clicked', { location, plan, page_path: pagePath });
 
   const seoJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: 'Bookkeeping Packages (UAE)',
     serviceType: 'Bookkeeping',
-    url: absoluteUrl(PAGE_PATH),
+    url: absoluteUrl(pagePath),
     image: absoluteUrl('/Dubai.jpg'),
     description: SEO_DESCRIPTION,
     areaServed: 'AE',
@@ -64,6 +77,8 @@ const PackagesLanding = () => {
 
   return (
     <div className="new-homepage packages-landing">
+      {/* The twin canonicalises to the original so the two URLs never compete;
+          the whole site is noindex anyway (vercel.json X-Robots-Tag). */}
       <Seo
         title={SEO_TITLE}
         description={SEO_DESCRIPTION}
@@ -140,6 +155,7 @@ const PackagesLanding = () => {
             <div className="consultation-form" id={QUOTE_ANCHOR_ID}>
               <PackageQuoteForm
                 formId="packages-quote-hero"
+                action={formAction}
                 title="Get Your Package Quote"
                 subtitle={`Tell us your volume and a senior accountant replies with the right package and price ${QUOTE_RESPONSE_TIME}.`}
               />
@@ -454,6 +470,7 @@ const PackagesLanding = () => {
             <div className="final-consultation-form">
               <PackageQuoteForm
                 formId="packages-quote-final"
+                action={formAction}
                 title="Compare Packages &amp; Get a Quote"
                 subtitle={`Four questions. A senior accountant replies ${QUOTE_RESPONSE_TIME}.`}
                 submitLabel="Send My Quote Request"

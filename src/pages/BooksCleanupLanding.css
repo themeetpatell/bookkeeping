@@ -1,0 +1,45 @@
+/* Only what /books-cleanup introduces on top of the shared /packages design
+   system. The page chrome comes from BookkeepingLanding.css and the proof
+   strip / scope grid / steps band from PackagesLanding.css.
+
+   Same specificity rule as PackagesLanding.css applies here: BookkeepingLanding.css
+   is imported by several page components, so Vite emits its `.pricing-grid`
+   and `.pricing-card` rules more than once and a later copy can land after this
+   file. Every override below is scoped under .books-cleanup-landing so it beats
+   those single-class rules regardless of source order. */
+
+/* One offer instead of three tiers, so the grid becomes a single centred card
+   rather than a column track with two dead columns beside it. */
+.books-cleanup-landing .cleanup-offer {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.books-cleanup-landing .cleanup-offer-card {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* The shared "popular" card is scaled 1.05 to stand out among siblings. This
+   card has none, so the scale only pushes it out of alignment with the section
+   around it. The badge and gradient already carry the emphasis. */
+.books-cleanup-landing .pricing-card.popular {
+  transform: none;
+}
+
+.books-cleanup-landing .pricing-card.popular:hover {
+  transform: translateY(-6px);
+}
+
+/* No "/mo" suffix on a one-time engagement, so the amount sits alone and needs
+   the baseline nudged back under the "from AED" prefix. */
+.books-cleanup-landing .pricing-price {
+  align-items: baseline;
+}
+
+@media (max-width: 768px) {
+  .books-cleanup-landing .cleanup-offer-card {
+    max-width: 100%;
+  }
+}

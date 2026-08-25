@@ -9,6 +9,7 @@ import AccountingLandingBing from './pages/AccountingLandingBing';
 import BookkeepingLanding from './pages/BookkeepingLanding';
 import BookkeepingLandingBing from './pages/BookkeepingLandingBing';
 import PackagesLanding from './pages/PackagesLanding';
+import BooksCleanupLanding from './pages/BooksCleanupLanding';
 import AccountingSoftwareLanding from './pages/AccountingSoftwareLanding';
 import AccountingSoftwareLandingBing from './pages/AccountingSoftwareLandingBing';
 import PayrollAccountingLanding from './pages/PayrollAccountingLanding';
@@ -51,8 +52,19 @@ function App() {
           <Route path="/bookkeeping" element={<BookkeepingLanding />} />
           <Route path="/bookkeeping-bing" element={<BookkeepingLandingBing />} />
           {/* Ad-group-specific variant for "bookkeeping packages" — leads with
-              the three published tiers instead of the service story. */}
+              the three published tiers instead of the service story. The
+              `-bing` twin serves the same component: it posts to the Bing Zoho
+              form and, because its path ends in `-bing`, the nav and footer
+              booking CTAs resolve to the Bing scheduler (src/utils/booking.js). */}
           <Route path="/packages" element={<PackagesLanding />} />
+          <Route path="/packages-bing" element={<PackagesLanding channel="bing" />} />
+          {/* Catch-up bookkeeping ad group — one priced engagement rather than
+              monthly tiers. Same Google/Bing twin arrangement as /packages. */}
+          <Route path="/books-cleanup" element={<BooksCleanupLanding />} />
+          <Route
+            path="/books-cleanup-bing"
+            element={<BooksCleanupLanding channel="bing" />}
+          />
           <Route path="/accounting-software" element={<AccountingSoftwareLanding />} />
           <Route path="/accounting-software-bing" element={<AccountingSoftwareLandingBing />} />
           <Route path="/payroll-accounting" element={<PayrollAccountingLanding />} />
