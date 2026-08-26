@@ -15,6 +15,34 @@ export const ZOHO_GOOGLE_FORM_ACTION = `${ZOHO_FORM_BASE}/BookYourAccountingCons
 export const ZOHO_BING_FORM_ACTION = `${ZOHO_FORM_BASE}/BookYourAccountingConsultationBing/formperma/pTZ1WJZ9hxCnspXoXMYZtxgTQVFoMK6tTPG-KwVOfwE/htmlRecords/submit`;
 
 /**
+ * The Zoho form field that the Forms → CRM integration maps to Lead Source.
+ *
+ * This field is not free space. Whatever a page posts here becomes the lead's
+ * Lead Source in the CRM: the /packages quote form posted its transaction-volume
+ * answer here and every lead from that ad group arrived with a Lead Source of
+ * "20 – 80 a month". Only ever stamp a channel name into it, and check the
+ * Forms → CRM mapping before pointing any other field at a Zoho field name.
+ */
+export const ZOHO_LEAD_SOURCE_FIELD = 'SingleLine1';
+
+/**
+ * Lead Source per ad channel. Kept channel-level rather than per landing page
+ * so the CRM picklist stays short — the landing page is already recoverable
+ * from the utm_campaign/utm_content values posted alongside it.
+ */
+const LEAD_SOURCE_BY_CHANNEL = {
+  google: 'Google Ads',
+  bing: 'Bing Ads',
+};
+
+/**
+ * @param {'google' | 'bing'} channel the ad channel the page serves
+ * @returns {string} the Lead Source value to stamp on that channel's leads
+ */
+export const getLeadSourceForChannel = (channel) =>
+  LEAD_SOURCE_BY_CHANNEL[channel] ?? LEAD_SOURCE_BY_CHANNEL.google;
+
+/**
  * Where Zoho sends the browser after a successful submission.
  *
  * Pinned in the markup rather than left to the Zoho form's own redirect

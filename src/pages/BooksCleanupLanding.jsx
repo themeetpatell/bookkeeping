@@ -6,7 +6,11 @@ import Testimonials from '../components/Testimonials';
 import PackageQuoteForm from '../components/PackageQuoteForm';
 import clientLogos from '../data/clientLogos';
 import { absoluteUrl } from '../utils/site';
-import { ZOHO_BING_FORM_ACTION, ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
+import {
+  getLeadSourceForChannel,
+  ZOHO_BING_FORM_ACTION,
+  ZOHO_GOOGLE_FORM_ACTION,
+} from '../utils/zohoForms';
 import {
   CLEANUP_PRICE,
   CLEANUP_QUOTE_ANCHOR_ID,
@@ -51,6 +55,7 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
   const isBing = channel === 'bing';
   const pagePath = isBing ? `${PAGE_PATH}-bing` : PAGE_PATH;
   const formAction = isBing ? ZOHO_BING_FORM_ACTION : ZOHO_GOOGLE_FORM_ACTION;
+  const leadSource = getLeadSourceForChannel(channel);
 
   const toggleFaq = (index) => setOpenFaqIndex(openFaqIndex === index ? null : index);
 
@@ -160,8 +165,9 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
               <PackageQuoteForm
                 formId="cleanup-quote-hero"
                 action={formAction}
+                leadSource={leadSource}
                 title="Get Your Cleanup Quote"
-                subtitle={`Tell us how far behind you are and a senior accountant replies with a fixed quote ${CLEANUP_RESPONSE_TIME}.`}
+                subtitle={`Your fixed cleanup quote ${CLEANUP_RESPONSE_TIME}.`}
                 submitLabel="Get My Cleanup Quote"
                 selectLabel="How far behind are your books?"
                 selectHint="A rough answer is fine — it tells us the size of the backlog to quote."
@@ -173,20 +179,6 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
                 data is secure and will never be shared.
               </p>
 
-              <div className="form-badges">
-                <div className="badge-item">
-                  <FiCheckCircle className="badge-icon" />
-                  <span>No obligation</span>
-                </div>
-                <div className="badge-item">
-                  <FiCheckCircle className="badge-icon" />
-                  <span>Fixed quote</span>
-                </div>
-                <div className="badge-item">
-                  <FiCheckCircle className="badge-icon" />
-                  <span>Reply {CLEANUP_RESPONSE_TIME}</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -433,8 +425,9 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
               <PackageQuoteForm
                 formId="cleanup-quote-final"
                 action={formAction}
+                leadSource={leadSource}
                 title="Get Your Cleanup Quote"
-                subtitle={`Four questions. A senior accountant replies ${CLEANUP_RESPONSE_TIME}.`}
+                subtitle={`A senior accountant replies ${CLEANUP_RESPONSE_TIME}.`}
                 submitLabel="Send My Quote Request"
                 selectLabel="How far behind are your books?"
                 selectHint="A rough answer is fine — it tells us the size of the backlog to quote."

@@ -6,7 +6,11 @@ import Testimonials from '../components/Testimonials';
 import PackageQuoteForm from '../components/PackageQuoteForm';
 import clientLogos from '../data/clientLogos';
 import { absoluteUrl } from '../utils/site';
-import { ZOHO_BING_FORM_ACTION, ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
+import {
+  getLeadSourceForChannel,
+  ZOHO_BING_FORM_ACTION,
+  ZOHO_GOOGLE_FORM_ACTION,
+} from '../utils/zohoForms';
 import {
   QUOTE_ANCHOR_ID,
   QUOTE_RESPONSE_TIME,
@@ -50,6 +54,7 @@ const PackagesLanding = ({ channel = 'google' }) => {
   const isBing = channel === 'bing';
   const pagePath = isBing ? `${PAGE_PATH}-bing` : PAGE_PATH;
   const formAction = isBing ? ZOHO_BING_FORM_ACTION : ZOHO_GOOGLE_FORM_ACTION;
+  const leadSource = getLeadSourceForChannel(channel);
 
   const toggleFaq = (index) => setOpenFaqIndex(openFaqIndex === index ? null : index);
 
@@ -156,29 +161,15 @@ const PackagesLanding = ({ channel = 'google' }) => {
               <PackageQuoteForm
                 formId="packages-quote-hero"
                 action={formAction}
+                leadSource={leadSource}
                 title="Get Your Package Quote"
-                subtitle={`Tell us your volume and a senior accountant replies with the right package and price ${QUOTE_RESPONSE_TIME}.`}
+                subtitle={`Your package and price ${QUOTE_RESPONSE_TIME}.`}
               />
 
               <p className="form-disclaimer">
                 By submitting, you agree to receive communications from Finanshels. Your
                 data is secure and will never be shared.
               </p>
-
-              <div className="form-badges">
-                <div className="badge-item">
-                  <FiCheckCircle className="badge-icon" />
-                  <span>No obligation</span>
-                </div>
-                <div className="badge-item">
-                  <FiCheckCircle className="badge-icon" />
-                  <span>No setup fee</span>
-                </div>
-                <div className="badge-item">
-                  <FiCheckCircle className="badge-icon" />
-                  <span>Reply {QUOTE_RESPONSE_TIME}</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -471,8 +462,9 @@ const PackagesLanding = ({ channel = 'google' }) => {
               <PackageQuoteForm
                 formId="packages-quote-final"
                 action={formAction}
+                leadSource={leadSource}
                 title="Compare Packages &amp; Get a Quote"
-                subtitle={`Four questions. A senior accountant replies ${QUOTE_RESPONSE_TIME}.`}
+                subtitle={`A senior accountant replies ${QUOTE_RESPONSE_TIME}.`}
                 submitLabel="Send My Quote Request"
               />
 

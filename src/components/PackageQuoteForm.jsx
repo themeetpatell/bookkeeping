@@ -19,12 +19,19 @@ import { transactionVolumeBands } from '../content/bookkeepingPackages';
  * them, and a renamed field arrives empty with no error to tell you.
  */
 
-/* Zoho's second single-line field. The same answer is also read off the DOM by
-   the global submit listener in index.html, which attaches it to the
-   `consultation_form_submitted` PostHog event — so the signal survives even if
-   this field is not mapped on the Zoho form yet. Keep the name in sync with the
-   `select[name="SingleLine1"]` query there. */
-const VOLUME_FIELD_NAME = 'SingleLine1';
+/* The Zoho field the volume/backlog answer is posted to.
+ *
+ * Empty on purpose: this used to be `SingleLine1`, which the Zoho Forms → CRM
+ * integration maps to Lead Source, so every /packages and /books-cleanup lead
+ * reached the CRM with a Lead Source of "20 – 80 a month" or "6 – 12 months
+ * behind" instead of the ad channel. Set this only to a field name confirmed
+ * against the consultation forms' CRM mapping — a wrong name silently
+ * overwrites whichever CRM field that Zoho field feeds, with no error anywhere.
+ *
+ * The answer reaches PostHog either way: the global submit listener in
+ * index.html reads it off `select[data-lead-volume]` and attaches it to the
+ * `consultation_form_submitted` event. Keep that attribute in sync. */
+const VOLUME_FIELD_NAME = '';
 
 const DEFAULT_SELECT_LABEL = 'Approximate monthly transactions';
 const DEFAULT_SELECT_HINT = 'A rough number is fine — it tells us which package to quote.';
@@ -42,6 +49,9 @@ const PackageQuoteForm = ({
   selectLabel = DEFAULT_SELECT_LABEL,
   selectHint = DEFAULT_SELECT_HINT,
   selectOptions = transactionVolumeBands,
+  // Stamped into the CRM's Lead Source field. Pass the ad channel's value from
+  // getLeadSourceForChannel() — never the visitor's answer to anything.
+  leadSource = '',
 }) => {
   return (
     <form
@@ -52,7 +62,7 @@ const PackageQuoteForm = ({
       acceptCharset="UTF-8"
       encType="multipart/form-data"
     >
-      <ZohoHiddenFields />
+      <ZohoHiddenFields leadSource={leadSource} />
 
       <div className="form-header">
         <h2 className="form-title">{title}</h2>
@@ -151,7 +161,8 @@ const PackageQuoteForm = ({
         </label>
         <select
           id={`${formId}-volume`}
-          name={VOLUME_FIELD_NAME}
+          name={VOLUME_FIELD_NAME || undefined}
+          data-lead-volume=""
           className="form-select pkg-quote-select"
           defaultValue=""
           required
