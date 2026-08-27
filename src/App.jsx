@@ -73,8 +73,10 @@ function App() {
           <Route path="/ai-accounting" element={<AIAccountingLanding />} />
           <Route path="/accounting-form" element={<AccountingForm />} />
           <Route path="/accounting-form-reddit" element={<AccountingFormReddit />} />
+          {/* The only thank-you route. `/thank-you-from-finanshels` was a second
+              copy of this same page; it is now a 308 to here in vercel.json, so any
+              old link still lands on the page that fires the conversion. */}
           <Route path="/thank-you" element={<ThankYou />} />
-          <Route path="/thank-you-from-finanshels" element={<ThankYou />} />
           <Route path="/booking-confirmed" element={<BookingConfirmed />} />
         </Route>
       </Routes>

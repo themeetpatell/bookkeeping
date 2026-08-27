@@ -19,11 +19,20 @@ Paid-ads landing site for Finanshels’ UAE bookkeeping, month-end close, and CF
   `src/components/Seo.jsx`, `X-Robots-Tag` header in `vercel.json`). robots.txt still allows crawling —
   a blocked crawler never reads the noindex — and never blocks AdsBot/adidxbot.
 - Booking CTA targets: `https://contact-finanshels.zohobookings.com/accounting-google`, and
-  `.../accounting-bing` from the `-bing` routes. Resolved in `src/utils/booking.js`.
+  `.../accounting-bing` from the `-bing` routes. Resolved in `src/utils/booking.js`, which maps the
+  channel from the path suffix and passes it to `/book-a-call` on the query string.
+- A third Zoho service, `.../accounting-seo`, exists but is **deliberately not served from this site**.
+  Every page here is `noindex` paid-traffic only, so there is no organic visitor to route to it; it
+  belongs to the finanshels.com (Webflow) pages. Do not add it to `BOOKING_SLUGS` to "cover" direct or
+  returning visitors — an ad visitor who comes back without their `gclid` would be routed to the SEO
+  calendar and that booking would be attributed to organic.
 - Zoho Bookings must redirect after a confirmed booking to `/booking-confirmed`
   (`src/pages/BookingConfirmed.jsx`), which pushes the `zoho_booking_completed` dataLayer event. The GTM
   "Book a meeting Zoho" Google Ads conversion fires on that event — not on booking-link clicks. Set it on
-  **both** Zoho services; each stores a single absolute URL, so pick the domain that campaign runs on.
+  **both** Zoho services this site uses (`accounting-google` and `accounting-bing`); each stores a single
+  absolute URL, so pick the domain that campaign runs on. `accounting-seo` needs its own confirmation
+  page on finanshels.com — it cannot redirect here, because a booking that crosses registrable domains
+  loses the session the conversion is matched on.
 - Floating contacts: WhatsApp + phone links configured in `src/components/FloatingContacts.jsx`.
 
 ## Project Structure

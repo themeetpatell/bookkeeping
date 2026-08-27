@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/thank-you-from-finanshels",
+      "destination": "/thank-you",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/((?!api/|sitemap\\.xml$).*)", "destination": "/index.html" }
   ],
