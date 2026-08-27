@@ -68,7 +68,13 @@ being dragged down by a generic destination. The pattern:
 - Base meta, OG/Twitter tags defined in `index.html`.
 - JSON-LD `ProfessionalService` schema injected in `NewHomePage.jsx`.
 - Google Tag Manager: `GTM-MXFJ6CGB` (configured for conversion tracking).
-- Gallabox WhatsApp Tracker: All WhatsApp CTAs tracked with `data-wa-track="true"` attribute.
+- Gallabox WhatsApp Tracker: every WhatsApp CTA carries `data-wa-track` as a **CSS class**, not an
+  attribute — the vendor is configured with `selector: ".data-wa-track"` in `index.html`, so an
+  element tagged `data-wa-track="true"` is never bound and its clicks go untracked.
+- `autoInit` is deliberately `false`. The vendor scans the DOM once at load and binds a handler per
+  link, which on a SPA misses every CTA rendered by a later route. `src/components/WhatsAppTracker.jsx`
+  owns the binding instead, re-scanning on route changes and marking bound links so none is bound
+  twice. Turning `autoInit` back on double-binds and opens two WhatsApp tabs per click.
 
 ## Deployment Notes
 - Built with Vite; output in `dist/`.
