@@ -17,6 +17,7 @@ import {
 } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa6';
 import Seo from '../components/Seo';
+import FtaBadge from '../components/FtaBadge';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
 import './AIAccountingLanding.css';
 import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
@@ -431,6 +432,10 @@ const AIAccountingLanding = () => {
                   <dd>UAE businesses</dd>
                 </div>
                 <div className="ai-stat">
+                  <dt>FTA</dt>
+                  <dd>Registered tax agency</dd>
+                </div>
+                <div className="ai-stat">
                   <dt>10&times;</dt>
                   <dd>Faster than manual</dd>
                 </div>
@@ -447,6 +452,7 @@ const AIAccountingLanding = () => {
 
             {/* This morning's activity log */}
             <div className="ai-hero-visual">
+              <FtaBadge />
               <div className="ai-term">
                 <div className="ai-term-bar">
                   <span className="ai-term-name">

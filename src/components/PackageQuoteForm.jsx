@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import ZohoHiddenFields from './ZohoHiddenFields';
 import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import { transactionVolumeBands } from '../content/bookkeepingPackages';
@@ -33,6 +34,15 @@ import { transactionVolumeBands } from '../content/bookkeepingPackages';
  * `consultation_form_submitted` event. Keep that attribute in sync. */
 const VOLUME_FIELD_NAME = '';
 
+/* Which GA4 parameter the form's single select answers.
+ *
+ * The same control asks a different question per landing page — /packages asks
+ * monthly transaction volume, /books-cleanup asks how far behind the books are
+ * — so the page names the parameter rather than the component assuming one.
+ * Reporting a transaction band as `months_behind` would put a false value in a
+ * GA4 property that nothing downstream could tell was false. */
+const DEFAULT_SELECT_PARAM = 'monthly_transactions';
+
 const DEFAULT_SELECT_LABEL = 'Approximate monthly transactions';
 const DEFAULT_SELECT_HINT = 'A rough number is fine — it tells us which package to quote.';
 
@@ -52,7 +62,21 @@ const PackageQuoteForm = ({
   // Stamped into the CRM's Lead Source field. Pass the ad channel's value from
   // getLeadSourceForChannel() — never the visitor's answer to anything.
   leadSource = '',
+  // The `form_name` reported on form_start and form_submit. Pass a stable,
+  // human-readable name per placement (e.g. hero_cleanup_quote) — it is what
+  // someone reads in GA4 to tell the two forms on a page apart, so changing one
+  // splits that form's history in two.
+  formName = '',
+  selectParam = DEFAULT_SELECT_PARAM,
 }) => {
+  /* The submission is a native POST that navigates the tab to Zoho, so there is
+     a visible dead moment between the click and the page changing. Without
+     feedback the visitor clicks again and submits a second lead — which is both
+     a duplicate record and a duplicate conversion. The disabled button closes
+     both. The confirmed success state is /thank-you, which Zoho only reaches
+     after it has accepted the record. */
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   return (
     <form
       action={action}
@@ -61,6 +85,13 @@ const PackageQuoteForm = ({
       method="POST"
       acceptCharset="UTF-8"
       encType="multipart/form-data"
+      onSubmit={() => setIsSubmitting(true)}
+      /* Read by src/components/LeadEventTracker.jsx, which owns form_start and
+         the form_submit handoff. Deliberately our own attributes rather than
+         Zoho field names: the Zoho names have moved once already and took the
+         measurement with them. */
+      data-lead-form={formName || formId}
+      data-select-param={selectParam}
     >
       <ZohoHiddenFields leadSource={leadSource} />
 
@@ -179,9 +210,15 @@ const PackageQuoteForm = ({
         <p className="form-hint">{selectHint}</p>
       </div>
 
-      <button type="submit" className="form-submit">
-        <em>{submitLabel}</em>
+      <button type="submit" className="form-submit" disabled={isSubmitting}>
+        <em>{isSubmitting ? 'Sending\u2026' : submitLabel}</em>
       </button>
+
+      {isSubmitting ? (
+        <p className="form-status" role="status" aria-live="polite">
+          Sending your request\u2026 you&rsquo;ll see a confirmation in a moment.
+        </p>
+      ) : null}
     </form>
   );
 };

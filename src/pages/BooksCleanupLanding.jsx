@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown } from 'react-icons/fi';
 import { usePostHog } from '@posthog/react';
 import Seo from '../components/Seo';
+import FtaBadge from '../components/FtaBadge';
 import Testimonials from '../components/Testimonials';
 import PackageQuoteForm from '../components/PackageQuoteForm';
 import clientLogos from '../data/clientLogos';
 import { absoluteUrl } from '../utils/site';
+import { buildWhatsAppUrl } from '../utils/whatsapp';
 import {
   getLeadSourceForChannel,
   ZOHO_BING_FORM_ACTION,
@@ -18,7 +20,6 @@ import {
   backlogBands,
   cleanupDeliverables,
   cleanupFaqs,
-  cleanupProofPoints,
   cleanupSteps,
 } from '../content/booksCleanup';
 
@@ -34,9 +35,6 @@ import HeroRatingWidget from '../components/HeroRatingWidget';
 
 const PAGE_PATH = '/books-cleanup';
 
-/* Copy on this page is constrained by the Google Ads government-documents
-   policy — see the header of src/content/booksCleanup.js before editing any
-   string here or in that file. */
 const SEO_TITLE = 'Books Cleanup UAE | Catch-Up Bookkeeping from AED 1,499';
 const SEO_DESCRIPTION =
   'Behind on your books? We clean up months or years of backlog — every transaction captured, every account reconciled — from AED 1,499, with a fixed quote before we start.';
@@ -57,6 +55,13 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
   const pagePath = isBing ? `${PAGE_PATH}-bing` : PAGE_PATH;
   const formAction = isBing ? ZOHO_BING_FORM_ACTION : ZOHO_GOOGLE_FORM_ACTION;
   const leadSource = getLeadSourceForChannel(channel);
+
+  /* Named per network for the same reason FloatingContacts does it: sales can
+     tell a paid click from a direct visitor at a glance. */
+  const whatsappMessage = isBing
+    ? 'Hi, I saw your Bing ad for books cleanup. My books are behind and I need a fixed quote.'
+    : 'Hi, I saw your Google ad for books cleanup. My books are behind and I need a fixed quote.';
+  const whatsappUrl = buildWhatsAppUrl(whatsappMessage);
 
   const toggleFaq = (index) => setOpenFaqIndex(openFaqIndex === index ? null : index);
 
@@ -102,76 +107,34 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
       <section className="hero-section">
         <div className="hero-container">
           <div className="hero-left">
-            <div className="trust-badge">
-              <span className="trust-dot" aria-hidden="true" />
-              <span className="trust-text">Trusted by 7,000+ UAE businesses</span>
-            </div>
+            <p className="hero-eyebrow">CATCH-UP BOOKKEEPING FOR UAE BUSINESSES</p>
 
             <h1 className="hero-title">
-              Books a mess? We clean them up
+              Catch Up Months of Bookkeeping.
               <br />
-              <span className="highlight-green">from AED {CLEANUP_PRICE}</span>
+              Get Clean, Reconciled Books{' '}
+              <span className="highlight-green">From AED {CLEANUP_PRICE}</span>.
             </h1>
 
             <p className="hero-description">
-              Months — or years — behind on your bookkeeping? A dedicated accountant
-              works through the full backlog: every transaction captured, every account
-              reconciled, every error fixed. Fixed quote before we start, no hourly
-              surprises.
+              Finanshels corrects missing entries, duplicates, miscoding and
+              unreconciled balances in QuickBooks, Xero, Zoho Books or spreadsheets.
+              Get a fixed quote before work begins.
             </p>
 
+            {/* One proof line, deliberately. Four separate proof blocks used to
+                stack here — a trust badge, a stats row, a feature list and a proof
+                strip — and between them "7,000+" was stated three times above the
+                fold and "150+" twice. Repeating a number does not make it more
+                persuasive; it costs the scroll depth the CTA needs. */}
+            <ul className="hero-proof-line">
+              <li className="hero-proof-item">Trusted by 7,000+ businesses</li>
+              <li className="hero-proof-item">150+ accounting specialists</li>
+              <li className="hero-proof-item">Dedicated accountant assigned</li>
+              <li className="hero-proof-item">FTA Registered Tax Agency</li>
+            </ul>
+
             <HeroRatingWidget />
-
-
-            <div className="hero-stats">
-
-              <div className="hero-stat">
-
-                <span className="stat-value">7,000+</span>
-
-                <span className="stat-label">Businesses Served</span>
-
-              </div>
-
-              <div className="hero-stat">
-
-                <span className="stat-value">FTA</span>
-
-                <span className="stat-label">Registered Tax Agency</span>
-
-              </div>
-
-              <div className="hero-stat">
-
-                <span className="stat-value">150+</span>
-
-                <span className="stat-label">Accountants</span>
-
-              </div>
-
-            </div>
-
-
-            <div className="hero-features">
-              <div className="hero-feature">
-                <FiCheckCircle className="feature-icon" />
-                <div>
-                  <strong>Fixed cleanup quote, agreed up front</strong>
-                </div>
-              </div>
-              <div className="hero-feature">
-                <FiCheckCircle className="feature-icon" />
-                <div>
-                  <strong>Every month reconciled to the bank</strong>
-                </div>
-              </div>
-              <div className="hero-feature">
-                <FiCheckCircle className="feature-icon" />
-                <div>
-                  <strong>Clean books in as little as 1–3 weeks</strong>
-                </div>
-              </div>
-            </div>
 
             <div className="hero-ctas">
               <a
@@ -179,18 +142,25 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
                 className="btn-primary"
                 onClick={() => trackCta('hero_quote')}
               >
-                Get My Cleanup Quote
+                Get My Fixed Cleanup Quote
+              </a>
+              {/* No onClick: whatsapp_click is fired by the delegated listener in
+                  src/components/LeadEventTracker.jsx, which reads data-wa-location.
+                  The data-wa-track class is what binds the Gallabox tracker. */}
+              <a
+                href={whatsappUrl}
+                className="btn-secondary data-wa-track"
+                target="_blank"
+                rel="noreferrer"
+                data-wa-location="hero_cleanup"
+              >
+                WhatsApp an Accountant
               </a>
             </div>
 
-            <ul className="pkg-proof-strip">
-              {cleanupProofPoints.map((point) => (
-                <li key={point.label} className="pkg-proof-item">
-                  <span className="pkg-proof-value">{point.value}</span>
-                  <span className="pkg-proof-label">{point.label}</span>
-                </li>
-              ))}
-            </ul>
+            <p className="hero-cta-microcopy">
+              Tell us how many months are behind. No commitment required.
+            </p>
           </div>
 
           <div className="hero-right">
@@ -453,6 +423,8 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
                 <span>We rebuild the backlog and hand over clean, reconciled books</span>
               </div>
             </div>
+
+            <FtaBadge />
           </div>
 
           <div className="final-cta-right">

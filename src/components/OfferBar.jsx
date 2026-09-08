@@ -90,17 +90,8 @@ const OfferBar = () => {
   const whatsappUrl = buildWhatsAppUrl(message);
   const isFormPage = pathname === FORM_PAGE_PATH;
 
-  const handleClick = () => {
-    posthog?.capture('whatsapp_click', {
-      source: 'offer_bar',
-      offer: '3_months_free_annual',
-      page_path: pathname,
-      keyword,
-    });
-    if (typeof window !== 'undefined' && window.dataLayer) {
-      window.dataLayer.push({ event: 'whatsapp_click', source: 'offer_bar' });
-    }
-  };
+  // whatsapp_click is owned by src/components/LeadEventTracker.jsx — see the
+  // note in FloatingContacts.jsx for why it is not fired per component.
 
   const handleContactClick = (event) => {
     event.preventDefault();
@@ -175,7 +166,7 @@ const OfferBar = () => {
             className="offer-bar-cta data-wa-track"
             target="_blank"
             rel="noreferrer"
-            onClick={handleClick}
+            data-wa-location="offer_bar"
           >
             <svg className="offer-bar-cta-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path

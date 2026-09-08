@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import SalesIQAttribution from './components/SalesIQAttribution';
 import WhatsAppTracker from './components/WhatsAppTracker';
+import LeadEventTracker from './components/LeadEventTracker';
 import AccountingLanding from './pages/AccountingLanding';
 import AccountingLandingBing from './pages/AccountingLandingBing';
 import BookkeepingLanding from './pages/BookkeepingLanding';
@@ -40,6 +41,7 @@ function App() {
           navigation, so they are deliberately not tied to any single route. */}
       <SalesIQAttribution />
       <WhatsAppTracker />
+      <LeadEventTracker />
 
       <Routes>
         {/* Standalone: the booking page renders the scheduler on its own, with no

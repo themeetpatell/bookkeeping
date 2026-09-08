@@ -1,5 +1,10 @@
 import { getGclid, getZohoUtmValues } from '../utils/zohoUtm';
-import { getZohoRedirectUrl, ZOHO_LEAD_SOURCE_FIELD } from '../utils/zohoForms';
+import {
+  getZohoRedirectUrl,
+  LEAD_ID_FIELD_NAME,
+  ZOHO_LEAD_SOURCE_FIELD,
+} from '../utils/zohoForms';
+import { getLeadId } from '../utils/leadTracking';
 
 /**
  * The hidden inputs every Zoho lead form on the site must carry.
@@ -22,11 +27,17 @@ import { getZohoRedirectUrl, ZOHO_LEAD_SOURCE_FIELD } from '../utils/zohoForms';
  */
 export default function ZohoHiddenFields({ leadSource = '' }) {
   const utm = getZohoUtmValues();
+  // The join key between the GA4 events and the CRM record. Only submitted once
+  // a spare Zoho field has been confirmed — see LEAD_ID_FIELD_NAME.
+  const leadId = LEAD_ID_FIELD_NAME ? getLeadId() : '';
 
   return (
     <>
       {leadSource ? (
         <input type="hidden" name={ZOHO_LEAD_SOURCE_FIELD} value={leadSource} readOnly />
+      ) : null}
+      {LEAD_ID_FIELD_NAME ? (
+        <input type="hidden" name={LEAD_ID_FIELD_NAME} value={leadId} readOnly />
       ) : null}
       <input type="hidden" name="zf_referrer_name" value="" readOnly />
       <input type="hidden" name="zf_redirect_url" value={getZohoRedirectUrl()} readOnly />

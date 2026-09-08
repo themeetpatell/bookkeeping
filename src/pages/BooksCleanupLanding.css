@@ -43,3 +43,72 @@
     max-width: 100%;
   }
 }
+
+/* ── Hero: eyebrow, proof line, dual CTA, microcopy ─────────────────────────
+   The hero is a dark surface — a dark gradient over /Dubai.jpg with
+   `color: white` (see .hero-section in BookkeepingLanding.css) — so everything
+   here is white-on-dark, and the WhatsApp CTA reuses the existing
+   .btn-secondary, which is already built for exactly that surface rather than
+   given a new one.
+
+   Orange comes from --orange-primary in src/styles/variables.css. Note it
+   resolves to #FF6B35 here, not the #F16610 in the brand canon; following the
+   project's own token is deliberate, since one orange per codebase matters more
+   than this page being right on its own. Changing it repo-wide is its own job.
+
+   Scoped to .books-cleanup-landing so nothing leaks into /packages or
+   /bookkeeping, which share these stylesheets. */
+
+.books-cleanup-landing .hero-eyebrow {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  color: var(--orange-primary);
+}
+
+.books-cleanup-landing .hero-proof-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* The separator is drawn here rather than typed into the markup: a screen
+   reader should not announce a bullet as content, and a CSS separator lets the
+   line wrap to two rows on a phone without a dot stranded at the end of one. */
+.books-cleanup-landing .hero-proof-item + .hero-proof-item::before {
+  content: '\2022';
+  margin-right: 14px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.books-cleanup-landing .hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.books-cleanup-landing .hero-cta-microcopy {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Two side-by-side CTAs do not fit a phone; stacking full-width keeps both tap
+   targets honest instead of shrinking them to fit. */
+@media (max-width: 640px) {
+  .books-cleanup-landing .hero-ctas .btn-primary,
+  .books-cleanup-landing .hero-ctas .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}

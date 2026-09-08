@@ -35,12 +35,11 @@ const FloatingContacts = () => {
       : MESSAGE_BY_SOURCE[adSource];
   const whatsappUrl = buildWhatsAppUrl(message);
 
-  const trackWhatsAppClick = () => {
-    posthog?.capture('whatsapp_click', { source: 'floating_contacts', page_path: pathname, keyword });
-    if (typeof window !== 'undefined' && window.dataLayer) {
-      window.dataLayer.push({ event: 'whatsapp_click', source: 'floating_contacts' });
-    }
-  };
+  // whatsapp_click is fired by src/components/LeadEventTracker.jsx, which
+  // listens for every WhatsApp CTA on the site from one delegated handler. This
+  // component used to push its own copy; with both in place the floating button
+  // would have reported two clicks for one, while the offer bar, the footer and
+  // the in-page CTAs reported none. Do not re-add a local push here.
 
   const trackPhoneClick = () => {
     posthog?.capture('phone_click', { source: 'floating_contacts', page_path: pathname });
@@ -54,7 +53,7 @@ const FloatingContacts = () => {
         target="_blank"
         rel="noreferrer"
         aria-label="Chat on WhatsApp"
-        onClick={trackWhatsAppClick}
+        data-wa-location="floating_contacts"
       >
         <FaWhatsapp className="contact-icon" />
         <span className="contact-label">WhatsApp</span>

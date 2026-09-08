@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown } from 'react-icons/fi';
 import { usePostHog } from '@posthog/react';
 import Seo from '../components/Seo';
+import FtaBadge from '../components/FtaBadge';
 import Testimonials from '../components/Testimonials';
 import PackageQuoteForm from '../components/PackageQuoteForm';
 import clientLogos from '../data/clientLogos';
@@ -33,9 +34,6 @@ import HeroRatingWidget from '../components/HeroRatingWidget';
 
 const PAGE_PATH = '/packages';
 
-/* Copy on this page is constrained by the Google Ads government-documents
-   policy — see the header of src/content/bookkeepingPackages.js before editing
-   any string here or in that file. */
 const SEO_TITLE = 'Bookkeeping Packages UAE | Monthly Bookkeeping Plans from AED 499';
 const SEO_DESCRIPTION =
   'Compare monthly bookkeeping packages for UAE businesses from AED 499/month. Clear bookkeeping pricing, a dedicated accountant, management reports and a 48-hour switch.';
@@ -489,6 +487,8 @@ const PackagesLanding = ({ channel = 'google' }) => {
                 <span>Switch in 48 hours — we organise the handover</span>
               </div>
             </div>
+
+            <FtaBadge />
           </div>
 
           <div className="final-cta-right">

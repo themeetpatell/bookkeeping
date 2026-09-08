@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { usePostHog } from '@posthog/react';
 import { FiCheckCircle, FiArrowLeft } from 'react-icons/fi';
 import { readBookedEmail } from '../utils/booking';
+import { FORM_SUBMIT, pushLeadEvent, takePendingSubmit } from '../utils/leadTracking';
 import './ThankYou.css';
 
 // Basic shape check so we never render a garbage value into the confirmation copy.
@@ -49,6 +50,18 @@ const ThankYou = () => {
     } catch {
       // sessionStorage unavailable (private mode / blocked) — skip enhanced data.
     }
+
+    /* GA4 `form_submit` — the only place it fires, anywhere.
+       Requirement: report a submit on server acceptance, never on a button
+       click. The quote forms native-POST to Zoho and the browser leaves the
+       page, so nothing on the landing page can observe the outcome; arriving
+       here is the acceptance, because Zoho only sends the browser to
+       zf_redirect_url once it has taken the record.
+       takePendingSubmit() reads and clears in a single call, so a refresh of
+       this page, a bookmark or a direct visit finds nothing and fires nothing.
+       See src/utils/leadTracking.js. */
+    const pendingSubmit = takePendingSubmit();
+    if (pendingSubmit) pushLeadEvent(FORM_SUBMIT, pendingSubmit);
 
     if (submitted) {
       window.dataLayer.push({

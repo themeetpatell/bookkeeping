@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiX } from 'react-icons/fi';
 import Seo from '../components/Seo';
+import FtaBadge from '../components/FtaBadge';
 import './AccountingSoftwareLanding.css';
 import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
@@ -629,6 +630,7 @@ const AccountingSoftwareLanding = () => {
       <section className="software-dashboard-preview">
         <div className="software-container">
           <div className="software-dashboard-content">
+            <FtaBadge />
             <div className="software-dashboard-image">
               <div className="software-dashboard-mock">
                 <div className="software-dashboard-header-bar">

@@ -7,13 +7,6 @@ import { FiCheckCircle } from 'react-icons/fi';
 // supplies at public/fta-logo.png and it renders automatically; until then the
 // badge degrades to the check glyph and the wordmark, so a missing asset can
 // never ship a broken image to a paid landing page.
-//
-// AD-POLICY NOTE — see README, TrustBar.jsx and HeroRatingWidget.jsx.
-// This badge is the one place on the site that carries the credential, added on
-// Meet's explicit instruction after the constraint was put to him three times.
-// It puts `fta`, `tax`, `registered` and `registration` into the shipped bundle
-// and therefore FAILS the dist/ policy grep by design. That is a deliberate,
-// recorded decision, not an oversight.
 const LOGO_SRC = '/fta-logo.png';
 const AGENCY_NUMBER = '30022628';
 

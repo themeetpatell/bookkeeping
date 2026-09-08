@@ -410,3 +410,19 @@
     color: var(--orange-primary);
   }
 }
+
+/* Feedback for the dead moment between submitting the quote form and the tab
+   navigating to Zoho. Without it the visitor clicks again and files a second
+   lead. Shared by /packages and /books-cleanup, which both import this file. */
+.form-status {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4b5563;
+  text-align: center;
+}
+
+.form-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}

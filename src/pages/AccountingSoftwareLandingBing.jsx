@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiX } from 'react-icons/fi';
 import Seo from '../components/Seo';
+import FtaBadge from '../components/FtaBadge';
 // Shares the Google-ads stylesheet: the Bing variant is visually identical and
 // only differs in the prefilled WhatsApp copy below.
 import './AccountingSoftwareLanding.css';
@@ -632,6 +633,7 @@ const AccountingSoftwareLandingBing = () => {
       <section className="software-dashboard-preview">
         <div className="software-container">
           <div className="software-dashboard-content">
+            <FtaBadge />
             <div className="software-dashboard-image">
               <div className="software-dashboard-mock">
                 <div className="software-dashboard-header-bar">

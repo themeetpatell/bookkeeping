@@ -2,12 +2,6 @@ import { FiStar } from 'react-icons/fi';
 
 // Floating review card for the hero, sat directly above the hero stat row.
 //
-// AD-POLICY CONSTRAINT — see README and TrustBar.jsx before editing.
-// The competitor pattern this mirrors leads with a tax-authority badge. We
-// cannot carry one: every token in that credential is on the Google Ads
-// disapproval keyword list for this destination. This card therefore proves
-// standing through reviews, which is the strongest claim we can make here.
-//
 // Both figures are already published on this site — the Trustpilot block on
 // AccountingLanding.jsx and seven sibling pages states 4.9/5 from 239 reviews.
 const RATING = '4.9';

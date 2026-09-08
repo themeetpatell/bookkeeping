@@ -5,17 +5,6 @@
  * Kept out of the page component for two reasons: the component stays readable,
  * and the next ad-group variation forks this file rather than a 700-line JSX
  * tree.
- *
- * AD-POLICY CONSTRAINT — read before editing any string in this file.
- * Google Ads disapproved this destination once already under the government
- * documents & official services policy. No copy here may name VAT, corporate
- * tax, the FTA, EmaraTax, TRN, WPS or a ministry, claim any registration,
- * filing or submission to an authority, or mention another Finanshels domain.
- * The disapproval is keyword-triggered on the built output, so it fires on
- * collapsed FAQ answers and class names too. Verify with the grep in README.md
- * against dist/ before shipping. Reassurance is carried by what we do to our
- * own books instead: reconciliation, close, management reporting, year-end
- * schedules an auditor can work from.
  */
 
 /** Where the plan CTAs and the hero CTA scroll to. */

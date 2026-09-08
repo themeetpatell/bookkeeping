@@ -1,15 +1,6 @@
 /**
  * Copy and data for the /books-cleanup landing page (Google Ads + Bing Ads
  * "books cleanup" / catch-up bookkeeping ad groups).
- *
- * AD-POLICY CONSTRAINT — read before editing any string in this file.
- * Same rules as src/content/bookkeepingPackages.js: no copy here may name VAT,
- * corporate tax, the FTA, EmaraTax, TRN, WPS or a ministry, claim any
- * registration, filing or submission to an authority, or mention another
- * Finanshels domain. The disapproval is keyword-triggered on the built output.
- * Reassurance is carried by what we do to the books themselves: catch-up,
- * reconciliation, close, management reporting, year-end schedules an auditor
- * can work from.
  */
 
 /** Where the cleanup CTAs scroll to. */

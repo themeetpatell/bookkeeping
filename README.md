@@ -2,8 +2,6 @@
 
 Paid-ads landing site for Finanshels’ UAE bookkeeping, month-end close, and CFO advisory offering. Built with React + Vite, styled in CSS, and wired to Zoho Forms/Bookings for lead capture.
 
-> **Ad-policy constraint:** this site must never claim to perform registrations, filings, or submissions to any government body (VAT, Corporate Tax, FTA, WPS, Ministry of Labour, etc.), and must not link to or mention any other Finanshels domain. Google Ads disapproves the destination on both counts. Keep copy on bookkeeping, reconciliation, close, reporting, payroll processing, and advisory.
-
 ## Getting Started
 - Install deps: `npm install`
 - Run dev server: `npm run dev`
@@ -60,9 +58,6 @@ being dragged down by a generic destination. The pattern:
   so they cannot leak onto the other pages.
 - The global `Nav` scrolls to `#services`, `#pricing`, `#testimonials` and
   `#faq`. A variant must expose those ids or those nav links are dead on it.
-- **Every variant is re-checked against the ad-policy grep below before it
-  ships.** Briefs written by the ads team routinely ask for the exact terms that
-  got this site disapproved; rewrite them, do not ship them.
 
 ## SEO & Analytics
 - Base meta, OG/Twitter tags defined in `index.html`.
