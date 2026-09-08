@@ -8,6 +8,7 @@ import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import clientLogos from '../data/clientLogos';
 import HeroRatingWidget from '../components/HeroRatingWidget';
 import FtaBadge from '../components/FtaBadge';
+import FtaStamp from '../components/FtaStamp';
 
 const ZohoPayrollForm = ({ formId }) => (
   <form

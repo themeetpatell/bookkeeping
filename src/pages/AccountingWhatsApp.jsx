@@ -6,6 +6,7 @@ import { BOOKING_PATH } from '../utils/booking';
 import clientLogos from '../data/clientLogos';
 import HeroRatingWidget from '../components/HeroRatingWidget';
 import FtaBadge from '../components/FtaBadge';
+import FtaStamp from '../components/FtaStamp';
 
 const WHATSAPP_URL =
   'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+google+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0';
