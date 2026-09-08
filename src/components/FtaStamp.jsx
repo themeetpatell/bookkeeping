@@ -1,48 +1,41 @@
-import { useState } from 'react';
-import { FiCheckCircle } from 'react-icons/fi';
-
 /* The credential applied to the corner of a lead form, the way a seal is
-   applied to a signed document.
+ * applied to a signed document.
  *
- * Distinct from FtaBadge, which is the horizontal card that sits under a CTA in
- * the hero copy column. This one is absolutely positioned and belongs INSIDE a
- * form card — every container it is dropped into is given `position: relative`
- * in App.css, so adding it to a new form means adding that class there too or
- * the stamp escapes to the nearest positioned ancestor.
+ * This is the real stamp artwork, not a CSS reconstruction: the rotation, the
+ * rounded double border, the broken ink edges and the authority mark are all
+ * baked into the asset, so the styles here only position and size it. Do not
+ * add a background, border, shadow or transform — every one of those fights the
+ * artwork and makes it read as a sticker again.
  *
- * Same asset and fallback contract as FtaBadge: the official mark ships at
- * public/fta-logo.png, and a missing file degrades to the check glyph rather
- * than a broken image on a paid landing page. */
-const LOGO_SRC = '/fta-logo.png';
+ * The source was 1496x1496 on an opaque white background. It ships keyed to
+ * transparency and resized (see public/fta-stamp.png, 440x440), so it sits on a
+ * coloured card without a white box behind it.
+ *
+ * Distinct from FtaBadge, which is the horizontal card under a hero CTA. This
+ * one is absolutely positioned and belongs INSIDE a form card — every container
+ * it is dropped into is given `position: relative` in App.css, so adding it to a
+ * new form means adding that class there too or the stamp escapes to the
+ * nearest positioned ancestor.
+ */
+const STAMP_PNG = '/fta-stamp.png';
+const STAMP_WEBP = '/fta-stamp.webp';
 const AGENCY_NUMBER = '30022628';
 
-const FtaStamp = () => {
-  const [hasLogo, setHasLogo] = useState(true);
-
-  return (
-    <div
-      className="fta-stamp"
-      role="img"
-      aria-label={`FTA Registered Tax Agency, agency registration number ${AGENCY_NUMBER}`}
-    >
-      {hasLogo ? (
-        <img
-          src={LOGO_SRC}
-          alt=""
-          className="fta-stamp-logo"
-          onError={() => setHasLogo(false)}
-        />
-      ) : (
-        <FiCheckCircle className="fta-stamp-icon" aria-hidden="true" />
-      )}
-      <span className="fta-stamp-title" aria-hidden="true">
-        Registered Tax Agency
-      </span>
-      <span className="fta-stamp-no" aria-hidden="true">
-        No. {AGENCY_NUMBER}
-      </span>
-    </div>
-  );
-};
+const FtaStamp = () => (
+  <span className="fta-stamp">
+    <picture>
+      <source srcSet={STAMP_WEBP} type="image/webp" />
+      <img
+        src={STAMP_PNG}
+        alt={`FTA-approved Tax Agency firm, registration number ${AGENCY_NUMBER}`}
+        className="fta-stamp-img"
+        width="440"
+        height="440"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
+  </span>
+);
 
 export default FtaStamp;

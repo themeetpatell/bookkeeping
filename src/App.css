@@ -1037,50 +1037,27 @@ main {
 
 .fta-stamp {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 10px;
+  right: 10px;
   z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  width: 104px;
-  padding: 10px 8px 9px;
-  background: #ffffff;
-  border: 1px solid rgba(241, 102, 16, 0.32);
-  border-radius: 12px;
-  box-shadow: 0 10px 24px rgba(16, 44, 60, 0.14);
-  transform: rotate(-4deg);
-  text-align: center;
+  display: block;
+  width: 116px;
   pointer-events: none;
 }
 
-.fta-stamp-logo {
-  width: 62px;
-  height: auto;
+/* No background, border, shadow or rotation: the artwork carries all of it. */
+.fta-stamp-img {
   display: block;
+  width: 100%;
+  height: auto;
 }
 
-.fta-stamp-icon {
-  width: 22px;
-  height: 22px;
-  color: var(--orange-primary);
-}
-
-.fta-stamp-title {
-  font-size: 9px;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: 0.2px;
-  color: #191919;
-}
-
-.fta-stamp-no {
-  font-size: 8px;
-  font-weight: 500;
-  line-height: 1.2;
-  color: #625e57;
-  font-variant-numeric: tabular-nums;
+@media (max-width: 480px) {
+  .fta-stamp {
+    width: 92px;
+    top: 8px;
+    right: 8px;
+  }
 }
 
 /* The containers a stamp is pinned to. Adding a stamp to a new form means
