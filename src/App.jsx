@@ -1,27 +1,33 @@
 import './App.css';
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import SalesIQAttribution from './components/SalesIQAttribution';
 import WhatsAppTracker from './components/WhatsAppTracker';
 import LeadEventTracker from './components/LeadEventTracker';
-import AccountingLanding from './pages/AccountingLanding';
-import AccountingLandingBing from './pages/AccountingLandingBing';
-import BookkeepingLanding from './pages/BookkeepingLanding';
-import BookkeepingLandingBing from './pages/BookkeepingLandingBing';
-import PackagesLanding from './pages/PackagesLanding';
-import BooksCleanupLanding from './pages/BooksCleanupLanding';
-import AccountingSoftwareLanding from './pages/AccountingSoftwareLanding';
-import AccountingSoftwareLandingBing from './pages/AccountingSoftwareLandingBing';
-import PayrollAccountingLanding from './pages/PayrollAccountingLanding';
-import PayrollAccountingLandingBing from './pages/PayrollAccountingLandingBing';
-import AccountingWhatsApp from './pages/AccountingWhatsApp';
-import AIAccountingLanding from './pages/AIAccountingLanding';
-import AccountingForm from './pages/AccountingForm';
-import AccountingFormReddit from './pages/AccountingFormReddit';
-import ThankYou from './pages/ThankYou';
-import BookingConfirmed from './pages/BookingConfirmed';
-import BookACall from './pages/BookACall';
+
+/* Every page is its own chunk. These are paid landing pages: a visitor lands
+   on exactly one and almost never navigates to another, so shipping all
+   seventeen in a single bundle made each page download sixteen it would
+   never render. Layout and the trackers above stay eager because they must
+   survive client-side navigation. */
+const AccountingLanding = lazy(() => import('./pages/AccountingLanding'));
+const AccountingLandingBing = lazy(() => import('./pages/AccountingLandingBing'));
+const BookkeepingLanding = lazy(() => import('./pages/BookkeepingLanding'));
+const BookkeepingLandingBing = lazy(() => import('./pages/BookkeepingLandingBing'));
+const PackagesLanding = lazy(() => import('./pages/PackagesLanding'));
+const BooksCleanupLanding = lazy(() => import('./pages/BooksCleanupLanding'));
+const AccountingSoftwareLanding = lazy(() => import('./pages/AccountingSoftwareLanding'));
+const AccountingSoftwareLandingBing = lazy(() => import('./pages/AccountingSoftwareLandingBing'));
+const PayrollAccountingLanding = lazy(() => import('./pages/PayrollAccountingLanding'));
+const PayrollAccountingLandingBing = lazy(() => import('./pages/PayrollAccountingLandingBing'));
+const AccountingWhatsApp = lazy(() => import('./pages/AccountingWhatsApp'));
+const AIAccountingLanding = lazy(() => import('./pages/AIAccountingLanding'));
+const AccountingForm = lazy(() => import('./pages/AccountingForm'));
+const AccountingFormReddit = lazy(() => import('./pages/AccountingFormReddit'));
+const ThankYou = lazy(() => import('./pages/ThankYou'));
+const BookingConfirmed = lazy(() => import('./pages/BookingConfirmed'));
+const BookACall = lazy(() => import('./pages/BookACall'));
 
 function App() {
   const { pathname } = useLocation();
@@ -43,6 +49,7 @@ function App() {
       <WhatsAppTracker />
       <LeadEventTracker />
 
+      <Suspense fallback={null}>
       <Routes>
         {/* Standalone: the booking page renders the scheduler on its own, with no
             nav, offer bar or floating buttons to distract from or overlap it. */}
@@ -82,6 +89,7 @@ function App() {
           <Route path="/booking-confirmed" element={<BookingConfirmed />} />
         </Route>
       </Routes>
+      </Suspense>
     </>
   );
 }

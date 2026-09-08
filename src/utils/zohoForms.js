@@ -78,3 +78,18 @@ export const getZohoRedirectUrl = () => absoluteUrl('/thank-you');
  * reach GA4 at all. See getLeadId() in src/utils/leadTracking.js.
  */
 export const LEAD_ID_FIELD_NAME = '';
+
+/**
+ * The Zoho field that would carry the /books-cleanup intent (`cleanup_type`).
+ *
+ * EMPTY ON PURPOSE, for exactly the reason documented on LEAD_ID_FIELD_NAME
+ * above: posting to a Zoho field that is mapped in the Forms -> CRM integration
+ * silently overwrites whatever CRM field it feeds, with no error anywhere. That
+ * has already cost this site every Lead Source in one ad group.
+ *
+ * Until a spare field is confirmed against the live form's CRM mapping, the
+ * intent is reported to PostHog and the dataLayer only, and does not reach the
+ * CRM record. Set this to a confirmed field name to close that half — nothing
+ * else needs to change, PackageQuoteForm already posts the value when it is set.
+ */
+export const CLEANUP_TYPE_FIELD_NAME = '';

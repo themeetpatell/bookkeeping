@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ZohoHiddenFields from './ZohoHiddenFields';
-import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
+import { CLEANUP_TYPE_FIELD_NAME, ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import { transactionVolumeBands } from '../content/bookkeepingPackages';
 
 /**
@@ -51,6 +51,14 @@ const PackageQuoteForm = ({
   title,
   subtitle,
   submitLabel = 'Get My Quote',
+  // /books-cleanup asks for as little as possible before the first submission;
+  // the company name is collected in sales follow-up instead. The input stays
+  // in the markup either way so Zoho still receives its SingleLine field.
+  companyRequired = true,
+  // The /books-cleanup intent selected by the card the visitor clicked. Posted
+  // only once a spare Zoho field is confirmed (see CLEANUP_TYPE_FIELD_NAME);
+  // until then it rides on the data attribute for client-side reporting.
+  cleanupType = '',
   // Bing routes pass ZOHO_BING_FORM_ACTION so their leads land in the Bing
   // form's records — see src/utils/zohoForms.js for why the split matters.
   action = ZOHO_GOOGLE_FORM_ACTION,
@@ -80,6 +88,7 @@ const PackageQuoteForm = ({
   return (
     <form
       action={action}
+      data-cleanup-type={cleanupType || undefined}
       name="form"
       id={formId}
       method="POST"
@@ -134,7 +143,7 @@ const PackageQuoteForm = ({
 
       <div className="form-field">
         <label htmlFor={`${formId}-company`}>
-          Business name <em>*</em>
+          Business name {companyRequired ? <em>*</em> : null}
         </label>
         <input
           id={`${formId}-company`}
@@ -145,7 +154,7 @@ const PackageQuoteForm = ({
           placeholder="i.e. Dropxcell LLC"
           className="form-input"
           autoComplete="organization"
-          required
+          required={companyRequired}
         />
       </div>
 
@@ -209,6 +218,10 @@ const PackageQuoteForm = ({
         </select>
         <p className="form-hint">{selectHint}</p>
       </div>
+
+      {cleanupType && CLEANUP_TYPE_FIELD_NAME ? (
+        <input type="hidden" name={CLEANUP_TYPE_FIELD_NAME} value={cleanupType} readOnly />
+      ) : null}
 
       <button type="submit" className="form-submit" disabled={isSubmitting}>
         <em>{isSubmitting ? 'Sending\u2026' : submitLabel}</em>

@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+/* Inter is loaded from index.html with preconnect: a CSS @import is fetched
+   only after this stylesheet parses, which serialises two round trips before
+   any text can paint. Weights 300 and 900 were dropped — nothing uses them
+   (audited across every stylesheet: 600x171, 700x84, 800x33, 500x31, 400x2). */
 
 /* GLOBAL RESETS - APPLIES TO ALL PAGES */
 :root {

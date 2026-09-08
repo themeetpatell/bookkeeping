@@ -6,6 +6,8 @@ import FtaStamp from '../components/FtaStamp';
 import FtaBadge from '../components/FtaBadge';
 import Testimonials from '../components/Testimonials';
 import PackageQuoteForm from '../components/PackageQuoteForm';
+import ReviewedBy from '../components/ReviewedBy';
+import StickyMobileCta from '../components/StickyMobileCta';
 import clientLogos from '../data/clientLogos';
 import { absoluteUrl } from '../utils/site';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
@@ -20,6 +22,11 @@ import {
   CLEANUP_RESPONSE_TIME,
   backlogBands,
   cleanupDeliverables,
+  cleanupIntents,
+  cleanupOutputs,
+  cleanupPriceBox,
+  cleanupReviewer,
+  cleanupScopeNote,
   cleanupFaqs,
   cleanupSteps,
 } from '../content/booksCleanup';
@@ -48,8 +55,23 @@ const SEO_DESCRIPTION =
  * Bing scheduler automatically (see src/utils/booking.js).
  * @param {{ channel?: 'google' | 'bing' }} props
  */
+/* The logo wall shipped 29 images on a paid landing page. They are below the
+   fold and lazy, but they are still 29 requests competing for a throttled
+   mobile connection with the hero. Eight is enough to read as social proof. */
+const HERO_LOGO_COUNT = 8;
+
 const BooksCleanupLanding = ({ channel = 'google' }) => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  /* Which of the three intents the visitor picked. Stamped on both quote forms
+     so a lead can be read back as "which cleanup did they actually want".
+     Seeded from the URL hash on first render: a Google Ads final URL can
+     deep-link to one card (…/books-cleanup#software-cleanup), and arriving on
+     that anchor is itself the intent signal. */
+  const [cleanupType, setCleanupType] = useState(() => {
+    if (typeof window === 'undefined') return '';
+    const landedOn = window.location.hash.replace('#', '');
+    return cleanupIntents.find((intent) => intent.id === landedOn)?.value ?? '';
+  });
   const posthog = usePostHog();
 
   const isBing = channel === 'bing';
@@ -65,6 +87,25 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
   const whatsappUrl = buildWhatsAppUrl(whatsappMessage);
 
   const toggleFaq = (index) => setOpenFaqIndex(openFaqIndex === index ? null : index);
+
+  /* All three cards feed the same short form; the only thing that differs is
+     the cleanup_type they stamp on it. */
+  const selectIntent = (intent) => {
+    setCleanupType(intent.value);
+    posthog?.capture('cleanup_intent_selected', {
+      cleanup_type: intent.value,
+      page_path: pagePath,
+    });
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({
+        event: 'cleanup_intent_selected',
+        cleanup_type: intent.value,
+      });
+    }
+    document
+      .getElementById(CLEANUP_QUOTE_ANCHOR_ID)
+      ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
 
   const trackCta = (location) =>
     posthog?.capture('cleanup_cta_clicked', { location, page_path: pagePath });
@@ -179,15 +220,25 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
                 formId="cleanup-quote-hero"
                 formName="hero_cleanup_quote"
                 selectParam="months_behind"
+                companyRequired={false}
+                cleanupType={cleanupType}
                 action={formAction}
                 leadSource={leadSource}
                 title="Get Your Cleanup Quote"
                 subtitle={`Your fixed cleanup quote ${CLEANUP_RESPONSE_TIME}.`}
-                submitLabel="Get My Cleanup Quote"
+                submitLabel="Get My Fixed Cleanup Quote"
                 selectLabel="How far behind are your books?"
                 selectHint="A rough answer is fine — it tells us the size of the backlog to quote."
                 selectOptions={backlogBands}
               />
+
+              {/* The brief's reassurance line leads, because it answers the
+                  objection that stops the click: "what am I committing to?".
+                  The consent sentence below it is kept rather than replaced —
+                  it is the stated basis for contacting the lead, not decoration. */}
+              <p className="form-reassurance">
+                We will confirm scope and price before work starts.
+              </p>
 
               <p className="form-disclaimer">
                 By submitting, you agree to receive communications from Finanshels. Your
@@ -201,17 +252,153 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
         <div className="hero-trust-row">
           <p className="trust-label">Trusted by leading UAE businesses</p>
           <div className="logo-list-wide">
-            {clientLogos.map((logo) => (
+            {clientLogos.slice(0, HERO_LOGO_COUNT).map((logo) => (
               <div key={logo.alt} className="trust-logo">
                 <img
                   src={logo.src}
                   alt={`${logo.alt} logo`}
                   className="trust-logo-image"
+                  width="120"
+                  height="40"
                   loading="lazy"
                   decoding="async"
                 />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Intent selector, directly under the hero. The ad groups buy three
+          different problems; this is where a visitor says which one is theirs.
+          Each card id is a real anchor target so an ad's final URL can land on
+          the matching card, which also stamps the form — see the effect above. */}
+      <section className="cleanup-intents" aria-labelledby="cleanup-intents-heading">
+        <div className="content-container">
+          <h2 id="cleanup-intents-heading" className="visually-hidden">
+            Choose the cleanup you need
+          </h2>
+
+          <div className="cleanup-intent-grid">
+            {cleanupIntents.map((intent) => (
+              <article
+                key={intent.id}
+                id={intent.id}
+                className={
+                  cleanupType === intent.value
+                    ? 'cleanup-intent-card is-selected'
+                    : 'cleanup-intent-card'
+                }
+              >
+                <h3 className="cleanup-intent-title">{intent.title}</h3>
+                <p className="cleanup-intent-copy">{intent.copy}</p>
+                <button
+                  type="button"
+                  className="cleanup-intent-cta"
+                  onClick={() => selectIntent(intent)}
+                >
+                  {intent.cta}
+                </button>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Scope, stated before the visitor is asked for anything. */}
+      <section className="pkg-included-section" id="services">
+        <div className="content-container">
+          <div className="section-header">
+            <p className="section-eyebrow">WHAT&rsquo;S INCLUDED</p>
+            <h2 className="section-title">
+              What a Finanshels cleanup
+              <br />
+              <span className="highlight-green">actually covers</span>
+            </h2>
+            <p className="section-subtitle">
+              The same standard of work as our monthly bookkeeping — applied to every
+              month in your backlog until each one closes clean.
+            </p>
+          </div>
+
+          <div className="pkg-included-grid">
+            {cleanupDeliverables.map((item) => (
+              <div key={item.title} className="pkg-included-card">
+                <FiCheckCircle className="pkg-included-icon" aria-hidden="true" />
+                <h3 className="pkg-included-title">{item.title}</h3>
+                <p className="pkg-included-description">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What the client is handed at the end. The section above it describes the
+          work; this one describes the artefacts, which is what makes a cleanup
+          concrete enough to buy. */}
+      <section className="cleanup-outputs-section" id="what-you-receive">
+        <div className="content-container-small">
+          <div className="section-header">
+            <h2 className="section-title">What You Receive at the End</h2>
+          </div>
+
+          <ul className="cleanup-outputs-list">
+            {cleanupOutputs.map((output) => (
+              <li key={output} className="cleanup-output-item">
+                <FiCheckCircle className="cleanup-output-icon" aria-hidden="true" />
+                <span>{output}</span>
+              </li>
+            ))}
+          </ul>
+
+          <p className="cleanup-scope-note">{cleanupScopeNote}</p>
+
+        </div>
+      </section>
+
+      {/* The path out of the mess, in three steps. */}
+      <section className="pkg-switch-section">
+        <div className="content-container">
+          <div className="section-header">
+            <p className="section-eyebrow">HOW IT WORKS</p>
+            <h2 className="section-title">
+              From backlog to clean books in{' '}
+              <span className="highlight-green">three steps</span>
+            </h2>
+            <p className="section-subtitle">
+              You share the backlog once. We do the digging, the reconciling and the
+              fixing — and report progress as each period closes.
+            </p>
+          </div>
+
+          <ol className="pkg-switch-steps">
+            {cleanupSteps.map((item) => (
+              <li key={item.step} className="pkg-switch-step">
+                <span className="pkg-switch-number" aria-hidden="true">
+                  {item.step}
+                </span>
+                <h3 className="pkg-switch-title">{item.title}</h3>
+                <p className="pkg-switch-description">{item.description}</p>
+              </li>
+            ))}
+          </ol>
+
+          {/* Price, stated where the process is explained rather than only in the
+              hero. Carries no turnaround claim on purpose — the delivery
+              timeline is confirmed per engagement at step 2. */}
+          <div className="cleanup-price-box">
+            <p className="cleanup-price-headline">{cleanupPriceBox.headline}</p>
+            <p className="cleanup-price-note">{cleanupPriceBox.note}</p>
+          </div>
+
+          <div className="pkg-switch-cta-row">
+            <a
+              href={`#${CLEANUP_QUOTE_ANCHOR_ID}`}
+              className="btn-primary"
+              onClick={() => trackCta('steps_band')}
+            >
+              Get My Fixed Cleanup Quote
+            </a>
           </div>
         </div>
       </section>
@@ -294,70 +481,17 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
         </div>
       </section>
 
-      {/* Scope, stated before the visitor is asked for anything. */}
-      <section className="pkg-included-section" id="services">
-        <div className="content-container">
-          <div className="section-header">
-            <p className="section-eyebrow">WHAT&rsquo;S INCLUDED</p>
-            <h2 className="section-title">
-              What a Finanshels cleanup
-              <br />
-              <span className="highlight-green">actually covers</span>
-            </h2>
-            <p className="section-subtitle">
-              The same standard of work as our monthly bookkeeping — applied to every
-              month in your backlog until each one closes clean.
-            </p>
-          </div>
-
-          <div className="pkg-included-grid">
-            {cleanupDeliverables.map((item) => (
-              <div key={item.title} className="pkg-included-card">
-                <FiCheckCircle className="pkg-included-icon" aria-hidden="true" />
-                <h3 className="pkg-included-title">{item.title}</h3>
-                <p className="pkg-included-description">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* The path out of the mess, in three steps. */}
-      <section className="pkg-switch-section">
-        <div className="content-container">
-          <div className="section-header">
-            <p className="section-eyebrow">HOW IT WORKS</p>
-            <h2 className="section-title">
-              From backlog to clean books in{' '}
-              <span className="highlight-green">three steps</span>
-            </h2>
-            <p className="section-subtitle">
-              You share the backlog once. We do the digging, the reconciling and the
-              fixing — and report progress as each period closes.
-            </p>
-          </div>
-
-          <ol className="pkg-switch-steps">
-            {cleanupSteps.map((item) => (
-              <li key={item.step} className="pkg-switch-step">
-                <span className="pkg-switch-number" aria-hidden="true">
-                  {item.step}
-                </span>
-                <h3 className="pkg-switch-title">{item.title}</h3>
-                <p className="pkg-switch-description">{item.description}</p>
-              </li>
-            ))}
-          </ol>
-
-          <div className="pkg-switch-cta-row">
-            <a
-              href={`#${CLEANUP_QUOTE_ANCHOR_ID}`}
-              className="btn-primary"
-              onClick={() => trackCta('steps_band')}
-            >
-              Get My Cleanup Quote
-            </a>
-          </div>
+      {/* Standalone authority module. Sits after the price so the reader meets the
+          named specialist accountable for the claims immediately before the
+          client proof, rather than buried inside the deliverables list. */}
+      <section className="cleanup-reviewer-section" id="reviewed-by">
+        <div className="content-container-small">
+          <ReviewedBy
+            name={cleanupReviewer.name}
+            role={cleanupReviewer.role}
+            photo={cleanupReviewer.photo}
+            profileUrl={cleanupReviewer.profileUrl}
+          />
         </div>
       </section>
 
@@ -443,15 +577,25 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
                 formId="cleanup-quote-final"
                 formName="footer_cleanup_quote"
                 selectParam="months_behind"
+                companyRequired={false}
+                cleanupType={cleanupType}
                 action={formAction}
                 leadSource={leadSource}
                 title="Get Your Cleanup Quote"
                 subtitle={`A senior accountant replies ${CLEANUP_RESPONSE_TIME}.`}
-                submitLabel="Send My Quote Request"
+                submitLabel="Get My Fixed Cleanup Quote"
                 selectLabel="How far behind are your books?"
                 selectHint="A rough answer is fine — it tells us the size of the backlog to quote."
                 selectOptions={backlogBands}
               />
+
+              {/* The brief's reassurance line leads, because it answers the
+                  objection that stops the click: "what am I committing to?".
+                  The consent sentence below it is kept rather than replaced —
+                  it is the stated basis for contacting the lead, not decoration. */}
+              <p className="form-reassurance">
+                We will confirm scope and price before work starts.
+              </p>
 
               <p className="form-disclaimer">
                 By submitting, you agree to receive communications from Finanshels. Your
@@ -461,6 +605,12 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
           </div>
         </div>
       </section>
+      <StickyMobileCta
+        formAnchorId={CLEANUP_QUOTE_ANCHOR_ID}
+        label="Get My Fixed Cleanup Quote"
+        whatsappUrl={whatsappUrl}
+        onQuoteClick={() => trackCta('sticky_mobile')}
+      />
     </div>
   );
 };

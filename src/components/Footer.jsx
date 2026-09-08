@@ -1,4 +1,4 @@
-import { FiMessageCircle } from 'react-icons/fi';
+import { FiMessageCircle, FiPhone} from 'react-icons/fi';
 import {
   FaFacebookF,
   FaInstagram,
@@ -64,6 +64,14 @@ const Footer = () => {
               >
                 <FiMessageCircle className="footer-email-icon" />
                 <span>WhatsApp: +971 52 154 9572</span>
+              </a>
+
+              {/* A tappable phone link: the number was previously text only, so a
+                  visitor on a phone could read it but not dial it. No email link
+                  here on purpose — see the ad-policy note in README. */}
+              <a href="tel:+971521549572" className="footer-email">
+                <FiPhone className="footer-email-icon" />
+                <span>Call: +971 52 154 9572</span>
               </a>
             </div>
           </div>
