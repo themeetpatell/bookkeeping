@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Footer from './Footer';
 import Nav from './Nav';
 import OfferBar from './OfferBar';
+import TrustBar from './TrustBar';
 import FloatingContacts from './FloatingContacts';
 
 // Layout route for the marketing pages. Routes that opt out of this chrome —
@@ -16,6 +17,7 @@ const Layout = () => {
     <div className="app-shell">
       <OfferBar />
       <Nav />
+      <TrustBar />
       <main>
         <Outlet />
       </main>

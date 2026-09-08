@@ -13,6 +13,8 @@
   --bg-secondary: #f8fafc;
   --border: #e2e8f0;
   --offer-bar-h: 44px;
+  --nav-h: 75px;
+  --trust-bar-h: 36px;
 }
 
 * {
@@ -31,9 +33,9 @@ body {
 }
 
 main {
-  /* Offset the fixed offer bar + nav (nav ≈ 75px here). Keep in sync with
-     the nav height at each breakpoint so no white gap appears below the nav. */
-  padding-top: calc(75px + var(--offer-bar-h));
+  /* Offset the three fixed strips above it: offer bar, nav, trust bar. Each
+     breakpoint only has to correct the tokens — this expression never changes. */
+  padding-top: calc(var(--nav-h) + var(--offer-bar-h) + var(--trust-bar-h));
 }
 
 @media (max-width: 1024px) {
@@ -45,20 +47,15 @@ main {
 @media (max-width: 768px) {
   :root {
     --offer-bar-h: 50px;
-  }
-
-  main {
-    padding-top: calc(73px + var(--offer-bar-h));
+    --nav-h: 73px;
   }
 }
 
 @media (max-width: 480px) {
   :root {
     --offer-bar-h: 54px;
-  }
-
-  main {
-    padding-top: calc(65px + var(--offer-bar-h));
+    --nav-h: 65px;
+    --trust-bar-h: 34px;
   }
 }
 
@@ -295,6 +292,98 @@ main {
   background: #ffffff;
   border-bottom-color: #e5e7eb;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* TRUST STRIP - PINNED DIRECTLY UNDER THE NAV ON ALL PAGES.
+   Third and last of the fixed strips; --trust-bar-h feeds the main offset. */
+.trust-bar {
+  position: fixed;
+  top: calc(var(--offer-bar-h) + var(--nav-h));
+  left: 0;
+  right: 0;
+  z-index: 999;
+  height: var(--trust-bar-h);
+  display: flex;
+  align-items: center;
+  background: #fff1e7;
+  border-bottom: 1px solid rgba(241, 102, 16, 0.18);
+}
+
+.trust-bar-inner {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* One line at every width. Narrow screens scroll rather than wrap, so the
+     strip never outgrows --trust-bar-h and leaves a gap under the nav. */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.trust-bar-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.trust-bar-item {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.trust-bar-sep {
+  width: 3px;
+  height: 3px;
+  margin: 0 1.2rem;
+  border-radius: 999px;
+  background: rgba(241, 102, 16, 0.5);
+}
+
+.trust-bar-icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  margin-right: 0.4rem;
+  color: var(--primary);
+}
+
+.trust-bar-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.005em;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .trust-bar-inner {
+    justify-content: flex-start;
+    padding: 0 1.25rem;
+  }
+
+  .trust-bar-sep {
+    margin: 0 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .trust-bar-inner {
+    padding: 0 1rem;
+  }
+
+  .trust-bar-label {
+    font-size: 0.72rem;
+  }
+
+  .trust-bar-icon {
+    width: 13px;
+    height: 13px;
+  }
 }
 
 .nav-container-modern {

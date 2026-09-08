@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Finanshels — /services Folder Elimination &amp; Redirect Repair</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; font-size: 10.5pt; line-height: 1.55; margin: 0; }
+  .header { border-bottom: 4px solid #f16610; padding-bottom: 14px; margin-bottom: 22px; }
+  .brand { color: #f16610; font-weight: 800; font-size: 20pt; letter-spacing: -0.5px; }
+  h1 { font-size: 15pt; margin: 6px 0 2px; font-weight: 700; }
+  .meta { color: #666; font-size: 9.5pt; }
+  .badge { display: inline-block; background: #e8f5e9; color: #1b7a2f; font-weight: 700; font-size: 9pt; padding: 2px 10px; border-radius: 12px; margin-left: 6px; vertical-align: middle; }
+  h2 { font-size: 12pt; color: #f16610; margin: 22px 0 8px; font-weight: 700; }
+  h2 .num { color: #1a1a1a; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 9pt; }
+  th { text-align: left; background: #fff3ec; color: #b34a08; padding: 6px 8px; border-bottom: 2px solid #f16610; }
+  td { padding: 5px 8px; border-bottom: 1px solid #eee; font-family: 'SF Mono', Menlo, monospace; font-size: 8.5pt; }
+  ul { margin: 6px 0; padding-left: 20px; }
+  li { margin-bottom: 4px; }
+  .stat-row { display: flex; gap: 10px; margin: 12px 0 4px; }
+  .stat { flex: 1; border: 1px solid #eee; border-top: 3px solid #f16610; border-radius: 6px; padding: 10px 12px; }
+  .stat .n { font-size: 16pt; font-weight: 800; color: #f16610; }
+  .stat .l { font-size: 8.5pt; color: #555; }
+  .warn { background: #fff8e6; border-left: 4px solid #e6a700; padding: 10px 14px; border-radius: 4px; margin: 8px 0; }
+  .ok { color: #1b7a2f; font-weight: 600; }
+  code { font-family: 'SF Mono', Menlo, monospace; font-size: 8.5pt; background: #f6f6f6; padding: 1px 4px; border-radius: 3px; }
+  .footer { margin-top: 26px; padding-top: 10px; border-top: 1px solid #eee; color: #999; font-size: 8pt; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">Finanshels</div>
+  <h1>/services Folder Elimination &amp; Redirect Repair <span class="badge">SHIPPED &amp; VERIFIED</span></h1>
+  <div class="meta">finanshels.com · 24 August 2026 · Executed via Webflow API + dashboard automation</div>
+</div>
+
+<div class="stat-row">
+  <div class="stat"><div class="n">12</div><div class="l">pages moved from /services to site root</div></div>
+  <div class="stat"><div class="n">99</div><div class="l">redirect rules retargeted (46 were 301&rarr;404)</div></div>
+  <div class="stat"><div class="n">7</div><div class="l">new /services/&rarr;root redirects added</div></div>
+  <div class="stat"><div class="n">104/104</div><div class="l">rules verified ending in a final 200</div></div>
+</div>
+
+<h2><span class="num">1.</span> Pages moved to root (folder eliminated)</h2>
+<p>All 12 pages moved out of the <code>/services</code> folder via the Webflow API; slugs unchanged. The 7 live pages below all return <span class="ok">200 at root</span>:</p>
+<table>
+  <tr><th>Old URL</th><th>New URL</th></tr>
+  <tr><td>/services/vat-registration-in-uae</td><td>/vat-registration-in-uae</td></tr>
+  <tr><td>/services/corporate-tax-registration-in-uae</td><td>/corporate-tax-registration-in-uae</td></tr>
+  <tr><td>/services/tax-consultation-in-uae</td><td>/tax-consultation-in-uae</td></tr>
+  <tr><td>/services/claim-your-vat-refund-in-uae</td><td>/claim-your-vat-refund-in-uae</td></tr>
+  <tr><td>/services/company-liquidation-services-in-uae</td><td>/company-liquidation-services-in-uae</td></tr>
+  <tr><td>/services/business-compliance-services-in-uae</td><td>/business-compliance-services-in-uae</td></tr>
+  <tr><td>/services/valuation-and-financial-modelling-service-in-uae</td><td>/valuation-and-financial-modelling-service-in-uae</td></tr>
+</table>
+<p>Plus 5 deprecated draft pages (accounting-firm-for-smes / startups / ecommerce / restaurants, hire-an-accountant) — unpublished; their old URLs already 301 to /bookkeeping-services-uae.</p>
+
+<h2><span class="num">2.</span> Redirect table rebuilt — 261 rules live</h2>
+<ul>
+  <li><b>7 added:</b> every old <code>/services/&lt;slug&gt;</code> URL now 301s <b>single-hop</b> to its root twin — no rankings or inbound links break.</li>
+  <li><b>99 retargeted:</b> every rule pointing into <code>/services/...</code>. Key finding: <b>46 rules were live-301ing into 404s</b> — all 25 rows from the consolidation sheet (targets <code>/services/corporate-tax-return-filing-in-uae</code> and <code>/services/vat-filing-and-accounting-in-uae</code> never existed as pages), glossary/blog rules pointing at ghost pages (<code>/services/vat-services-by-finanshels</code>, <code>/services/corporate-tax-tool</code>), and six rules redirecting into the 404'ing <code>/services</code> index itself.</li>
+  <li><b>New targets mapped by intent:</b> corporate tax &rarr; /corporate-tax-filing-in-uae · VAT filing/tools &rarr; /vat-filing-in-uae · VAT <i>registration</i> intent &rarr; /vat-registration-in-uae · bookkeeping/accounting &rarr; /bookkeeping-services-uae · CFO &rarr; /cfo-services-uae · AML &rarr; /aml-compliance-uae · consultancy/transfer-pricing &rarr; /tax-consultation-in-uae.</li>
+  <li><b>155 kept verbatim</b> — untouched working rules preserved exactly.</li>
+  <li><b>2 deleted:</b> a broken rule that intercepted a live landing page and sent it to a 404 (page now serves 200 again), and a pre-existing self-loop redirect.</li>
+</ul>
+
+<h2><span class="num">3.</span> Collateral fixes</h2>
+<ul>
+  <li><b>JSON-LD schema</b> on 3 moved pages had <code>url</code> hardcoded to the old /services/ path — corrected so the new URLs don't declare a 404 as canonical.</li>
+  <li><b>Nav &amp; footer links</b> auto-updated site-wide on publish — zero /services/ hrefs remain on live pages.</li>
+  <li><b>Sitemap</b> — all 7 root URLs present; zero /services/ URLs remain.</li>
+</ul>
+
+<h2><span class="num">4.</span> Verification method</h2>
+<p>Every redirect was followed to its <b>final response code</b> (terminal-status standard), not merely checked for a 301 — the prior "301 exists = done" check is what allowed 25 broken redirects to be marked complete. Results: <span class="ok">97/97 retargeted sources end in 200</span> · <span class="ok">7/7 new rules are single-hop 301&rarr;200</span> · deprecated drafts resolve to /bookkeeping-services-uae.</p>
+
+<h2><span class="num">5.</span> Rollback &amp; artifacts</h2>
+<ul>
+  <li><code>.claude/ops/webflow/2026-08-24-redirects-export-backup.csv</code> — full pre-change table (256 rules), restore point.</li>
+  <li><code>.playwright-mcp/redirects-import.csv</code> — the 261-row table now live.</li>
+  <li><code>.claude/ops/webflow/2026-08-24-services-folder-flattening.md</code> — full change log.</li>
+</ul>
+
+<h2><span class="num">6.</span> Needs attention</h2>
+<div class="warn"><b>1. www.finanshels.com SSL:</b> Webflow shows "Update needed" — the registrar's CAA record blocks certificate renewal. Fix at DNS: delete the CAA record or set it to <code>issue: letsencrypt.org</code> and <code>pki.goog</code>. www serves today but the certificate will lapse.</div>
+<div class="warn"><b>2. Google Ads final URLs:</b> any still using /services/ paths now 301 (no breakage), but update them to root URLs to protect quality score.</div>
+<div class="warn"><b>3. Measurement gap:</b> no GSC/GA4 access for finanshels.com — review organic via Ahrefs on <b>21 Sep</b> and <b>19 Oct 2026</b>. Expected: flat to &minus;10% on the 7 moved pages for 2&ndash;4 weeks, baseline by ~8 weeks.</div>
+
+<div class="footer">Prepared 24 Aug 2026 · Finanshels growth ops · Verification: curl terminal-status sweep on all 104 changed rules</div>
+
+</body>
+</html>
