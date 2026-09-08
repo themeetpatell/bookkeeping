@@ -819,3 +819,146 @@ main {
     margin: 0;
   }
 }
+
+
+/* HERO REVIEW CARD - SITS ABOVE THE HERO STAT ROW ON THE LANDING PAGES.
+   Carries its own white surface so it reads on the dark navy hero, the
+   image-backed hero and the light heroes without a per-page variant. */
+.hero-rating-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+  padding: 0.7rem 1.15rem;
+  background: #ffffff;
+  border: 1px solid rgba(241, 102, 16, 0.16);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(16, 44, 60, 0.1);
+}
+
+.hero-rating-score {
+  font-size: 1.95rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-rating-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(241, 102, 16, 0.18);
+}
+
+.hero-rating-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.hero-rating-stars {
+  display: flex;
+  gap: 0.12rem;
+  color: var(--primary);
+}
+
+.hero-rating-star {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+  stroke-width: 1;
+}
+
+.hero-rating-meta {
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.hero-rating-meta strong {
+  font-weight: 700;
+  color: var(--text);
+}
+
+@media (max-width: 480px) {
+  .hero-rating-card {
+    gap: 0.7rem;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .hero-rating-score {
+    font-size: 1.6rem;
+  }
+
+  .hero-rating-meta {
+    font-size: 0.72rem;
+    white-space: normal;
+  }
+}
+
+
+/* FTA CREDENTIAL BADGE - SITS ABOVE THE DASHBOARD PREVIEW.
+   White surface so it holds on the dark dashboard grounds across all four
+   page stylesheets, in normal flow so it needs no positioning per page. */
+.fta-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 1rem;
+  padding: 0.65rem 1rem;
+  background: #ffffff;
+  border: 1px solid rgba(241, 102, 16, 0.22);
+  border-radius: 12px;
+  box-shadow: 0 10px 26px rgba(16, 44, 60, 0.12);
+}
+
+.fta-badge-logo {
+  height: 34px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.fta-badge-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: var(--primary);
+}
+
+.fta-badge-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.fta-badge-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text);
+}
+
+.fta-badge-meta {
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.15;
+  color: #64748b;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 480px) {
+  .fta-badge {
+    gap: 0.65rem;
+    padding: 0.55rem 0.8rem;
+  }
+
+  .fta-badge-logo { height: 28px; }
+  .fta-badge-title { font-size: 0.78rem; }
+  .fta-badge-meta { font-size: 0.68rem; }
+}

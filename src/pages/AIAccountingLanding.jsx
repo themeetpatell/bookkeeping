@@ -23,6 +23,7 @@ import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import { absoluteUrl } from '../utils/site';
 import clientLogos from '../data/clientLogos';
+import HeroRatingWidget from '../components/HeroRatingWidget';
 
 const WHATSAPP_MESSAGE =
   "Hi Finanshels! I saw your google ad. I'd like to learn more about your AI-native accounting services.";
@@ -404,6 +405,9 @@ const AIAccountingLanding = () => {
                 accountant checks every number before it goes anywhere. That&rsquo;s how 7,000+ UAE
                 businesses close 10&times; faster and always know where they stand.
               </p>
+
+              <HeroRatingWidget />
+
 
               <div className="ai-hero-actions">
                 <a href="#consultation" className="ai-btn ai-btn-primary">

@@ -1920,3 +1920,12 @@
   }
 
 }
+
+
+/* The review card carries a white surface that reads instantly on the dark
+   heroes elsewhere. This hero is cream (--ai-canvas), so white-on-cream needs a
+   firmer warm edge to stay a distinct card rather than a faint patch. */
+.ai-hero .hero-rating-card {
+  border-color: rgba(241, 102, 16, 0.3);
+  box-shadow: 0 10px 26px rgba(16, 44, 60, 0.08);
+}

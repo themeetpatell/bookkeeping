@@ -30,6 +30,7 @@ import {
 import './BookkeepingLanding.css';
 import './PackagesLanding.css';
 import './BooksCleanupLanding.css';
+import HeroRatingWidget from '../components/HeroRatingWidget';
 
 const PAGE_PATH = '/books-cleanup';
 
@@ -119,6 +120,38 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
               surprises.
             </p>
 
+            <HeroRatingWidget />
+
+
+            <div className="hero-stats">
+
+              <div className="hero-stat">
+
+                <span className="stat-value">7,000+</span>
+
+                <span className="stat-label">Businesses Served</span>
+
+              </div>
+
+              <div className="hero-stat">
+
+                <span className="stat-value">FTA</span>
+
+                <span className="stat-label">Registered Tax Agency</span>
+
+              </div>
+
+              <div className="hero-stat">
+
+                <span className="stat-value">150+</span>
+
+                <span className="stat-label">Accountants</span>
+
+              </div>
+
+            </div>
+
+
             <div className="hero-features">
               <div className="hero-feature">
                 <FiCheckCircle className="feature-icon" />
@@ -164,6 +197,8 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
             <div className="consultation-form" id={CLEANUP_QUOTE_ANCHOR_ID}>
               <PackageQuoteForm
                 formId="cleanup-quote-hero"
+                formName="hero_cleanup_quote"
+                selectParam="months_behind"
                 action={formAction}
                 leadSource={leadSource}
                 title="Get Your Cleanup Quote"
@@ -424,6 +459,8 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
             <div className="final-consultation-form">
               <PackageQuoteForm
                 formId="cleanup-quote-final"
+                formName="footer_cleanup_quote"
+                selectParam="months_behind"
                 action={formAction}
                 leadSource={leadSource}
                 title="Get Your Cleanup Quote"

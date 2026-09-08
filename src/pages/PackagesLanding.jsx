@@ -29,6 +29,7 @@ import {
    comparison, the scope grid and the switching band. */
 import './BookkeepingLanding.css';
 import './PackagesLanding.css';
+import HeroRatingWidget from '../components/HeroRatingWidget';
 
 const PAGE_PATH = '/packages';
 
@@ -115,6 +116,38 @@ const PackagesLanding = ({ channel = 'google' }) => {
               monthly bookkeeping pricing, with no lock-in.
             </p>
 
+            <HeroRatingWidget />
+
+
+            <div className="hero-stats">
+
+              <div className="hero-stat">
+
+                <span className="stat-value">7,000+</span>
+
+                <span className="stat-label">Businesses Served</span>
+
+              </div>
+
+              <div className="hero-stat">
+
+                <span className="stat-value">FTA</span>
+
+                <span className="stat-label">Registered Tax Agency</span>
+
+              </div>
+
+              <div className="hero-stat">
+
+                <span className="stat-value">150+</span>
+
+                <span className="stat-label">Accountants</span>
+
+              </div>
+
+            </div>
+
+
             <div className="hero-features">
               <div className="hero-feature">
                 <FiCheckCircle className="feature-icon" />
@@ -160,6 +193,7 @@ const PackagesLanding = ({ channel = 'google' }) => {
             <div className="consultation-form" id={QUOTE_ANCHOR_ID}>
               <PackageQuoteForm
                 formId="packages-quote-hero"
+                formName="hero_packages_quote"
                 action={formAction}
                 leadSource={leadSource}
                 title="Get Your Package Quote"
@@ -461,6 +495,7 @@ const PackagesLanding = ({ channel = 'google' }) => {
             <div className="final-consultation-form">
               <PackageQuoteForm
                 formId="packages-quote-final"
+                formName="footer_packages_quote"
                 action={formAction}
                 leadSource={leadSource}
                 title="Compare Packages &amp; Get a Quote"

@@ -7,6 +7,7 @@ import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import { getSiteOrigin } from '../utils/site';
 import clientLogos from '../data/clientLogos';
+import HeroRatingWidget from '../components/HeroRatingWidget';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
@@ -347,6 +348,9 @@ const AccountingSoftwareLanding = () => {
               </li>
             </ul>
             
+            <HeroRatingWidget />
+
+            
             <div className="software-hero-buttons">
               <a href="#consultation" className="software-btn-primary">Get Free Consultation</a>
               <a href="#pricing" className="software-btn-secondary">View Pricing</a>
@@ -358,12 +362,8 @@ const AccountingSoftwareLanding = () => {
                 <span className="software-stat-label">Businesses Served</span>
               </div>
               <div className="software-hero-stat">
-                <span className="software-stat-number">4.9</span>
-                <span className="software-stat-label">Trustpilot Rating</span>
-              </div>
-              <div className="software-hero-stat">
-                <span className="software-stat-number">10×</span>
-                <span className="software-stat-label">Faster Than Manual</span>
+                <span className="software-stat-number">FTA</span>
+                <span className="software-stat-label">Registered Tax Agency</span>
               </div>
               <div className="software-hero-stat">
                 <span className="software-stat-number">150+</span>

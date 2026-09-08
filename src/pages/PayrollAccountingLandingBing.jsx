@@ -6,6 +6,8 @@ import './PayrollAccountingLanding.css';
 import { ZOHO_BING_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import clientLogos from '../data/clientLogos';
+import HeroRatingWidget from '../components/HeroRatingWidget';
+import FtaBadge from '../components/FtaBadge';
 
 const ZohoPayrollForm = ({ formId }) => (
   <form
@@ -276,18 +278,17 @@ const PayrollAccountingLandingBing = () => {
                 </div>
               </div>
               
+              <HeroRatingWidget />
+
+              
               <div className="hero-stats">
                 <div className="hero-stat">
                   <span className="stat-value">7,000+</span>
                   <span className="stat-label">UAE Businesses Served</span>
                 </div>
                 <div className="hero-stat">
-                  <span className="stat-value">4.9</span>
-                  <span className="stat-label">Trustpilot Rating</span>
-                </div>
-                <div className="hero-stat">
-                  <span className="stat-value">10x</span>
-                  <span className="stat-label">Faster Than Manual</span>
+                  <span className="stat-value">FTA</span>
+                  <span className="stat-label">Registered Tax Agency</span>
                 </div>
                 <div className="hero-stat">
                   <span className="stat-value">150+</span>
@@ -442,6 +443,8 @@ const PayrollAccountingLandingBing = () => {
             </div>
             
             <div className="solution-right">
+              <FtaBadge />
+
               <div className="dashboard-preview">
                 <div className="dashboard-header">
                   <h3 className="dashboard-title">Payroll Accounting Dashboard</h3>

@@ -6,6 +6,8 @@ import './AccountingLanding.css';
 import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import clientLogos from '../data/clientLogos';
+import HeroRatingWidget from '../components/HeroRatingWidget';
+import FtaBadge from '../components/FtaBadge';
 
 const WHATSAPP_MESSAGE = 'Hi I saw your ad for Accounting Services. I’d like to know more.';
 
@@ -227,18 +229,17 @@ const AccountingForm = () => {
                 </a>
               </div>
 
+              <HeroRatingWidget />
+
+
               <div className="hero-stats">
                 <div className="hero-stat">
                   <span className="stat-number">7,000+</span>
                   <span className="stat-label">UAE Businesses Served</span>
                 </div>
                 <div className="hero-stat">
-                  <span className="stat-number">4.9</span>
-                  <span className="stat-label">Trustpilot Rating</span>
-                </div>
-                <div className="hero-stat">
-                  <span className="stat-number">10×</span>
-                  <span className="stat-label">Faster Than Manual</span>
+                  <span className="stat-number">FTA</span>
+                  <span className="stat-label">Registered Tax Agency</span>
                 </div>
                 <div className="hero-stat">
                   <span className="stat-number">150+</span>
@@ -391,6 +392,8 @@ const AccountingForm = () => {
             </div>
             
             <div className="solution-right">
+              <FtaBadge />
+
               <div className="dashboard-preview">
                 <div className="dashboard-header">
                   <div className="dashboard-status">

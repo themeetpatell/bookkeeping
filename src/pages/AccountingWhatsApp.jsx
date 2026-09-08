@@ -4,6 +4,8 @@ import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAl
 import './AccountingLanding.css';
 import { BOOKING_PATH } from '../utils/booking';
 import clientLogos from '../data/clientLogos';
+import HeroRatingWidget from '../components/HeroRatingWidget';
+import FtaBadge from '../components/FtaBadge';
 
 const WHATSAPP_URL =
   'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+google+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0';
@@ -156,18 +158,16 @@ const AccountingWhatsApp = () => {
             </div>
 
             {/* Stats row — below the content on desktop, below the CTA card on mobile */}
+            <HeroRatingWidget />
+
             <div className="hero-stats">
               <div className="hero-stat">
                 <span className="stat-number">7,000+</span>
                 <span className="stat-label">UAE Businesses Served</span>
               </div>
               <div className="hero-stat">
-                <span className="stat-number">4.9</span>
-                <span className="stat-label">Trustpilot Rating</span>
-              </div>
-              <div className="hero-stat">
-                <span className="stat-number">10×</span>
-                <span className="stat-label">Faster Than Manual</span>
+                <span className="stat-number">FTA</span>
+                <span className="stat-label">Registered Tax Agency</span>
               </div>
               <div className="hero-stat">
                 <span className="stat-number">150+</span>
@@ -319,6 +319,8 @@ const AccountingWhatsApp = () => {
             </div>
             
             <div className="solution-right">
+              <FtaBadge />
+
               <div className="dashboard-preview">
                 <div className="dashboard-header">
                   <div className="dashboard-status">
