@@ -2,104 +2,12 @@ import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield } from 'react-icons/fi';
 import Testimonials from '../components/Testimonials';
 import './BookkeepingLanding.css';
-import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
-import ZohoHiddenFields from '../components/ZohoHiddenFields';
+import BookkeepingPlanForm from '../components/BookkeepingPlanForm';
 import { absoluteUrl } from '../utils/site';
 import clientLogos from '../data/clientLogos';
 import HeroRatingWidget from '../components/HeroRatingWidget';
 import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
-
-const ZohoConsultationForm = ({ formId }) => (
-  <form
-    action={ZOHO_GOOGLE_FORM_ACTION}
-    name="form"
-    id={formId || 'form'}
-    method="POST"
-    acceptCharset="UTF-8"
-    encType="multipart/form-data"
-  >
-    {/* Change or deletion of the name attributes in the input tag will lead to empty values on record submission */}
-    <ZohoHiddenFields />
-    <div className="form-header">
-      <h2 className="form-title">Get Your Free Consultation</h2>
-      <p className="form-subtitle">Book a 30-minute call with our finance experts. No obligation.</p>
-    </div>
-    <div className="form-row form-row-half">
-      <div className="form-field">
-        <label>First Name</label>
-        <input
-          type="text"
-          maxLength="255"
-          name="Name_First"
-          fieldType="7"
-          placeholder="i.e. John"
-          className="form-input"
-        />
-      </div>
-      <div className="form-field">
-        <label>Last Name</label>
-        <input
-          type="text"
-          maxLength="255"
-          name="Name_Last"
-          fieldType="7"
-          placeholder="i.e. Smith"
-          className="form-input"
-        />
-      </div>
-    </div>
-    <div className="form-field">
-      <label>
-        Email <em>*</em>
-      </label>
-      <input
-        type="text"
-        maxLength="255"
-        name="Email"
-        fieldType="9"
-        placeholder="i.e. name@yourdomain.com"
-        className="form-input"
-        required
-      />
-    </div>
-    <div className="form-field">
-      <label>
-        Phone <em>*</em>
-      </label>
-      <input
-        type="text"
-        compname="PhoneNumber"
-        name="PhoneNumber_countrycode"
-        phoneFormat="1"
-        isCountryCodeEnabled="false"
-        maxLength="20"
-        fieldType="11"
-        id="international_PhoneNumber_countrycode"
-        placeholder="+971 00 000 0000"
-        className="form-input"
-        required
-      />
-    </div>
-    <div className="form-field">
-      <label>
-        Company Name <em>*</em>
-      </label>
-      <input
-        type="text"
-        name="SingleLine"
-        fieldType="1"
-        maxLength="255"
-        placeholder="i.e. dropxcell LLC"
-        className="form-input"
-        required
-      />
-    </div>
-    <button type="submit" className="form-submit">
-      <em>Book A Slot</em>
-    </button>
-  </form>
-);
 
 const BookkeepingLanding = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -167,7 +75,7 @@ const BookkeepingLanding = () => {
     {
       icon: <FiZap />,
       title: 'Automated Bookkeeping',
-      description: 'Built with APIs and machine learning. Human oversight ensures accuracy while saving you 10× the time.'
+      description: 'Built with APIs and machine learning, with human oversight on every entry — the ledger is reviewed, not just generated.'
     },
     {
       icon: <FiBarChart2 />,
@@ -176,7 +84,7 @@ const BookkeepingLanding = () => {
     },
     {
       icon: <FiShield />,
-      title: 'Always Close-Ready',
+      title: 'Close-Ready Every Month',
       description: 'Reconciled ledgers and clean schedules every month. No year-end scramble.'
     }
   ];
@@ -200,7 +108,7 @@ const BookkeepingLanding = () => {
     },
     {
       before: 'Costly in-house team',
-      after: '70% cost reduction with predictable outcomes'
+      after: 'One predictable monthly fee'
     }
   ];
 
@@ -328,47 +236,34 @@ const BookkeepingLanding = () => {
         />
         <div className="hero-container">
           <div className="hero-left">
-            <div className="trust-badge">
-              <span className="trust-dot" aria-hidden="true" />
-              <span className="trust-text">Trusted by 7,000+ UAE businesses</span>
-            </div>
             
             <h1 className="hero-title">
-              Buried in<br />
-              <span className="highlight-green">Bookkeeping?</span><br />
-              Let Experts Manage it For You
+              UAE Bookkeeping With a{' '}
+              <span className="highlight-green">Dedicated Accountant</span>
+              <br />
+              &mdash;From AED 499/Month
             </h1>
             
             <p className="hero-description">
-              Expert outsourced accounting & bookkeeping for UAE small businesses.
-              Month-end close, management accounts, and real-time financial
-              insights — all handled by our dedicated team.
+              Monthly bookkeeping, reconciliations and management reports for UAE
+              businesses. Your accountant owns the close; you keep a clear view of
+              the numbers.
             </p>
             
-            <div className="hero-features">
-              <div className="hero-feature">
-                <FiCheckCircle className="feature-icon" />
-                <div>
-                  <strong>Pay Only if Satisfied</strong>
-                </div>
-              </div>
-              <div className="hero-feature">
-                <FiCheckCircle className="feature-icon" />
-                <div>
-                  <strong>Dedicated Account Manager</strong>
-                </div>
-              </div>
-              <div className="hero-feature">
-                <FiCheckCircle className="feature-icon" />
-                <div>
-                  <strong>Comprehensive Financial Dashboard</strong>
-                </div>
-              </div>
-            </div>
+            {/* The above-fold proof line. A list rather than one string of
+                bullet characters so a screen reader reads four claims instead
+                of reading "bullet" three times; the separators are drawn in
+                CSS. */}
+            <ul className="hero-proof">
+              <li>Dedicated accountant</li>
+              <li>Monthly close</li>
+              <li>Clear reports</li>
+              <li>7,000+ businesses supported</li>
+            </ul>
             
             <div className="hero-ctas">
                 <FtaBadge />
-              <a href="#consultation" className="btn-primary">Get Free Consultation</a>
+              <a href="#consultation" className="btn-primary">Get My Bookkeeping Plan</a>
               <a href="#pricing" className="btn-secondary">View Pricing</a>
             </div>
 
@@ -394,7 +289,7 @@ const BookkeepingLanding = () => {
           <div className="hero-right">
             <div className="consultation-form">
               <FtaStamp />
-              <ZohoConsultationForm formId="zoho-consultation-hero" />
+              <BookkeepingPlanForm formId="zoho-consultation-hero" />
               
               <p className="form-disclaimer">
                 By submitting, you agree to receive communications from Finanshels. Your data is secure and will never be shared.
@@ -471,7 +366,7 @@ const BookkeepingLanding = () => {
               <p className="section-eyebrow">THE SOLUTION</p>
               <h2 className="section-title">
                 One Platform. One Team.<br />
-                <span className="highlight-green">10x Faster.</span>
+                <span className="highlight-green">Closed Every Month.</span>
               </h2>
               <p className="solution-description">
                 In one platform, one dedicated team manages all your finance
@@ -668,7 +563,7 @@ const BookkeepingLanding = () => {
               Transparent Plans for <span className="highlight-green">Every<br />Business</span>
             </h2>
             <p className="section-subtitle">
-              Best prices in the market. No hidden fees. Cancel anytime.
+              Transparent monthly pricing. No hidden fees. Cancel anytime.
             </p>
           </div>
           
@@ -786,7 +681,7 @@ const BookkeepingLanding = () => {
           <div className="final-cta-right">
             <div className="final-consultation-form">
               <FtaStamp />
-              <ZohoConsultationForm formId="zoho-consultation-final" />
+              <BookkeepingPlanForm formId="zoho-consultation-final" />
               
               <p className="form-disclaimer">
                 By submitting, you agree to receive communications from Finanshels. Your data is secure and will never be shared.

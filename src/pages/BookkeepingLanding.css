@@ -2636,3 +2636,97 @@
     font-size: 15px;
   }
 }
+
+/* ── Two-step plan form ─────────────────────────────────────────────────── */
+
+/* The step-one fields stay mounted while step two is showing, so the lead
+   tracker can still read the volume and software answers off the DOM at submit
+   time. `hidden` is what hides them, and a later `display` rule on .form-field
+   would silently override it — hence the guard rather than a utility class. */
+.consultation-form [hidden],
+.final-consultation-form [hidden] {
+  display: none !important;
+}
+
+.form-hint {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+/* Validation for step one is manual — the button is a `type="button"` that
+   advances rather than submits, so the browser never renders its own message. */
+.form-error {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #b42318;
+}
+
+/* Shown while the native POST is navigating the tab to Zoho. Without it the
+   visitor clicks again and files a second lead. */
+.form-status {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4b5563;
+  text-align: center;
+}
+
+.form-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-step-back {
+  display: block;
+  width: 100%;
+  margin: -4px 0 12px;
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  color: #4b5563;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.form-step-back:hover {
+  color: var(--orange-primary);
+}
+
+/* ── Above-fold proof line ──────────────────────────────────────────────── */
+
+/* One scannable row of four claims, sitting between the subheading and the
+   CTAs where the three stacked feature ticks used to be. It wraps to two lines
+   on narrow screens rather than shrinking, so the fold still holds the price,
+   the promise and the form on mobile. */
+.hero-proof {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+  max-width: 580px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* The separator is decorative and drawn here rather than typed into the markup,
+   so a screen reader reads four claims instead of three bullet characters. */
+.hero-proof li + li::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-right: 14px;
+  border-radius: 50%;
+  background: var(--orange-primary);
+  vertical-align: middle;
+}
