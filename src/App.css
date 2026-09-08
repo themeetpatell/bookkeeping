@@ -962,3 +962,180 @@ main {
   .fta-badge-title { font-size: 0.78rem; }
   .fta-badge-meta { font-size: 0.68rem; }
 }
+
+
+/* FOCUSED CHROME - PAID-TRAFFIC LANDING PAGES (src/utils/chrome.js).
+   The offer bar and trust bar are not rendered on these routes, so their
+   height tokens go to zero and the nav collapses. Because these are custom
+   properties on the shell, `main`, `.nav-modern` and everything else inside
+   inherit them and the fixed-stack offset stays a single expression. */
+.app-shell-focused {
+  --offer-bar-h: 0px;
+  --trust-bar-h: 0px;
+  --nav-h: 60px;
+}
+
+.nav-minimal .nav-container-modern {
+  padding: 0.6rem 2rem;
+  gap: 1rem;
+}
+
+.nav-minimal .nav-logo-img {
+  height: 34px;
+}
+
+@media (max-width: 768px) {
+  .app-shell-focused {
+    --nav-h: 56px;
+  }
+
+  .nav-minimal .nav-container-modern {
+    padding: 0.55rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-shell-focused {
+    --nav-h: 52px;
+  }
+
+  .nav-minimal .nav-container-modern {
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-minimal .nav-logo-img {
+    height: 28px;
+  }
+
+  .nav-minimal .btn-nav-primary {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.78rem;
+  }
+}
+
+/* ── FTA credential: corner stamp + below-CTA badge ─────────────────────────
+   Two placements, one credential.
+
+   .fta-stamp is applied to the top-right corner of a lead form, overlapping the
+   card edge so it reads as pressed onto the form rather than laid out inside
+   it. Every form card that carries one is given position:relative below — a
+   stamp in an unpositioned container escapes to the nearest positioned
+   ancestor, which on these pages is the hero section, and lands in the wrong
+   place entirely.
+
+   It sits INSIDE the corner rather than overhanging it. .hero-form-wrapper is
+   `overflow:hidden` on three pages — paired with min-width:0 to stop a sticky
+   grid column overflowing horizontally — so a negative offset was silently
+   sliced off there. Clearance below keeps the form's own heading from running
+   under it.
+
+   The small rotation is what separates "stamp" from "badge". It is the one
+   deliberately imprecise thing on the page; drop the transform to square it. */
+
+.fta-stamp {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 104px;
+  padding: 10px 8px 9px;
+  background: #ffffff;
+  border: 1px solid rgba(241, 102, 16, 0.32);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(16, 44, 60, 0.14);
+  transform: rotate(-4deg);
+  text-align: center;
+  pointer-events: none;
+}
+
+.fta-stamp-logo {
+  width: 62px;
+  height: auto;
+  display: block;
+}
+
+.fta-stamp-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--orange-primary);
+}
+
+.fta-stamp-title {
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.2px;
+  color: #191919;
+}
+
+.fta-stamp-no {
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #625e57;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The containers a stamp is pinned to. Adding a stamp to a new form means
+   adding that form's class here. */
+.hero-form-card,
+.consultation-form,
+.final-consultation-form,
+.ai-cta-form-card,
+.software-consultation-card {
+  position: relative;
+}
+
+/* Below-CTA placement. Every hero CTA row on the site is `display:flex;
+   flex-wrap:wrap`, so a full-basis item with a high order lands on its own row
+   underneath the buttons regardless of how many buttons a page has — no
+   per-page markup order to keep in sync. */
+.hero-actions > .fta-badge,
+.hero-ctas > .fta-badge,
+.ai-hero-actions > .fta-badge,
+.software-hero-buttons > .fta-badge {
+  order: 99;
+  flex-basis: 100%;
+  margin: 4px 0 0;
+}
+
+/* On a phone the stamp would sit over the form's own heading, so it tucks back
+   inside the corner and shrinks rather than overlapping the edge. */
+@media (max-width: 640px) {
+  .fta-stamp {
+    top: 8px;
+    right: 8px;
+    width: 84px;
+    padding: 8px 6px 7px;
+  }
+
+  .fta-stamp-logo {
+    width: 50px;
+  }
+}
+
+/* Clearance so a form title never runs underneath the stamp. Width of the stamp
+   plus its offset; the block is the heading + subtitle, both of which are short. */
+.hero-form-card .form-intro,
+.consultation-form .form-header,
+.final-consultation-form .form-header,
+.ai-cta-form-card .form-header,
+.software-consultation-card > h2,
+.software-consultation-card > .software-card-subtitle {
+  padding-right: 118px;
+}
+
+@media (max-width: 640px) {
+  .hero-form-card .form-intro,
+  .consultation-form .form-header,
+  .final-consultation-form .form-header,
+  .ai-cta-form-card .form-header,
+  .software-consultation-card > h2,
+  .software-consultation-card > .software-card-subtitle {
+    padding-right: 96px;
+  }
+}

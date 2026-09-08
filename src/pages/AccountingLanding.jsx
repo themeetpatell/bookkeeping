@@ -205,6 +205,7 @@ const AccountingLanding = () => {
               </div>
               
               <div className="hero-actions">
+                <FtaBadge />
                 <a href="#consultation" className="hero-btn hero-btn-primary">
                   Get Free Consultation
                 </a>
@@ -235,6 +236,7 @@ const AccountingLanding = () => {
             {/* Right Column - Form */}
             <div className="hero-form-wrapper">
               <div className="hero-form-card">
+              <FtaStamp />
                 <div className="form-intro">
                   <h2 className="form-title">Get Your Free Consultation</h2>
                   <p className="form-subtitle">Book a 30-minute call with our experts. No obligation.</p>
@@ -386,8 +388,6 @@ const AccountingLanding = () => {
             </div>
             
             <div className="solution-right">
-              <FtaBadge />
-
               <div className="dashboard-preview">
                 <div className="dashboard-header">
                   <div className="dashboard-status">

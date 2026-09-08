@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown } from 'react-icons/fi';
 import { usePostHog } from '@posthog/react';
 import Seo from '../components/Seo';
+import FtaStamp from '../components/FtaStamp';
 import FtaBadge from '../components/FtaBadge';
 import Testimonials from '../components/Testimonials';
 import PackageQuoteForm from '../components/PackageQuoteForm';
@@ -168,6 +169,7 @@ const PackagesLanding = ({ channel = 'google' }) => {
             </div>
 
             <div className="hero-ctas">
+                <FtaBadge />
               <a
                 href="#pricing"
                 className="btn-primary"
@@ -189,6 +191,7 @@ const PackagesLanding = ({ channel = 'google' }) => {
 
           <div className="hero-right">
             <div className="consultation-form" id={QUOTE_ANCHOR_ID}>
+              <FtaStamp />
               <PackageQuoteForm
                 formId="packages-quote-hero"
                 formName="hero_packages_quote"
@@ -488,11 +491,11 @@ const PackagesLanding = ({ channel = 'google' }) => {
               </div>
             </div>
 
-            <FtaBadge />
           </div>
 
           <div className="final-cta-right">
             <div className="final-consultation-form">
+              <FtaStamp />
               <PackageQuoteForm
                 formId="packages-quote-final"
                 formName="footer_packages_quote"

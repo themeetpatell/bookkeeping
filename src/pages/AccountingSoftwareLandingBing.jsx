@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiX } from 'react-icons/fi';
 import Seo from '../components/Seo';
+import FtaStamp from '../components/FtaStamp';
 import FtaBadge from '../components/FtaBadge';
 // Shares the Google-ads stylesheet: the Bing variant is visually identical and
 // only differs in the prefilled WhatsApp copy below.
@@ -356,6 +357,7 @@ const AccountingSoftwareLandingBing = () => {
 
             
             <div className="software-hero-buttons">
+                <FtaBadge />
               <a href="#consultation" className="software-btn-primary">Get Free Consultation</a>
               <a href="#pricing" className="software-btn-secondary">View Pricing</a>
             </div>
@@ -378,6 +380,7 @@ const AccountingSoftwareLandingBing = () => {
           
           <div className="software-hero-right">
             <div className="software-consultation-card">
+              <FtaStamp />
               <h2>Get Your Free Accounting Consultation</h2>
               <p className="software-card-subtitle">Book a 30-minute call with our finance experts. No obligation.</p>
               
@@ -633,7 +636,6 @@ const AccountingSoftwareLandingBing = () => {
       <section className="software-dashboard-preview">
         <div className="software-container">
           <div className="software-dashboard-content">
-            <FtaBadge />
             <div className="software-dashboard-image">
               <div className="software-dashboard-mock">
                 <div className="software-dashboard-header-bar">
@@ -919,6 +921,7 @@ const AccountingSoftwareLandingBing = () => {
             
             <div className="software-final-cta-right">
               <div className="software-consultation-card">
+              <FtaStamp />
                 <h3>Get Your Free Accounting Consultation</h3>
                 <p className="software-card-subtitle">Book a 30-minute call with our finance experts. No obligation.</p>
                 

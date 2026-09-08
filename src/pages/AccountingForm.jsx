@@ -208,6 +208,7 @@ const AccountingForm = () => {
             {/* Lead Form - sits directly below the checkmarks on mobile */}
             <div className="hero-form-wrapper">
               <div className="hero-form-card">
+              <FtaStamp />
                 <div className="form-intro">
                   <h2 className="form-title">Get Your Free Consultation</h2>
                   <p className="form-subtitle">Book a 30-minute call with our experts. No obligation.</p>
@@ -224,6 +225,7 @@ const AccountingForm = () => {
             {/* Secondary - pricing link + stats (below content on desktop, after form on mobile) */}
             <div className="hero-secondary">
               <div className="hero-actions">
+                <FtaBadge />
                 <a href="#pricing" className="hero-btn hero-btn-secondary">
                   View Pricing
                 </a>
@@ -392,8 +394,6 @@ const AccountingForm = () => {
             </div>
             
             <div className="solution-right">
-              <FtaBadge />
-
               <div className="dashboard-preview">
                 <div className="dashboard-header">
                   <div className="dashboard-status">

@@ -281,6 +281,8 @@ const PayrollAccountingLandingBing = () => {
               <HeroRatingWidget />
 
               
+              <FtaBadge />
+
               <div className="hero-stats">
                 <div className="hero-stat">
                   <span className="stat-value">7,000+</span>
@@ -303,6 +305,7 @@ const PayrollAccountingLandingBing = () => {
                 className="hero-form-card payroll-form-card"
                 style={{ background: '#ffffff', color: '#0f172a' }}
               >
+                <FtaStamp />
                 <div className="form-intro">
                   <h2 className="form-title">Get Your Free Payroll Consultation</h2>
                   <p className="form-subtitle">Book a 30-minute call with our payroll experts. No obligation.</p>
@@ -443,8 +446,6 @@ const PayrollAccountingLandingBing = () => {
             </div>
             
             <div className="solution-right">
-              <FtaBadge />
-
               <div className="dashboard-preview">
                 <div className="dashboard-header">
                   <h3 className="dashboard-title">Payroll Accounting Dashboard</h3>

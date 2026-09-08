@@ -142,8 +142,11 @@ const AccountingWhatsApp = () => {
             </div>
             
             {/* Right Column - Form */}
-            <div className="hero-form-wrapper">
+            <FtaBadge />
+
+              <div className="hero-form-wrapper">
               <div className="hero-form-card">
+              <FtaStamp />
                 <div className="form-intro">
                   <h2 className="form-title">Talk to Our Accounting Experts</h2>
                   <p className="form-subtitle">Message us on WhatsApp or book a 30-minute call. No obligation.</p>
@@ -319,8 +322,6 @@ const AccountingWhatsApp = () => {
             </div>
             
             <div className="solution-right">
-              <FtaBadge />
-
               <div className="dashboard-preview">
                 <div className="dashboard-header">
                   <div className="dashboard-status">

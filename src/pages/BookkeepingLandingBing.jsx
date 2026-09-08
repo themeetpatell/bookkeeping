@@ -368,6 +368,7 @@ const BookkeepingLandingBing = () => {
             </div>
             
             <div className="hero-ctas">
+                <FtaBadge />
               <a href="#consultation" className="btn-primary">Get Free Consultation</a>
               <a href="#pricing" className="btn-secondary">View Pricing</a>
             </div>
@@ -393,6 +394,7 @@ const BookkeepingLandingBing = () => {
           
           <div className="hero-right">
             <div className="consultation-form">
+              <FtaStamp />
               <ZohoConsultationForm formId="zoho-consultation-hero" />
               
               <p className="form-disclaimer">
@@ -501,8 +503,6 @@ const BookkeepingLandingBing = () => {
             </div>
             
             <div className="solution-right">
-              <FtaBadge />
-
               <div className="dashboard-preview">
                 <div className="invoice-toast">
                   <div className="toast-icon">✅</div>
@@ -796,6 +796,7 @@ const BookkeepingLandingBing = () => {
           
           <div className="final-cta-right">
             <div className="final-consultation-form">
+              <FtaStamp />
               <ZohoConsultationForm formId="zoho-consultation-final" />
               
               <p className="form-disclaimer">

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown } from 'react-icons/fi';
 import { usePostHog } from '@posthog/react';
 import Seo from '../components/Seo';
+import FtaStamp from '../components/FtaStamp';
 import FtaBadge from '../components/FtaBadge';
 import Testimonials from '../components/Testimonials';
 import PackageQuoteForm from '../components/PackageQuoteForm';
@@ -137,6 +138,7 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
             <HeroRatingWidget />
 
             <div className="hero-ctas">
+                <FtaBadge />
               <a
                 href={`#${CLEANUP_QUOTE_ANCHOR_ID}`}
                 className="btn-primary"
@@ -158,6 +160,13 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
               </a>
             </div>
 
+            {/* The entry price is stated in the H1, but on mobile the H1 scrolls
+                away from the button. Repeating it against the CTA keeps the ad's
+                promise on screen at the moment of the click. */}
+            <p className="hero-cta-price">
+              Cleanup engagements start from <strong>AED {CLEANUP_PRICE}</strong>
+            </p>
+
             <p className="hero-cta-microcopy">
               Tell us how many months are behind. No commitment required.
             </p>
@@ -165,6 +174,7 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
 
           <div className="hero-right">
             <div className="consultation-form" id={CLEANUP_QUOTE_ANCHOR_ID}>
+              <FtaStamp />
               <PackageQuoteForm
                 formId="cleanup-quote-hero"
                 formName="hero_cleanup_quote"
@@ -424,11 +434,11 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
               </div>
             </div>
 
-            <FtaBadge />
           </div>
 
           <div className="final-cta-right">
             <div className="final-consultation-form">
+              <FtaStamp />
               <PackageQuoteForm
                 formId="cleanup-quote-final"
                 formName="footer_cleanup_quote"

@@ -112,3 +112,98 @@
     text-align: center;
   }
 }
+
+
+/* The price restated against the CTA. Orange only on the figure itself —
+   the sentence around it is body text. */
+.books-cleanup-landing .hero-cta-price {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.books-cleanup-landing .hero-cta-price strong {
+  font-weight: 700;
+  color: var(--orange-primary);
+}
+
+/* ── Mobile fold ───────────────────────────────────────────────────────────
+   Acceptance target: at 390x844 the full H1, the proof line and the primary
+   CTA are all above the fold. The source order is written for desktop, where
+   the supporting paragraph belongs under the headline; on a phone that
+   paragraph and the review card together push the button 218px past the fold.
+
+   So on mobile the column is reordered rather than rewritten — headline,
+   proof, decision first; the description and the review card follow, still on
+   the page and still read, just after the thing the visitor came to do. */
+@media (max-width: 768px) {
+  .books-cleanup-landing .hero-left {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0;
+  }
+
+  .books-cleanup-landing .hero-eyebrow { order: 1; }
+  .books-cleanup-landing .hero-title { order: 2; }
+  .books-cleanup-landing .hero-proof-line { order: 3; }
+  .books-cleanup-landing .hero-ctas { order: 4; }
+  .books-cleanup-landing .hero-cta-price { order: 5; }
+  .books-cleanup-landing .hero-cta-microcopy { order: 6; }
+  .books-cleanup-landing .hero-description { order: 7; }
+  .books-cleanup-landing .hero-rating-card { order: 8; }
+
+  .books-cleanup-landing .hero-description {
+    margin: 24px 0 0;
+  }
+
+  .books-cleanup-landing .hero-rating-card {
+    margin: 20px 0 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .books-cleanup-landing .hero-section {
+    padding-top: 20px;
+  }
+
+  .books-cleanup-landing .hero-eyebrow {
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+  .books-cleanup-landing .hero-title {
+    font-size: 30px;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  /* The items are too long to share a row at 390px, so flex-wrap put each on
+     its own line and the sibling-only separator left the first item without a
+     marker and the rest looking like a mis-rendered list. Below 480 it becomes
+     a real stacked list and every item carries the same marker. */
+  .books-cleanup-landing .hero-proof-line {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+    margin-bottom: 18px;
+    font-size: 14px;
+  }
+
+  .books-cleanup-landing .hero-proof-item {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .books-cleanup-landing .hero-proof-item::before,
+  .books-cleanup-landing .hero-proof-item + .hero-proof-item::before {
+    content: '\2022';
+    margin-right: 9px;
+    color: var(--orange-primary);
+  }
+
+  .books-cleanup-landing .hero-ctas {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+}

@@ -17,6 +17,7 @@ import {
 } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa6';
 import Seo from '../components/Seo';
+import FtaStamp from '../components/FtaStamp';
 import FtaBadge from '../components/FtaBadge';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
 import './AIAccountingLanding.css';
@@ -411,6 +412,7 @@ const AIAccountingLanding = () => {
 
 
               <div className="ai-hero-actions">
+                <FtaBadge />
                 <a href="#consultation" className="ai-btn ai-btn-primary">
                   Get a Free Consultation
                   <FiArrowRight aria-hidden="true" />
@@ -452,7 +454,6 @@ const AIAccountingLanding = () => {
 
             {/* This morning's activity log */}
             <div className="ai-hero-visual">
-              <FtaBadge />
               <div className="ai-term">
                 <div className="ai-term-bar">
                   <span className="ai-term-name">
@@ -921,6 +922,7 @@ const AIAccountingLanding = () => {
             </div>
 
             <div className="ai-cta-form-card" data-reveal>
+              <FtaStamp />
               <h3>Get your free consultation</h3>
               <p>Tell us where your books stand — we&rsquo;ll take it from there.</p>
               <ZohoConsultationForm formId="ai-consultation-form" />
