@@ -26,6 +26,7 @@ import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import { absoluteUrl } from '../utils/site';
 import clientLogos from '../data/clientLogos';
 import HeroRatingWidget from '../components/HeroRatingWidget';
+import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const WHATSAPP_MESSAGE =
   "Hi Finanshels! I saw your google ad. I'd like to learn more about your AI-native accounting services.";
@@ -413,10 +414,13 @@ const AIAccountingLanding = () => {
 
               <div className="ai-hero-actions">
                 <FtaBadge />
-                <a href="#consultation" className="ai-btn ai-btn-primary">
-                  Get a Free Consultation
-                  <FiArrowRight aria-hidden="true" />
-                </a>
+<QuoteCta
+                  label="Generate Quote →"
+                  className="ai-btn ai-btn-primary"
+                  planKey="accounting"
+                  location="hero"
+                  autoOpen
+                />
                 <a
                   href={buildWhatsAppUrl(WHATSAPP_MESSAGE)}
                   target="_blank"

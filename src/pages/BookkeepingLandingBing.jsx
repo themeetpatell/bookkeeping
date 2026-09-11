@@ -11,6 +11,7 @@ import clientLogos from '../data/clientLogos';
 import HeroRatingWidget from '../components/HeroRatingWidget';
 import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
+import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
@@ -370,7 +371,13 @@ const BookkeepingLandingBing = () => {
             
             <div className="hero-ctas">
                 <FtaBadge />
-              <a href="#consultation" className="btn-primary">Get Free Consultation</a>
+<QuoteCta
+                label="Generate Quote →"
+                className="btn-primary"
+                planKey="accounting"
+                location="hero"
+                autoOpen
+              />
               <a href="#pricing" className="btn-secondary">View Pricing</a>
             </div>
 

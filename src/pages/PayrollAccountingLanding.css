@@ -1551,3 +1551,13 @@
     width: 100%;
   }
 }
+
+/* The payroll hero had no action row of its own — the only path out of it was
+   the form on the right. The quote CTA gets a row; the form is untouched. */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 4px;
+}

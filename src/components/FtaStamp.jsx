@@ -27,7 +27,7 @@ const FtaStamp = () => (
       <source srcSet={STAMP_WEBP} type="image/webp" />
       <img
         src={STAMP_PNG}
-        alt={`FTA-approved Tax Agency firm, registration number ${AGENCY_NUMBER}`}
+        alt={`FTA Registered Tax Agency, registration number ${AGENCY_NUMBER}`}
         className="fta-stamp-img"
         width="440"
         height="440"

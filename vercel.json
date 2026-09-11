@@ -7,13 +7,31 @@
     }
   ],
   "rewrites": [
-    { "source": "/((?!api/|sitemap\\.xml$).*)", "destination": "/index.html" }
+    {
+      "source": "/api/quote/:path*",
+      "destination": "https://fincore.finanshels.com/api/pricing/public/:path*"
+    },
+    {
+      "source": "/api/quote-session",
+      "destination": "https://fincore.finanshels.com/api/wizard/session"
+    },
+    {
+      "source": "/api/quote-proposal",
+      "destination": "https://fincore.finanshels.com/api/quotes/public"
+    },
+    {
+      "source": "/((?!api/|sitemap\\.xml$).*)",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
       ]
     }
   ]

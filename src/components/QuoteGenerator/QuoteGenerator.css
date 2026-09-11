@@ -1,0 +1,457 @@
+/* Quote generator.
+   Brand: accent #f16610 (dark #d45a0e), Inter only, WhatsApp green #25d366.
+   Kept alongside the component rather than in App.css so the hero experiment
+   can be lifted out in one directory if it loses. */
+
+.quote-generator {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #fff;
+  padding: 28px 24px;
+  width: 100%;
+}
+
+/* ---- modal ---- */
+
+.quote-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  /* Above the offer bar, nav and trust bar, which reach z-index 1100. */
+  z-index: 2000;
+  background: rgba(8, 32, 50, 0.55);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.quote-modal {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(8, 32, 50, 0.28);
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  outline: none;
+}
+
+.quote-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  font-size: 26px;
+  line-height: 1;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.quote-modal-close:hover {
+  background: #f3f4f6;
+  color: #082032;
+}
+
+.quote-modal-body {
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  border-radius: 16px;
+}
+
+/* ---- field errors ---- */
+
+.quote-field-error {
+  font-size: 12.5px;
+  color: #d92d20;
+  margin: 6px 0 0;
+}
+
+.quote-submit-error {
+  margin-bottom: 8px;
+}
+
+.quote-form-header {
+  margin-bottom: 20px;
+  /* Clears the modal's close button, which is absolutely positioned over this
+     corner — without it a long title runs underneath the ×. */
+  padding-right: 34px;
+}
+
+.quote-form-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #082032;
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+
+.quote-form-subtitle,
+.quote-question-help {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.quote-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.quote-field {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #082032;
+  margin-bottom: 6px;
+}
+
+.quote-field label em {
+  color: #f16610;
+  font-style: normal;
+}
+
+.quote-input,
+.quote-select {
+  font-family: inherit;
+  font-size: 15px;
+  padding: 12px 14px;
+  border: 1px solid #e2e5ea;
+  border-radius: 10px;
+  background: #fff;
+  color: #082032;
+  width: 100%;
+}
+
+.quote-input:focus,
+.quote-select:focus {
+  outline: none;
+  border-color: #f16610;
+  box-shadow: 0 0 0 3px rgba(241, 102, 16, 0.15);
+}
+
+.quote-submit {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  width: 100%;
+  padding: 14px 20px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 10px;
+  background: #f16610;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.quote-submit em {
+  font-style: normal;
+}
+
+.quote-submit:hover:not(:disabled) {
+  background: #d45a0e;
+}
+
+.quote-submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.quote-form-note {
+  font-size: 12px;
+  color: #9aa1ab;
+  text-align: center;
+  margin: 12px 0 0;
+}
+
+/* ---- questions ---- */
+
+.quote-progress {
+  margin-bottom: 18px;
+}
+
+.quote-progress-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #9aa1ab;
+}
+
+.quote-progress-track {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: #f0f1f3;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.quote-progress-fill {
+  display: block;
+  height: 100%;
+  background: #f16610;
+  transition: width 0.25s ease;
+}
+
+.quote-question-text {
+  font-size: 19px;
+  font-weight: 700;
+  color: #082032;
+  margin: 0 0 6px;
+  line-height: 1.35;
+}
+
+.quote-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+
+.quote-option {
+  font-family: inherit;
+  font-size: 14.5px;
+  text-align: left;
+  padding: 13px 16px;
+  border: 1px solid #e2e5ea;
+  border-radius: 10px;
+  background: #fff;
+  color: #082032;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.quote-option:hover,
+.quote-option.is-selected {
+  border-color: #f16610;
+  background: #fff7f1;
+}
+
+.quote-back {
+  font-family: inherit;
+  font-size: 13px;
+  color: #6b7280;
+  background: none;
+  border: none;
+  padding: 14px 0 0;
+  cursor: pointer;
+}
+
+/* ---- calculating ---- */
+
+.quote-calculating {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.quote-spinner {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3e6dc;
+  border-top-color: #f16610;
+  border-radius: 50%;
+  animation: quote-spin 0.8s linear infinite;
+}
+
+@keyframes quote-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quote-spinner {
+    animation-duration: 2.4s;
+  }
+}
+
+.quote-calculating-text {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 16px 0 0;
+}
+
+/* ---- result ---- */
+
+.quote-result-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9aa1ab;
+  margin: 0 0 8px;
+}
+
+.quote-result-amount {
+  font-size: 40px;
+  font-weight: 800;
+  color: #082032;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.quote-result-custom {
+  font-size: 30px;
+}
+
+.quote-result-period {
+  font-size: 17px;
+  font-weight: 600;
+  color: #6b7280;
+  margin-left: 6px;
+}
+
+.quote-result-note {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 10px 0 0;
+}
+
+.quote-result-basis {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.55;
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid #f0f1f3;
+}
+
+
+
+
+
+.quote-result-next {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #f0f1f3;
+}
+
+.quote-result-next-text {
+  font-size: 14px;
+  color: #082032;
+  line-height: 1.55;
+  margin: 0 0 14px;
+}
+
+.quote-whatsapp {
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 13px 20px;
+  border-radius: 10px;
+  background: #25d366;
+  color: #fff;
+}
+
+.quote-whatsapp:hover {
+  background: #1eb857;
+}
+
+.quote-failed {
+  text-align: left;
+}
+
+@media (max-width: 520px) {
+  .quote-generator {
+    padding: 22px 18px;
+  }
+
+  .quote-modal-backdrop {
+    padding: 12px 10px;
+  }
+
+  .quote-modal-body {
+    max-height: calc(100vh - 24px);
+  }
+
+  .quote-field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .quote-result-amount {
+    font-size: 34px;
+  }
+}
+
+/* The primary action once a proposal exists: open it, read the scope, pay. */
+.quote-proposal-cta {
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 14px 20px;
+  border-radius: 10px;
+  background: #f16610;
+  color: #fff;
+  transition: background 0.15s ease;
+}
+
+.quote-proposal-cta:hover {
+  background: #d45a0e;
+}
+
+/* WhatsApp, demoted to a text link while the proposal is the better next step. */
+.quote-whatsapp-secondary {
+  display: block;
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #6b7280;
+  padding: 12px 8px 2px;
+}
+
+.quote-whatsapp-secondary:hover {
+  color: #082032;
+}
+
+/* The service selector's options carry a second line, so they stack rather than
+   centre a single label the way a plain pricing option does. */
+.quote-option-rich {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.quote-option-label {
+  font-weight: 600;
+}
+
+.quote-option-hint {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #6b7280;
+}
+
+.quote-option-rich.is-selected .quote-option-hint,
+.quote-option-rich:hover .quote-option-hint {
+  color: inherit;
+}
+
+/* The period step puts its fields directly under the help text, where the
+   contact step has a header block doing the spacing. */
+[data-testid='quote-period'] .quote-field-row {
+  margin-top: 18px;
+}

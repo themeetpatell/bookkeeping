@@ -7,6 +7,7 @@ import clientLogos from '../data/clientLogos';
 import HeroRatingWidget from '../components/HeroRatingWidget';
 import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
+import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const WHATSAPP_URL =
   'https://api.whatsapp.com/send/?phone=971521549572&text=Hi+I+saw+your+google+ad+for+Accounting+Services.+I%E2%80%99d+like+to+know+more.&type=phone_number&app_absent=0';
@@ -139,7 +140,19 @@ const AccountingWhatsApp = () => {
                   <span>Real-Time Financial Dashboard</span>
                 </div>
               </div>
-              
+
+              {/* This hero had no action row of its own — the only path out of it
+                  was the form to the right, which is untouched. */}
+              <div className="hero-actions">
+                <QuoteCta
+                  label="Generate Quote →"
+                  className="hero-btn hero-btn-primary"
+                  planKey="general"
+                  location="hero"
+                  autoOpen
+                />
+              </div>
+
             </div>
             
             {/* Right Column - Form */}

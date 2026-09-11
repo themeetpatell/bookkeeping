@@ -7,6 +7,7 @@ import clientLogos from '../data/clientLogos';
 import HeroRatingWidget from '../components/HeroRatingWidget';
 import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
+import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const ZohoPayrollForm = ({ formId }) => (
   <form
@@ -281,6 +282,18 @@ const PayrollAccountingLanding = () => {
 
               
               <FtaBadge />
+
+              {/* This hero had no action row of its own. The lead form to the
+                  right is untouched; this is the additional path. */}
+              <div className="hero-actions">
+                <QuoteCta
+                  label="Generate Quote →"
+                  className="btn-cta-section"
+                  planKey="payroll"
+                  location="hero"
+                  autoOpen
+                />
+              </div>
 
               <div className="hero-stats">
                 <div className="hero-stat">

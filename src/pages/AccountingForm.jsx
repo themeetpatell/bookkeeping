@@ -9,6 +9,7 @@ import clientLogos from '../data/clientLogos';
 import HeroRatingWidget from '../components/HeroRatingWidget';
 import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
+import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const WHATSAPP_MESSAGE = 'Hi I saw your ad for Accounting Services. I’d like to know more.';
 
@@ -227,6 +228,13 @@ const AccountingForm = () => {
             <div className="hero-secondary">
               <div className="hero-actions">
                 <FtaBadge />
+<QuoteCta
+                  label="Generate Quote →"
+                  className="hero-btn hero-btn-primary"
+                  planKey="general"
+                  location="hero"
+                  autoOpen
+                />
                 <a href="#pricing" className="hero-btn hero-btn-secondary">
                   View Pricing
                 </a>

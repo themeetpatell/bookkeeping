@@ -26,4 +26,18 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+  {
+    /* Tooling that runs in Node, not the browser: build config, the quote
+       question sync script and the Playwright suite. Without this they fail on
+       `process` and `console`, which are correct globals there. */
+    files: [
+      '*.config.js',
+      'scripts/**/*.{js,mjs}',
+      'tests/**/*.js',
+      'src/**/__tests__/**/*.js',
+    ],
+    languageOptions: {
+      globals: { ...globals.node },
+    },
+  },
 ])

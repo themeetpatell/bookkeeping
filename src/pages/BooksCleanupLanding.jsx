@@ -40,6 +40,7 @@ import './BookkeepingLanding.css';
 import './PackagesLanding.css';
 import './BooksCleanupLanding.css';
 import HeroRatingWidget from '../components/HeroRatingWidget';
+import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const PAGE_PATH = '/books-cleanup';
 
@@ -180,13 +181,16 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
 
             <div className="hero-ctas">
                 <FtaBadge />
-              <a
-                href={`#${CLEANUP_QUOTE_ANCHOR_ID}`}
+              {/* Same promise the anchor made — a fixed cleanup quote — but
+                  answered here instead of scrolling to a form. That section and
+                  its form are untouched and still below. */}
+<QuoteCta
+                label="Generate Quote →"
                 className="btn-primary"
-                onClick={() => trackCta('hero_quote')}
-              >
-                Get My Fixed Cleanup Quote
-              </a>
+                planKey="booksCleanup"
+                location="hero"
+                autoOpen
+              />
               {/* No onClick: whatsapp_click is fired by the delegated listener in
                   src/components/LeadEventTracker.jsx, which reads data-wa-location.
                   The data-wa-track class is what binds the Gallabox tracker. */}

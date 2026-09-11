@@ -195,10 +195,10 @@ export const cleanupFaqs = [
  * `photo` degrades to initials if the file is absent, so a missing asset can
  * never ship a broken image to a paid landing page.
  *
- * `profileUrl` is EMPTY ON PURPOSE and the link is not rendered while it is.
- * The natural destination is the main Finanshels web presence, and linking to
- * it is the second of the two causes of the 2026-08-11 Google Ads disapproval
- * (see README). Set this only to a destination that has been cleared.
+ * `profileUrl` is empty and the link is not rendered while it is. The natural
+ * destination is the main Finanshels web presence; the Google Ads constraint
+ * that previously blocked that link was resolved on 2026-09-11, so this can now
+ * be set to a real profile URL.
  */
 export const cleanupReviewer = {
   name: 'Suhail K Y, CMA\u00ae',

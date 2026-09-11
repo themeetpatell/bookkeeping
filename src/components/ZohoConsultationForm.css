@@ -1,0 +1,151 @@
+/* Styles for ZohoConsultationForm.
+ *
+ * Copied from src/pages/AccountingLanding.css, which is where this form's look
+ * is defined and where it is currently the only place it exists. Everything is
+ * scoped under .zc-form so the component carries its own appearance onto any
+ * page, and so it cannot fight a host page's own .form-title / .form-row rules
+ * (BookkeepingLanding.css defines both).
+ *
+ * The --form-* tokens come from src/styles/variables.css, which src/index.css
+ * imports globally, so they resolve on every route. --orange is page-local on
+ * the home page, so it is re-declared here rather than inherited.
+ */
+
+.zc-form {
+  --orange: var(--orange-primary, #f16610);
+  --orange-hover: #ff7f4d;
+}
+
+.zc-form .form-intro {
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.zc-form .form-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 12px 0;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.zc-form .form-subtitle {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #475569;
+  margin: 0;
+}
+
+.zc-form .zoho-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.zc-form .form-row {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
+}
+
+.zc-form .form-row > .form-group {
+  flex: 1;
+}
+
+.zc-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.zc-form .form-group label {
+  font-size: var(--form-label-size);
+  font-weight: var(--form-label-weight);
+  color: var(--form-label-color);
+  letter-spacing: 0.01em;
+}
+
+.zc-form .form-control {
+  width: 100%;
+  padding: var(--form-input-padding);
+  background: var(--form-input-bg);
+  border: var(--form-input-border-width) solid var(--form-input-border-color);
+  border-radius: var(--form-input-radius);
+  color: var(--form-input-text);
+  font-size: var(--form-input-size);
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+.zc-form .form-control::placeholder {
+  color: var(--form-placeholder);
+}
+
+.zc-form .form-control:hover {
+  border-color: rgba(15, 23, 42, 0.2);
+  background: #ffffff;
+}
+
+.zc-form .form-control:focus {
+  outline: none;
+  border-color: var(--orange);
+  background: var(--form-input-bg-active);
+  box-shadow: var(--form-focus-ring);
+}
+
+.zc-form .btn-submit-form {
+  width: 100%;
+  padding: var(--form-submit-padding);
+  background: var(--orange);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--form-submit-radius);
+  font-family: inherit;
+  font-size: var(--form-submit-size);
+  font-weight: var(--form-submit-weight);
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  box-shadow: var(--form-submit-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 4px;
+}
+
+.zc-form .btn-submit-form:hover {
+  background: var(--orange-hover);
+  box-shadow: 0 6px 24px rgba(255, 107, 53, 0.5);
+  transform: translateY(-2px);
+}
+
+.zc-form .btn-submit-form:active {
+  transform: translateY(0);
+}
+
+.zc-form .form-privacy {
+  font-size: 12px;
+  color: #64748b;
+  text-align: center;
+  margin-top: 24px;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* Matches the home page's own breakpoint: the name row stacks on narrow
+   screens rather than squeezing two inputs side by side. */
+@media (max-width: 768px) {
+  .zc-form .form-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .zc-form .form-title {
+    font-size: 24px;
+  }
+
+  .zc-form .form-subtitle {
+    font-size: 14px;
+  }
+}

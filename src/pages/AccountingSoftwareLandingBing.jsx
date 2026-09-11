@@ -12,6 +12,7 @@ import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import { getSiteOrigin } from '../utils/site';
 import clientLogos from '../data/clientLogos';
 import HeroRatingWidget from '../components/HeroRatingWidget';
+import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
@@ -358,7 +359,13 @@ const AccountingSoftwareLandingBing = () => {
             
             <div className="software-hero-buttons">
                 <FtaBadge />
-              <a href="#consultation" className="software-btn-primary">Get Free Consultation</a>
+<QuoteCta
+                label="Generate Quote →"
+                className="software-btn-primary"
+                planKey="accounting"
+                location="hero"
+                autoOpen
+              />
               <a href="#pricing" className="software-btn-secondary">View Pricing</a>
             </div>
 

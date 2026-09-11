@@ -7,6 +7,7 @@ import clientLogos from '../data/clientLogos';
 import HeroRatingWidget from '../components/HeroRatingWidget';
 import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
+import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
@@ -207,9 +208,16 @@ const AccountingLanding = () => {
               
               <div className="hero-actions">
                 <FtaBadge />
-                <a href="#consultation" className="hero-btn hero-btn-primary">
-                  Get Free Consultation
-                </a>
+                {/* Replaces the anchor that scrolled to the consultation
+                    form. The form itself is untouched and still sits in this
+                    hero — the quote is a faster path to the same outcome. */}
+<QuoteCta
+                  label="Generate Quote →"
+                  className="hero-btn hero-btn-primary"
+                  planKey="general"
+                  location="hero"
+                  autoOpen
+                />
                 <a href="#pricing" className="hero-btn hero-btn-secondary">
                   View Pricing
                 </a>

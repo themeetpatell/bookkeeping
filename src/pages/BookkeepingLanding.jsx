@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAlertTriangle, FiUsers, FiZap, FiBarChart2, FiShield } from 'react-icons/fi';
 import Testimonials from '../components/Testimonials';
 import './BookkeepingLanding.css';
-import BookkeepingPlanForm from '../components/BookkeepingPlanForm';
+import ZohoConsultationForm from '../components/ZohoConsultationForm';
+import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 import { absoluteUrl } from '../utils/site';
 import clientLogos from '../data/clientLogos';
 import HeroRatingWidget from '../components/HeroRatingWidget';
@@ -263,7 +264,7 @@ const BookkeepingLanding = () => {
             
             <div className="hero-ctas">
                 <FtaBadge />
-              <a href="#consultation" className="btn-primary">Get My Bookkeeping Plan</a>
+              <QuoteCta label="Generate Quote →" className="btn-primary" location="hero" autoOpen />
               <a href="#pricing" className="btn-secondary">View Pricing</a>
             </div>
 
@@ -289,7 +290,9 @@ const BookkeepingLanding = () => {
           <div className="hero-right">
             <div className="consultation-form">
               <FtaStamp />
-              <BookkeepingPlanForm formId="zoho-consultation-hero" />
+              {/* privacyNote suppressed: this page renders its own
+                  .form-disclaimer immediately below. */}
+              <ZohoConsultationForm formId="zoho-consultation-hero" privacyNote="" />
               
               <p className="form-disclaimer">
                 By submitting, you agree to receive communications from Finanshels. Your data is secure and will never be shared.
@@ -681,7 +684,9 @@ const BookkeepingLanding = () => {
           <div className="final-cta-right">
             <div className="final-consultation-form">
               <FtaStamp />
-              <BookkeepingPlanForm formId="zoho-consultation-final" />
+              {/* privacyNote suppressed: this page renders its own
+                  .form-disclaimer immediately below. */}
+              <ZohoConsultationForm formId="zoho-consultation-final" privacyNote="" />
               
               <p className="form-disclaimer">
                 By submitting, you agree to receive communications from Finanshels. Your data is secure and will never be shared.

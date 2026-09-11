@@ -32,6 +32,7 @@ import {
 import './BookkeepingLanding.css';
 import './PackagesLanding.css';
 import HeroRatingWidget from '../components/HeroRatingWidget';
+import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const PAGE_PATH = '/packages';
 
@@ -170,12 +171,21 @@ const PackagesLanding = ({ channel = 'google' }) => {
 
             <div className="hero-ctas">
                 <FtaBadge />
+<QuoteCta
+                label="Generate Quote →"
+                className="btn-primary"
+                planKey="accounting"
+                location="hero"
+                autoOpen
+              />
+              {/* Demoted rather than removed: the packages table is this
+                  page's reason to exist and the hero is the only link to it. */}
               <a
                 href="#pricing"
-                className="btn-primary"
+                className="btn-secondary"
                 onClick={() => trackCta('hero_compare', null)}
               >
-                Compare Packages &amp; Get a Quote
+                Compare Packages
               </a>
             </div>
 
