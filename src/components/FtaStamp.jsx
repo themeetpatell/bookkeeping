@@ -11,6 +11,14 @@
  * transparency and resized (see public/fta-stamp.png, 440x440), so it sits on a
  * coloured card without a white box behind it.
  *
+ * The wording is a UAE regulatory claim, so it is not a styling choice: the
+ * approved claim is "FTA Registered Tax Agency" and it must stay identical to
+ * the one FtaBadge renders. The artwork originally read "FTA-approved Tax
+ * Agency firm"; those two bold lines were re-set by scripts/build-fta-stamp.py,
+ * which is also how any future wording change is made. The frame, the authority
+ * mark and the registration number are untouched original artwork. Changing the
+ * alt text alone does not fix a wrong claim — it is baked into the pixels.
+ *
  * Distinct from FtaBadge, which is the horizontal card under a hero CTA. This
  * one is absolutely positioned and belongs INSIDE a form card — every container
  * it is dropped into is given `position: relative` in App.css, so adding it to a
