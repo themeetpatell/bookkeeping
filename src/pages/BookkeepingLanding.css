@@ -2730,3 +2730,27 @@
   background: var(--orange-primary);
   vertical-align: middle;
 }
+
+/* /bookkeeping ON A PHONE — the quote CTA sat at 751px on a 664px viewport, one
+   credential card below the fold. The card moves under the buttons (it is still
+   in the hero, and the FTA stamp on the form repeats it) and the spacing above
+   the CTAs tightens. The proof line keeps its place above them. */
+@media (max-width: 768px) {
+  .hero-ctas .fta-badge {
+    order: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-left {
+    padding-top: 0;
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .hero-proof {
+    margin-bottom: 20px;
+  }
+}

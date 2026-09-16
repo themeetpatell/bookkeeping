@@ -9,6 +9,11 @@ import clientLogos from '../data/clientLogos';
 import HeroRatingWidget from '../components/HeroRatingWidget';
 import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
+import Seo from '../components/Seo';
+
+const SEO_TITLE = 'Bookkeeping Services UAE | From AED 499/Month | Finanshels';
+const SEO_DESCRIPTION =
+  'Monthly bookkeeping, reconciliations and management reports for UAE businesses, with a dedicated accountant from AED 499/month. Trusted by 7,000+ businesses, rated 4.9/5 on Trustpilot.';
 
 const BookkeepingLanding = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -229,6 +234,7 @@ const BookkeepingLanding = () => {
 
   return (
     <div className="new-homepage">
+      <Seo title={SEO_TITLE} description={SEO_DESCRIPTION} canonicalPath="/bookkeeping" image="/Dubai.jpg" />
       {/* Hero Section */}
       <section className="hero-section">
         <script

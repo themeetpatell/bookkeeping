@@ -2208,3 +2208,51 @@
     letter-spacing: -0.01em;
   }
 }
+
+/* "/" ON A PHONE — headline and quote CTA first, form second.
+   The shared single-column rule above puts the lead form first (order: 1),
+   which left the "accounting services" headline 1,100px down a phone screen and
+   the first thing an ad click saw was a blank form. Google grades that landing
+   page on mobile, so this page leads with the answer to the search instead.
+   Scoped to .accounting-home: /accounting-form, /accounting-form-reddit and
+   /accounting-whatsapp share this stylesheet and keep their own order. */
+@media (max-width: 968px) {
+  .accounting-home .hero-content-wrapper {
+    order: 1;
+  }
+
+  .accounting-home .hero-form-wrapper {
+    order: 2;
+  }
+
+  /* The trust bar pinned above the hero already carries "7,000+ businesses"
+     and the Trustpilot score, so the badge would only push the headline down. */
+  .accounting-home .hero-badge {
+    display: none;
+  }
+
+  .accounting-home .hero-headline { order: 1; }
+  .accounting-home .hero-actions { order: 2; }
+  .accounting-home .hero-rating-card { order: 3; }
+  .accounting-home .hero-subheadline { order: 4; }
+  .accounting-home .hero-features { order: 5; }
+  .accounting-home .hero-stats { order: 6; }
+
+  .accounting-home .hero-actions .fta-badge {
+    order: 3;
+  }
+}
+
+@media (max-width: 640px) {
+  .accounting-home.accounting-landing .hero {
+    padding-top: 32px;
+  }
+
+  .accounting-home .hero-headline {
+    font-size: 32px;
+  }
+
+  .accounting-home .hero-actions .hero-btn {
+    flex: 1 1 100%;
+  }
+}

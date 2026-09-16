@@ -8,6 +8,14 @@ import HeroRatingWidget from '../components/HeroRatingWidget';
 import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
+import Seo from '../components/Seo';
+
+/* The "accounting service" keywords land here, so the title, description and
+   headline all say accounting. Without this the page inherited the shell's
+   bookkeeping title from index.html. */
+const SEO_TITLE = 'Accounting Services UAE | Dedicated Accountant | Finanshels';
+const SEO_DESCRIPTION =
+  'Outsourced accounting services for UAE businesses: bookkeeping, month-end close and management accounts, run by a dedicated accountant. Trusted by 7,000+ businesses, rated 4.9/5 on Trustpilot.';
 
 const ZohoConsultationForm = ({ formId }) => (
   <form
@@ -171,7 +179,8 @@ const AccountingLanding = () => {
 
 
   return (
-    <div className="accounting-landing">
+    <div className="accounting-landing accounting-home">
+      <Seo title={SEO_TITLE} description={SEO_DESCRIPTION} canonicalPath="/" image="/Dubai.jpg" />
       {/* Hero Section - Complete Redesign */}
       <section className="hero">
         <div className="hero-container">
@@ -184,7 +193,8 @@ const AccountingLanding = () => {
               </div>
               
               <h1 className="hero-headline">
-                UAE's Top Accountants Handle Your Books
+                UAE Accounting Services With a{' '}
+                <span className="text-orange">Dedicated Accountant</span>
               </h1>
               
               <p className="hero-subheadline">
