@@ -6,8 +6,6 @@ import './PayrollAccountingLanding.css';
 import { ZOHO_BING_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import clientLogos from '../data/clientLogos';
-import HeroRatingWidget from '../components/HeroRatingWidget';
-import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
@@ -280,10 +278,10 @@ const PayrollAccountingLandingBing = () => {
                 </div>
               </div>
               
-              <HeroRatingWidget />
+              
 
               
-              <FtaBadge />
+              
 
               {/* This hero had no action row of its own. The lead form to the
                   right is untouched; this is the additional path. */}

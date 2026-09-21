@@ -3,7 +3,6 @@ import { FiCheckCircle, FiChevronDown } from 'react-icons/fi';
 import { usePostHog } from '@posthog/react';
 import Seo from '../components/Seo';
 import FtaStamp from '../components/FtaStamp';
-import FtaBadge from '../components/FtaBadge';
 import Testimonials from '../components/Testimonials';
 import PackageQuoteForm from '../components/PackageQuoteForm';
 import clientLogos from '../data/clientLogos';
@@ -31,7 +30,6 @@ import {
    comparison, the scope grid and the switching band. */
 import './BookkeepingLanding.css';
 import './PackagesLanding.css';
-import HeroRatingWidget from '../components/HeroRatingWidget';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const PAGE_PATH = '/packages';
@@ -116,7 +114,7 @@ const PackagesLanding = ({ channel = 'google' }) => {
               monthly bookkeeping pricing, with no lock-in.
             </p>
 
-            <HeroRatingWidget />
+            
 
 
             <div className="hero-stats">
@@ -170,7 +168,7 @@ const PackagesLanding = ({ channel = 'google' }) => {
             </div>
 
             <div className="hero-ctas">
-                <FtaBadge />
+                
 <QuoteCta
                 label="Generate Quote →"
                 className="btn-primary"

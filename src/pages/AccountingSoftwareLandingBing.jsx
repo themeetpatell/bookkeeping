@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiX } from 'react-icons/fi';
 import Seo from '../components/Seo';
 import FtaStamp from '../components/FtaStamp';
-import FtaBadge from '../components/FtaBadge';
 // Shares the Google-ads stylesheet: the Bing variant is visually identical and
 // only differs in the prefilled WhatsApp copy below.
 import './AccountingSoftwareLanding.css';
@@ -11,7 +10,6 @@ import { ZOHO_BING_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import { getSiteOrigin } from '../utils/site';
 import clientLogos from '../data/clientLogos';
-import HeroRatingWidget from '../components/HeroRatingWidget';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const ZohoConsultationForm = ({ formId }) => (
@@ -354,11 +352,11 @@ const AccountingSoftwareLandingBing = () => {
               </li>
             </ul>
             
-            <HeroRatingWidget />
+            
 
             
             <div className="software-hero-buttons">
-                <FtaBadge />
+                
 <QuoteCta
                 label="Generate Quote →"
                 className="software-btn-primary"

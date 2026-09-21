@@ -4,8 +4,6 @@ import './AccountingLanding.css';
 import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import clientLogos from '../data/clientLogos';
-import HeroRatingWidget from '../components/HeroRatingWidget';
-import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 import Seo from '../components/Seo';
@@ -217,7 +215,7 @@ const AccountingLanding = () => {
               </div>
               
               <div className="hero-actions">
-                <FtaBadge />
+                
                 {/* Replaces the anchor that scrolled to the consultation
                     form. The form itself is untouched and still sits in this
                     hero — the quote is a faster path to the same outcome. */}
@@ -233,7 +231,7 @@ const AccountingLanding = () => {
                 </a>
               </div>
 
-              <HeroRatingWidget />
+              
 
 
               <div className="hero-stats">

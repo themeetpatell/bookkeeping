@@ -3,13 +3,11 @@ import { useLocation } from 'react-router-dom';
 import { FiCheckCircle, FiChevronDown, FiX } from 'react-icons/fi';
 import Seo from '../components/Seo';
 import FtaStamp from '../components/FtaStamp';
-import FtaBadge from '../components/FtaBadge';
 import './AccountingSoftwareLanding.css';
 import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import { getSiteOrigin } from '../utils/site';
 import clientLogos from '../data/clientLogos';
-import HeroRatingWidget from '../components/HeroRatingWidget';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const ZohoConsultationForm = ({ formId }) => (
@@ -351,11 +349,11 @@ const AccountingSoftwareLanding = () => {
               </li>
             </ul>
             
-            <HeroRatingWidget />
+            
 
             
             <div className="software-hero-buttons">
-                <FtaBadge />
+                
 <QuoteCta
                 label="Generate Quote →"
                 className="software-btn-primary"

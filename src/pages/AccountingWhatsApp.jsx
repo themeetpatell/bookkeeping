@@ -4,8 +4,6 @@ import { FiCheckCircle, FiChevronDown, FiFileText, FiClock, FiTrendingDown, FiAl
 import './AccountingLanding.css';
 import { BOOKING_PATH } from '../utils/booking';
 import clientLogos from '../data/clientLogos';
-import HeroRatingWidget from '../components/HeroRatingWidget';
-import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
@@ -156,7 +154,7 @@ const AccountingWhatsApp = () => {
             </div>
             
             {/* Right Column - Form */}
-            <FtaBadge />
+            
 
               <div className="hero-form-wrapper">
               <div className="hero-form-card">
@@ -175,7 +173,7 @@ const AccountingWhatsApp = () => {
             </div>
 
             {/* Stats row — below the content on desktop, below the CTA card on mobile */}
-            <HeroRatingWidget />
+            
 
             <div className="hero-stats">
               <div className="hero-stat">

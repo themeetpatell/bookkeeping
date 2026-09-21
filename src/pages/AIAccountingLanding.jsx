@@ -18,14 +18,12 @@ import {
 import { FaWhatsapp } from 'react-icons/fa6';
 import Seo from '../components/Seo';
 import FtaStamp from '../components/FtaStamp';
-import FtaBadge from '../components/FtaBadge';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
 import './AIAccountingLanding.css';
 import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import { absoluteUrl } from '../utils/site';
 import clientLogos from '../data/clientLogos';
-import HeroRatingWidget from '../components/HeroRatingWidget';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const WHATSAPP_MESSAGE =
@@ -409,11 +407,11 @@ const AIAccountingLanding = () => {
                 businesses close 10&times; faster and always know where they stand.
               </p>
 
-              <HeroRatingWidget />
+              
 
 
               <div className="ai-hero-actions">
-                <FtaBadge />
+                
 <QuoteCta
                   label="Generate Quote →"
                   className="ai-btn ai-btn-primary"
