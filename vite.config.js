@@ -6,7 +6,7 @@ export default defineConfig({
   test: {
     /* Unit tests only. Without this, vitest also collects the Playwright specs
        in tests/, which import @playwright/test and fail on collection. */
-    include: ['src/**/__tests__/**/*.test.js'],
+    include: ['src/**/__tests__/**/*.test.js', 'server/**/__tests__/**/*.test.js'],
   },
   server: {
     proxy: {

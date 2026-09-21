@@ -35,6 +35,8 @@ export default defineConfig([
       'scripts/**/*.{js,mjs}',
       'tests/**/*.js',
       'src/**/__tests__/**/*.js',
+      'api/mcp.js',
+      'server/**/*.js',
     ],
     languageOptions: {
       globals: { ...globals.node },
