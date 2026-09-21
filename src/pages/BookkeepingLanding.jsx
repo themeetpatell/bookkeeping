@@ -6,8 +6,6 @@ import ZohoConsultationForm from '../components/ZohoConsultationForm';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 import { absoluteUrl } from '../utils/site';
 import clientLogos from '../data/clientLogos';
-import HeroRatingWidget from '../components/HeroRatingWidget';
-import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
 import Seo from '../components/Seo';
 
@@ -269,12 +267,12 @@ const BookkeepingLanding = () => {
             </ul>
             
             <div className="hero-ctas">
-                <FtaBadge />
+                
               <QuoteCta label="Generate Quote →" className="btn-primary" location="hero" autoOpen />
               <a href="#pricing" className="btn-secondary">View Pricing</a>
             </div>
 
-            <HeroRatingWidget />
+            
 
 
             <div className="hero-stats">

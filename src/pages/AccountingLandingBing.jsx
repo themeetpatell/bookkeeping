@@ -4,8 +4,6 @@ import './AccountingLandingBing.css';
 import { ZOHO_BING_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import clientLogos from '../data/clientLogos';
-import HeroRatingWidget from '../components/HeroRatingWidget';
-import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
@@ -208,7 +206,7 @@ const AccountingLandingBing = () => {
               </div>
               
               <div className="hero-actions">
-                <FtaBadge />
+                
                 {/* Replaces the anchor that scrolled to the consultation
                     form. The form itself is untouched and still sits in this
                     hero — the quote is a faster path to the same outcome. */}
@@ -224,7 +222,7 @@ const AccountingLandingBing = () => {
                 </a>
               </div>
 
-              <HeroRatingWidget />
+              
 
 
               <div className="hero-stats">

@@ -3,7 +3,6 @@ import { FiCheckCircle, FiChevronDown } from 'react-icons/fi';
 import { usePostHog } from '@posthog/react';
 import Seo from '../components/Seo';
 import FtaStamp from '../components/FtaStamp';
-import FtaBadge from '../components/FtaBadge';
 import Testimonials from '../components/Testimonials';
 import PackageQuoteForm from '../components/PackageQuoteForm';
 import ReviewedBy from '../components/ReviewedBy';
@@ -39,7 +38,6 @@ import {
 import './BookkeepingLanding.css';
 import './PackagesLanding.css';
 import './BooksCleanupLanding.css';
-import HeroRatingWidget from '../components/HeroRatingWidget';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
 const PAGE_PATH = '/books-cleanup';
@@ -177,10 +175,10 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
               <li className="hero-proof-item">FTA Registered Tax Agency</li>
             </ul>
 
-            <HeroRatingWidget />
+            
 
             <div className="hero-ctas">
-                <FtaBadge />
+                
               {/* Same promise the anchor made — a fixed cleanup quote — but
                   answered here instead of scrolling to a form. That section and
                   its form are untouched and still below. */}

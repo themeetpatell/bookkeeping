@@ -8,8 +8,6 @@ import { ZOHO_BING_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import { absoluteUrl } from '../utils/site';
 import clientLogos from '../data/clientLogos';
-import HeroRatingWidget from '../components/HeroRatingWidget';
-import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
@@ -370,7 +368,7 @@ const BookkeepingLandingBing = () => {
             </div>
             
             <div className="hero-ctas">
-                <FtaBadge />
+                
 <QuoteCta
                 label="Generate Quote →"
                 className="btn-primary"
@@ -381,7 +379,7 @@ const BookkeepingLandingBing = () => {
               <a href="#pricing" className="btn-secondary">View Pricing</a>
             </div>
 
-            <HeroRatingWidget />
+            
 
 
             <div className="hero-stats">

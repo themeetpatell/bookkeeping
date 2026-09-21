@@ -6,8 +6,6 @@ import './AccountingLanding.css';
 import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
 import clientLogos from '../data/clientLogos';
-import HeroRatingWidget from '../components/HeroRatingWidget';
-import FtaBadge from '../components/FtaBadge';
 import FtaStamp from '../components/FtaStamp';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
@@ -227,7 +225,7 @@ const AccountingFormReddit = () => {
             {/* Secondary - pricing link + stats (below content on desktop, after form on mobile) */}
             <div className="hero-secondary">
               <div className="hero-actions">
-                <FtaBadge />
+                
 <QuoteCta
                   label="Generate Quote →"
                   className="hero-btn hero-btn-primary"
@@ -240,7 +238,7 @@ const AccountingFormReddit = () => {
                 </a>
               </div>
 
-              <HeroRatingWidget />
+              
 
 
               <div className="hero-stats">
