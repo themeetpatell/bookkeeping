@@ -63,14 +63,14 @@ start_draft ─▶ edit_files / add_image ─▶ preview ─▶ publish ─▶ l
    - Permissions: Contents **read & write**, Pull requests **read & write**,
      Commit statuses **read**, Deployments **read** (Metadata read is automatic)
    - Expiry: 90 days, with a calendar reminder to rotate it
-2. **Vercel env vars** on `biggbizz/bookkeeping` → Settings → Environment Variables,
+2. **Vercel env vars** on `finanshels-original/bookkeeping` → Settings → Environment Variables,
    scope **Production**:
    - `CMO_MCP_KEY`: output of `openssl rand -hex 32`
    - `CMO_MCP_GITHUB_TOKEN`: the token from step 1
    - `CMO_MCP_AUTHOR_NAME`: the CMO's name (used as the commit author)
    - `CMO_MCP_AUTHOR_EMAIL`: optional; the CMO's GitHub email links their commits to their profile
 3. **Let the CMO open previews.** Previews are behind Vercel SSO. Either:
-   - **Recommended:** add the CMO to the `biggbizz` Vercel team, so preview links
+   - **Recommended:** add the CMO to the `finanshels-original` Vercel team, so preview links
      work after they sign in. Or:
    - generate a secret under Settings → Deployment Protection → *Protection Bypass
      for Automation* and set `CMO_MCP_SHARE_PREVIEW_BYPASS=1`. `preview` then adds
@@ -79,7 +79,7 @@ start_draft ─▶ edit_files / add_image ─▶ preview ─▶ publish ─▶ l
      grants that access. Rotate it if a link leaks.
 4. Deploy (merge this branch to `main`), then check the endpoint:
    `curl -s -o /dev/null -w '%{http_code}\n' -X POST https://accounting.finanshels.co/api/mcp`
-   should return `401`. A `503` means `CMO_MCP_KEY` is missing.
+   should return `401`. A `503` means `CMO_MCP_KEY` or `CMO_MCP_GITHUB_TOKEN` is missing.
 5. Send the CMO the connector URL privately. It contains the key:
    `https://accounting.finanshels.co/api/mcp?key=<CMO_MCP_KEY>`
 

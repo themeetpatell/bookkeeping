@@ -39,6 +39,11 @@ describe('handleMcpRequest', () => {
     expect((await handleMcpRequest(rpc('tools/list', {}), { env: {} })).status).toBe(503);
   });
 
+  test('fails closed when the GitHub token is missing', async () => {
+    const res = await handleMcpRequest(rpc('tools/list', {}), { env: { CMO_MCP_KEY: KEY } });
+    expect(res.status).toBe(503);
+  });
+
   test('initializes and advertises the workflow instructions', async () => {
     const res = await handleMcpRequest(
       rpc('initialize', {

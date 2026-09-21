@@ -46,6 +46,7 @@ export async function handleMcpRequest(request, { env, gh: injectedGh } = {}) {
   const auth = authorize(request, config.key);
   if (!auth.ok) return json(auth.status, auth.status === 503 ? 'Connector is not configured.' : 'Unauthorized.');
   if (request.method !== 'POST') return json(405, 'Method not allowed.');
+  if (!injectedGh && !config.token) return json(503, 'Connector is not configured.');
 
   const gh = injectedGh ?? createGitHub({ token: config.token, repo: config.repo });
   const server = buildServer({ gh, config });
