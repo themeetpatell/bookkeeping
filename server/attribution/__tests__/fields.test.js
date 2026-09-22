@@ -55,6 +55,19 @@ describe('resolveChannel', () => {
   });
 });
 
+describe('LEAD_READ_FIELDS', () => {
+  /* Zoho answers SUCCESS to an update of these and keeps nothing: GCLID, Keyword,
+     Ad_Campaign_Name and ZCAMPAIGNID are Google Ads system fields (api_update
+     false), and Referrer is a system field that dropped a live write
+     (verified 2026-09-22). The Google click id belongs in MGCLID. */
+  it('never includes a field Zoho silently refuses to update', () => {
+    for (const field of ['GCLID', 'Keyword', 'Ad_Campaign_Name', 'ZCAMPAIGNID', 'Referrer']) {
+      expect(LEAD_READ_FIELDS).not.toContain(field);
+    }
+    expect(LEAD_READ_FIELDS).toContain('MGCLID');
+  });
+});
+
 describe('buildLeadUpdate', () => {
   const now = new Date('2026-09-22T10:00:00Z');
   // What Zoho returns when read with LEAD_READ_FIELDS: every requested field
