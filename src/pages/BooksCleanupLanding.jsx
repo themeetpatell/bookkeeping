@@ -8,7 +8,7 @@ import PackageQuoteForm from '../components/PackageQuoteForm';
 import ReviewedBy from '../components/ReviewedBy';
 import StickyMobileCta from '../components/StickyMobileCta';
 import clientLogos from '../data/clientLogos';
-import { absoluteUrl } from '../utils/site';
+import { canonicalUrl } from '../utils/site';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
 import {
   getLeadSourceForChannel,
@@ -114,8 +114,8 @@ const BooksCleanupLanding = ({ channel = 'google' }) => {
     '@type': 'Service',
     name: 'Books Cleanup & Catch-Up Bookkeeping (UAE)',
     serviceType: 'Bookkeeping',
-    url: absoluteUrl(pagePath),
-    image: absoluteUrl('/Dubai.jpg'),
+    url: canonicalUrl(pagePath),
+    image: canonicalUrl('/Dubai.jpg'),
     description: SEO_DESCRIPTION,
     areaServed: 'AE',
     telephone: '+971521549572',

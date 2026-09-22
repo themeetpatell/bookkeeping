@@ -22,7 +22,7 @@ import { buildWhatsAppUrl } from '../utils/whatsapp';
 import './AIAccountingLanding.css';
 import { ZOHO_GOOGLE_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
-import { absoluteUrl } from '../utils/site';
+import { canonicalUrl } from '../utils/site';
 import clientLogos from '../data/clientLogos';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
@@ -354,7 +354,7 @@ const seoJsonLd = {
   description:
     'UAE’s First AI-native accounting firm. AI agents reconcile and draft; qualified accountants review and sign off. Bookkeeping, management accounts, payroll and CFO insights.',
   areaServed: 'AE',
-  url: absoluteUrl('/ai-accounting'),
+  url: canonicalUrl('/ai-accounting'),
 };
 
 const AIAccountingLanding = () => {

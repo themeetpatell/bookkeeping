@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { canonicalUrl } from '../utils/site';
 
 const getOrCreateTag = (selector, createTag) => {
   const existing = document.head.querySelector(selector);
@@ -58,12 +59,13 @@ const setJsonLd = (jsonLd) => {
   }
 };
 
+/* Canonical, og:url and share images always name the primary domain, so the
+   same page served on a secondary domain points search engines at one owner. */
 const buildUrl = (path) => {
   if (!path) {
     return '';
   }
-  const origin = typeof window !== 'undefined' ? window.location.origin : '';
-  return origin ? `${origin}${path}` : path;
+  return /^https?:\/\//i.test(path) ? path : canonicalUrl(path);
 };
 
 const Seo = ({

@@ -6,7 +6,7 @@ import FtaStamp from '../components/FtaStamp';
 import Testimonials from '../components/Testimonials';
 import PackageQuoteForm from '../components/PackageQuoteForm';
 import clientLogos from '../data/clientLogos';
-import { absoluteUrl } from '../utils/site';
+import { canonicalUrl } from '../utils/site';
 import {
   getLeadSourceForChannel,
   ZOHO_BING_FORM_ACTION,
@@ -65,8 +65,8 @@ const PackagesLanding = ({ channel = 'google' }) => {
     '@type': 'Service',
     name: 'Bookkeeping Packages (UAE)',
     serviceType: 'Bookkeeping',
-    url: absoluteUrl(pagePath),
-    image: absoluteUrl('/Dubai.jpg'),
+    url: canonicalUrl(pagePath),
+    image: canonicalUrl('/Dubai.jpg'),
     description: SEO_DESCRIPTION,
     areaServed: 'AE',
     telephone: '+971521549572',

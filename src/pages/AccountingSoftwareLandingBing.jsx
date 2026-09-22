@@ -8,7 +8,7 @@ import FtaStamp from '../components/FtaStamp';
 import './AccountingSoftwareLanding.css';
 import { ZOHO_BING_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
-import { getSiteOrigin } from '../utils/site';
+import { PRIMARY_ORIGIN } from '../utils/site';
 import clientLogos from '../data/clientLogos';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
 
@@ -118,7 +118,7 @@ const ZohoConsultationForm = ({ formId }) => (
 const AccountingSoftwareLandingBing = () => {
   const [openFaq, setOpenFaq] = useState(null);
   const { pathname } = useLocation();
-  const baseUrl = getSiteOrigin();
+  const baseUrl = PRIMARY_ORIGIN;
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);

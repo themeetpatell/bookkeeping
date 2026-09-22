@@ -6,7 +6,7 @@ import Testimonials from '../components/Testimonials';
 import './BookkeepingLanding.css';
 import { ZOHO_BING_FORM_ACTION } from '../utils/zohoForms';
 import ZohoHiddenFields from '../components/ZohoHiddenFields';
-import { absoluteUrl } from '../utils/site';
+import { canonicalUrl } from '../utils/site';
 import clientLogos from '../data/clientLogos';
 import FtaStamp from '../components/FtaStamp';
 import QuoteCta from '../components/QuoteGenerator/QuoteCta';
@@ -113,8 +113,8 @@ const BookkeepingLandingBing = () => {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'Finanshels Bookkeeping (UAE)',
-    url: absoluteUrl('/bookkeeping-bing'),
-    image: absoluteUrl('/Dubai.jpg'),
+    url: canonicalUrl('/bookkeeping-bing'),
+    image: canonicalUrl('/Dubai.jpg'),
     description:
       'UAE bookkeeping and management reporting with real-time dashboards. Free consultation and pay only if satisfied.',
     areaServed: 'AE',
