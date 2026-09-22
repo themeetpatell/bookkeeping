@@ -11,7 +11,7 @@ describe('createRefLookup', () => {
     const found = await lookup('K7Q2M9XP');
     expect(found).toEqual({ properties: { gclid: 'g1' }, distinctId: 'ph-1' });
     const [url, init] = fetchImpl.mock.calls[0];
-    expect(url).toBe('https://us.posthog.com/api/projects/493646/query/');
+    expect(url).toBe('https://us.posthog.com/api/projects/622242/query/');
     const sent = JSON.parse(init.body);
     expect(sent.query.values).toEqual({ ref: 'K7Q2M9XP' });
     expect(sent.query.query).not.toContain('K7Q2M9XP');

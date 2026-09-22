@@ -24,7 +24,8 @@ const QUERY = `
  */
 export function createRefLookup({ env, fetchImpl = fetch }) {
   const host = env.POSTHOG_API_HOST || 'https://us.posthog.com';
-  const projectId = env.POSTHOG_PROJECT_ID || '493646';
+  // Project 622242 in the Finanshels org the site moved to on 2026-09-22.
+  const projectId = env.POSTHOG_PROJECT_ID || '622242';
 
   /**
    * @param {string} ref

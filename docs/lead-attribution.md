@@ -92,7 +92,7 @@ visible added to the message.
 Switch-on, in order:
 1. Vercel (production, sensitive): `GALLABOX_WEBHOOK_SECRET` (a long random
    string) and `POSTHOG_PERSONAL_API_KEY` (PostHog → Settings → Personal API
-   keys, scope **query: read**, project Default). Redeploy.
+   keys, scope **query: read**, project 622242). Redeploy.
 2. Gallabox: add a webhook for incoming messages pointing at
    `https://accounting.finanshels.com/api/whatsapp-inbound?key=<secret>`.
 3. Leave `WHATSAPP_ATTRIBUTION_ENABLED` unset for the first few chats. The

@@ -7,7 +7,7 @@
 // analytics keep working on a deploy where the env var was not configured.
 export const POSTHOG_KEY =
   import.meta.env.VITE_PUBLIC_POSTHOG_KEY ||
-  'phc_saLqpV3uLmLXEqprdnXTpoFKyMp5hcZEnPXkYajpwzSk';
+  'phc_rYSUcUebjkp7hgnoDzz54CCjVRNsrYzHp3wveBD5Jeqg';
 
 export const POSTHOG_HOST =
   import.meta.env.VITE_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com';

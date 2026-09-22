@@ -9,7 +9,7 @@ import { PostHog } from 'posthog-node';
 const POSTHOG_KEY =
   process.env.POSTHOG_KEY ||
   process.env.VITE_PUBLIC_POSTHOG_KEY ||
-  'phc_saLqpV3uLmLXEqprdnXTpoFKyMp5hcZEnPXkYajpwzSk';
+  'phc_rYSUcUebjkp7hgnoDzz54CCjVRNsrYzHp3wveBD5Jeqg';
 const POSTHOG_HOST = process.env.POSTHOG_HOST || 'https://us.i.posthog.com';
 
 const posthog = new PostHog(POSTHOG_KEY, { host: POSTHOG_HOST, flushAt: 1, flushInterval: 0 });
