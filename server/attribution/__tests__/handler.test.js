@@ -129,6 +129,23 @@ describe('handleLeadAttribution', () => {
     expect(second.MGCLID).toBe('g1');
   });
 
+  it('refuses a caller over the per-IP limit before touching Zoho', async () => {
+    const d = deps();
+    d.limiters = { ip: { allow: () => false }, contact: { allow: () => true } };
+    const res = await handleLeadAttribution(request(validBody), d);
+    expect(res.status).toBe(429);
+    expect(d.client.findLeads).not.toHaveBeenCalled();
+  });
+
+  it('refuses a contact over its limit', async () => {
+    const d = deps();
+    const seen = [];
+    d.limiters = { ip: { allow: () => true }, contact: { allow: (k) => { seen.push(k); return false; } } };
+    const res = await handleLeadAttribution(request(validBody), d);
+    expect(res.status).toBe(429);
+    expect(seen).toEqual(['lead@example.com']);
+  });
+
   it('reports a Zoho failure as a 502 without leaking the detail', async () => {
     const d = deps();
     d.client.findLeads.mockReset().mockRejectedValue(new Error('Zoho token refresh failed: 200 invalid_code'));

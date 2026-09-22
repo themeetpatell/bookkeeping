@@ -115,7 +115,9 @@ function candidateFields(p) {
     First_UTM_Content: f.utm_content,
     First_Landing_Page: httpUrl(f.landing_page || e.landing_page),
     Landing_Page: httpUrl(l.landing_page || e.landing_page),
-    Referrer: httpUrl(e.referrer || l.referrer),
+    // No Referrer: it is a Zoho system field that accepts an API write and
+    // silently keeps nothing (verified 2026-09-22). The referrer still decides
+    // the channel in resolveChannel above.
     Click_Timestamp: zohoDateTime(l.click_ts || f.click_ts),
   };
 }

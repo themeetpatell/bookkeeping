@@ -14,6 +14,10 @@ import { APP_ORIGINS } from '../../src/utils/booking.js';
 import { buildLeadUpdate, LEAD_READ_FIELDS } from './fields.js';
 import { parseAttributionPayload } from './schema.js';
 
+/** The caller's IP as Vercel forwards it; '' when absent. */
+const clientIp = (request) =>
+  (request.headers.get('x-forwarded-for') || '').split(',')[0].trim();
+
 /* Zoho Forms -> CRM usually lands in seconds, Bookings and FinCore can take
    longer. ~50s in total, well inside the function's time limit. */
 export const FIND_RETRY_DELAYS_MS = [3000, 5000, 7000, 10000, 25000];
@@ -98,7 +102,9 @@ async function attach(payload, deps) {
 /**
  * @param {Request} request
  * @param {{ env: object, client: object, sleep: (ms: number) => Promise<void>,
- *           now: () => Date, log: (msg: string, detail?: object) => void }} deps
+ *           now: () => Date, log: (msg: string, detail?: object) => void,
+ *           limiters?: { ip: { allow: (k: string) => boolean },
+ *                        contact: { allow: (k: string) => boolean } } }} deps
  * @returns {Promise<Response>}
  */
 export async function handleLeadAttribution(request, deps) {
@@ -110,11 +116,17 @@ export async function handleLeadAttribution(request, deps) {
 
   if (env.LEAD_ATTRIBUTION_ENABLED !== '1') return reply(202, { status: 'disabled' });
 
+  const { limiters } = deps;
+  const tooMany = () => reply(429, { error: 'too many requests' });
+  if (limiters && !limiters.ip.allow(clientIp(request) || 'unknown')) return tooMany();
+
   const body = await readBody(request);
   if (body.tooLarge) return reply(413, { error: 'payload too large' });
   const parsed = parseAttributionPayload(body.value);
   if (!parsed.ok) return reply(400, { error: parsed.error });
   const payload = parsed.value;
+  // Per contact too: one address hammered from many IPs is the fishing pattern.
+  if (limiters && !limiters.contact.allow(payload.email || payload.phone)) return tooMany();
 
   try {
     const outcome = await attach(payload, deps);

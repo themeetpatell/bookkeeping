@@ -41,12 +41,15 @@ they can match, so capture comes before the offline-conversion uploads.
 Every valid request gets the same `202 {"status":"accepted"}`, whether the lead
 was found, stale or updated, so the endpoint cannot be used to test which emails
 are leads. The real outcome is in the Vercel function log
-(`lead-attribution: outcome`). Rate limiting is not implemented; the origin check
-stops browsers, not scripts.
+(`lead-attribution: outcome`). Rate limits: 20 requests per IP and 5 per email or
+phone per 10 minutes, held per function instance (best effort, no shared store);
+over the limit answers 429.
 
 Fields written: Lead_Source, Secondary_Source, MGCLID, GBRAID, WBRAID, FBCLID,
 MSCLKID, TTCLID, FBP, FBC, Lead_ID, PostHog_Distinct_ID, UTM_\*,
-First_UTM_\*, First_Landing_Page, Landing_Page, Referrer, Click_Timestamp.
+First_UTM_\*, First_Landing_Page, Landing_Page, Click_Timestamp. Not Referrer: it is a
+Zoho system field that accepts an API write and keeps nothing (verified 2026-09-22);
+the referrer is still used to classify organic-search leads.
 MSCLKID already existed. FBP, FBC and Lead_ID were created on 2026-09-22
 (Zoho field ids 5847102000094095165/175/184), all single-line text, 255 chars.
 

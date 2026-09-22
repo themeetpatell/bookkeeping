@@ -133,6 +133,13 @@ describe('buildLeadUpdate', () => {
     expect(fields.First_Landing_Page).toBeUndefined();
   });
 
+  it('never writes Referrer — Zoho silently discards API writes to it — but still uses it for the channel', () => {
+    const p = payload({ entry: { referrer: 'https://www.google.com/' } });
+    const { fields } = buildLeadUpdate(p, { ...fresh, Referrer: null }, now);
+    expect(fields).not.toHaveProperty('Referrer');
+    expect(fields.Lead_Source).toBe(LEAD_SOURCE_LABELS.seo);
+  });
+
   it('treats -None- as empty', () => {
     const p = payload({ last: { gclid: 'g1' } });
     const { fields } = buildLeadUpdate(p, { ...fresh, Lead_Source: '-None-' }, now);
