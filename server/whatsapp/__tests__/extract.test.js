@@ -41,6 +41,27 @@ describe('findPhone', () => {
   });
 });
 
+/* The real Gallabox Message.Received shape, as logged on 2026-09-22
+   (field paths only; values here are made up). */
+const gallaboxBody = (text) => ({
+  id: 'm1', conversationId: 'c1', accountId: 'a1', channelId: 'ch1', channelType: 'whatsapp',
+  localMessageId: 'l1', contactId: '68ef745e87408c5e41b11f43',
+  sender: '68ef745e87408c5e41b11f43',
+  whatsapp: { id: 'w1', from: '971500000923', fromBSUID: 'b1', time: '1790000000', status: 'received',
+    statusTime: '1790000000', type: 'text', text: { body: text } },
+  senderType: 'contact', contact: { id: 'c1', name: 'Sara', bsuId: 'b2' }, channelNumber: '971521549572',
+});
+
+describe('the real Gallabox Message.Received shape', () => {
+  it('reads the phone from whatsapp.from, not the sender id or our channel number', () => {
+    expect(findPhone(gallaboxBody('hi'))).toBe('+971500000923');
+  });
+
+  it('reads the hidden URL from whatsapp.text.body', () => {
+    expect(findHiddenUrl(gallaboxBody(`Hi${hide(URL_)} `))).toBe(URL_);
+  });
+});
+
 describe('describeShape', () => {
   it('logs paths and types, never values', () => {
     const shape = describeShape({ contact: { phone: '+971500000923' } });

@@ -32,12 +32,21 @@ function* walk(value, path = [], depth = 0) {
   }
 }
 
+/* Where Gallabox's Message.Received puts things, confirmed from a real
+   delivery on 2026-09-22: the text at whatsapp.text.body, the customer's number
+   at whatsapp.from. `sender` carries an id, and channelNumber is our own number.
+   The generic walks below stay only as a fallback if the shape ever changes. */
+const knownText = (body) => body?.whatsapp?.text?.body;
+const knownPhone = (body) => body?.whatsapp?.from;
+
 /**
  * Tries every string that carries hidden characters and returns the first one
  * that decodes, so an emoji joined with U+200D elsewhere cannot shadow it.
  * @returns {string} the page URL hidden in the message, or ''
  */
 export function findHiddenUrl(body) {
+  const direct = typeof knownText(body) === 'string' ? decodeHiddenUrl(knownText(body)) : null;
+  if (direct) return direct;
   for (const { value } of walk(body)) {
     if (typeof value !== 'string' || !HIDDEN.test(value)) continue;
     const url = decodeHiddenUrl(value);
@@ -48,6 +57,8 @@ export function findHiddenUrl(body) {
 
 /** @returns {string} the customer's phone as +digits, or '' when none is found */
 export function findPhone(body) {
+  const direct = String(knownPhone(body) || '').replace(/[^0-9]/g, '');
+  if (direct.length >= 8 && direct.length <= 15 && !BUSINESS_NUMBERS.has(direct)) return `+${direct}`;
   const candidates = [];
   for (const { path, value } of walk(body)) {
     const key = path[path.length - 1] || '';
