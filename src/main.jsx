@@ -6,6 +6,7 @@ import { PostHogProvider, PostHogErrorBoundary } from '@posthog/react';
 import './index.css';
 import App from './App.jsx';
 import { POSTHOG_KEY, posthogOptions } from './lib/posthog';
+import { recordEntryTouch } from './utils/leadAttribution';
 
 posthog.init(POSTHOG_KEY, posthogOptions);
 
@@ -14,6 +15,8 @@ posthog.init(POSTHOG_KEY, posthogOptions);
 // conversion on the very same client instance.
 if (typeof window !== 'undefined') {
   window.posthog = posthog;
+  // Before any route renders, so the session's true entry page and referrer are kept.
+  recordEntryTouch();
 }
 
 createRoot(document.getElementById('root')).render(

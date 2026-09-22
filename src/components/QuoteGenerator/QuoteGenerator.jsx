@@ -16,6 +16,7 @@ import {
 } from '../../lib/quoteApi';
 import { getZohoUtmValues } from '../../utils/zohoUtm';
 import { buildWhatsAppUrl } from '../../utils/whatsapp';
+import { sendLeadAttribution } from '../../utils/leadAttribution';
 import './QuoteGenerator.css';
 
 /**
@@ -208,6 +209,11 @@ const QuoteGenerator = ({ planKey = 'accounting', formId = 'quote-generator', on
         try {
           const created = await createProposal(payload);
           setProposal(created);
+          /* FinCore only forwards three UTMs; the click ids reach the CRM here. */
+          sendLeadAttribution('Proposal Engine', {
+            email: contact.contactEmail,
+            phone: contact.contactMobile,
+          });
           posthog?.capture?.('quote_proposal_created', {
             plan: planKey,
             service: service.slug,

@@ -9,6 +9,7 @@ import {
   readBookingParam,
 } from '../utils/booking';
 import { buildUserData, queueMetaUserData } from '../utils/metaMatching';
+import { sendLeadAttribution } from '../utils/leadAttribution';
 import './ThankYou.css';
 
 // Landing page for the Zoho Bookings post-booking redirect. Configure the
@@ -113,6 +114,11 @@ const BookingConfirmed = () => {
         _event: 'zoho_booking_completed'
       });
       posthog?.capture('zoho_booking_completed');
+      // Zoho Bookings takes no attribution, so it is written onto the Lead here.
+      sendLeadAttribution('Booking', {
+        email: customerEmail,
+        phone: readBookingParam('customer_contact_no'),
+      });
       markAsFired();
     };
 

@@ -5,6 +5,7 @@ import { FiCheckCircle, FiArrowLeft } from 'react-icons/fi';
 import { readBookedEmail } from '../utils/booking';
 import { FORM_SUBMIT, pushLeadEvent, takePendingSubmit } from '../utils/leadTracking';
 import { buildUserData, queueMetaUserData, takeMatchKeys } from '../utils/metaMatching';
+import { sendLeadAttribution } from '../utils/leadAttribution';
 import './ThankYou.css';
 
 // Basic shape check so we never render a garbage value into the confirmation copy.
@@ -90,6 +91,8 @@ const ThankYou = () => {
       // visits never double-count it in PostHog either).
       if (email) posthog?.identify(email, { email });
       posthog?.capture('consultation_completed', { has_email: Boolean(email) });
+      // Write this visit's click ids and UTMs onto the Zoho Lead the form made.
+      sendLeadAttribution('Form', { email });
       try {
         window.sessionStorage.removeItem('consultation_submitted');
         window.sessionStorage.removeItem('consultation_email');
