@@ -10,9 +10,10 @@ import {
   stashPendingSubmit,
 } from '../utils/leadTracking';
 import { stashMatchKeys } from '../utils/metaMatching';
+import { PHONE_CLICK, PHONE_SELECTOR, phoneClickParams, phoneLinkLocation } from '../utils/phoneClick';
 
-/* The sole owner of `form_start`, the `form_submit` handoff and
-   `whatsapp_click`.
+/* The sole owner of `form_start`, the `form_submit` handoff,
+   `whatsapp_click` and `phone_click`.
 
    Delegated from `document` rather than wired per component, for the reason
    WhatsAppTracker gives a few files over: this is a SPA, CTAs mount and unmount
@@ -88,7 +89,19 @@ export default function LeadEventTracker() {
       stashMatchKeys(formEl);
     };
 
+    const handlePhoneClick = (event) => {
+      const link = event.target.closest && event.target.closest(PHONE_SELECTOR);
+      if (!link) return;
+      const location = phoneLinkLocation(link);
+      if (!claimOnce(`${PHONE_CLICK}:${location}`)) return;
+      pushLeadEvent(PHONE_CLICK, {
+        ...phoneClickParams({ href: link.getAttribute('href'), location, pathname: window.location.pathname }),
+        lead_id: getLeadId(),
+      });
+    };
+
     const handleClick = (event) => {
+      handlePhoneClick(event);
       const link = event.target.closest && event.target.closest(WHATSAPP_SELECTOR);
       if (!link) return;
 

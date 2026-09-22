@@ -110,7 +110,7 @@ export function claimOnce(key) {
  * straight off these pushes. PostHog gets the same payload so the two tools can
  * be reconciled against each other when they disagree.
  *
- * @param {string} eventName one of FORM_START | FORM_SUBMIT | WHATSAPP_CLICK
+ * @param {string} eventName one of FORM_START | FORM_SUBMIT | WHATSAPP_CLICK | PHONE_CLICK
  * @param {Record<string, string>} params the measurement parameters
  */
 export function pushLeadEvent(eventName, params) {
