@@ -8,7 +8,7 @@ import {
   readBookedEmail,
   readBookingParam,
 } from '../utils/booking';
-import { buildUserData, queueMetaUserData } from '../utils/metaMatching';
+import { buildUserData, queueMetaEvent, queueMetaUserData } from '../utils/metaMatching';
 import { sendLeadAttribution } from '../utils/leadAttribution';
 import './ThankYou.css';
 
@@ -107,6 +107,10 @@ const BookingConfirmed = () => {
           phone: readBookingParam('customer_contact_no'),
         }),
       );
+      // GTM has no Meta tag for a booking, so Meta never saw one. Schedule, not
+      // Lead: Lead-optimised ad sets ignore it, so bidding is unchanged until
+      // someone chooses to optimise for bookings. Decided by Meet, 2026-09-22.
+      queueMetaEvent('Schedule');
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({

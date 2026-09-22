@@ -178,6 +178,54 @@ export function queueMetaUserData(userData, options = {}) {
 }
 
 /**
+ * Fires a Meta standard event from the site, in dataLayer order.
+ *
+ * For events GTM has no tag for. /booking-confirmed is the case: the GTM
+ * container only fires PageView there, so Meta never learned a booking
+ * happened. Queued the same way as queueMetaUserData, so an event pushed after
+ * the user data leaves after it and carries em/ph.
+ *
+ * Like the user data, it only goes to a pixel the page already initialised, and
+ * waits out a pixel that loads after GTM. A blocked pixel means no event, which
+ * is the same outcome as for every other Meta tag on the site.
+ *
+ * @param {string} eventName a Meta standard event, e.g. 'Schedule'
+ * @param {{ win?: object, retryMs?: number, timeoutMs?: number }} [options]
+ */
+export function queueMetaEvent(eventName, options = {}) {
+  const {
+    win = typeof window === 'undefined' ? undefined : window,
+    retryMs = DEFAULT_RETRY_MS,
+    timeoutMs = DEFAULT_TIMEOUT_MS,
+  } = options;
+  if (!win || !eventName) return;
+
+  const track = () => {
+    if (initialisedPixelIds(win.fbq).length === 0) return false;
+    try {
+      win.fbq('track', eventName);
+    } catch {
+      // A broken pixel must not break the confirmation page.
+    }
+    return true;
+  };
+
+  try {
+    win.dataLayer = win.dataLayer || [];
+    win.dataLayer.push(() => {
+      if (track()) return;
+      let waited = 0;
+      const timerId = setInterval(() => {
+        waited += retryMs;
+        if (track() || waited >= timeoutMs) clearInterval(timerId);
+      }, retryMs);
+    });
+  } catch {
+    // A blocked dataLayer must not break the confirmation page.
+  }
+}
+
+/**
  * Records the submitted email and phone for /thank-you, which is where the
  * Lead fires. Same sessionStorage handoff the rest of the submit tracking uses,
  * because the native POST to Zoho leaves the page.

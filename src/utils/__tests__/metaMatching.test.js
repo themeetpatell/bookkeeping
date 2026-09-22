@@ -6,6 +6,7 @@ import {
   initialisedPixelIds,
   applyMetaUserData,
   queueMetaUserData,
+  queueMetaEvent,
   stashMatchKeys,
   takeMatchKeys,
 } from '../metaMatching';
@@ -224,6 +225,64 @@ describe('queueMetaUserData', () => {
     const win = {};
     queueMetaUserData(null, { win });
     expect(win.dataLayer).toBeUndefined();
+  });
+});
+
+describe('queueMetaEvent', () => {
+  test('queues a track call behind whatever is already on the dataLayer', () => {
+    const win = { dataLayer: [{ event: 'gtm.js' }] };
+    queueMetaEvent('Schedule', { win });
+    expect(win.dataLayer).toHaveLength(2);
+    expect(typeof win.dataLayer[1]).toBe('function');
+  });
+
+  test('fires the standard event on the page pixel when GTM runs it', () => {
+    const win = { fbq: loadedFbq() };
+    queueMetaEvent('Schedule', { win });
+    win.dataLayer[0]();
+    expect(win.fbq).toHaveBeenCalledTimes(1);
+    expect(win.fbq).toHaveBeenCalledWith('track', 'Schedule');
+  });
+
+  test('runs after the user data queued before it', () => {
+    const win = { fbq: stubFbq() };
+    queueMetaUserData({ em: 'a@b.co' }, { win });
+    queueMetaEvent('Schedule', { win });
+    win.dataLayer.forEach((step) => step());
+    expect(win.fbq.mock.calls).toEqual([
+      ['init', PIXEL_ID, { em: 'a@b.co' }],
+      ['track', 'Schedule'],
+    ]);
+  });
+
+  test('never fires into a page with no pixel set up', () => {
+    const fbq = vi.fn();
+    const win = { fbq };
+    queueMetaEvent('Schedule', { win, retryMs: 100, timeoutMs: 300 });
+    win.dataLayer[0]();
+    expect(fbq).not.toHaveBeenCalled();
+  });
+
+  test('waits for a pixel that loads late, then fires once', () => {
+    vi.useFakeTimers();
+    const win = {};
+    queueMetaEvent('Schedule', { win, retryMs: 100, timeoutMs: 1000 });
+    win.dataLayer[0]();
+    vi.advanceTimersByTime(250);
+    win.fbq = loadedFbq();
+    vi.advanceTimersByTime(1000);
+    expect(win.fbq).toHaveBeenCalledTimes(1);
+    expect(win.fbq).toHaveBeenCalledWith('track', 'Schedule');
+  });
+
+  test('a throwing fbq does not break the page', () => {
+    const fbq = loadedFbq();
+    fbq.mockImplementation(() => {
+      throw new Error('boom');
+    });
+    const win = { fbq };
+    queueMetaEvent('Schedule', { win });
+    expect(() => win.dataLayer[0]()).not.toThrow();
   });
 });
 
