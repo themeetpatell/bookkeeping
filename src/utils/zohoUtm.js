@@ -40,7 +40,7 @@ export function getZohoUtmValues() {
   return values;
 }
 
-/** Pulls a key out of the JSON attribution cookies SalesIQAttribution writes. */
+/** Pulls a key out of the JSON attribution cookies AttributionTracker writes. */
 function readAttributionCookie(name, key) {
   const raw = readCookie(name);
   if (!raw) return '';

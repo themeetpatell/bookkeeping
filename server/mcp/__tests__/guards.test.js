@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { checkChange, GuardError } from '../guards.js';
 
 const APP = `
-<SalesIQAttribution />
+<AttributionTracker />
 <WhatsAppTracker />
 <LeadEventTracker />
 <Route path="/book-a-call" element={<BookACall />} />

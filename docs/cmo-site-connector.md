@@ -39,7 +39,7 @@ start_draft ─▶ edit_files / add_image ─▶ preview ─▶ publish ─▶ l
 - **Write scope:** `src/` and `public/` only. `api/`, `server/`, `index.html`,
   `vercel.json`, `package*.json`, `scripts/` and env files are off limits.
 - **Locked files:** lead capture and attribution — `zohoForms`, `zohoUtm`, `booking`, `site`,
-  `leadTracking`, `SalesIQAttribution`, `ZohoHiddenFields`, `WhatsAppTracker`,
+  `leadTracking`, `AttributionTracker`, `ZohoHiddenFields`, `WhatsAppTracker`,
   `LeadEventTracker`, `lib/posthog`, `lib/quoteApi`, `main.jsx`, and the
   `ThankYou` / `BookingConfirmed` conversion pages. Full list: `server/mcp/policy.js`.
 - **Content guards** (`server/mcp/guards.js`): refuses edits that add
@@ -109,7 +109,7 @@ URL stops working immediately. To cut GitHub access independently, revoke the to
   2. Optional: require review on `main` in GitHub and change `publish` to open a PR
      for Meet to approve. This is safer, but the CMO can no longer ship alone.
   3. Optional: a Content-Security-Policy header in `vercel.json`. This needs a careful
-     allowlist (GTM, Zoho, PostHog, SalesIQ, Gallabox) or it will break tracking.
+     allowlist (GTM, Zoho, PostHog, Gallabox) or it will break tracking.
 - **The key is in the URL.** Treat the connector URL as a password. Rotate
   `CMO_MCP_KEY` with the GitHub token every 90 days, and immediately if it is shared.
   Every commit is credited to the CMO whoever holds the key.

@@ -8,7 +8,7 @@ export class GuardError extends Error {}
 
 const REJECTED_FTA = /FTA[\s-]*(approved|certified|accredited)/gi;
 const APP = 'src/App.jsx';
-const REQUIRED_IN_APP = ['<SalesIQAttribution', '<WhatsAppTracker', '<LeadEventTracker'];
+const REQUIRED_IN_APP = ['<AttributionTracker', '<WhatsAppTracker', '<LeadEventTracker'];
 const ROUTE_PATH = /<Route\s+path="([^"]+)"/g;
 
 /**

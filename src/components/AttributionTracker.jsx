@@ -5,20 +5,17 @@
    `catch`. Kept verbatim so this file stays byte-identical across every
    Finanshels site it is dropped into. */
 /* ============================================================
-   SalesIQAttribution.jsx — Finanshels drop-in for React sites
-   v1.1 (2026-08-08)
+   AttributionTracker.jsx — Finanshels drop-in for React sites
+   v1.2
 
-   One component = the full stack that runs on every Finanshels
-   property (see COOKIE_DOMAINS below):
+   One component = attribution and lead tracking stack:
    1. Attribution capture (UTMs + gclid/gbraid/wbraid/fbclid/
       msclkid/li_fat_id/ttclid → fs_first / fs_last cookies)
    2. Zoho Forms iframe patcher (formperma + zfrmz embeds)
    3. WhatsApp [Ref:FS-xxxxxx] tagger (off here) + PostHog click event
-   4. Zoho SalesIQ widget + visitor.info bridge → CRM fields
-      (MGCLID, UTM_*, First_UTM_*, Attribution_Method, …)
 
    INSTALL — mount ONCE at the app root:
-   - Next.js App Router:  render <SalesIQAttribution /> in app/layout.tsx
+   - Next.js App Router:  render <AttributionTracker /> in app/layout.tsx
      (this file already has "use client")
    - Next.js Pages Router: render it in pages/_app.tsx
    - Vite / CRA:          render it in App.jsx
@@ -26,15 +23,6 @@
    ============================================================ */
 
 import { useEffect } from "react";
-
-const WIDGET_SRC =
-  "https://salesiq.zohopublic.com/widget?wc=siqa011f58f27c11f682c3ee45163d23f5d23510ed43403091004de5d7cfe5f4468cc1dcc26b4874c0235a0c032bccd6fff";
-
-/* The chat bubble is hidden site-wide for now. Only the widget injection is
-   skipped — attribution capture, the Zoho Forms iframe patcher and the
-   WhatsApp/PostHog listeners keep running, so lead tracking is unaffected.
-   Flip back to true to bring the chat widget back on every page. */
-const IS_SALESIQ_ENABLED = false;
 
 /* The [Ref:FS-xxxxxx] code is appended to the prefilled WhatsApp message in
    plain sight, and reads as noise to a prospect opening their first chat. This
@@ -162,65 +150,6 @@ function tagWa(href) {
   } catch (e) { return href; }
 }
 
-/* ---------- 4. SalesIQ + CRM bridge ---------- */
-function cleanId(v) {
-  return v ? String(v).split("#")[0].split("&")[0].trim() : "";
-}
-function initSalesIQ() {
-  window.$zoho = window.$zoho || {};
-  window.$zoho.salesiq = window.$zoho.salesiq || {};
-  window.$zoho.salesiq.ready = function () {
-    try {
-      const a = window.fsAttribution ? window.fsAttribution() : {};
-      const p = (x, y) => a[x] || a[y] || "";
-      const info = {
-        UTM_source: a.utm_source || "",
-        UTM_medium: a.utm_medium || "",
-        UTM_campaign: a.utm_campaign || "",
-        UTM_term: a.utm_term || "",
-        UTM_content: a.utm_content || "",
-        First_UTM_Source: a.first_utm_source || "",
-        First_UTM_Medium: a.first_utm_medium || "",
-        First_UTM_Campaign: a.first_utm_campaign || "",
-        First_UTM_Term: a.first_utm_term || "",
-        First_UTM_Content: a.first_utm_content || "",
-        First_Landing_Page: a.first_landing_page || "",
-        MGCLID: cleanId(p("gclid", "first_gclid")),
-        GBRAID: cleanId(p("gbraid", "first_gbraid")),
-        WBRAID: cleanId(p("wbraid", "first_wbraid")),
-        FBCLID: cleanId(p("fbclid", "first_fbclid")),
-        MSCLKID: cleanId(p("msclkid", "first_msclkid")),
-        TTCLID: cleanId(p("ttclid", "first_ttclid")),
-        LI_Fat_ID: cleanId(p("li_fat_id", "first_li_fat_id")),
-        Click_Timestamp: String(p("click_ts", "first_click_ts")).replace(/\.\d{3}Z$/, "Z"),
-        PostHog_Distinct_ID:
-          (window.posthog && window.posthog.get_distinct_id && window.posthog.get_distinct_id()) || "",
-        Attribution_Method: "SalesIQ Chat",
-      };
-      const out = {};
-      Object.keys(info).forEach((k) => { if (info[k]) out[k] = String(info[k]).slice(0, 250); });
-      window.$zoho.salesiq.visitor.info(out);
-      try {
-        const raw = getCookie("fs_id");
-        if (raw) {
-          const id = JSON.parse(raw);
-          if (id.name) window.$zoho.salesiq.visitor.name(id.name);
-          if (id.email) window.$zoho.salesiq.visitor.email(id.email);
-          if (id.phone) window.$zoho.salesiq.visitor.contactnumber(id.phone);
-        }
-      } catch (e) {}
-      if (window.posthog && window.posthog.capture) window.posthog.capture("salesiq_widget_ready");
-    } catch (e) {}
-  };
-  if (!document.getElementById("zsiqscript")) {
-    const s = document.createElement("script");
-    s.id = "zsiqscript";
-    s.src = WIDGET_SRC;
-    s.defer = true;
-    document.body.appendChild(s);
-  }
-}
-
 /* ---------- listeners ---------- */
 function initListeners() {
   if (document.readyState !== "loading") setTimeout(patchIframes, 500);
@@ -239,12 +168,6 @@ function initListeners() {
           window.posthog.capture("whatsapp_click_attributed", p);
         }
       }
-      const t = e.target && e.target.closest
-        ? e.target.closest('.zsiq_floatmain,[id^="zsiq_float"],#zsiq_agtpic')
-        : null;
-      if (t && window.posthog && window.posthog.capture) {
-        window.posthog.capture("salesiq_chat_opened", window.fsAttribution ? window.fsAttribution() : {});
-      }
     } catch (err) {}
   }, true);
   document.addEventListener("submit", (ev) => {
@@ -261,15 +184,12 @@ function initListeners() {
   }, true);
 }
 
-export default function SalesIQAttribution() {
+export default function AttributionTracker() {
   useEffect(() => {
-    if (typeof window === "undefined" || window.__fsSiq) return; // StrictMode / remount guard
-    window.__fsSiq = 1;
+    if (typeof window === "undefined" || window.__fsAttr) return; // StrictMode / remount guard
+    window.__fsAttr = 1;
     try { initCapture(); } catch (e) {}
     try { initListeners(); } catch (e) {}
-    if (IS_SALESIQ_ENABLED) {
-      try { initSalesIQ(); } catch (e) {}
-    }
   }, []);
   return null;
 }

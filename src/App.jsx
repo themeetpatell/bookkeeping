@@ -2,7 +2,7 @@ import './App.css';
 import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
-import SalesIQAttribution from './components/SalesIQAttribution';
+import AttributionTracker from './components/AttributionTracker';
 import WhatsAppTracker from './components/WhatsAppTracker';
 import LeadEventTracker from './components/LeadEventTracker';
 
@@ -42,10 +42,10 @@ function App() {
 
   return (
     <>
-      {/* Mounted once, outside the routes: attribution capture, the WhatsApp
-          ref tagger and the SalesIQ widget + CRM bridge must survive client-side
-          navigation, so they are deliberately not tied to any single route. */}
-      <SalesIQAttribution />
+      {/* Mounted once, outside the routes: attribution capture and the WhatsApp
+          ref tagger must survive client-side navigation, so they are deliberately
+          not tied to any single route. */}
+      <AttributionTracker />
       <WhatsAppTracker />
       <LeadEventTracker />
 

@@ -50,7 +50,7 @@ The same build serves ${LIVE_HOSTS.join(', ')}. Never hardcode a domain in a lin
 - Every lead form must keep a required phone field — the CRM rejects leads without one. For small CTA strips use a WhatsApp button instead of a mini form.
 - Do not rename Zoho form field name attributes, the form action URL, or hidden fields. Do not remove ZohoHiddenFields, the booking links, or tracking components from a page.
 - WhatsApp CTAs carry the CSS class "data-wa-track" (a class, not an attribute) — keep it on any WhatsApp link you add.
-- Lead capture, attribution and tracking files are locked for this connector (utils/zohoForms, booking, site, zohoUtm, leadTracking, SalesIQAttribution, ZohoHiddenFields, WhatsAppTracker, LeadEventTracker, lib/posthog, lib/quoteApi, the ThankYou and BookingConfirmed conversion pages, index.html, api/). The connector also refuses edits that unmount trackers from App.jsx, remove a live route, or introduce rejected FTA wording. If a change needs them, tell the user it needs engineering.
+- Lead capture, attribution and tracking files are locked for this connector (utils/zohoForms, booking, site, zohoUtm, leadTracking, AttributionTracker, ZohoHiddenFields, WhatsAppTracker, LeadEventTracker, lib/posthog, lib/quoteApi, the ThankYou and BookingConfirmed conversion pages, index.html, api/). The connector also refuses edits that unmount trackers from App.jsx, remove a live route, or introduce rejected FTA wording. If a change needs them, tell the user it needs engineering.
 - The global Nav scrolls to #services, #pricing, #testimonials and #faq — keep those section ids on a page.
 
 ## Good practice

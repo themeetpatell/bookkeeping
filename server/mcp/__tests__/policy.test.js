@@ -77,7 +77,7 @@ describe('assertWritable', () => {
       'src/utils/zohoUtm.js',
       'src/utils/leadTracking.js',
       'src/utils/site.js',
-      'src/components/SalesIQAttribution.jsx',
+      'src/components/AttributionTracker.jsx',
       'src/components/ZohoHiddenFields.jsx',
       'src/components/WhatsAppTracker.jsx',
       'src/components/LeadEventTracker.jsx',
