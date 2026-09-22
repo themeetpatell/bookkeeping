@@ -52,3 +52,53 @@ export function createRefLookup({ env, fetchImpl = fetch }) {
     return { properties, distinctId: String(row[1] || '') };
   };
 }
+
+/* Clicks whose prefilled message matches, in the window a customer takes to hit
+   send. The text is passed as a query value, never interpolated. LIMIT 5 is
+   enough to tell one match from several. */
+const TEXT_QUERY = `
+  SELECT properties, distinct_id
+  FROM events
+  WHERE event = 'whatsapp_ref_issued'
+    AND properties.wa_text = {text}
+    AND timestamp > now() - INTERVAL 15 MINUTE
+  ORDER BY timestamp DESC
+  LIMIT 5`;
+
+const parseRow = (row) => {
+  const raw = row[0];
+  const properties = typeof raw === 'string' ? JSON.parse(raw) : raw || {};
+  return { properties, distinctId: String(row[1] || '') };
+};
+
+/**
+ * Matches a chat to its click by the message the button prefilled, for when
+ * Gallabox has stripped the hidden ref (see messageKey.js).
+ * @param {{ env: Record<string, string|undefined>, fetchImpl?: typeof fetch }} deps
+ */
+export function createTextLookup({ env, fetchImpl = fetch }) {
+  const host = env.POSTHOG_API_HOST || 'https://us.posthog.com';
+  const projectId = env.POSTHOG_PROJECT_ID || '622242';
+
+  /**
+   * @param {string} text a normalised message (normalizeMessage)
+   * @returns {Promise<{ count: number, match: { properties: Record<string, unknown>, distinctId: string } | null }>}
+   *   match is set only when exactly one recent click prefilled this text
+   */
+  return async function lookupText(text) {
+    if (!text) return { count: 0, match: null };
+    if (!env.POSTHOG_PERSONAL_API_KEY) throw new Error('POSTHOG_PERSONAL_API_KEY is not set');
+    const response = await fetchImpl(`${host}/api/projects/${projectId}/query/`, {
+      method: 'POST',
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+      headers: {
+        Authorization: `Bearer ${env.POSTHOG_PERSONAL_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query: { kind: 'HogQLQuery', query: TEXT_QUERY, values: { text } } }),
+    });
+    if (!response.ok) throw new Error(`PostHog text lookup failed: ${response.status}`);
+    const rows = (await response.json()).results || [];
+    return { count: rows.length, match: rows.length === 1 ? parseRow(rows[0]) : null };
+  };
+}

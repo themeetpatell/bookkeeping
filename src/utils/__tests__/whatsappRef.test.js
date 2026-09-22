@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isWhatsAppLink, refFromBytes, withRef } from '../whatsappRef';
+import { isWhatsAppLink, refFromBytes, waTextFromHref, withRef } from '../whatsappRef';
 import { REF_PATTERN, attributionFromUrl } from '../../../server/whatsapp/decode.js';
 
 describe('whatsappRef', () => {
@@ -22,5 +22,11 @@ describe('whatsappRef', () => {
     expect(isWhatsAppLink('https://wa.me/971521549572')).toBe(true);
     expect(isWhatsAppLink('https://example.com/?next=api.whatsapp.com')).toBe(false);
     expect(isWhatsAppLink('/book-a-call')).toBe(false);
+  });
+
+  it('records the prefilled message in the form the webhook compares', () => {
+    const href = `https://api.whatsapp.com/send/?phone=971521549572&text=${encodeURIComponent('Hi I saw your google ad for Accounting Services. I’d like to get started.')}`;
+    expect(waTextFromHref(href)).toBe("hi i saw your google ad for accounting services. i'd like to get started.");
+    expect(waTextFromHref('https://wa.me/971521549572')).toBe('');
   });
 });

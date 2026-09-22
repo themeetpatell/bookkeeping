@@ -66,6 +66,15 @@ export function hiddenCharCount(body) {
   return typeof text === 'string' ? (text.match(/[\u200B-\u200F]/g) || []).length : 0;
 }
 
+/**
+ * @returns {string} the message text Gallabox forwarded, or '' when there is
+ *   none (a media message, or a shape change)
+ */
+export function findMessageText(body) {
+  const text = knownText(body);
+  return typeof text === 'string' ? text : '';
+}
+
 /** @returns {string} the customer's phone as +digits, or '' when none is found */
 export function findPhone(body) {
   const direct = String(knownPhone(body) || '').replace(/[^0-9]/g, '');

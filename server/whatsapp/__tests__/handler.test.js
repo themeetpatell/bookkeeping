@@ -38,6 +38,7 @@ function deps(over = {}) {
       properties: { fs_ref: 'K7Q2M9XP', gclid: 'g-click', utm_campaign: 'bk', first_utm_source: 'google', fbp: 'fb.1.2.3', entry_landing_page: 'https://accounting.finanshels.com/bookkeeping', entry_referrer: 'https://www.google.com/' },
       distinctId: 'ph-1',
     }),
+    lookupText: vi.fn().mockResolvedValue({ count: 0, match: null }),
     sleep: vi.fn().mockResolvedValue(undefined),
     now: () => new Date('2026-09-22T10:00:00Z'),
     log: vi.fn(),
@@ -115,6 +116,47 @@ describe('handleWhatsAppInbound', () => {
     await d.settle();
     expect(d.client.findLeads).not.toHaveBeenCalled();
     expect(outcome(d)).toMatchObject({ result: 'no_site_origin' });
+  });
+
+  /* What Gallabox really forwards (confirmed 2026-09-22): its hidden URL stripped. */
+  const stripped = {
+    whatsapp: { from: '971500000923', text: { body: "Hi I saw your google ad for Accounting Services. I'd like to get started." } },
+  };
+
+  it('joins a stripped chat to its click by the message it prefilled', async () => {
+    const lookupText = vi.fn().mockResolvedValue({
+      count: 1,
+      match: { properties: { gclid: 'g-text', utm_campaign: 'bk', entry_landing_page: 'https://accounting.finanshels.com/bookkeeping' }, distinctId: 'ph-9' },
+    });
+    const d = deps({ lookupText });
+    await handleWhatsAppInbound(request(stripped), d);
+    await d.settle();
+    expect(lookupText).toHaveBeenCalledWith("hi i saw your google ad for accounting services. i'd like to get started.");
+    expect(d.client.updateLead).toHaveBeenCalledWith('777', expect.objectContaining({
+      Secondary_Source: 'WhatsApp Button',
+      MGCLID: 'g-text',
+      UTM_campaign: 'bk',
+      PostHog_Distinct_ID: 'ph-9',
+    }));
+    expect(outcome(d)).toMatchObject({ result: 'updated', matched_by: 'text' });
+  });
+
+  it('writes nothing when two recent clicks prefilled the same message', async () => {
+    const d = deps({ lookupText: vi.fn().mockResolvedValue({ count: 2, match: null }) });
+    await handleWhatsAppInbound(request(stripped), d);
+    await d.settle();
+    expect(d.client.updateLead).not.toHaveBeenCalled();
+    expect(outcome(d)).toEqual({ result: 'ambiguous_text', matches: 2 });
+  });
+
+  it('retries the text lookup while the click is still ingesting, then gives up quietly', async () => {
+    const lookupText = vi.fn().mockResolvedValue({ count: 0, match: null });
+    const d = deps({ lookupText });
+    await handleWhatsAppInbound(request(stripped), d);
+    await d.settle();
+    expect(lookupText).toHaveBeenCalledTimes(4);
+    expect(d.client.updateLead).not.toHaveBeenCalled();
+    expect(outcome(d)).toMatchObject({ result: 'no_site_origin', has_phone: true, has_text: true });
   });
 
   it('logs a failure without throwing out of the background task', async () => {

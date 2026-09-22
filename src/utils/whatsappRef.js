@@ -11,6 +11,7 @@
  * Nothing visible is appended: a code in plain sight gets deleted by customers.
  */
 import { REF_PARAM } from '../../server/whatsapp/decode.js';
+import { messageFromHref, normalizeMessage } from '../../server/whatsapp/messageKey.js';
 
 const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const REF_LENGTH = 8;
@@ -46,6 +47,17 @@ export function isWhatsAppLink(href) {
   }
 }
 
+/**
+ * The prefilled message in the form the webhook compares. Gallabox strips its
+ * hidden URL before forwarding a chat, so this text is what joins the chat to
+ * the click (server/whatsapp/messageKey.js).
+ * @param {string} href the WhatsApp link that was clicked
+ * @returns {string}
+ */
+export function waTextFromHref(href) {
+  return normalizeMessage(messageFromHref(href));
+}
+
 function readEntry() {
   try {
     return JSON.parse(window.sessionStorage.getItem(ENTRY_KEY) || '{}');
@@ -54,7 +66,7 @@ function readEntry() {
   }
 }
 
-function recordClick(ref) {
+function recordClick(ref, href) {
   const attribution = typeof window.fsAttribution === 'function' ? window.fsAttribution() : {};
   const entry = readEntry();
   window.posthog?.capture(
@@ -65,6 +77,7 @@ function recordClick(ref) {
       entry_landing_page: entry.landing_page || '',
       entry_referrer: entry.referrer || '',
       page: window.location.pathname,
+      wa_text: waTextFromHref(href),
     },
     // The visitor is leaving for WhatsApp; don't let the batch wait.
     { send_instantly: true },
@@ -85,7 +98,7 @@ function onClick(event) {
     // runs after this capture-phase listener in the same dispatch.
     window.history.replaceState(window.history.state, '', withRef(original, ref));
     window.setTimeout(() => window.history.replaceState(window.history.state, '', original), 0);
-    recordClick(ref);
+    recordClick(ref, link.href);
   } catch (error) {
     // Tracking must never block the chat from opening; report instead of swallowing.
     try {

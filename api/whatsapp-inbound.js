@@ -6,11 +6,12 @@
 import { waitUntil } from '@vercel/functions';
 import { createZohoClient } from '../server/attribution/zoho.js';
 import { handleWhatsAppInbound } from '../server/whatsapp/handler.js';
-import { createRefLookup } from '../server/whatsapp/posthog.js';
+import { createRefLookup, createTextLookup } from '../server/whatsapp/posthog.js';
 
 const env = process.env;
 const client = createZohoClient({ env });
 const lookupRef = createRefLookup({ env });
+const lookupText = createTextLookup({ env });
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default {
@@ -19,6 +20,7 @@ export default {
       env,
       client,
       lookupRef,
+      lookupText,
       sleep,
       now: () => new Date(),
       // Vercel function logs; field paths and outcomes only, never message text or phone.

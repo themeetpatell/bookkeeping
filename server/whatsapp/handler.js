@@ -20,7 +20,8 @@ import { timingSafeEqual } from 'node:crypto';
 import { attachAttribution } from '../attribution/handler.js';
 import { parseAttributionPayload } from '../attribution/schema.js';
 import { attributionFromUrl } from './decode.js';
-import { describeShape, findHiddenUrl, findPhone, hiddenCharCount } from './extract.js';
+import { describeShape, findHiddenUrl, findMessageText, findPhone, hiddenCharCount } from './extract.js';
+import { normalizeMessage } from './messageKey.js';
 
 export const SECONDARY_SOURCE = 'WhatsApp Button';
 /* The click event is captured a few seconds before the first message is sent;
@@ -63,27 +64,29 @@ async function lookupWithRetry(ref, { lookupRef, sleep }) {
   return found;
 }
 
+/** The attribution payload for a click the site recorded in PostHog. */
+function payloadFromClick(phone, click, landingFallback = '') {
+  const p = click.properties || {};
+  return {
+    secondarySource: SECONDARY_SOURCE,
+    phone,
+    last: pick(p),
+    first: pick(p, 'first_'),
+    entry: {
+      landing_page: String(p.entry_landing_page || landingFallback || ''),
+      referrer: String(p.entry_referrer || ''),
+    },
+    ...(p.fbp ? { fbp: String(p.fbp) } : {}),
+    ...(p.fbc ? { fbc: String(p.fbc) } : {}),
+    ...(click.distinctId ? { posthogId: click.distinctId } : {}),
+  };
+}
+
 /** Builds the attribution payload from the ref's click, else from the URL. */
 async function buildPayload(phone, hidden, deps) {
   const fromRef = hidden.ref ? await lookupWithRetry(hidden.ref, deps) : null;
   if (fromRef) {
-    const p = fromRef.properties || {};
-    return {
-      matchedBy: 'ref',
-      payload: {
-        secondarySource: SECONDARY_SOURCE,
-        phone,
-        last: pick(p),
-        first: pick(p, 'first_'),
-        entry: {
-          landing_page: String(p.entry_landing_page || hidden.landingPage || ''),
-          referrer: String(p.entry_referrer || ''),
-        },
-        ...(p.fbp ? { fbp: String(p.fbp) } : {}),
-        ...(p.fbc ? { fbc: String(p.fbc) } : {}),
-        ...(fromRef.distinctId ? { posthogId: fromRef.distinctId } : {}),
-      },
-    };
+    return { matchedBy: 'ref', payload: payloadFromClick(phone, fromRef, hidden.landingPage) };
   }
   return {
     matchedBy: 'url',
@@ -96,20 +99,49 @@ async function buildPayload(phone, hidden, deps) {
   };
 }
 
+/* Waits out PostHog ingestion like the ref lookup, stopping once any click
+   matches; one match is a join, several are left alone. */
+async function lookupTextWithRetry(text, { lookupText, sleep }) {
+  let found = await lookupText(text);
+  for (const delay of REF_RETRY_DELAYS_MS) {
+    if (found.count > 0) break;
+    await sleep(delay);
+    found = await lookupText(text);
+  }
+  return found;
+}
+
+async function attach(payload, matchedBy, deps, extra = {}) {
+  const parsed = parseAttributionPayload(payload);
+  if (!parsed.ok) return { result: 'invalid', error: parsed.error };
+  const outcome = await attachAttribution(parsed.value, deps);
+  return { ...outcome, matched_by: matchedBy, ...extra };
+}
+
 async function processChat(body, deps) {
   const url = findHiddenUrl(body);
   const phone = findPhone(body);
-  if (!url || !phone) {
-    return { result: 'no_site_origin', has_phone: Boolean(phone), hidden_chars: hiddenCharCount(body) };
+
+  if (url && phone) {
+    const hidden = attributionFromUrl(url);
+    const { matchedBy, payload } = await buildPayload(phone, hidden, deps);
+    return attach(payload, matchedBy, deps, { has_ref: Boolean(hidden.ref) });
   }
 
-  const hidden = attributionFromUrl(url);
-  const { matchedBy, payload } = await buildPayload(phone, hidden, deps);
-  const parsed = parseAttributionPayload(payload);
-  if (!parsed.ok) return { result: 'invalid', error: parsed.error };
-
-  const outcome = await attachAttribution(parsed.value, deps);
-  return { ...outcome, matched_by: matchedBy, has_ref: Boolean(hidden.ref) };
+  /* Gallabox strips its hidden URL before forwarding, so the usual path is
+     the message text the button prefilled (messageKey.js). */
+  const text = normalizeMessage(findMessageText(body));
+  if (phone && text && deps.lookupText) {
+    const found = await lookupTextWithRetry(text, deps);
+    if (found.match) return attach(payloadFromClick(phone, found.match), 'text', deps);
+    if (found.count > 1) return { result: 'ambiguous_text', matches: found.count };
+  }
+  return {
+    result: 'no_site_origin',
+    has_phone: Boolean(phone),
+    has_text: Boolean(text),
+    hidden_chars: hiddenCharCount(body),
+  };
 }
 
 /**
