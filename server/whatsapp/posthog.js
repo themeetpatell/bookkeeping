@@ -102,3 +102,36 @@ export function createTextLookup({ env, fetchImpl = fetch }) {
     return { count: rows.length, match: rows.length === 1 ? parseRow(rows[0]) : null };
   };
 }
+
+const RECENT_QUERY = `
+  SELECT count(), countIf(properties.wa_text != '')
+  FROM events
+  WHERE event = 'whatsapp_ref_issued'
+    AND timestamp > now() - INTERVAL 15 MINUTE`;
+
+/**
+ * Diagnostic for a chat that matched nothing: how many WhatsApp clicks
+ * PostHog holds from the last 15 minutes, and how many recorded a message.
+ * @param {{ env: Record<string, string|undefined>, fetchImpl?: typeof fetch }} deps
+ */
+export function createRecentClickCount({ env, fetchImpl = fetch }) {
+  const host = env.POSTHOG_API_HOST || 'https://us.posthog.com';
+  const projectId = env.POSTHOG_PROJECT_ID || '622242';
+
+  /** @returns {Promise<{ clicks: number, withText: number }>} */
+  return async function countRecentClicks() {
+    if (!env.POSTHOG_PERSONAL_API_KEY) throw new Error('POSTHOG_PERSONAL_API_KEY is not set');
+    const response = await fetchImpl(`${host}/api/projects/${projectId}/query/`, {
+      method: 'POST',
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+      headers: {
+        Authorization: `Bearer ${env.POSTHOG_PERSONAL_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query: { kind: 'HogQLQuery', query: RECENT_QUERY } }),
+    });
+    if (!response.ok) throw new Error(`PostHog click count failed: ${response.status}`);
+    const row = ((await response.json()).results || [])[0] || [0, 0];
+    return { clicks: Number(row[0]) || 0, withText: Number(row[1]) || 0 };
+  };
+}

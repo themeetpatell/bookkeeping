@@ -27,6 +27,10 @@ export const SECONDARY_SOURCE = 'WhatsApp Button';
 /* The click event is captured a few seconds before the first message is sent;
    PostHog usually has it within a minute. */
 export const REF_RETRY_DELAYS_MS = [5000, 15000, 30000];
+/* The text lookup waits longer: the first real test (2026-09-22 12:07 UTC)
+   found no click after ~50s, and PostHog can take minutes to make a new event
+   queryable. 200s in all, inside the function's 300s limit. */
+export const TEXT_RETRY_DELAYS_MS = [5000, 15000, 30000, 60000, 90000];
 const MAX_BODY_BYTES = 64 * 1024;
 
 const TOUCH_KEYS = [
@@ -103,12 +107,24 @@ async function buildPayload(phone, hidden, deps) {
    matches; one match is a join, several are left alone. */
 async function lookupTextWithRetry(text, { lookupText, sleep }) {
   let found = await lookupText(text);
-  for (const delay of REF_RETRY_DELAYS_MS) {
+  for (const delay of TEXT_RETRY_DELAYS_MS) {
     if (found.count > 0) break;
     await sleep(delay);
     found = await lookupText(text);
   }
   return found;
+}
+
+/* Counts only, never text: tells "the click never reached PostHog" apart from
+   "it arrived but its message differs". */
+async function recentClickCounts({ countRecentClicks }) {
+  if (!countRecentClicks) return {};
+  try {
+    const { clicks, withText } = await countRecentClicks();
+    return { recent_clicks: clicks, recent_clicks_with_text: withText };
+  } catch {
+    return { recent_clicks: 'unavailable' };
+  }
 }
 
 async function attach(payload, matchedBy, deps, extra = {}) {
@@ -136,11 +152,13 @@ async function processChat(body, deps) {
     if (found.match) return attach(payloadFromClick(phone, found.match), 'text', deps);
     if (found.count > 1) return { result: 'ambiguous_text', matches: found.count };
   }
+  const diagnostics = phone && text ? await recentClickCounts(deps) : {};
   return {
     result: 'no_site_origin',
     has_phone: Boolean(phone),
     has_text: Boolean(text),
     hidden_chars: hiddenCharCount(body),
+    ...diagnostics,
   };
 }
 

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { handleWhatsAppInbound } from '../handler.js';
+import { TEXT_RETRY_DELAYS_MS, handleWhatsAppInbound } from '../handler.js';
 import { LEAD_READ_FIELDS } from '../../attribution/fields.js';
 
 const SECRET = 's3cret-webhook-key';
@@ -39,6 +39,7 @@ function deps(over = {}) {
       distinctId: 'ph-1',
     }),
     lookupText: vi.fn().mockResolvedValue({ count: 0, match: null }),
+    countRecentClicks: vi.fn().mockResolvedValue({ clicks: 0, withText: 0 }),
     sleep: vi.fn().mockResolvedValue(undefined),
     now: () => new Date('2026-09-22T10:00:00Z'),
     log: vi.fn(),
@@ -149,14 +150,34 @@ describe('handleWhatsAppInbound', () => {
     expect(outcome(d)).toEqual({ result: 'ambiguous_text', matches: 2 });
   });
 
-  it('retries the text lookup while the click is still ingesting, then gives up quietly', async () => {
+  it('waits out slow PostHog ingestion for the text lookup, a few minutes in all', async () => {
     const lookupText = vi.fn().mockResolvedValue({ count: 0, match: null });
     const d = deps({ lookupText });
     await handleWhatsAppInbound(request(stripped), d);
     await d.settle();
-    expect(lookupText).toHaveBeenCalledTimes(4);
+    expect(lookupText).toHaveBeenCalledTimes(TEXT_RETRY_DELAYS_MS.length + 1);
+    const waited = TEXT_RETRY_DELAYS_MS.reduce((a, b) => a + b, 0);
+    expect(waited).toBeGreaterThanOrEqual(180000);
+    expect(waited).toBeLessThanOrEqual(240000);
+  });
+
+  it('logs how many recent clicks PostHog holds when nothing matches, counts only', async () => {
+    const d = deps({ countRecentClicks: vi.fn().mockResolvedValue({ clicks: 3, withText: 2 }) });
+    await handleWhatsAppInbound(request(stripped), d);
+    await d.settle();
     expect(d.client.updateLead).not.toHaveBeenCalled();
-    expect(outcome(d)).toMatchObject({ result: 'no_site_origin', has_phone: true, has_text: true });
+    expect(outcome(d)).toEqual({
+      result: 'no_site_origin', has_phone: true, has_text: true, hidden_chars: 0,
+      recent_clicks: 3, recent_clicks_with_text: 2,
+    });
+    expect(JSON.stringify(outcome(d))).not.toContain('google ad');
+  });
+
+  it('still reports no_site_origin when the diagnostic count itself fails', async () => {
+    const d = deps({ countRecentClicks: vi.fn().mockRejectedValue(new Error('403')) });
+    await handleWhatsAppInbound(request(stripped), d);
+    await d.settle();
+    expect(outcome(d)).toMatchObject({ result: 'no_site_origin', recent_clicks: 'unavailable' });
   });
 
   it('logs a failure without throwing out of the background task', async () => {

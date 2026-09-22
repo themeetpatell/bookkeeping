@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { createRefLookup, createTextLookup } from '../posthog.js';
+import { createRecentClickCount, createRefLookup, createTextLookup } from '../posthog.js';
 
 const ENV = { POSTHOG_PERSONAL_API_KEY: 'phx_test' };
 const ok = (body) => new Response(JSON.stringify(body), { status: 200 });
@@ -72,5 +72,19 @@ describe('createTextLookup', () => {
 
   it('fails closed without a key', async () => {
     await expect(createTextLookup({ env: {}, fetchImpl: vi.fn() })(TEXT)).rejects.toThrow('POSTHOG_PERSONAL_API_KEY is not set');
+  });
+});
+
+describe('createRecentClickCount', () => {
+  it('counts WhatsApp clicks from the last 15 minutes, and those that recorded a message', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue(ok({ results: [[4, 3]] }));
+    expect(await createRecentClickCount({ env: ENV, fetchImpl })()).toEqual({ clicks: 4, withText: 3 });
+    const sent = JSON.parse(fetchImpl.mock.calls[0][1].body);
+    expect(sent.query.query).toContain("event = 'whatsapp_ref_issued'");
+    expect(sent.query.query).toContain('INTERVAL 15 MINUTE');
+  });
+
+  it('fails closed without a key', async () => {
+    await expect(createRecentClickCount({ env: {}, fetchImpl: vi.fn() })()).rejects.toThrow('POSTHOG_PERSONAL_API_KEY is not set');
   });
 });
