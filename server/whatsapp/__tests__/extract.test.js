@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { describeShape, findHiddenUrl, findPhone } from '../extract.js';
+import { describeShape, findHiddenUrl, findPhone, hiddenCharCount } from '../extract.js';
 
 const INVIS = ['‌', '‍', '‎', '‏'];
 const toBase4 = (n) => { let r = ''; if (n === 0) return '0'; while (n > 0) { r = (n % 4) + r; n = Math.floor(n / 4); } return r; };
@@ -59,6 +59,13 @@ describe('the real Gallabox Message.Received shape', () => {
 
   it('reads the hidden URL from whatsapp.text.body', () => {
     expect(findHiddenUrl(gallaboxBody(`Hi${hide(URL_)} `))).toBe(URL_);
+  });
+});
+
+describe('hiddenCharCount', () => {
+  it('counts the zero-width characters in the message, and nothing else', () => {
+    expect(hiddenCharCount(gallaboxBody('plain text'))).toBe(0);
+    expect(hiddenCharCount(gallaboxBody(`Hi${hide('https://x.co/')}`))).toBeGreaterThan(20);
   });
 });
 

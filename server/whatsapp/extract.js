@@ -55,6 +55,17 @@ export function findHiddenUrl(body) {
   return '';
 }
 
+/**
+ * How many zero-width characters the message text carries. A count only,
+ * never the text: it tells a chat that arrived without Gallabox's hidden URL
+ * apart from one where Gallabox (or WhatsApp) stripped the characters.
+ * @returns {number}
+ */
+export function hiddenCharCount(body) {
+  const text = knownText(body);
+  return typeof text === 'string' ? (text.match(/[\u200B-\u200F]/g) || []).length : 0;
+}
+
 /** @returns {string} the customer's phone as +digits, or '' when none is found */
 export function findPhone(body) {
   const direct = String(knownPhone(body) || '').replace(/[^0-9]/g, '');

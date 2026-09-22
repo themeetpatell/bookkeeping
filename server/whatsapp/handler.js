@@ -20,7 +20,7 @@ import { timingSafeEqual } from 'node:crypto';
 import { attachAttribution } from '../attribution/handler.js';
 import { parseAttributionPayload } from '../attribution/schema.js';
 import { attributionFromUrl } from './decode.js';
-import { describeShape, findHiddenUrl, findPhone } from './extract.js';
+import { describeShape, findHiddenUrl, findPhone, hiddenCharCount } from './extract.js';
 
 export const SECONDARY_SOURCE = 'WhatsApp Button';
 /* The click event is captured a few seconds before the first message is sent;
@@ -99,7 +99,9 @@ async function buildPayload(phone, hidden, deps) {
 async function processChat(body, deps) {
   const url = findHiddenUrl(body);
   const phone = findPhone(body);
-  if (!url || !phone) return { result: 'no_site_origin', has_phone: Boolean(phone) };
+  if (!url || !phone) {
+    return { result: 'no_site_origin', has_phone: Boolean(phone), hidden_chars: hiddenCharCount(body) };
+  }
 
   const hidden = attributionFromUrl(url);
   const { matchedBy, payload } = await buildPayload(phone, hidden, deps);
