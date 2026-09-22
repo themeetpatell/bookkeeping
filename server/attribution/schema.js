@@ -5,17 +5,17 @@ import { z } from 'zod';
  * 2026-09-22: Lead Source says WHICH channel paid for the visit, Secondary
  * Source says HOW the person got in touch.
  *
- * Secondary_Source is a RESTRICTED picklist. Until the Zoho admin adds these six
- * values, Zoho rejects them; the handler then drops the field and still writes
- * the click ids (see dropRejectedFields in handler.js).
+ * Secondary_Source is a RESTRICTED picklist: these must match its values exactly
+ * (added in Zoho 2026-09-22). A value Zoho rejects is dropped by writeFields in
+ * handler.js and the rest of the attribution is still written.
  */
 export const SECONDARY_SOURCES = [
-  'Form',
-  'Booking',
-  'WhatsApp',
+  'Zoho Form',
+  'Zoho Booking',
+  'WhatsApp Button',
   'Proposal Engine',
   'Call',
-  'Lead Form',
+  'Instant Form', // Meta lead forms
 ];
 
 /* Short, bounded strings only. Everything here lands in a CRM text field, and

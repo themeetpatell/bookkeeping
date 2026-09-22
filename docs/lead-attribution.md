@@ -17,7 +17,7 @@ they can match, so capture comes before the offline-conversion uploads.
 | Field | Meaning | Values |
 |---|---|---|
 | Lead Source | Which channel paid for the visit | Google Ads, Meta Ads, Bing Ads, SEO (today the "Organic Search" option) |
-| Secondary Source | How the person got in touch | Form, Booking, WhatsApp, Proposal Engine, Call, Lead Form |
+| Secondary Source | How the person got in touch | Zoho Form, Zoho Booking, WhatsApp Button, Proposal Engine, Call, Instant Form (Meta lead forms) |
 
 ## What the endpoint does
 
@@ -52,8 +52,8 @@ MSCLKID already existed. FBP, FBC and Lead_ID were created on 2026-09-22
 
 ## Switch-on (in order)
 
-1. **Zoho admin:** add the six Secondary Source values (Setup → Modules and
-   Fields → Leads → Secondary Source). The four attribution fields already exist.
+1. **Zoho admin:** done 2026-09-22. The six Secondary Source values and the four
+   attribution fields exist.
    SEO stays "Organic Search" (decided 2026-09-22).
 2. **Zoho API console:** a Self Client with scope
    `ZohoCRM.modules.leads.READ,ZohoCRM.modules.leads.UPDATE`. Mint a refresh token.

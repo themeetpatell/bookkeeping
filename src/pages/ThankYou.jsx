@@ -92,7 +92,7 @@ const ThankYou = () => {
       if (email) posthog?.identify(email, { email });
       posthog?.capture('consultation_completed', { has_email: Boolean(email) });
       // Write this visit's click ids and UTMs onto the Zoho Lead the form made.
-      sendLeadAttribution('Form', { email });
+      sendLeadAttribution('Zoho Form', { email });
       try {
         window.sessionStorage.removeItem('consultation_submitted');
         window.sessionStorage.removeItem('consultation_email');

@@ -14,7 +14,7 @@ describe('buildAttributionPayload', () => {
   };
 
   it('splits the tracker output into last and first touch', () => {
-    const p = buildAttributionPayload('Form', { email: 'a@b.co' }, { attribution });
+    const p = buildAttributionPayload('Zoho Form', { email: 'a@b.co' }, { attribution });
     expect(p.last).toEqual({ utm_source: 'google', gclid: 'g-last', click_ts: '2026-09-22T05:00:00.000Z' });
     expect(p.first).toEqual({ utm_source: 'bing', msclkid: 'm-first' });
     expect(p.fbp).toBe('fb.1.2.3');
@@ -23,7 +23,7 @@ describe('buildAttributionPayload', () => {
 
   it('produces a body the server schema accepts', () => {
     const p = buildAttributionPayload(
-      'Booking',
+      'Zoho Booking',
       { email: 'a@b.co', phone: '+971 50 000 0000' },
       { attribution, entry: { landing_page: 'https://x.co/', referrer: '' }, leadId: 'L1', posthogId: 'ph' },
     );

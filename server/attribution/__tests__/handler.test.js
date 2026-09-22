@@ -13,7 +13,7 @@ const request = (body, { origin = ORIGIN, method = 'POST' } = {}) =>
   });
 
 const validBody = {
-  secondarySource: 'Form',
+  secondarySource: 'Zoho Form',
   email: 'lead@example.com',
   last: { gclid: 'g1', utm_campaign: 'bk' },
 };
@@ -56,7 +56,7 @@ describe('handleLeadAttribution', () => {
   });
 
   it('rejects a payload with no way to find the lead', async () => {
-    const res = await handleLeadAttribution(request({ secondarySource: 'Form' }), deps());
+    const res = await handleLeadAttribution(request({ secondarySource: 'Zoho Form' }), deps());
     expect(res.status).toBe(400);
   });
 
@@ -73,7 +73,7 @@ describe('handleLeadAttribution', () => {
     expect(d.client.findLeads).toHaveBeenCalledWith({ email: 'lead@example.com', phone: undefined }, LEAD_READ_FIELDS);
     expect(d.client.updateLead).toHaveBeenCalledWith('555', expect.objectContaining({
       Lead_Source: 'Google Ads',
-      Secondary_Source: 'Form',
+      Secondary_Source: 'Zoho Form',
       MGCLID: 'g1',
       UTM_campaign: 'bk',
     }));

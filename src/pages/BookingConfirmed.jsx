@@ -115,7 +115,7 @@ const BookingConfirmed = () => {
       });
       posthog?.capture('zoho_booking_completed');
       // Zoho Bookings takes no attribution, so it is written onto the Lead here.
-      sendLeadAttribution('Booking', {
+      sendLeadAttribution('Zoho Booking', {
         email: customerEmail,
         phone: readBookingParam('customer_contact_no'),
       });

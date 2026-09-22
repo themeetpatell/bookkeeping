@@ -4,7 +4,7 @@ import { parseAttributionPayload } from '../schema.js';
 
 const payload = (overrides = {}) => {
   const parsed = parseAttributionPayload({
-    secondarySource: 'Form',
+    secondarySource: 'Zoho Form',
     email: 'a@b.co',
     ...overrides,
   });
@@ -72,7 +72,7 @@ describe('buildLeadUpdate', () => {
     const { fields } = buildLeadUpdate(p, fresh, now);
     expect(fields).toMatchObject({
       Lead_Source: LEAD_SOURCE_LABELS.google,
-      Secondary_Source: 'Form',
+      Secondary_Source: 'Zoho Form',
       MGCLID: 'g1',
       UTM_source: 'google',
       UTM_campaign: 'bk',
@@ -86,7 +86,7 @@ describe('buildLeadUpdate', () => {
 
   it('never overwrites a value the CRM already holds', () => {
     const p = payload({ last: { gclid: 'new', utm_campaign: 'new' } });
-    const existing = { ...fresh, MGCLID: 'old', UTM_campaign: 'old', Secondary_Source: 'Booking' };
+    const existing = { ...fresh, MGCLID: 'old', UTM_campaign: 'old', Secondary_Source: 'Zoho Booking' };
     const { fields } = buildLeadUpdate(p, existing, now);
     expect(fields.MGCLID).toBeUndefined();
     expect(fields.UTM_campaign).toBeUndefined();
@@ -94,7 +94,7 @@ describe('buildLeadUpdate', () => {
   });
 
   it('replaces a Lead Source that was really an entry method', () => {
-    const p = payload({ secondarySource: 'Booking', last: { gclid: 'g1' } });
+    const p = payload({ secondarySource: 'Zoho Booking', last: { gclid: 'g1' } });
     const { fields } = buildLeadUpdate(p, { ...fresh, Lead_Source: 'Zoho bookings' }, now);
     expect(fields.Lead_Source).toBe(LEAD_SOURCE_LABELS.google);
   });
