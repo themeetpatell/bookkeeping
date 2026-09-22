@@ -4,6 +4,7 @@ import { usePostHog } from '@posthog/react';
 import { FiCheckCircle, FiArrowLeft } from 'react-icons/fi';
 import { readBookedEmail } from '../utils/booking';
 import { FORM_SUBMIT, pushLeadEvent, takePendingSubmit } from '../utils/leadTracking';
+import { buildUserData, queueMetaUserData, takeMatchKeys } from '../utils/metaMatching';
 import './ThankYou.css';
 
 // Basic shape check so we never render a garbage value into the confirmation copy.
@@ -61,6 +62,20 @@ const ThankYou = () => {
        this page, a bookmark or a direct visit finds nothing and fires nothing.
        See src/utils/leadTracking.js. */
     const pendingSubmit = takePendingSubmit();
+
+    /* Meta advanced matching. Must run BEFORE the form_submit push below: that
+       push fires the GTM Meta Lead tag, and the user data has to be ahead of
+       the Lead in the pixel's queue for the Lead to carry it. The email falls
+       back to the one index.html stashes, for a submit that predates the
+       match-key stash. See src/utils/metaMatching.js. */
+    const matchKeys = takeMatchKeys();
+    queueMetaUserData(
+      buildUserData({
+        email: (matchKeys && matchKeys.email) || email,
+        phone: matchKeys && matchKeys.phone,
+      }),
+    );
+
     if (pendingSubmit) pushLeadEvent(FORM_SUBMIT, pendingSubmit);
 
     if (submitted) {

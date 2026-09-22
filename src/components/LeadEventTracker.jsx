@@ -9,6 +9,7 @@ import {
   readFormParams,
   stashPendingSubmit,
 } from '../utils/leadTracking';
+import { stashMatchKeys } from '../utils/metaMatching';
 
 /* The sole owner of `form_start`, the `form_submit` handoff and
    `whatsapp_click`.
@@ -82,6 +83,9 @@ export default function LeadEventTracker() {
       const formEl = event.target;
       if (!isLeadForm(formEl)) return;
       stashPendingSubmit(readFormParams(formEl));
+      // Kept apart from the GA4 params: email and phone go to the Meta pixel
+      // on /thank-you and nowhere else. See src/utils/metaMatching.js.
+      stashMatchKeys(formEl);
     };
 
     const handleClick = (event) => {

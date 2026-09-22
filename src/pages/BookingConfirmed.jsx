@@ -6,7 +6,9 @@ import {
   APP_ORIGINS,
   BOOKING_CONFIRMED_MESSAGE,
   readBookedEmail,
+  readBookingParam,
 } from '../utils/booking';
+import { buildUserData, queueMetaUserData } from '../utils/metaMatching';
 import './ThankYou.css';
 
 // Landing page for the Zoho Bookings post-booking redirect. Configure the
@@ -94,6 +96,16 @@ const BookingConfirmed = () => {
     const fireConversion = () => {
       window.scrollTo(0, 0);
       if (hasAlreadyFired()) return;
+
+      // Meta advanced matching, ahead of the conversion push so any Meta tag
+      // it fires carries the booked email and phone. Only here, at top level —
+      // the framed copy of this page is not where the site's pixel runs.
+      queueMetaUserData(
+        buildUserData({
+          email: customerEmail,
+          phone: readBookingParam('customer_contact_no'),
+        }),
+      );
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
