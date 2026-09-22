@@ -5,6 +5,7 @@ import { FiCheckCircle, FiArrowLeft } from 'react-icons/fi';
 import { readBookedEmail } from '../utils/booking';
 import { FORM_SUBMIT, pushLeadEvent, takePendingSubmit } from '../utils/leadTracking';
 import { buildUserData, queueMetaUserData, takeMatchKeys } from '../utils/metaMatching';
+import { buildConversionPush, buildGoogleUserData } from '../utils/googleUserData';
 import { sendLeadAttribution } from '../utils/leadAttribution';
 import './ThankYou.css';
 
@@ -80,12 +81,22 @@ const ThankYou = () => {
     if (pendingSubmit) pushLeadEvent(FORM_SUBMIT, pendingSubmit);
 
     if (submitted) {
-      window.dataLayer.push({
-        event: 'consultation_form_ec',
-        _event: 'consultation_form_ec',
-        enhanced_conversion_data: { email },
-        user_data: { email }
-      });
+      /* Google Ads enhanced conversions (task 3.2): the push now also carries
+         the lead's hashed email and phone, and lead_id as the transaction id.
+         Hashing is async, so the push waits on it; a hashing failure still
+         pushes, just without ads_user_data. The hashes are cleared from GTM's
+         data model straight after, so later events cannot inherit them.
+         See src/utils/googleUserData.js. */
+      const leadId = (pendingSubmit && pendingSubmit.lead_id) || '';
+      buildGoogleUserData({
+        email: (matchKeys && matchKeys.email) || email,
+        phone: matchKeys && matchKeys.phone,
+      })
+        .catch(() => null)
+        .then((adsUserData) => {
+          window.dataLayer.push(buildConversionPush({ leadId, email, adsUserData }));
+          window.dataLayer.push({ ads_user_data: undefined });
+        });
       // Confirmed conversion — fires only when this page was reached via a real
       // submission (the one-shot flag is cleared below so refreshes/direct
       // visits never double-count it in PostHog either).
