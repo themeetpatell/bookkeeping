@@ -81,8 +81,13 @@ async function writeFields(client, id, fields) {
   return { dropped };
 }
 
-/** Finds the lead and writes what it may. Returns an outcome for the log only. */
-async function attach(payload, deps) {
+/**
+ * Finds the lead and writes what it may. Returns an outcome for the log only.
+ * Shared with the WhatsApp webhook (server/whatsapp/handler.js) so both entry
+ * points obey the same never-overwrite and freshness rules.
+ * @param {object} payload a payload already accepted by parseAttributionPayload
+ */
+export async function attachAttribution(payload, deps) {
   const leads = await findWithRetry(payload, deps);
   if (!leads.length) return { result: 'not_found' };
 
@@ -129,7 +134,7 @@ export async function handleLeadAttribution(request, deps) {
   if (limiters && !limiters.contact.allow(payload.email || payload.phone)) return tooMany();
 
   try {
-    const outcome = await attach(payload, deps);
+    const outcome = await attachAttribution(payload, deps);
     log('lead-attribution: outcome', { source: payload.secondarySource, ...outcome });
     return reply(202, ACCEPTED);
   } catch (error) {

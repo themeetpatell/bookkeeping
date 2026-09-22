@@ -19,6 +19,7 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
     "@posthog/react": "^1.10.3",
+    "@vercel/functions": "^3.9.9",
     "posthog-js": "^1.405.3",
     "posthog-node": "^5.46.0",
     "react": "^19.2.0",

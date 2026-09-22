@@ -70,10 +70,41 @@ MSCLKID already existed. FBP, FBC and Lead_ID were created on 2026-09-22
 
 Until step 3, the endpoint answers `202 {"status":"disabled"}` and touches nothing.
 
+## WhatsApp (task 1.9)
+
+A chat started from a website button is joined to its ad click with nothing
+visible added to the message.
+
+1. **At click** (`src/utils/whatsappRef.js`): an 8-character `fs_ref` is put on
+   the page URL for the instant Gallabox's tracker reads it, then removed. The
+   click's attribution is captured in PostHog as `whatsapp_ref_issued` under
+   that ref.
+2. **In the message**: Gallabox's own tracker (links with `data-wa-track`)
+   hides the page URL, ref included, as zero-width characters. The customer
+   sees the same text as before and cannot delete what they cannot see.
+3. **Webhook** `POST /api/whatsapp-inbound?key=<GALLABOX_WEBHOOK_SECRET>`
+   (`server/whatsapp/`): decodes the hidden URL, looks the ref up in PostHog,
+   finds the Lead by the sender's phone, and writes the attribution with
+   Secondary Source "WhatsApp Button" under the same rules as the site endpoint.
+   With no ref match it uses what the URL itself carries (landing page, a gclid
+   still in the URL). It replies 200 at once and works in the background.
+
+Switch-on, in order:
+1. Vercel (production, sensitive): `GALLABOX_WEBHOOK_SECRET` (a long random
+   string) and `POSTHOG_PERSONAL_API_KEY` (PostHog → Settings → Personal API
+   keys, scope **query: read**, project Default). Redeploy.
+2. Gallabox: add a webhook for incoming messages pointing at
+   `https://accounting.finanshels.com/api/whatsapp-inbound?key=<secret>`.
+3. Leave `WHATSAPP_ATTRIBUTION_ENABLED` unset for the first few chats. The
+   function log then shows each payload's field paths
+   (`whatsapp-attribution: payload shape`), which confirms where Gallabox puts
+   the message text and the phone. Narrow `server/whatsapp/extract.js` to
+   those paths if they differ from what it expects.
+4. Set `WHATSAPP_ATTRIBUTION_ENABLED=1` and redeploy. Check a test chat's Lead
+   for MGCLID/UTMs and Secondary Source "WhatsApp Button".
+
 ## Not covered here
 
-- **WhatsApp:** the site never learns a WhatsApp lead's phone, and no WhatsApp
-  integration writes a page URL, click id or ref into the CRM (task 1.8
-  finding). This needs a ref code in the prefilled message that the Gallabox → CRM
-  flow copies into a Lead field (task 1.9).
+- **WhatsApp links without `data-wa-track`:** Gallabox does not encode them,
+  so they carry no ref. Almost every button has the class.
 - **Phone calls:** click event only (task 1.11).

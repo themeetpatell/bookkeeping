@@ -7,6 +7,7 @@ import './index.css';
 import App from './App.jsx';
 import { POSTHOG_KEY, posthogOptions } from './lib/posthog';
 import { recordEntryTouch } from './utils/leadAttribution';
+import { installWhatsAppRef } from './utils/whatsappRef';
 
 posthog.init(POSTHOG_KEY, posthogOptions);
 
@@ -17,6 +18,8 @@ if (typeof window !== 'undefined') {
   window.posthog = posthog;
   // Before any route renders, so the session's true entry page and referrer are kept.
   recordEntryTouch();
+  // Invisible ref on WhatsApp clicks, joined back to the lead by the Gallabox webhook.
+  installWhatsAppRef();
 }
 
 createRoot(document.getElementById('root')).render(
