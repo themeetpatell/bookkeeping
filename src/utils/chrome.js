@@ -4,6 +4,18 @@
 // These are paid-traffic landing pages where the first screen has to carry one
 // decision. The offer bar and the trust bar each add a competing CTA and, on a
 // 390x844 phone, 88px of the fold before the headline has started.
-export const FOCUSED_CHROME_PATHS = ['/books-cleanup', '/books-cleanup-bing'];
+export const FOCUSED_CHROME_PATHS = [
+  '/books-cleanup',
+  '/books-cleanup-bing',
+  // Bookkeeping_UAE_Search ad-group pages (src/pages/AdGroupLanding.jsx):
+  // one primary CTA per page, so the nav CTA and promo strips are dropped.
+  '/hire-accountant',
+  '/remote-bookkeeper',
+  '/backlog-catch-up',
+  '/outsource-accounting',
+  '/accounting-services',
+  '/accounting-firm',
+  '/accounting-and-bookkeeping',
+];
 
 export const isFocusedChrome = (pathname) => FOCUSED_CHROME_PATHS.includes(pathname);

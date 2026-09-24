@@ -28,6 +28,7 @@ const AccountingFormReddit = lazy(() => import('./pages/AccountingFormReddit'));
 const ThankYou = lazy(() => import('./pages/ThankYou'));
 const BookingConfirmed = lazy(() => import('./pages/BookingConfirmed'));
 const BookACall = lazy(() => import('./pages/BookACall'));
+const AdGroupLanding = lazy(() => import('./pages/AdGroupLanding'));
 
 function App() {
   const { pathname } = useLocation();
@@ -82,6 +83,18 @@ function App() {
           <Route path="/ai-accounting" element={<AIAccountingLanding />} />
           <Route path="/accounting-form" element={<AccountingForm />} />
           <Route path="/accounting-form-reddit" element={<AccountingFormReddit />} />
+          {/* Bookkeeping_UAE_Search ad groups: one path per ad group, one
+              shared layout, per-page copy in src/content/adGroupLandings.js. */}
+          <Route path="/hire-accountant" element={<AdGroupLanding pageKey="hire-accountant" />} />
+          <Route path="/remote-bookkeeper" element={<AdGroupLanding pageKey="remote-bookkeeper" />} />
+          <Route path="/backlog-catch-up" element={<AdGroupLanding pageKey="backlog-catch-up" />} />
+          <Route path="/outsource-accounting" element={<AdGroupLanding pageKey="outsource-accounting" />} />
+          <Route path="/accounting-services" element={<AdGroupLanding pageKey="accounting-services" />} />
+          <Route path="/accounting-firm" element={<AdGroupLanding pageKey="accounting-firm" />} />
+          <Route
+            path="/accounting-and-bookkeeping"
+            element={<AdGroupLanding pageKey="accounting-and-bookkeeping" />}
+          />
           {/* The only thank-you route. `/thank-you-from-finanshels` was a second
               copy of this same page; it is now a 308 to here in vercel.json, so any
               old link still lands on the page that fires the conversion. */}
