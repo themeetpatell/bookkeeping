@@ -877,6 +877,18 @@
     margin-bottom: 44px;
   }
 }
+
+
+
+
+
+/* The review card carries a white surface that reads instantly on the dark
+   heroes elsewhere. This hero is cream (--fsai-canvas), so white-on-cream needs a
+   firmer warm edge to stay a distinct card rather than a faint patch. */
+.fsai-root:not(#_) .fsai-hero .hero-rating-card {
+  border-color: rgba(241, 102, 16, 0.3);
+  box-shadow: 0 10px 26px rgba(16, 44, 60, 0.08);
+}
 </style>
 <div class="fsai-root">
 
@@ -972,7 +984,7 @@
                 <span class="fsai-term-time">06:05:41</span>
                 <span class="fsai-term-glyph"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
                 <span class="fsai-term-msg">
-                  Drafted your VAT return
+                  Drafted your quarterly management report
                   <span class="fsai-term-meta">due 28 Aug, ready now</span>
                 </span>
               </li>
@@ -1966,7 +1978,7 @@
         <article class="fsai-pillar">
           <span class="fsai-pillar-number">03</span>
           <h3>You can look any time</h3>
-          <p>No waiting for a PDF at month-end. Open the dashboard and see your cash, your runway, what you owe in VAT and how the month is going — as of this morning.</p>
+          <p>No waiting for a PDF at month-end. Open the dashboard and see your cash, your runway and how the month is going — as of this morning.</p>
         </article>
       </div>
     </div>
@@ -2003,11 +2015,6 @@
           <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>A dashboard that is always current</span>
         </div>
         <div class="fsai-compare-row" role="row">
-          <span class="fsai-compare-label" role="cell">Tax deadlines</span>
-          <span class="fsai-compare-old" role="cell">Last-minute scrambles</span>
-          <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Watched all year, filed early</span>
-        </div>
-        <div class="fsai-compare-row" role="row">
           <span class="fsai-compare-label" role="cell">Errors</span>
           <span class="fsai-compare-old" role="cell">Discovered at audit</span>
           <span class="fsai-compare-now" role="cell"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Caught the day they happen</span>
@@ -2027,7 +2034,6 @@
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Monthly close.</strong> Weeks after month-end</span></li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Data entry.</strong> Manual keying, human error</span></li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Visibility.</strong> Static PDFs, once a month</span></li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Tax deadlines.</strong> Last-minute scrambles</span></li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Errors.</strong> Discovered at audit</span></li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-x"/></svg><span><strong>Cost.</strong> Grows with headcount</span></li>
           </ul>
@@ -2038,7 +2044,6 @@
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Monthly close.</strong> Days — the matching never stops</span></li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Data entry.</strong> Captured for you, checked by a person</span></li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Visibility.</strong> A dashboard that is always current</span></li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Tax deadlines.</strong> Watched all year, filed early</span></li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Errors.</strong> Caught the day they happen</span></li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg><span><strong>Cost.</strong> Grows with software, not headcount</span></li>
           </ul>
@@ -2796,7 +2801,7 @@
         <li class="fsai-step">
           <span class="fsai-step-number">04</span>
           <h3>You decide</h3>
-          <p>Clean books, live dashboards and on-time VAT &amp; Corporate Tax filings — plus a team on WhatsApp when you need an answer.</p>
+          <p>Clean books, live dashboards and filings handled on time — plus a team on WhatsApp when you need an answer.</p>
         </li>
       </ol>
     </div>
@@ -3622,8 +3627,8 @@
         <p class="fsai-eyebrow fsai-eyebrow-light">The product</p>
         <h2>Your numbers, live in <span class="fsai-accent">Findelivery</span></h2>
         <p class="fsai-dash-sub">
-          Every Finanshels client gets Findelivery — our AI CFO dashboard. P&amp;L, cash,
-          runway and tax positions update as your books do, and you can ask the CFO anything
+          Every Finanshels client gets Findelivery — our AI CFO dashboard. P&amp;L, cash
+          and runway update as your books do, and you can ask the CFO anything
           in plain English.
         </p>
       </div>
@@ -4454,8 +4459,6 @@
     <symbol id="fsai-i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
     <symbol id="fsai-i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
     <symbol id="fsai-i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
-    <symbol id="fsai-i-percent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
-    <symbol id="fsai-i-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
     <symbol id="fsai-i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
     <symbol id="fsai-i-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
     <symbol id="fsai-i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
@@ -4478,7 +4481,6 @@
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Sorts every transaction, every day</li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Matches your bank lines as they land</li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Reads your invoices and receipts</li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Keeps an eye on every tax deadline</li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Drafts your returns and monthly reports</li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Spots duplicates and odd entries</li>
           </ul>
@@ -4492,7 +4494,6 @@
           <ul>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Checks and approves the work</li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Sorts out anything that looks wrong</li>
-            <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Signs off on VAT &amp; Corporate Tax filings</li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Talks through cash, runway and structure</li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Answers on WhatsApp — quickly, and as a person</li>
             <li><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg>Owns the numbers at audit time</li>
@@ -4514,16 +4515,6 @@
           <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-book"/></svg></span>
           <h3>Bookkeeping</h3>
           <p>Books matched daily and checked by your own accountant. Ready whenever an auditor, a bank or an investor asks.</p>
-        </article>
-        <article class="fsai-service-card">
-          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-percent"/></svg></span>
-          <h3>VAT Compliance</h3>
-          <p>Registration, quarterly returns and FTA letters — drafted for you, filed by a person.</p>
-        </article>
-        <article class="fsai-service-card">
-          <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-briefcase"/></svg></span>
-          <h3>Corporate Tax</h3>
-          <p>9% Corporate Tax registration, planning and filing, with the deadlines watched for you.</p>
         </article>
         <article class="fsai-service-card">
           <span class="fsai-service-icon"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-users"/></svg></span>

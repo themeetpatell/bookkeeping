@@ -852,6 +852,18 @@
     margin-bottom: 44px;
   }
 }
+
+
+
+
+
+/* The review card carries a white surface that reads instantly on the dark
+   heroes elsewhere. This hero is cream (--fsai-canvas), so white-on-cream needs a
+   firmer warm edge to stay a distinct card rather than a faint patch. */
+.fsai-root:not(#_) .fsai-hero .hero-rating-card {
+  border-color: rgba(241, 102, 16, 0.3);
+  box-shadow: 0 10px 26px rgba(16, 44, 60, 0.08);
+}
 </style>
 <div class="fsai-root">
 
@@ -947,7 +959,7 @@
                 <span class="fsai-term-time">06:05:41</span>
                 <span class="fsai-term-glyph"><svg aria-hidden="true" focusable="false"><use href="#fsai-i-check"/></svg></span>
                 <span class="fsai-term-msg">
-                  Drafted your VAT return
+                  Drafted your quarterly management report
                   <span class="fsai-term-meta">due 28 Aug, ready now</span>
                 </span>
               </li>

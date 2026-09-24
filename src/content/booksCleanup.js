@@ -67,7 +67,7 @@ export const cleanupOutputs = [
   'Missing, duplicated and miscoded transactions identified and corrected.',
   'A clean general ledger and trial balance.',
   'An exception list showing unresolved items that still need client evidence.',
-  'Closing schedules ready for tax filing, audit or ongoing monthly bookkeeping.',
+  'Closing schedules ready for audit or ongoing monthly bookkeeping.',
 ];
 
 /** Stated immediately under the outputs so the fixed-quote promise is qualified. */
@@ -174,9 +174,9 @@ export const cleanupFaqs = [
       'Yes. Multi-year backlogs are normal work for us and are quoted the same way as a short one — the length of the backlog is one of the inputs to the fixed quote. We close each overdue period in order so every year stands on its own rather than being merged into a single adjustment.',
   },
   {
-    question: 'Will the cleaned books be ready for tax filing or audit?',
+    question: 'Will the cleaned books be ready for audit?',
     answer:
-      'We prepare closing schedules and reconciled ledgers to the standard your tax agent or auditor works from. Whether they are sufficient for a specific filing or audit depends on the evidence you are able to supply and on the scope we agreed — where evidence is missing, it is named on the exception list rather than assumed. We do not make submissions to any authority on your behalf.',
+      'We prepare closing schedules and reconciled ledgers to the standard your auditor works from. Whether they are sufficient for a specific audit depends on the evidence you are able to supply and on the scope we agreed — where evidence is missing, it is named on the exception list rather than assumed. We do not make submissions to any authority on your behalf.',
   },
   {
     question: 'How do you handle missing documents or unexplained transactions?',

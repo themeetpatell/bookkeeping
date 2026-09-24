@@ -1,6 +1,6 @@
 export const brand = {
   name: 'Finanshels',
-  tagline: 'Bookkeeping, tax, and reporting built for fast-moving teams.',
+  tagline: 'Bookkeeping and reporting built for fast-moving teams.',
   phone: '+97145457841',
 };
 

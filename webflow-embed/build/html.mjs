@@ -59,7 +59,7 @@ const heroFeedItems = [
   { icon: 'check', time: '06:04:12', text: 'Sorted 214 transactions', meta: 'Emirates NBD, Mashreq' },
   { icon: 'check', time: '06:04:38', text: 'Matched every bank line', meta: 'nothing left over' },
   { icon: 'flag', time: '06:05:07', text: 'Set 3 invoices aside', meta: 'your accountant is on it' },
-  { icon: 'check', time: '06:05:41', text: 'Drafted your VAT return', meta: 'due 28 Aug, ready now' },
+  { icon: 'check', time: '06:05:41', text: 'Drafted your quarterly management report', meta: 'due 28 Aug, ready now' },
   { icon: 'human', time: '06:06:02', text: 'Your accountant signed it off', meta: 'checked line by line' },
 ];
 
@@ -98,14 +98,13 @@ const clientLogos = [
 const pillars = [
   ['01', 'The boring work runs itself', 'Sorting transactions, matching bank lines, chasing receipts, watching deadlines — it happens every day instead of once a month. You wake up to books that are already current.'],
   ['02', 'A real accountant owns your numbers', 'Nothing reaches you or the FTA until a qualified accountant has been through it. The software does the typing. A person takes responsibility.'],
-  ['03', 'You can look any time', 'No waiting for a PDF at month-end. Open the dashboard and see your cash, your runway, what you owe in VAT and how the month is going — as of this morning.'],
+  ['03', 'You can look any time', 'No waiting for a PDF at month-end. Open the dashboard and see your cash, your runway and how the month is going — as of this morning.'],
 ];
 
 const comparisonRows = [
   ['Monthly close', 'Weeks after month-end', 'Days — the matching never stops'],
   ['Data entry', 'Manual keying, human error', 'Captured for you, checked by a person'],
   ['Visibility', 'Static PDFs, once a month', 'A dashboard that is always current'],
-  ['Tax deadlines', 'Last-minute scrambles', 'Watched all year, filed early'],
   ['Errors', 'Discovered at audit', 'Caught the day they happen'],
   ['Cost', 'Grows with headcount', 'Grows with software, not headcount'],
 ];
@@ -114,14 +113,13 @@ const workflowSteps = [
   ['01', 'Connect', 'We link your banks, invoicing tools and accounting software — QuickBooks, Xero, Zoho Books or ours. Migration handled for you.'],
   ['02', 'We do the daily work', 'Every transaction is captured, sorted and matched against your bank — daily. Anything odd, duplicated or missing a receipt gets pulled out for a person to look at.'],
   ['03', 'Your accountant checks it', 'A dedicated accountant goes through the work, sorts out anything that was set aside, and signs the filings. Nothing goes out on the software’s say-so alone.'],
-  ['04', 'You decide', 'Clean books, live dashboards and on-time VAT &amp; Corporate Tax filings — plus a team on WhatsApp when you need an answer.'],
+  ['04', 'You decide', 'Clean books, live dashboards and filings handled on time — plus a team on WhatsApp when you need an answer.'],
 ];
 
 const aiDuties = [
   'Sorts every transaction, every day',
   'Matches your bank lines as they land',
   'Reads your invoices and receipts',
-  'Keeps an eye on every tax deadline',
   'Drafts your returns and monthly reports',
   'Spots duplicates and odd entries',
 ];
@@ -129,7 +127,6 @@ const aiDuties = [
 const humanDuties = [
   'Checks and approves the work',
   'Sorts out anything that looks wrong',
-  'Signs off on VAT &amp; Corporate Tax filings',
   'Talks through cash, runway and structure',
   'Answers on WhatsApp — quickly, and as a person',
   'Owns the numbers at audit time',
@@ -137,8 +134,6 @@ const humanDuties = [
 
 const services = [
   ['book', 'Bookkeeping', 'Books matched daily and checked by your own accountant. Ready whenever an auditor, a bank or an investor asks.'],
-  ['percent', 'VAT Compliance', 'Registration, quarterly returns and FTA letters — drafted for you, filed by a person.'],
-  ['briefcase', 'Corporate Tax', '9% Corporate Tax registration, planning and filing, with the deadlines watched for you.'],
   ['users', 'Payroll &amp; WPS', 'Salaries processed, WPS files generated and gratuity accruals kept current every month.'],
   ['trending', 'CFO Insights', 'Cash-flow forecasts, budgets and board-ready reporting from live data — not stale exports.'],
   ['file', 'Audit Support', 'Clean trails and organized documents mean audits close faster and cost less.'],
@@ -510,8 +505,8 @@ ${workflowSteps
         <p class="fsai-eyebrow fsai-eyebrow-light">The product</p>
         <h2>Your numbers, live in <span class="fsai-accent">Findelivery</span></h2>
         <p class="fsai-dash-sub">
-          Every Finanshels client gets Findelivery — our AI CFO dashboard. P&amp;L, cash,
-          runway and tax positions update as your books do, and you can ask the CFO anything
+          Every Finanshels client gets Findelivery — our AI CFO dashboard. P&amp;L, cash
+          and runway update as your books do, and you can ask the CFO anything
           in plain English.
         </p>
       </div>
