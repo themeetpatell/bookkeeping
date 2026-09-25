@@ -25,7 +25,7 @@ import {
   FiX,
 } from 'react-icons/fi';
 import Seo from '../components/Seo';
-import FtaStamp from '../components/FtaStamp';
+import FtaBadge from '../components/FtaBadge';
 import Testimonials from '../components/Testimonials';
 import ReviewedBy from '../components/ReviewedBy';
 import ZohoConsultationForm from '../components/ZohoConsultationForm';
@@ -93,23 +93,38 @@ const WhatsAppGlyph = () => (
 
 /* ---------------------------------------------------------- page visuals */
 
+/* Human imagery with the work floating over it. The photo is a licensed stock
+   image (Unsplash License), not a named Finanshels employee, so the cards
+   describe the service rather than putting a name on the person. Swap in a
+   real team photo at the same path when one is available. */
 const VisualAccountantCard = () => (
-  <div className="agl-visual" aria-hidden="true">
-    <div className="agl-vc-head">
+  <figure className="agl-photo">
+    <img
+      src="/landing/accountant-at-work.jpg"
+      alt="An accountant working through a client's books on a laptop"
+      className="agl-photo-img"
+      width="1100"
+      height="1375"
+      loading="lazy"
+      decoding="async"
+    />
+    <div className="agl-photo-card agl-photo-card-top" aria-hidden="true">
       <span className="agl-vc-avatar"><FiUser /></span>
       <span>
-        <strong>Your accountant</strong>
-        <small>Chartered Accountant, assigned to you</small>
+        <strong>Your named accountant</strong>
+        <small>CA review every month</small>
       </span>
     </div>
-    <ul className="agl-vc-list">
-      <li><FiCheck /> Books reconciled</li>
-      <li><FiCheck /> VAT return prepared</li>
-      <li><FiCheck /> Corporate tax on track</li>
-      <li><FiCheck /> CA review signed off</li>
-    </ul>
-    <p className="agl-vc-foot">This month: closed</p>
-  </div>
+    <div className="agl-photo-card agl-photo-card-bottom" aria-hidden="true">
+      <p className="agl-photo-card-label">This month</p>
+      <ul className="agl-vc-list">
+        <li><FiCheck /> Books reconciled</li>
+        <li><FiCheck /> VAT return prepared</li>
+        <li><FiCheck /> CA review signed off</li>
+      </ul>
+    </div>
+    <span className="agl-photo-chip" aria-hidden="true">150+ qualified accountants</span>
+  </figure>
 );
 
 const VisualCostScale = () => (
@@ -227,7 +242,9 @@ const SectionHeader = ({ eyebrow, title, subtitle }) => (
 
 const LeadFormCard = ({ id, formId, title, subtitle, className }) => (
   <div className={className} id={id}>
-    <FtaStamp />
+    {/* No FTA stamp on the form card: it sat over the form heading and pulled
+        the eye off the fields. The credential is shown as a badge beside the
+        form instead (hero CTA row and final CTA column). */}
     <ZohoConsultationForm
       formId={formId}
       title={title}
@@ -526,6 +543,7 @@ const AdGroupLanding = ({ pageKey }) => {
             <div className="hero-ctas agl-hero-ctas">
               {renderCta('hero')}
               {whatsappLink('hero', 'agl-btn agl-btn-wa', <><WhatsAppGlyph /> WhatsApp an Accountant</>)}
+              <FtaBadge />
             </div>
 
             <div className="hero-stats agl-hero-stats">
@@ -710,6 +728,25 @@ const AdGroupLanding = ({ pageKey }) => {
         <div className="content-container">
           <SectionHeader eyebrow={page.pricing.eyebrow} title={page.pricing.title} subtitle={page.pricing.subtitle} />
 
+          {page.annualOffer ? (
+            <div className="agl-annual-offer">
+              <div>
+                <p className="agl-annual-offer-badge">Limited Offer</p>
+                <h3 className="agl-annual-offer-title">{page.annualOffer.title}</h3>
+                <p className="agl-annual-offer-copy">{page.annualOffer.copy}</p>
+              </div>
+              <a
+                href={buildWhatsAppUrl(page.annualOffer.whatsappMessage)}
+                className="agl-btn agl-btn-wa data-wa-track"
+                target="_blank"
+                rel="noreferrer"
+                data-wa-location="annual_offer"
+              >
+                <WhatsAppGlyph /> {page.annualOffer.cta}
+              </a>
+            </div>
+          ) : null}
+
           <div className="pricing-banner">
             <strong>Pay Only if Satisfied. No Commitment.</strong>
             <p>Only pay if you are satisfied. No questions asked.</p>
@@ -818,6 +855,7 @@ const AdGroupLanding = ({ pageKey }) => {
               ))}
             </div>
             {whatsappLink('final', 'agl-btn agl-btn-wa agl-final-wa', <><WhatsAppGlyph /> Prefer WhatsApp? Message us</>)}
+            <div className="agl-final-badge"><FtaBadge /></div>
           </div>
           <div className="final-cta-right">
             <LeadFormCard

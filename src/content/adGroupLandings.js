@@ -118,10 +118,18 @@ export const adGroupLandings = {
     heroStats: [
       { value: '7,000+', label: 'UAE businesses served' },
       { value: '4.9', label: 'Trustpilot, 239 reviews' },
-      { value: '10x', label: 'Faster close cycle' },
+      { value: '150+', label: 'Qualified accountants' },
     ],
     cta: { label: 'Talk to Your Accountant', color: 'orange', kind: 'booking' },
     whatsappMessage: 'Hi, I saw your Google ad. I want to hire a chartered accountant for my business.',
+    /* Annual-plan offer shown above the pricing cards. Same offer the site
+       offer bar runs; terms match the /packages FAQ. */
+    annualOffer: {
+      title: 'Get 3 Months Free With Annual Accounting Packages',
+      copy: 'Pay for 12 months and get 3 more months of the same package at no charge.',
+      cta: 'Get Started',
+      whatsappMessage: "Hi, I saw your Google ad. I'd like to claim the 3 months free offer on annual accounting packages.",
+    },
     heroForm: {
       title: 'Talk to Your Accountant',
       subtitle: 'Leave your details. A qualified accountant calls you back.',
@@ -213,6 +221,7 @@ export const adGroupLandings = {
       { q: 'How does the cost compare with hiring in-house?', a: 'Plans start from AED 499 a month. There is no salary, visa, insurance, desk or recruitment cost, and no gap in cover when someone is on leave.' },
       { q: 'How quickly can I get started?', a: 'Most businesses start within 24 to 48 hours of the first call. We set up your account, connect your systems and begin work straight away.' },
       { q: 'Can I speak to my accountant directly?', a: 'Yes. You have a named accountant you can reach by call, email or WhatsApp. You never go through a generic support queue.' },
+      { q: 'How do the 3 free months work?', a: 'The offer applies to annual plans only: pay for 12 months up front and you receive 3 additional months of the same package at no charge, 15 months in total. It cannot be combined with monthly billing. Confirm current availability with your accountant.' },
     ],
     final: {
       eyebrow: 'SPEAK TO AN ACCOUNTANT',

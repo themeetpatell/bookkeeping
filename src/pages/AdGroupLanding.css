@@ -664,7 +664,136 @@
 .agl-vm-doc.is-old { border: 1px dashed #94a3b8; color: #64748b; text-decoration: line-through; }
 .agl-vm-doc.is-new { background: #dbeafe; color: #1d4ed8; }
 
+/* photo visual: human imagery with the service cards floating over it */
+.agl-photo {
+  position: relative;
+  margin: 0;
+  padding: 0 0 28px;
+}
+
+.agl-photo-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: 560px;
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+}
+
+.agl-photo-card {
+  position: absolute;
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.agl-photo-card-top {
+  top: 20px;
+  left: -18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.agl-photo-card-top strong { display: block; font-size: 15px; }
+.agl-photo-card-top small { font-size: 13px; color: #475569; }
+
+.agl-photo-card-bottom {
+  right: -18px;
+  bottom: 0;
+  width: 250px;
+}
+
+.agl-photo-card-label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #059669;
+}
+
+.agl-photo-card-bottom .agl-vc-list li {
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.agl-photo-chip {
+  position: absolute;
+  left: 16px;
+  bottom: 48px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--agl-orange);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .agl-photo { max-width: 460px; margin: 0 auto; }
+  .agl-photo-card-top { left: 10px; }
+  .agl-photo-card-bottom { right: 10px; width: 220px; }
+  .agl-photo-chip { display: none; }
+}
+
 /* -------------------------------------------------------------- pricing */
+
+.agl-annual-offer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto 24px;
+  padding: 24px 28px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(241, 102, 16, 0.22), rgba(241, 102, 16, 0.08));
+  border: 1px solid rgba(241, 102, 16, 0.5);
+  text-align: left;
+}
+
+.agl-annual-offer-badge {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--agl-orange);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.agl-annual-offer-title {
+  margin: 0 0 6px;
+  font-size: 22px;
+  line-height: 1.3;
+  color: #ffffff;
+}
+
+.agl-annual-offer-copy {
+  margin: 0;
+  font-size: 15px;
+  color: var(--agl-muted);
+}
+
+.agl .agl-annual-offer .agl-btn {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .agl-annual-offer { flex-direction: column; align-items: stretch; padding: 20px; }
+  .agl .agl-annual-offer .agl-btn { width: 100%; }
+}
+
+.agl-final-badge {
+  margin-top: 20px;
+}
 
 .agl-offer {
   max-width: 420px;

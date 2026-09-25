@@ -9,7 +9,8 @@ export const FOCUSED_CHROME_PATHS = [
   '/books-cleanup-bing',
   // Bookkeeping_UAE_Search ad-group pages (src/pages/AdGroupLanding.jsx):
   // one primary CTA per page, so the nav CTA and promo strips are dropped.
-  '/hire-accountant',
+  // /hire-accountant is deliberately NOT listed: marketing asked for the
+  // section nav and the annual-plan offer bar on that page (2026-09-25).
   '/remote-bookkeeper',
   '/backlog-catch-up',
   '/outsource-accounting',
