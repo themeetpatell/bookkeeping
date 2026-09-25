@@ -338,8 +338,14 @@
   color: var(--agll-green);
 }
 
-/* The photo melts into the section: soft edges, no frame, no overlays. */
-.agll-photo { margin: 0; }
+/* The photo melts into the section: soft edges, no frame, no overlays.
+   Decorative, so phones skip it: the page stays short and the image is never
+   downloaded on the connections that can least afford it. */
+.agll-photo { margin: 0; display: none; }
+
+@media (min-width: 640px) {
+  .agll-photo { display: block; }
+}
 
 .agll-photo img {
   display: block;
