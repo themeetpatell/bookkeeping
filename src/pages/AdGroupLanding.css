@@ -664,6 +664,78 @@
 .agl-vm-doc.is-old { border: 1px dashed #94a3b8; color: #64748b; text-decoration: line-through; }
 .agl-vm-doc.is-new { background: #dbeafe; color: #1d4ed8; }
 
+/* ------------------------------------------------ calmer first fold */
+
+/* WhatsApp as a text link, not a second button */
+.agl .agl-wa-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 2px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+  text-underline-offset: 4px;
+}
+
+.agl .agl-wa-link .agl-wa-glyph { color: var(--agl-wa); }
+.agl .agl-wa-link:hover { text-decoration-color: #ffffff; }
+
+.agl .agl-hero-ctas { align-items: center; gap: 20px; }
+
+/* FTA credential as a plain line of text, no card */
+.agl-credential {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 28px;
+  font-size: 13px;
+  color: var(--agl-muted);
+}
+
+.agl-credential-logo {
+  height: 22px;
+  width: auto;
+  padding: 2px 4px;
+  border-radius: 3px;
+  background: #ffffff;
+}
+
+.agl .final-cta-left .agl-credential { margin: 16px 0 0; }
+
+/* Logos as a quiet row, not a grid of boxes */
+.agl .hero-trust-row .trust-logo {
+  padding: 0;
+  min-width: 0;
+  background: none;
+  border: 0;
+  backdrop-filter: none;
+}
+
+.agl .hero-trust-row .trust-logo-image {
+  height: 24px;
+  opacity: 0.55;
+  filter: grayscale(1);
+}
+
+.agl .hero-trust-row .logo-list-wide { gap: 18px 28px; }
+
+/* illustration */
+.agl-illustration {
+  margin: 0;
+}
+
+.agl-illustration svg {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin: 0 auto;
+}
+
 /* photo visual: human imagery with the service cards floating over it */
 .agl-photo {
   position: relative;
@@ -787,6 +859,8 @@
 }
 
 @media (max-width: 768px) {
+  .agl .agl-hero-ctas { flex-direction: column; align-items: stretch; gap: 8px; }
+  .agl .agl-wa-link { justify-content: center; }
   .agl-annual-offer { flex-direction: column; align-items: stretch; padding: 20px; }
   .agl .agl-annual-offer .agl-btn { width: 100%; }
 }

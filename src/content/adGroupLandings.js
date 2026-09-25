@@ -113,7 +113,6 @@ export const adGroupLandings = {
       'One named accountant, not a ticket queue',
       'Chartered Accountant review every month',
       'VAT and corporate tax handled by the same team',
-      'FTA Registered Tax Agency',
     ],
     heroStats: [
       { value: '7,000+', label: 'UAE businesses served' },

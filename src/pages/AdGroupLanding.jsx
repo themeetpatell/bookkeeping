@@ -25,7 +25,6 @@ import {
   FiX,
 } from 'react-icons/fi';
 import Seo from '../components/Seo';
-import FtaBadge from '../components/FtaBadge';
 import Testimonials from '../components/Testimonials';
 import ReviewedBy from '../components/ReviewedBy';
 import ZohoConsultationForm from '../components/ZohoConsultationForm';
@@ -93,37 +92,49 @@ const WhatsAppGlyph = () => (
 
 /* ---------------------------------------------------------- page visuals */
 
-/* Human imagery with the work floating over it. The photo is a licensed stock
-   image (Unsplash License), not a named Finanshels employee, so the cards
-   describe the service rather than putting a name on the person. Swap in a
-   real team photo at the same path when one is available. */
+/* Flat illustration: an accountant at a desk with the books, the reports and a
+   signed-off check. Original artwork, inline SVG, so it costs no request and
+   stays sharp at any size. Deliberately calm: no text and nothing that looks
+   clickable. */
 const VisualAccountantCard = () => (
-  <figure className="agl-photo">
-    <img
-      src="/landing/accountant-at-work.jpg"
-      alt="An accountant working through a client's books on a laptop"
-      className="agl-photo-img"
-      width="1100"
-      height="619"
-      loading="lazy"
-      decoding="async"
-    />
-    <div className="agl-photo-card agl-photo-card-top" aria-hidden="true">
-      <span className="agl-vc-avatar"><FiUser /></span>
-      <span>
-        <strong>Your named accountant</strong>
-        <small>CA review every month</small>
-      </span>
-    </div>
-    <div className="agl-photo-card agl-photo-card-bottom" aria-hidden="true">
-      <p className="agl-photo-card-label">This month</p>
-      <ul className="agl-vc-list">
-        <li><FiCheck /> Books reconciled</li>
-        <li><FiCheck /> VAT return prepared</li>
-        <li><FiCheck /> CA review signed off</li>
-      </ul>
-    </div>
-    <span className="agl-photo-chip" aria-hidden="true">150+ qualified accountants</span>
+  <figure className="agl-illustration">
+    <svg viewBox="0 0 420 340" role="img" aria-label="Illustration of an accountant at a desk reviewing reconciled books and reports">
+      <circle cx="210" cy="170" r="150" fill="#132a40" />
+      <circle cx="318" cy="72" r="26" fill="#1c3b57" />
+      <circle cx="86" cy="96" r="14" fill="#1c3b57" />
+      {/* documents */}
+      <g transform="rotate(-7 100 205)">
+        <rect x="58" y="160" width="78" height="96" rx="8" fill="#dbe4ee" />
+      </g>
+      <rect x="66" y="156" width="78" height="96" rx="8" fill="#ffffff" />
+      <rect x="78" y="174" width="44" height="6" rx="3" fill="#cbd5e1" />
+      <rect x="78" y="188" width="54" height="6" rx="3" fill="#e2e8f0" />
+      <rect x="78" y="202" width="36" height="6" rx="3" fill="#e2e8f0" />
+      <rect x="78" y="216" width="50" height="6" rx="3" fill="#e2e8f0" />
+      <circle cx="136" cy="160" r="15" fill="#13875b" />
+      <path d="M129 160 l5 5 l9 -10" stroke="#ffffff" strokeWidth="3.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      {/* laptop */}
+      <rect x="162" y="146" width="132" height="92" rx="8" fill="#ffffff" />
+      <rect x="176" y="160" width="58" height="7" rx="3.5" fill="#e2e8f0" />
+      <rect x="180" y="204" width="14" height="22" rx="3" fill="#ffb27d" />
+      <rect x="200" y="192" width="14" height="34" rx="3" fill="#f16610" />
+      <rect x="220" y="182" width="14" height="44" rx="3" fill="#f16610" />
+      <rect x="240" y="196" width="14" height="30" rx="3" fill="#ffb27d" />
+      <rect x="260" y="176" width="14" height="50" rx="3" fill="#3898ec" />
+      <path d="M146 238 h164 l-12 12 h-140 z" fill="#b8c6d4" />
+      {/* desk */}
+      <rect x="40" y="250" width="340" height="10" rx="5" fill="#2b4a66" />
+      <rect x="70" y="260" width="10" height="50" rx="4" fill="#2b4a66" />
+      <rect x="340" y="260" width="10" height="50" rx="4" fill="#2b4a66" />
+      {/* accountant */}
+      <path d="M306 250 v-62 a32 32 0 0 1 64 0 v62 z" fill="#3898ec" />
+      <path d="M318 206 q-22 16 -34 32" stroke="#3898ec" strokeWidth="14" fill="none" strokeLinecap="round" />
+      <circle cx="284" cy="238" r="7" fill="#e8b48f" />
+      <rect x="329" y="140" width="18" height="18" rx="6" fill="#e8b48f" />
+      <circle cx="338" cy="124" r="24" fill="#e8b48f" />
+      <path d="M314 122 a24 24 0 0 1 48 -4 q-10 -8 -24 -6 q-14 2 -24 10 z" fill="#0b243a" />
+      <path d="M322 176 l16 14 l16 -14" stroke="#ffffff" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   </figure>
 );
 
@@ -540,11 +551,17 @@ const AdGroupLanding = ({ pageKey }) => {
               ))}
             </ul>
 
+            {/* One button. WhatsApp is offered as a text link beside it and
+                the FTA credential as a plain line, so nothing else in the
+                first fold looks clickable apart from the CTA and the form. */}
             <div className="hero-ctas agl-hero-ctas">
               {renderCta('hero')}
-              {whatsappLink('hero', 'agl-btn agl-btn-wa', <><WhatsAppGlyph /> WhatsApp an Accountant</>)}
-              <FtaBadge />
+              {whatsappLink('hero', 'agl-wa-link', <><WhatsAppGlyph /> or chat on WhatsApp</>)}
             </div>
+            <p className="agl-credential">
+              <img src="/fta-logo.png" alt="" width="54" height="24" className="agl-credential-logo" />
+              FTA Registered Tax Agency <span aria-hidden="true">&middot;</span> Agency Registration No. 30022628
+            </p>
 
             <div className="hero-stats agl-hero-stats">
               {page.heroStats.map((stat) => (
@@ -570,7 +587,7 @@ const AdGroupLanding = ({ pageKey }) => {
         <div className="hero-trust-row">
           <p className="trust-label">Trusted by leading UAE businesses</p>
           <div className="logo-list-wide">
-            {clientLogos.map((logo) => (
+            {clientLogos.slice(0, 12).map((logo) => (
               <div key={logo.alt} className="trust-logo">
                 <img
                   src={logo.src}
@@ -622,7 +639,7 @@ const AdGroupLanding = ({ pageKey }) => {
                   </div>
                 ))}
               </div>
-              {whatsappLink('solution', 'agl-btn agl-btn-wa', <><WhatsAppGlyph /> Talk to an Expert on WhatsApp</>)}
+              {whatsappLink('solution', 'agl-wa-link', <><WhatsAppGlyph /> Talk to an expert on WhatsApp</>)}
             </div>
             <div className="solution-right">{Visual ? <Visual /> : null}</div>
           </div>
@@ -731,7 +748,6 @@ const AdGroupLanding = ({ pageKey }) => {
           {page.annualOffer ? (
             <div className="agl-annual-offer">
               <div>
-                <p className="agl-annual-offer-badge">Limited Offer</p>
                 <h3 className="agl-annual-offer-title">{page.annualOffer.title}</h3>
                 <p className="agl-annual-offer-copy">{page.annualOffer.copy}</p>
               </div>
@@ -747,10 +763,14 @@ const AdGroupLanding = ({ pageKey }) => {
             </div>
           ) : null}
 
-          <div className="pricing-banner">
-            <strong>Pay Only if Satisfied. No Commitment.</strong>
-            <p>Only pay if you are satisfied. No questions asked.</p>
-          </div>
+          {/* One banner above the cards, not two: the annual offer when the page
+              runs it, otherwise the satisfaction promise. */}
+          {!page.annualOffer ? (
+            <div className="pricing-banner">
+              <strong>Pay Only if Satisfied. No Commitment.</strong>
+              <p>Only pay if you are satisfied. No questions asked.</p>
+            </div>
+          ) : null}
 
           {page.pricing.offer ? (
             <div className="agl-offer">
@@ -854,8 +874,11 @@ const AdGroupLanding = ({ pageKey }) => {
                 </div>
               ))}
             </div>
-            {whatsappLink('final', 'agl-btn agl-btn-wa agl-final-wa', <><WhatsAppGlyph /> Prefer WhatsApp? Message us</>)}
-            <div className="agl-final-badge"><FtaBadge /></div>
+            {whatsappLink('final', 'agl-wa-link agl-final-wa', <><WhatsAppGlyph /> Prefer WhatsApp? Message us</>)}
+            <p className="agl-credential">
+              <img src="/fta-logo.png" alt="" width="54" height="24" className="agl-credential-logo" />
+              FTA Registered Tax Agency <span aria-hidden="true">&middot;</span> Agency Registration No. 30022628
+            </p>
           </div>
           <div className="final-cta-right">
             <LeadFormCard
