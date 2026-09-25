@@ -7,7 +7,7 @@ import { getBookingPath } from '../utils/booking';
 // `minimal` collapses the nav for paid-traffic routes: the section links are
 // dropped so the first screen offers one decision, and the bar itself shrinks.
 // See src/utils/chrome.js for which routes opt in.
-const Nav = ({ minimal = false }) => {
+const Nav = ({ minimal = false, hideCta = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const posthog = usePostHog();
   const { pathname } = useLocation();
@@ -47,7 +47,7 @@ const Nav = ({ minimal = false }) => {
         
         {/* The nav CTA is a second offer. On focused routes the page's own
             primary CTA is the only decision, so this is dropped entirely. */}
-        {!minimal && (
+        {!minimal && !hideCta && (
           <Link
             to={getBookingPath(pathname)}
             className="btn-nav-primary"

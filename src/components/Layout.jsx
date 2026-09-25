@@ -5,7 +5,7 @@ import Nav from './Nav';
 import OfferBar from './OfferBar';
 import TrustBar from './TrustBar';
 import FloatingContacts from './FloatingContacts';
-import { isFocusedChrome } from '../utils/chrome';
+import { isFocusedChrome, isQuietChrome } from '../utils/chrome';
 
 // Layout route for the marketing pages. Routes that opt out of this chrome —
 // currently only the booking page — sit outside it in App.jsx.
@@ -14,6 +14,9 @@ const Layout = () => {
   // Paid-traffic pages drop the promotional strips and collapse the nav so the
   // first screen carries a single decision. See src/utils/chrome.js.
   const focused = isFocusedChrome(pathname);
+  // Quiet chrome: section nav and offer bar stay, but toned down, and the
+  // trust strip and nav CTA are dropped. See src/utils/chrome.js.
+  const quiet = isQuietChrome(pathname);
 
   useEffect(() => {
     /* This used to scroll to the top unconditionally, which silently defeated
@@ -32,10 +35,14 @@ const Layout = () => {
   }, []);
 
   return (
-    <div className={focused ? 'app-shell app-shell-focused' : 'app-shell'}>
-      {!focused && <OfferBar />}
-      <Nav minimal={focused} />
-      {!focused && <TrustBar />}
+    <div
+      className={
+        focused ? 'app-shell app-shell-focused' : quiet ? 'app-shell app-shell-quiet' : 'app-shell'
+      }
+    >
+      {!focused && <OfferBar quiet={quiet} />}
+      <Nav minimal={focused} hideCta={quiet} />
+      {!focused && !quiet && <TrustBar />}
       <main>
         <Outlet />
       </main>

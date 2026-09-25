@@ -967,6 +967,39 @@ main {
 }
 
 
+/* QUIET CHROME (src/utils/chrome.js isQuietChrome). No trust strip, and the
+   offer bar reads as a line of text with a link, not as badges and buttons. */
+.app-shell-quiet {
+  --trust-bar-h: 0px;
+}
+
+.offer-bar-quiet {
+  background: #0b243a;
+  box-shadow: none;
+}
+
+.offer-bar-quiet .offer-bar-badge,
+.offer-bar-quiet .offer-bar-cta-icon {
+  display: none;
+}
+
+.offer-bar-quiet .offer-bar-text strong {
+  color: #ffffff;
+}
+
+.offer-bar-quiet .offer-bar-cta,
+.offer-bar-quiet .offer-bar-cta:hover {
+  background: none;
+  box-shadow: none;
+  transform: none;
+  padding: 0;
+  border-radius: 0;
+  color: #ffb27d;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* FOCUSED CHROME - PAID-TRAFFIC LANDING PAGES (src/utils/chrome.js).
    The offer bar and trust bar are not rendered on these routes, so their
    height tokens go to zero and the nav collapses. Because these are custom

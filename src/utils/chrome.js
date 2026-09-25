@@ -20,3 +20,13 @@ export const FOCUSED_CHROME_PATHS = [
 ];
 
 export const isFocusedChrome = (pathname) => FOCUSED_CHROME_PATHS.includes(pathname);
+
+// Routes that keep the section nav and the offer bar but in a quieter form:
+// the offer bar loses its pill badge and green button (the offer becomes a
+// text link), the trust strip is dropped, and the nav keeps its section
+// links without the "Book a Free Call" button. Asked for by marketing on
+// /hire-accountant (2026-09-25): pill-shaped labels that are not buttons were
+// pulling attention away from the form and the page's own CTAs.
+export const QUIET_CHROME_PATHS = ['/hire-accountant'];
+
+export const isQuietChrome = (pathname) => QUIET_CHROME_PATHS.includes(pathname);
