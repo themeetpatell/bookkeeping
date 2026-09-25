@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { usePostHog } from '@posthog/react';
 import { brand } from '../content/countries';
 import { buildWhatsAppUrl, getAdKeyword, getAdSource } from '../utils/whatsapp';
-import { isFocusedChrome } from '../utils/chrome';
+import { isFocusedChrome, isQuietChrome } from '../utils/chrome';
 
 // Naming the network in the message is how sales tells a paid click from a
 // direct visitor, so this button says the same thing the page CTAs around it do.
@@ -25,7 +25,9 @@ const FloatingContacts = () => {
   // Focused-chrome routes hide these too: they are fixed at top:50%, which on a
   // 390x844 phone lands exactly on the hero CTA, and they add a third and
   // fourth action to a screen that is meant to carry one.
-  if (HIDDEN_ON_PATHS.includes(pathname) || isFocusedChrome(pathname)) {
+  // Quiet-chrome routes carry their own sticky CTA + WhatsApp bar on phones
+  // and a WhatsApp link beside every CTA, so the floating pair would repeat it.
+  if (HIDDEN_ON_PATHS.includes(pathname) || isFocusedChrome(pathname) || isQuietChrome(pathname)) {
     return null;
   }
 

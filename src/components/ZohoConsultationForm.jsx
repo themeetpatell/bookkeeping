@@ -21,7 +21,7 @@ import './ZohoConsultationForm.css';
  * src/utils/zohoForms.js.
  *
  * @param {{ formId?: string, title?: string, subtitle?: string,
- *   leadSource?: string, privacyNote?: string }} props
+ *   leadSource?: string, privacyNote?: string, submitLabel?: string }} props
  */
 const ZohoConsultationForm = ({
   formId = 'form',
@@ -29,6 +29,8 @@ const ZohoConsultationForm = ({
   subtitle = 'Book a 30-minute call with our experts. No obligation.',
   leadSource = '',
   privacyNote = 'By submitting, you agree to receive communications. Your data is secure and will never be shared.',
+  // Visible label only; the button stays type="submit" so Zoho is unaffected.
+  submitLabel = 'Submit',
 }) => (
   <div className="zc-form">
     {title || subtitle ? (
@@ -132,7 +134,7 @@ const ZohoConsultationForm = ({
       </div>
 
       <button type="submit" className="btn-submit-form">
-        Submit
+        {submitLabel}
       </button>
     </form>
 

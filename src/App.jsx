@@ -29,6 +29,7 @@ const ThankYou = lazy(() => import('./pages/ThankYou'));
 const BookingConfirmed = lazy(() => import('./pages/BookingConfirmed'));
 const BookACall = lazy(() => import('./pages/BookACall'));
 const AdGroupLanding = lazy(() => import('./pages/AdGroupLanding'));
+const AdGroupLandingLight = lazy(() => import('./pages/AdGroupLandingLight'));
 
 function App() {
   const { pathname } = useLocation();
@@ -85,7 +86,8 @@ function App() {
           <Route path="/accounting-form-reddit" element={<AccountingFormReddit />} />
           {/* Bookkeeping_UAE_Search ad groups: one path per ad group, one
               shared layout, per-page copy in src/content/adGroupLandings.js. */}
-          <Route path="/hire-accountant" element={<AdGroupLanding pageKey="hire-accountant" />} />
+          {/* Light, conversion-first layout under review on this ad group. */}
+          <Route path="/hire-accountant" element={<AdGroupLandingLight pageKey="hire-accountant" />} />
           <Route path="/remote-bookkeeper" element={<AdGroupLanding pageKey="remote-bookkeeper" />} />
           <Route path="/backlog-catch-up" element={<AdGroupLanding pageKey="backlog-catch-up" />} />
           <Route path="/outsource-accounting" element={<AdGroupLanding pageKey="outsource-accounting" />} />
