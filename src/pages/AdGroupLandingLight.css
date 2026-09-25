@@ -348,8 +348,9 @@
   aspect-ratio: 16 / 11;
   object-fit: cover;
   border-radius: 28px;
-  -webkit-mask-image: radial-gradient(ellipse 75% 75% at 55% 50%, #000 55%, transparent 100%);
-  mask-image: radial-gradient(ellipse 75% 75% at 55% 50%, #000 55%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 72% at 58% 50%, #000 38%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 72% at 58% 50%, #000 38%, transparent 100%);
+  filter: saturate(0.85);
 }
 
 /* comparison */
