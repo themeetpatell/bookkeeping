@@ -104,7 +104,7 @@ const VisualAccountantCard = () => (
       alt="An accountant working through a client's books on a laptop"
       className="agl-photo-img"
       width="1100"
-      height="1375"
+      height="619"
       loading="lazy"
       decoding="async"
     />
