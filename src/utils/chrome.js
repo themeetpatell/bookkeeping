@@ -7,16 +7,8 @@
 export const FOCUSED_CHROME_PATHS = [
   '/books-cleanup',
   '/books-cleanup-bing',
-  // Bookkeeping_UAE_Search ad-group pages (src/pages/AdGroupLanding.jsx):
-  // one primary CTA per page, so the nav CTA and promo strips are dropped.
-  // /hire-accountant is deliberately NOT listed: marketing asked for the
-  // section nav and the annual-plan offer bar on that page (2026-09-25).
-  '/remote-bookkeeper',
-  '/backlog-catch-up',
-  '/outsource-accounting',
-  '/accounting-services',
-  '/accounting-firm',
-  '/accounting-and-bookkeeping',
+  // The Bookkeeping_UAE_Search ad-group pages moved to QUIET_CHROME_PATHS
+  // below (2026-09-26), when marketing approved the light layout for all seven.
 ];
 
 export const isFocusedChrome = (pathname) => FOCUSED_CHROME_PATHS.includes(pathname);
@@ -27,6 +19,15 @@ export const isFocusedChrome = (pathname) => FOCUSED_CHROME_PATHS.includes(pathn
 // links without the "Book a Free Call" button. Asked for by marketing on
 // /hire-accountant (2026-09-25): pill-shaped labels that are not buttons were
 // pulling attention away from the form and the page's own CTAs.
-export const QUIET_CHROME_PATHS = ['/hire-accountant'];
+// Extended to all seven Bookkeeping_UAE_Search ad-group pages (2026-09-26).
+export const QUIET_CHROME_PATHS = [
+  '/hire-accountant',
+  '/remote-bookkeeper',
+  '/backlog-catch-up',
+  '/outsource-accounting',
+  '/accounting-services',
+  '/accounting-firm',
+  '/accounting-and-bookkeeping',
+];
 
 export const isQuietChrome = (pathname) => QUIET_CHROME_PATHS.includes(pathname);

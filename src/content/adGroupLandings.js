@@ -1,7 +1,7 @@
 /**
  * Copy and data for the seven Bookkeeping_UAE_Search ad-group landing pages.
- * One entry per path; src/pages/AdGroupLanding.jsx lays them out on the same
- * design system as /bookkeeping (the source page for this campaign).
+ * One entry per path; src/pages/AdGroupLandingLight.jsx lays them out in the
+ * light, conversion-first design (extra layout data in src/content/adGroupLight.js).
  *
  * Every page carries, in this order: hero with the lead form in the first
  * fold, client logos, the problem, the solution, an in-house vs Finanshels
@@ -591,7 +591,7 @@ export const adGroupLandings = {
       { value: '7,000+', label: 'Businesses served' },
       { value: '3', label: 'Emirates covered' },
     ],
-    cta: { label: 'Explore Our Services', color: 'blue', kind: 'anchor', target: 'services' },
+    cta: { label: 'Explore Our Services', color: 'blue', kind: 'anchor', target: 'service-menu' },
     whatsappMessage: 'Hi, I saw your Google ad for accounting services in Dubai. I want to know which services fit my business.',
     heroForm: {
       title: 'Get a Services Recommendation',
@@ -636,7 +636,7 @@ export const adGroupLandings = {
     sections: [
       {
         type: 'serviceGrid',
-        id: 'services',
+        id: 'service-menu',
         eyebrow: 'SERVICE MENU',
         title: 'Pick One Service or Run Them All Through Us',
         items: [
