@@ -253,7 +253,7 @@ export const adGroupLandings = {
       { value: '24h', label: 'Response time' },
       { value: '4.9', label: 'Trustpilot rating' },
     ],
-    cta: { label: 'See Remote Bookkeeping Plans', color: 'blue', kind: 'anchor', target: 'pricing' },
+    cta: { label: 'See Remote Bookkeeping Plans', color: 'orange', kind: 'anchor', target: 'pricing' },
     whatsappMessage: 'Hi, I saw your Google ad for remote bookkeeping. I want to see the plans.',
     heroForm: {
       title: 'Get a Remote Bookkeeper',
@@ -589,7 +589,7 @@ export const adGroupLandings = {
       { value: '7,000+', label: 'Businesses served' },
       { value: '3', label: 'Emirates covered' },
     ],
-    cta: { label: 'Explore Our Services', color: 'blue', kind: 'anchor', target: 'service-menu' },
+    cta: { label: 'Explore Our Services', color: 'orange', kind: 'anchor', target: 'service-menu' },
     whatsappMessage: 'Hi, I saw your Google ad for accounting services in Dubai. I want to know which services fit my business.',
     heroForm: {
       title: 'Get a Services Recommendation',
@@ -760,9 +760,9 @@ export const adGroupLandings = {
         eyebrow: 'THE SPECIALISTS BEHIND YOUR ACCOUNT',
         title: 'Named Specialists, Not an Anonymous Back Office',
         people: [
-          { name: 'Gautam Sanoj', role: 'Senior Tax Advisor', focus: 'VAT and corporate tax', photo: '' },
+          { name: 'Gautam Sanoj', role: 'Senior Tax Advisor', focus: 'VAT and corporate tax', photo: '/authors/gautam-sanoj.webp' },
           { name: 'Suhail K Y, CMA®', role: 'Bookkeeping, finance and audit specialist', focus: 'Bookkeeping, audit and CFO work', photo: '/authors/suhail-ky.jpg' },
-          { name: 'Krishna Subash Nair', role: 'AML compliance specialist', focus: 'AML compliance', photo: '' },
+          { name: 'Krishna Subash Nair', role: 'AML compliance specialist', focus: 'AML compliance', photo: '/authors/krishna-subash-nair.jpg' },
         ],
       },
       {
@@ -833,7 +833,7 @@ export const adGroupLandings = {
       { value: 'AED 499', label: 'Plans from, per month' },
       { value: '4.9', label: 'Trustpilot rating' },
     ],
-    cta: { label: 'See Combined Plans', color: 'blue', kind: 'anchor', target: 'pricing' },
+    cta: { label: 'See Combined Plans', color: 'orange', kind: 'anchor', target: 'pricing' },
     whatsappMessage: 'Hi, I saw your Google ad for accounting and bookkeeping. I want to see the combined plans.',
     heroForm: {
       title: 'Get a Combined Plan',

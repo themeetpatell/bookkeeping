@@ -763,12 +763,6 @@
   .agll-compare-row svg { display: none; }
 }
 
-/* ------------------------------------------------ blue primary CTA
-   The brief sets blue (#3898EC) as the primary CTA on remote-bookkeeper,
-   accounting-services and accounting-and-bookkeeping. */
-.agll-btn-blue { background: #3898ec; color: #ffffff; }
-.agll-btn-blue:hover { background: #1f7fd4; }
-
 /* ------------------------------------------------ the brief's sections */
 .agll-brief { border-top: 1px solid var(--agll-line); }
 .agll-brief .agll-explainer { align-items: start; }

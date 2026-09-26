@@ -6,7 +6,7 @@ import Seo from '../components/Seo';
 import ZohoConsultationForm from '../components/ZohoConsultationForm';
 import { canonicalUrl } from '../utils/site';
 import { getBookingPath } from '../utils/booking';
-import { buildWhatsAppUrl } from '../utils/whatsapp';
+import { adGroupMessage, adGroupOfferMessage, buildWhatsAppUrl } from '../utils/whatsapp';
 import { getLeadSourceForChannel } from '../utils/zohoForms';
 import { FINAL_FORM_ID, HERO_FORM_ID, adGroupLandings } from '../content/adGroupLandings';
 import {
@@ -14,6 +14,7 @@ import {
   featuredLogos,
   lightPages,
   plans,
+  specialists,
   testimonialPool,
 } from '../content/adGroupLight';
 import './AdGroupLandingLight.css';
@@ -25,8 +26,9 @@ import './AdGroupLandingLight.css';
  * src/content/adGroupLight.js (see its header for the evidence).
  *
  * Rules this layout follows:
- * - White page, navy text; the brand colour (orange, or blue where the brief
- *   asks for it) is used on the primary CTA only.
+ * - White page, navy text; orange is used on the primary CTA only, on every
+ *   page. One high-contrast action colour, repeated, outperforms a mix: a
+ *   second button colour reads as a second, competing action (2026-09-26).
  * - Nothing that looks like a button unless it is one. Credentials, rating and
  *   the offer are plain text.
  * - One goal: a call with an accountant. The same label is repeated; the form
@@ -82,7 +84,8 @@ const initials = (name) =>
     .map((part) => part[0])
     .join('');
 
-const BRIEF_SECTION_TYPES = ['penalties', 'beforeAfter', 'scope', 'serviceGrid', 'team', 'table', 'explainer'];
+// 'team' is rendered separately, on every page, with real headshots.
+const BRIEF_SECTION_TYPES = ['penalties', 'beforeAfter', 'scope', 'serviceGrid', 'table', 'explainer'];
 
 const AdGroupLandingLight = ({ pageKey }) => {
   const page = adGroupLandings[pageKey];
@@ -92,7 +95,9 @@ const AdGroupLandingLight = ({ pageKey }) => {
   const [openFaq, setOpenFaq] = useState(0);
   const [formOnScreen, setFormOnScreen] = useState(false);
 
-  const whatsappUrl = buildWhatsAppUrl(page.whatsappMessage);
+  // Every WhatsApp message names the ad group, e.g. "Hi, I saw your Google
+  // ad about hire-accountant and would like to learn more."
+  const whatsappUrl = buildWhatsAppUrl(adGroupMessage(pageKey));
   const bookingPath = getBookingPath(pathname);
 
   const pains = light.pains || page.problems.items.slice(0, 3);
@@ -102,6 +107,11 @@ const AdGroupLandingLight = ({ pageKey }) => {
   const footnotes = page.footnotes || [];
   const footnoteNumber = (id) => footnotes.findIndex((note) => note.id === id) + 1;
   const briefSections = (page.sections || []).filter((section) => BRIEF_SECTION_TYPES.includes(section.type));
+  const briefTeam = (page.sections || []).find((section) => section.type === 'team');
+  const teamTitle = briefTeam?.title || 'The Specialists Behind Your Books';
+  const teamSubtitle =
+    briefTeam?.subtitle ||
+    'Qualified accountants and tax specialists work on your file, not an anonymous back office.';
 
   // The phone sticky bar steps aside while either form is on screen.
   useEffect(() => {
@@ -127,7 +137,7 @@ const AdGroupLandingLight = ({ pageKey }) => {
   const trackCta = (location) =>
     posthog?.capture('adgroup_cta_clicked', { location, page_path: page.path, cta: page.cta.label });
 
-  const ctaTone = page.cta.color === 'blue' ? 'agll-btn-blue' : 'agll-btn-primary';
+  const ctaTone = 'agll-btn-primary';
 
   /* The brief sets one primary CTA per page: a booking call, or a jump to a
      section of the page (plans, the form, the service menu). */
@@ -174,7 +184,7 @@ const AdGroupLandingLight = ({ pageKey }) => {
   );
 
   const planMessage = (plan) =>
-    `Hi, I saw your Google ad. I'm interested in the ${plan.name} plan (AED ${plan.price}/month).`;
+    adGroupMessage(pageKey, `the ${plan.name} plan (AED ${plan.price}/month)`);
 
   const sourceRef = (id) => {
     const n = footnoteNumber(id);
@@ -558,6 +568,26 @@ const AdGroupLandingLight = ({ pageKey }) => {
         </section>
       ))}
 
+      {/* --------------------------------------- named specialists */}
+      <section className="agll-section agll-brief" id="team">
+        <div className="agll-wrap">
+          <header className="agll-head">
+            <h2 className="agll-h2">{teamTitle}</h2>
+            <p className="agll-sub">{teamSubtitle}</p>
+          </header>
+          <div className="agll-team">
+            {specialists.map((person) => (
+              <div key={person.name} className="agll-person">
+                <img src={person.photo} alt={person.name} width="88" height="88" loading="lazy" decoding="async" />
+                <h3>{person.name}</h3>
+                <p className="agll-person-role">{person.role}</p>
+                <p>{person.focus}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ----------------------------------------------- how it works */}
       <section className="agll-section agll-alt">
         <div className="agll-wrap">
@@ -619,7 +649,7 @@ const AdGroupLandingLight = ({ pageKey }) => {
                 'annual_offer',
                 'agll-text-link agll-offer-link',
                 <>{annualOffer.cta} &rarr;</>,
-                buildWhatsAppUrl(annualOffer.whatsappMessage),
+                buildWhatsAppUrl(adGroupOfferMessage(pageKey)),
               )}
             </p>
           ) : null}
@@ -737,10 +767,10 @@ const AdGroupLandingLight = ({ pageKey }) => {
         </div>
       </section>
 
-      {/* Phone sticky bar: the one primary action plus WhatsApp. */}
+      {/* Phone sticky bar: the one primary action. */}
       <div className={formOnScreen ? 'agll-sticky is-hidden' : 'agll-sticky'} hidden={formOnScreen}>
+        {/* WhatsApp and call sit just above this bar (floating contacts). */}
         {primaryCta('sticky_mobile', 'agll-sticky-primary')}
-        {whatsappLink('sticky_mobile', 'agll-sticky-wa', <WhatsAppGlyph />, whatsappUrl, 'WhatsApp an accountant')}
       </div>
     </div>
   );

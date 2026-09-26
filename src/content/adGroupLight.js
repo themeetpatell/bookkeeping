@@ -145,15 +145,41 @@ export const testimonialPool = {
 };
 
 /**
+ * The named specialists, shown on every ad-group page with their real
+ * headshots (the same portraits their author pages on finanshels.com use).
+ */
+export const specialists = [
+  {
+    name: 'Gautam Sanoj',
+    role: 'Senior Tax Advisor',
+    focus: 'VAT and corporate tax',
+    photo: '/authors/gautam-sanoj.webp',
+  },
+  {
+    name: 'Suhail K Y, CMA®',
+    role: 'Bookkeeping, finance and audit specialist',
+    focus: 'Bookkeeping, audit and CFO work',
+    photo: '/authors/suhail-ky.jpg',
+  },
+  {
+    name: 'Krishna Subash Nair',
+    role: 'AML compliance specialist',
+    focus: 'AML compliance',
+    photo: '/authors/krishna-subash-nair.jpg',
+  },
+];
+
+/**
  * Per page: feature photo (licensed Pexels stock, never presented as a named
- * employee), its crop, the two floating cards, testimonials, and optional
+ * employee; chosen to reflect a mostly Indian accounting team and a mixed
+ * Arab, Asian and European client base), its crop, the two floating cards, testimonials, and optional
  * tighter pains/benefits. Pages without `pains`/`benefits` use their
  * problems/solution copy from adGroupLandings.js.
  */
 export const lightPages = {
   'hire-accountant': {
     photo: '/landing/accountant-professional.jpg',
-    photoPosition: '50% 75%',
+    photoPosition: '50% 35%',
     meeting: { title: 'Monthly review with your accountant', note: 'Books reconciled · CA review done' },
     message: { subject: 'Your monthly report is ready', file: 'Management-Report.pdf', from: 'your Finanshels accountant' },
     testimonials: ['meet', 'sapna', 'szilvia'],
@@ -172,7 +198,7 @@ export const lightPages = {
   },
   'remote-bookkeeper': {
     photo: '/landing/remote-bookkeeper.jpg',
-    photoPosition: '50% 45%',
+    photoPosition: '50% 40%',
     meeting: { title: 'Weekly check-in with your bookkeeper', note: 'Online · 15 minutes' },
     message: { subject: 'Your books are reconciled', file: 'Reconciliation-Summary.pdf', from: 'your remote bookkeeper' },
     testimonials: ['jeremy', 'pravin', 'sapna'],
@@ -180,7 +206,7 @@ export const lightPages = {
   },
   'backlog-catch-up': {
     photo: '/landing/backlog-catch-up.jpg',
-    photoPosition: '55% 50%',
+    photoPosition: '50% 45%',
     meeting: { title: 'Catch-up assessment call', note: 'Scope and fixed quote' },
     message: { subject: 'Your catch-up quote is ready', file: 'Catch-Up-Quote.pdf', from: 'your Finanshels accountant' },
     testimonials: ['meet', 'jomon', 'usama'],
@@ -188,7 +214,7 @@ export const lightPages = {
   },
   'outsource-accounting': {
     photo: '/landing/outsource-accounting.jpg',
-    photoPosition: '40% 50%',
+    photoPosition: '50% 55%',
     meeting: { title: 'Month-end close review', note: 'Books, VAT and reports in one call' },
     message: { subject: 'Your month-end pack is ready', file: 'Month-End-Pack.pdf', from: 'your account manager' },
     testimonials: ['jeremy', 'meet', 'bader'],
@@ -196,7 +222,7 @@ export const lightPages = {
   },
   'accounting-services': {
     photo: '/landing/accounting-services.jpg',
-    photoPosition: '78% 50%',
+    photoPosition: '50% 40%',
     meeting: { title: 'Quarterly VAT review', note: 'Prepared from your reconciled books' },
     message: { subject: 'Your VAT return is ready to review', file: 'VAT-Return-Summary.pdf', from: 'your Finanshels team' },
     testimonials: ['jomon', 'szilvia', 'usama'],
@@ -204,7 +230,7 @@ export const lightPages = {
   },
   'accounting-firm': {
     photo: '/landing/accounting-firm.jpg',
-    photoPosition: '50% 72%',
+    photoPosition: '50% 45%',
     meeting: { title: 'Tax and compliance review', note: 'With your tax and AML specialists' },
     message: { subject: 'Your compliance update', file: 'Compliance-Checklist.pdf', from: 'your Finanshels specialists' },
     testimonials: ['bader', 'jomon', 'meet'],
@@ -212,7 +238,7 @@ export const lightPages = {
   },
   'accounting-and-bookkeeping': {
     photo: '/landing/accounting-and-bookkeeping.jpg',
-    photoPosition: '50% 45%',
+    photoPosition: '50% 25%',
     meeting: { title: 'One review for books and tax', note: 'One team, one agenda' },
     message: { subject: 'Your monthly report and invoice', file: 'Monthly-Report.pdf', from: 'your Finanshels team' },
     testimonials: ['sapna', 'pravin', 'szilvia'],
