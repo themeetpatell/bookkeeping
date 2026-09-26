@@ -232,7 +232,23 @@ const AdGroupLandingLight = ({ pageKey }) => {
       </section>
 
       {/* ------------------------------------ what you get + photo */}
-      <section className="agll-section agll-alt" id="services">
+      <section className="agll-section agll-feature" id="services">
+        {/* Decorative line pattern behind the photo, as in the reference. */}
+        <svg className="agll-feature-lines" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
+            <rect
+              key={i}
+              x={60 + i * 18}
+              y={60 + i * 18}
+              width={480 - i * 36}
+              height={480 - i * 36}
+              rx={240 - i * 18}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.2"
+            />
+          ))}
+        </svg>
         <div className="agll-wrap agll-split">
           <div>
             <h2 className="agll-h2">{page.solution.title}</h2>
@@ -248,20 +264,41 @@ const AdGroupLandingLight = ({ pageKey }) => {
                 </li>
               ))}
             </ul>
+            <div className="agll-feature-cta">{primaryCta('what_you_get')}</div>
           </div>
-          {/* Human imagery, kept soft: the photo fades into the section
-              background rather than sitting in a hard frame. Licensed stock
-              (Unsplash License), not a named employee; swap for a real team
-              photo at the same path when one is available. */}
-          <figure className="agll-photo" aria-hidden="true">
+          {/* A finance professional at work, with two small cards showing what
+              working with Finanshels looks like: the monthly review call and
+              the monthly report arriving. Licensed stock (Pexels License), not
+              a named employee, so the cards describe the service rather than
+              the person. Swap in a real team photo at the same path later. */}
+          <figure className="agll-feature-media" aria-hidden="true">
             <img
-              src="/landing/accountant-at-work.jpg"
+              className="agll-feature-photo"
+              src="/landing/accountant-professional.jpg"
               alt=""
-              width="1100"
-              height="619"
+              width="900"
+              height="1350"
               loading="lazy"
               decoding="async"
             />
+            <div className="agll-mock agll-mock-meeting">
+              <span className="agll-mock-date">
+                <small>Mon</small>
+                <strong>6</strong>
+              </span>
+              <span className="agll-mock-meeting-copy">
+                <strong>Monthly review with your accountant</strong>
+                <small>Books reconciled &middot; CA review done</small>
+              </span>
+            </div>
+            <div className="agll-mock agll-mock-message">
+              <p className="agll-mock-bar">New message</p>
+              <p className="agll-mock-subject">
+                <span>Subject:</span> Your monthly report is ready
+              </p>
+              <p className="agll-mock-file">Management-Report.pdf</p>
+              <p className="agll-mock-from">From your Finanshels accountant</p>
+            </div>
           </figure>
         </div>
       </section>
