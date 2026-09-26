@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { usePostHog } from '@posthog/react';
-import { buildWhatsAppUrl, getAdKeyword, getAdSource } from '../utils/whatsapp';
+import { adGroupOfferMessage, buildWhatsAppUrl, getAdGroup, getAdKeyword, getAdSource } from '../utils/whatsapp';
 
 const OFFER_ASK =
   "I'd like to claim the 3 months FREE Accounting offer on your Annual Plans.";
@@ -88,7 +88,8 @@ const OfferBar = ({ quiet = false }) => {
     adSource === 'bing' && keyword
       ? `Hi, I saw your bing ads for “${keyword}”.`
       : OPENER_BY_SOURCE[adSource];
-  const message = `${opener} ${OFFER_ASK}`;
+  const adGroup = getAdGroup(pathname);
+  const message = adGroup ? adGroupOfferMessage(adGroup) : `${opener} ${OFFER_ASK}`;
   const whatsappUrl = buildWhatsAppUrl(message);
   const isFormPage = pathname === FORM_PAGE_PATH;
 

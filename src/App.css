@@ -987,6 +987,17 @@ main {
   color: #ffffff;
 }
 
+/* Floating WhatsApp + call: right edge, mid-height on desktop. On phones the
+   ad-group pages have a sticky CTA bar at the bottom, so the pair sits just
+   above it in the bottom-right corner instead of over the hero CTA. */
+@media (max-width: 959px) {
+  .app-shell-quiet .floating-contacts {
+    top: auto;
+    bottom: calc(84px + env(safe-area-inset-bottom));
+    transform: none;
+  }
+}
+
 .offer-bar-quiet .offer-bar-cta,
 .offer-bar-quiet .offer-bar-cta:hover {
   background: none;
