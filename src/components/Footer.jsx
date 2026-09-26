@@ -9,7 +9,7 @@ import {
 } from 'react-icons/fa6';
 import finanshelsLogo from '../assets/finanshelslogo.svg';
 import { Link, useLocation } from 'react-router-dom';
-import { buildWhatsAppUrl } from '../utils/whatsapp';
+import { adGroupMessage, buildWhatsAppUrl, getAdGroup } from '../utils/whatsapp';
 import { getBookingPath } from '../utils/booking';
 
 const SOCIAL_LINKS = [
@@ -28,12 +28,16 @@ const EXPLORE_LINKS = [
   { label: 'Get a Consultation', id: 'consultation' },
 ];
 
-const WHATSAPP_URL = buildWhatsAppUrl(
+const DEFAULT_WHATSAPP_URL = buildWhatsAppUrl(
   'Hi Finanshels! I have a question about your accounting services.'
 );
 
 const Footer = () => {
   const { pathname } = useLocation();
+  // On the ad-group pages the message names the ad group, like every other
+  // WhatsApp link there.
+  const adGroup = getAdGroup(pathname);
+  const WHATSAPP_URL = adGroup ? buildWhatsAppUrl(adGroupMessage(adGroup)) : DEFAULT_WHATSAPP_URL;
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
