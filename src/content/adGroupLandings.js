@@ -472,7 +472,6 @@ export const adGroupLandings = {
       'Bookkeeping, reporting, VAT and audit prep in one engagement',
       'One account manager for everything',
       'A team that grows with your volume',
-      'FTA Registered Tax Agency',
     ],
     heroStats: [
       { value: '3 in 1', label: 'Books, reporting, tax' },
@@ -584,7 +583,6 @@ export const adGroupLandings = {
       'Bookkeeping, VAT, corporate tax, audit prep and CFO consultation',
       'One team and one dashboard for every service',
       'Serving Dubai, Abu Dhabi and Sharjah',
-      'FTA Registered Tax Agency',
     ],
     heroStats: [
       { value: '5', label: 'Core services' },
@@ -829,7 +827,6 @@ export const adGroupLandings = {
       'Books and compliance handled by one team',
       'One invoice a month',
       'No handovers between vendors',
-      'FTA Registered Tax Agency',
     ],
     heroStats: [
       { value: '1', label: 'Team, one invoice' },
