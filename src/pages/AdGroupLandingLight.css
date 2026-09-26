@@ -762,3 +762,145 @@
   .agll-compare-row > span { flex-direction: column; gap: 4px; }
   .agll-compare-row svg { display: none; }
 }
+
+/* ------------------------------------------------ blue primary CTA
+   The brief sets blue (#3898EC) as the primary CTA on remote-bookkeeper,
+   accounting-services and accounting-and-bookkeeping. */
+.agll-btn-blue { background: #3898ec; color: #ffffff; }
+.agll-btn-blue:hover { background: #1f7fd4; }
+
+/* ------------------------------------------------ the brief's sections */
+.agll-brief { border-top: 1px solid var(--agll-line); }
+.agll-brief .agll-explainer { align-items: start; }
+
+/* published penalties: plain figures, no boxes */
+.agll-facts { display: grid; gap: 16px; }
+.agll-fact { padding: 20px 0 0; border-top: 2px solid var(--agll-navy); }
+.agll-fact p { margin: 0; }
+.agll-fact-label { font-size: 15px; font-weight: 600; color: var(--agll-navy); }
+.agll-fact .agll-fact-value { margin: 8px 0 6px; font-size: 32px; font-weight: 800; color: var(--agll-navy); }
+.agll-fact-detail { font-size: 15px; line-height: 1.55; color: var(--agll-muted); }
+
+.agll-ref { margin-left: 4px; font-size: 13px; font-weight: 600; }
+.agll-ref a { color: var(--agll-muted); text-decoration: none; }
+.agll-ref a:hover { color: var(--agll-navy); text-decoration: underline; }
+
+/* before and after */
+.agll-ba { display: grid; gap: 16px; }
+.agll-ba-col { padding: 24px; border: 1px solid var(--agll-line); border-radius: 14px; }
+.agll-ba-col.is-after { background: #fbf8f3; }
+.agll-ba-col h3 {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--agll-muted);
+}
+.agll-ba-col.is-after h3 { color: var(--agll-orange); }
+.agll-ba-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.agll-ba-col li { display: flex; gap: 10px; font-size: 15px; line-height: 1.5; color: var(--agll-muted); }
+.agll-ba-col.is-after li { color: var(--agll-navy); font-weight: 500; }
+.agll-ba-col svg { flex-shrink: 0; margin-top: 3px; color: var(--agll-green); }
+.agll-ba-col .agll-x { color: #b3bcc6; }
+
+/* scope list */
+.agll-scope { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--agll-line); }
+.agll-scope li { display: flex; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--agll-line); }
+.agll-scope strong { display: block; margin-bottom: 2px; font-size: 16px; color: var(--agll-navy); }
+.agll-scope li > span:last-child { font-size: 15px; line-height: 1.55; color: var(--agll-muted); }
+
+/* service menu */
+.agll-services { display: grid; gap: 16px; }
+.agll-service { padding: 20px 0 0; border-top: 2px solid var(--agll-navy); }
+.agll-service h3 { margin: 0 0 6px; font-size: 18px; color: var(--agll-navy); }
+.agll-service p { margin: 0 0 10px; font-size: 15px; line-height: 1.55; color: var(--agll-muted); }
+.agll-service-link { font-size: 15px; }
+
+/* team */
+.agll-team { display: grid; gap: 28px; text-align: center; }
+.agll-person img,
+.agll-person-initials {
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.agll-person-initials { background: #f1ece4; color: var(--agll-navy); font-size: 26px; font-weight: 700; }
+.agll-person h3 { margin: 0 0 4px; font-size: 18px; color: var(--agll-navy); }
+.agll-person p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--agll-muted); }
+.agll-person .agll-person-role { margin-bottom: 4px; color: var(--agll-text); font-weight: 500; }
+
+/* three-way table: scrolls inside its own box on phones, never the page */
+.agll-table-scroll { overflow-x: auto; border: 1px solid var(--agll-line); border-radius: 14px; }
+.agll-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px; }
+.agll-table th,
+.agll-table td { padding: 14px 16px; text-align: left; vertical-align: top; line-height: 1.5; border-top: 1px solid var(--agll-line); }
+.agll-table thead th {
+  border-top: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--agll-muted);
+}
+.agll-table tbody th { font-weight: 600; color: var(--agll-navy); }
+.agll-table td { color: var(--agll-muted); }
+.agll-table .is-us { background: #fbf8f3; color: var(--agll-navy); font-weight: 600; }
+.agll-table thead .is-us { color: var(--agll-orange); }
+
+/* explainer */
+.agll-explainer-list { margin: 0; padding: 24px; border: 1px solid var(--agll-line); border-radius: 14px; background: #fbf8f3; }
+
+/* one-off catch-up price, above the monthly plans */
+.agll-oneoff {
+  display: grid;
+  gap: 20px;
+  max-width: 980px;
+  margin: 0 auto 40px;
+  padding: 28px 24px;
+  border: 2px solid var(--agll-orange);
+  border-radius: 16px;
+  background: #ffffff;
+}
+.agll-oneoff h3 { margin: 0 0 8px; font-size: 18px; color: var(--agll-navy); }
+.agll-oneoff ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.agll-oneoff li { display: flex; gap: 8px; font-size: 15px; line-height: 1.45; color: var(--agll-text); }
+.agll-oneoff li svg { flex-shrink: 0; margin-top: 3px; color: var(--agll-green); }
+.agll-oneoff-cta { display: grid; gap: 12px; justify-items: center; align-content: center; }
+.agll-plans-label {
+  margin: 0 0 16px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--agll-navy);
+}
+
+/* sources for regulatory figures */
+.agll-sources {
+  margin: 32px 0 0;
+  padding: 20px 0 0 20px;
+  border-top: 1px solid var(--agll-line);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--agll-muted);
+}
+.agll-sources li { scroll-margin-top: 110px; }
+.agll-sources a { color: var(--agll-navy); }
+
+@media (min-width: 640px) {
+  .agll-facts { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .agll-ba { grid-template-columns: 1fr 1fr; }
+  .agll-services { grid-template-columns: repeat(2, 1fr); gap: 28px 24px; }
+  .agll-team { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 960px) {
+  .agll-steps { grid-template-columns: repeat(var(--agll-step-cols, 4), 1fr); }
+  .agll-services { grid-template-columns: repeat(3, 1fr); }
+  .agll-oneoff { grid-template-columns: 1.1fr 1.2fr 0.9fr; align-items: center; gap: 32px; padding: 32px; }
+  .agll-brief .agll-explainer { grid-template-columns: 1.2fr 1fr; }
+}
