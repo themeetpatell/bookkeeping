@@ -371,10 +371,11 @@
   display: block;
   width: 100%;
   max-width: 460px;
+  height: auto;
   margin-left: auto;
   aspect-ratio: 4 / 4.4;
   object-fit: cover;
-  object-position: 50% 22%;
+  object-position: 50% 75%;
   border-radius: 22px;
 }
 
