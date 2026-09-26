@@ -694,7 +694,7 @@ export const adGroupLandings = {
     path: '/accounting-firm',
     seoTitle: 'Chartered Accounting Firm in the UAE | Finanshels',
     seoDescription:
-      'A full chartered accounting firm with CAs, tax specialists and AML compliance experts on staff. FTA Registered Tax Agency No. 30022628.',
+      'A full chartered accounting firm with CAs, tax specialists and AML compliance experts on staff. FTA Registered Tax Agency, Agency Registration No. 30022628.',
     visual: 'firm-credentials',
     eyebrow: 'A CHARTERED ACCOUNTING FIRM',
     h1: 'A Chartered Accounting Firm for Growing UAE Businesses',
@@ -702,7 +702,6 @@ export const adGroupLandings = {
       'Not a freelancer, not a single bookkeeper — a full accounting firm with CAs, tax specialists, and AML compliance experts on staff.',
     heroPoints: [
       'CAs, tax specialists and AML experts on staff',
-      'FTA Registered Tax Agency No. 30022628',
       '4.9 on Trustpilot, from 239 reviews',
       'Named specialists on every account',
     ],
