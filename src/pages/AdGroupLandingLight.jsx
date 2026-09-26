@@ -578,7 +578,21 @@ const AdGroupLandingLight = ({ pageKey }) => {
           <div className="agll-team">
             {specialists.map((person) => (
               <div key={person.name} className="agll-person">
-                <img src={person.photo} alt={person.name} width="88" height="88" loading="lazy" decoding="async" />
+                <span className="agll-person-photo">
+                  <img
+                    src={person.photo}
+                    alt={person.name}
+                    width="88"
+                    height="88"
+                    loading="lazy"
+                    decoding="async"
+                    style={
+                      person.crop
+                        ? { transform: `scale(${person.crop.scale})`, transformOrigin: person.crop.origin }
+                        : undefined
+                    }
+                  />
+                </span>
                 <h3>{person.name}</h3>
                 <p className="agll-person-role">{person.role}</p>
                 <p>{person.focus}</p>

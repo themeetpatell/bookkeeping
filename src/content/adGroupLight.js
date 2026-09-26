@@ -154,6 +154,8 @@ export const specialists = [
     role: 'Senior Tax Advisor',
     focus: 'VAT and corporate tax',
     photo: '/authors/gautam-sanoj.webp',
+    // Standing portrait: zoom in on the face for the round avatar.
+    crop: { scale: 2.3, origin: '50% 17%' },
   },
   {
     name: 'Suhail K Y, CMA®',
@@ -166,6 +168,7 @@ export const specialists = [
     role: 'AML compliance specialist',
     focus: 'AML compliance',
     photo: '/authors/krishna-subash-nair.jpg',
+    crop: { scale: 1.6, origin: '50% 26%' },
   },
 ];
 
